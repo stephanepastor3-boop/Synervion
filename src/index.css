@@ -1,0 +1,137 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --synervion-primary-50: 28 100% 95%;
+    --synervion-primary-100: 28 95% 88%;
+    --synervion-primary-200: 28 92% 78%;
+    --synervion-primary-300: 28 90% 68%;
+    --synervion-primary-400: 28 88% 63%;
+    --synervion-primary-500: 28 85% 58%;
+    --synervion-primary-600: 28 80% 48%;
+    --synervion-primary-700: 28 75% 38%;
+    --synervion-primary-800: 28 70% 28%;
+    --synervion-primary-900: 28 65% 18%;
+    --synervion-secondary-50: 220 13% 95%;
+    --synervion-secondary-100: 220 12% 88%;
+    --synervion-secondary-200: 220 11% 75%;
+    --synervion-secondary-300: 220 10% 60%;
+    --synervion-secondary-400: 220 10% 45%;
+    --synervion-secondary-500: 220 10% 35%;
+    --synervion-secondary-600: 220 11% 28%;
+    --synervion-secondary-700: 220 12% 22%;
+    --synervion-secondary-800: 220 13% 18%;
+    --synervion-secondary-900: 220 15% 12%;
+    --synervion-accent-50: 30 20% 95%;
+    --synervion-accent-100: 30 18% 88%;
+    --synervion-accent-200: 30 17% 75%;
+    --synervion-accent-300: 30 16% 65%;
+    --synervion-accent-400: 30 15% 55%;
+    --synervion-accent-500: 30 15% 45%;
+    --synervion-accent-600: 30 16% 35%;
+    --synervion-accent-700: 30 17% 25%;
+    --synervion-accent-800: 30 18% 15%;
+    --synervion-accent-900: 30 20% 10%;
+    --synervion-bg-white: 0 0% 100%;
+    --synervion-bg-gray-50: 220 8% 98%;
+    --synervion-bg-gray-100: 220 8% 96%;
+    --synervion-bg-gray-200: 220 8% 92%;
+    --synervion-bg-gray-300: 220 8% 88%;
+    --synervion-text-primary: 220 13% 18%;
+    --synervion-text-secondary: 220 10% 35%;
+    --synervion-text-tertiary: 220 8% 55%;
+    --synervion-text-inverse: 0 0% 100%;
+    --synervion-success: 142 71% 45%;
+    --synervion-warning: 38 92% 50%;
+    --synervion-error: 0 84% 60%;
+    --synervion-info: 210 85% 58%;
+    --synervion-border-light: 220 8% 88%;
+    --synervion-border-medium: 220 8% 75%;
+    --synervion-border-dark: 220 10% 35%;
+    --synervion-shadow-sm: 0 1px 2px 0 #0000000d;
+    --synervion-shadow-md: 0 4px 6px -1px #0000001a;
+    --synervion-shadow-lg: 0 10px 15px -3px #0000001a;
+    --synervion-shadow-xl: 0 20px 25px -5px #0000001a;
+    --synervion-shadow-2xl: 0 25px 50px -12px #00000040;
+    --synervion-space-0: 0;
+    --synervion-space-1: .25rem;
+    --synervion-space-2: .5rem;
+    --synervion-space-3: .75rem;
+    --synervion-space-4: 1rem;
+    --synervion-space-6: 1.5rem;
+    --synervion-space-8: 2rem;
+    --synervion-space-12: 3rem;
+    --synervion-space-16: 4rem;
+    --synervion-space-20: 5rem;
+    --synervion-space-24: 6rem;
+    --synervion-space-32: 8rem;
+    --synervion-font-heading: "Manrope", system-ui, -apple-system, sans-serif;
+    --synervion-font-body: "Inter", system-ui, -apple-system, sans-serif;
+    --synervion-text-h1: 4rem;
+    --synervion-text-h2: 3rem;
+    --synervion-text-h3: 2rem;
+    --synervion-text-h4: 1.5rem;
+    --synervion-text-h5: 1.25rem;
+    --synervion-text-h6: 1.125rem;
+    --synervion-text-body: 1.125rem;
+    --synervion-text-body-sm: 1rem;
+    --synervion-text-caption: .875rem;
+    --synervion-text-small: .75rem;
+    --synervion-weight-regular: 400;
+    --synervion-weight-medium: 500;
+    --synervion-weight-semibold: 600;
+    --synervion-weight-bold: 700;
+    --synervion-leading-tight: 1.2;
+    --synervion-leading-normal: 1.5;
+    --synervion-leading-relaxed: 1.7;
+    --synervion-tracking-tight: -.02em;
+    --synervion-tracking-normal: 0;
+    --synervion-tracking-wide: .02em;
+    --synervion-radius-sm: .375rem;
+    --synervion-radius-md: .5rem;
+    --synervion-radius-lg: .75rem;
+    --synervion-radius-xl: 1rem;
+    --synervion-radius-2xl: 1.5rem;
+    --synervion-radius-full: 9999px;
+    --background: var(--synervion-bg-white);
+    --foreground: var(--synervion-text-primary);
+    --card: var(--synervion-bg-white);
+    --card-foreground: var(--synervion-text-primary);
+    --popover: var(--synervion-bg-white);
+    --popover-foreground: var(--synervion-text-primary);
+    --primary: var(--synervion-primary-500);
+    --primary-foreground: var(--synervion-text-inverse);
+    --secondary: var(--synervion-bg-gray-300);
+    --secondary-foreground: var(--synervion-text-primary);
+    --muted: var(--synervion-bg-gray-100);
+    --muted-foreground: var(--synervion-text-secondary);
+    --accent: var(--synervion-accent-400);
+    --accent-foreground: var(--synervion-text-inverse);
+    --destructive: var(--synervion-error);
+    --destructive-foreground: var(--synervion-text-inverse);
+    --border: var(--synervion-border-light);
+    --input: var(--synervion-border-light);
+    --ring: var(--synervion-primary-500);
+    --radius: var(--synervion-radius-md);
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body leading-relaxed;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading font-bold leading-tight tracking-tight text-foreground;
+  }
+}
+
+@layer components {
+  .synervion-container {
+    @apply max-w-[1440px] px-8 mx-auto lg:px-16;
+  }
+}

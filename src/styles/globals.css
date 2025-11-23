@@ -1,0 +1,266 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    /* ========================================
+       SYNERVION BRAND COLOR SYSTEM
+       ======================================== */
+    
+    /* Primary - Cordyceps Amber/Orange */
+    --synervion-primary-50: 28 100% 95%;
+    --synervion-primary-100: 28 95% 88%;
+    --synervion-primary-200: 28 92% 78%;
+    --synervion-primary-300: 28 90% 68%;
+    --synervion-primary-400: 28 88% 63%;
+    --synervion-primary-500: 28 85% 58%; /* Main brand color - #EE7B2F */
+    --synervion-primary-600: 28 80% 48%;
+    --synervion-primary-700: 28 75% 38%;
+    --synervion-primary-800: 28 70% 28%;
+    --synervion-primary-900: 28 65% 18%;
+
+    /* Secondary - Deep Neutral Gray */
+    --synervion-secondary-50: 220 13% 95%;
+    --synervion-secondary-100: 220 12% 88%;
+    --synervion-secondary-200: 220 11% 75%;
+    --synervion-secondary-300: 220 10% 60%;
+    --synervion-secondary-400: 220 10% 45%;
+    --synervion-secondary-500: 220 10% 35%; /* Medium gray */
+    --synervion-secondary-600: 220 11% 28%;
+    --synervion-secondary-700: 220 12% 22%;
+    --synervion-secondary-800: 220 13% 18%; /* Main dark gray - #272D35 */
+    --synervion-secondary-900: 220 15% 12%;
+
+    /* Accent - Muted Earth Tone */
+    --synervion-accent-50: 30 20% 95%;
+    --synervion-accent-100: 30 18% 88%;
+    --synervion-accent-200: 30 17% 75%;
+    --synervion-accent-300: 30 16% 65%;
+    --synervion-accent-400: 30 15% 55%; /* Main earth accent */
+    --synervion-accent-500: 30 15% 45%;
+    --synervion-accent-600: 30 16% 35%;
+    --synervion-accent-700: 30 17% 25%;
+    --synervion-accent-800: 30 18% 15%;
+    --synervion-accent-900: 30 20% 10%;
+
+    /* Background - Lab White & Gray Surfaces */
+    --synervion-bg-white: 0 0% 100%; /* Pure white */
+    --synervion-bg-gray-50: 220 8% 98%;
+    --synervion-bg-gray-100: 220 8% 96%;
+    --synervion-bg-gray-200: 220 8% 92%;
+    --synervion-bg-gray-300: 220 8% 88%;
+
+    /* Text Colors */
+    --synervion-text-primary: 220 13% 18%; /* Main text - #272D35 */
+    --synervion-text-secondary: 220 10% 35%; /* Muted text */
+    --synervion-text-tertiary: 220 8% 55%; /* Light text */
+    --synervion-text-inverse: 0 0% 100%; /* White text */
+
+    /* Functional Colors */
+    --synervion-success: 142 71% 45%;
+    --synervion-warning: 38 92% 50%;
+    --synervion-error: 0 84% 60%;
+    --synervion-info: 210 85% 58%;
+
+    /* Border & Divider */
+    --synervion-border-light: 220 8% 88%;
+    --synervion-border-medium: 220 8% 75%;
+    --synervion-border-dark: 220 10% 35%;
+
+    /* Shadow Tokens */
+    --synervion-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --synervion-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    --synervion-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+    --synervion-shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+    --synervion-shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+
+    /* ========================================
+       SPACING SCALE (8px base)
+       ======================================== */
+    --synervion-space-0: 0;
+    --synervion-space-1: 0.25rem; /* 4px */
+    --synervion-space-2: 0.5rem; /* 8px */
+    --synervion-space-3: 0.75rem; /* 12px */
+    --synervion-space-4: 1rem; /* 16px */
+    --synervion-space-6: 1.5rem; /* 24px */
+    --synervion-space-8: 2rem; /* 32px */
+    --synervion-space-12: 3rem; /* 48px */
+    --synervion-space-16: 4rem; /* 64px */
+    --synervion-space-20: 5rem; /* 80px */
+    --synervion-space-24: 6rem; /* 96px */
+    --synervion-space-32: 8rem; /* 128px */
+
+    /* ========================================
+       TYPOGRAPHY TOKENS
+       ======================================== */
+    --synervion-font-heading: 'Manrope', system-ui, -apple-system, sans-serif;
+    --synervion-font-body: 'Inter', system-ui, -apple-system, sans-serif;
+
+    /* Font Sizes */
+    --synervion-text-h1: 4rem; /* 64px */
+    --synervion-text-h2: 3rem; /* 48px */
+    --synervion-text-h3: 2rem; /* 32px */
+    --synervion-text-h4: 1.5rem; /* 24px */
+    --synervion-text-h5: 1.25rem; /* 20px */
+    --synervion-text-h6: 1.125rem; /* 18px */
+    --synervion-text-body: 1.125rem; /* 18px */
+    --synervion-text-body-sm: 1rem; /* 16px */
+    --synervion-text-caption: 0.875rem; /* 14px */
+    --synervion-text-small: 0.75rem; /* 12px */
+
+    /* Font Weights */
+    --synervion-weight-regular: 400;
+    --synervion-weight-medium: 500;
+    --synervion-weight-semibold: 600;
+    --synervion-weight-bold: 700;
+
+    /* Line Heights */
+    --synervion-leading-tight: 1.2;
+    --synervion-leading-normal: 1.5;
+    --synervion-leading-relaxed: 1.7;
+
+    /* Letter Spacing */
+    --synervion-tracking-tight: -0.02em;
+    --synervion-tracking-normal: 0;
+    --synervion-tracking-wide: 0.02em;
+
+    /* ========================================
+       BORDER RADIUS
+       ======================================== */
+    --synervion-radius-sm: 0.375rem; /* 6px */
+    --synervion-radius-md: 0.5rem; /* 8px */
+    --synervion-radius-lg: 0.75rem; /* 12px */
+    --synervion-radius-xl: 1rem; /* 16px */
+    --synervion-radius-2xl: 1.5rem; /* 24px */
+    --synervion-radius-full: 9999px;
+
+    /* ========================================
+       SHADCN THEME COMPATIBILITY
+       ======================================== */
+    --background: var(--synervion-bg-white);
+    --foreground: var(--synervion-text-primary);
+
+    --card: var(--synervion-bg-white);
+    --card-foreground: var(--synervion-text-primary);
+
+    --popover: var(--synervion-bg-white);
+    --popover-foreground: var(--synervion-text-primary);
+
+    --primary: var(--synervion-primary-500);
+    --primary-foreground: var(--synervion-text-inverse);
+
+    --secondary: var(--synervion-bg-gray-300);
+    --secondary-foreground: var(--synervion-text-primary);
+
+    --muted: var(--synervion-bg-gray-100);
+    --muted-foreground: var(--synervion-text-secondary);
+
+    --accent: var(--synervion-accent-400);
+    --accent-foreground: var(--synervion-text-inverse);
+
+    --destructive: var(--synervion-error);
+    --destructive-foreground: var(--synervion-text-inverse);
+
+    --border: var(--synervion-border-light);
+    --input: var(--synervion-border-light);
+    --ring: var(--synervion-primary-500);
+
+    --radius: var(--synervion-radius-md);
+  }
+
+  /* ========================================
+     BASE STYLES
+     ======================================== */
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--synervion-font-body);
+    font-size: var(--synervion-text-body);
+    line-height: var(--synervion-leading-relaxed);
+  }
+
+  /* ========================================
+     TYPOGRAPHY STYLES
+     ======================================== */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--synervion-font-heading);
+    font-weight: var(--synervion-weight-bold);
+    line-height: var(--synervion-leading-tight);
+    letter-spacing: var(--synervion-tracking-tight);
+    color: hsl(var(--synervion-text-primary));
+  }
+
+  h1 {
+    font-size: var(--synervion-text-h1);
+    font-weight: var(--synervion-weight-bold);
+  }
+
+  h2 {
+    font-size: var(--synervion-text-h2);
+    font-weight: var(--synervion-weight-semibold);
+  }
+
+  h3 {
+    font-size: var(--synervion-text-h3);
+    font-weight: var(--synervion-weight-semibold);
+  }
+
+  h4 {
+    font-size: var(--synervion-text-h4);
+    font-weight: var(--synervion-weight-semibold);
+  }
+
+  h5 {
+    font-size: var(--synervion-text-h5);
+    font-weight: var(--synervion-weight-medium);
+  }
+
+  h6 {
+    font-size: var(--synervion-text-h6);
+    font-weight: var(--synervion-weight-medium);
+  }
+
+  p {
+    font-size: var(--synervion-text-body);
+    line-height: var(--synervion-leading-relaxed);
+    color: hsl(var(--synervion-text-primary));
+  }
+
+  /* ========================================
+     UTILITY CLASSES
+     ======================================== */
+  .synervion-container {
+    max-width: 1440px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--synervion-space-8);
+    padding-right: var(--synervion-space-8);
+  }
+
+  @media (min-width: 1024px) {
+    .synervion-container {
+      padding-left: var(--synervion-space-16);
+      padding-right: var(--synervion-space-16);
+    }
+  }
+
+  .synervion-grid-12 {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--synervion-space-6);
+  }
+
+  .synervion-grid-6 {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: var(--synervion-space-4);
+  }
+
+  .synervion-grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--synervion-space-4);
+  }
+}
