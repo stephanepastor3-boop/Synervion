@@ -83,7 +83,7 @@ export function PartnershipModels() {
 
         {/* Partnership Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 lg:gap-8 mb-12 sm:mb-16 lg:mb-20">
-          {models.map((model, index) => {
+          {models.map((model) => {
             const Icon = model.icon;
             const cardAnimation = useScrollAnimation();
 
@@ -98,12 +98,27 @@ export function PartnershipModels() {
               >
                 <BrandCard
                   variant="partnership"
-                  badge={model.badge}
                   icon={<Icon className="w-6 h-6 sm:w-7 sm:h-7 text-primary" strokeWidth={1.5} />}
                   title={model.title}
                   description={model.description}
-                  features={model.features}
-                />
+                >
+                  {/* Badge */}
+                  <div className="mb-4">
+                    <BrandBadge variant="secondary" className="text-xs">
+                      {model.badge}
+                    </BrandBadge>
+                  </div>
+
+                  {/* Features List */}
+                  <ul className="space-y-2">
+                    {model.features.map((feature, idx) => (
+                      <li key={idx} className="flex items-start gap-2 text-sm text-muted-foreground">
+                        <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </BrandCard>
               </div>
             );
           })}
@@ -135,6 +150,7 @@ export function PartnershipModels() {
 
         {/* Reva Flora Partnership */}
         <div
+          id="rnd"
           ref={revaAnimation.ref as React.RefObject<HTMLDivElement>}
           className={cn(
             "grid lg:grid-cols-2 gap-8 lg:gap-16 items-center mb-16 sm:mb-24 transition-opacity duration-500",
@@ -142,9 +158,14 @@ export function PartnershipModels() {
           )}
         >
           <div className="order-2 lg:order-1 space-y-4 sm:space-y-6">
-            <BrandBadge variant="secondary">
-              Strategic Partnership
-            </BrandBadge>
+            <div className="flex flex-wrap gap-2">
+              <BrandBadge variant="primary">
+                Lab-Grown Excellence
+              </BrandBadge>
+              <BrandBadge variant="primary">
+                Strategic Partnership
+              </BrandBadge>
+            </div>
 
             <h3 className="text-2xl sm:text-3xl lg:text-4xl font-heading font-semibold">
               Powering Innovation with <span className="text-primary">Reva Flora</span>

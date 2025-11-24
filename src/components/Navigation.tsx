@@ -16,10 +16,10 @@ export function Navigation() {
   }, []);
 
   const navLinks = [
-    { label: 'Features', href: '#features' },
+    { label: 'Benefits', href: '#features' },
     { label: 'Why Lab-Grown', href: '#origin' },
-    { label: 'Partnership', href: '#partners' },
-    { label: 'R&D', href: '#rnd' },
+    { label: 'Collabs', href: '#partners' },
+    { label: 'Research', href: '#rnd' },
     { label: 'Contact', href: '#contact' },
   ];
 
@@ -44,16 +44,15 @@ export function Navigation() {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
             ? 'bg-[hsl(var(--synervion-bg-white))]/95 backdrop-blur-md shadow-sm'
             : 'bg-[hsl(var(--synervion-bg-white))]/80 backdrop-blur-sm'
-        }`}
+          }`}
       >
         {/* Desktop & Mobile Navigation Container */}
         <div className="w-full max-w-[1280px] mx-auto px-4 sm:px-8 lg:px-16">
           <div className="flex items-center justify-between h-16 lg:h-20">
-            
+
             {/* Left: Logo + Wordmark (Grouped) */}
             <button
               onClick={() => smoothScroll('#hero')}
@@ -65,16 +64,16 @@ export function Navigation() {
                   fill="currentColor"
                   className="text-[hsl(var(--synervion-secondary-800))]"
                 />
-                <circle 
-                  cx="16" 
-                  cy="16" 
-                  r="5" 
-                  fill="currentColor" 
-                  className="text-[hsl(var(--synervion-primary-500))]" 
+                <circle
+                  cx="16"
+                  cy="16"
+                  r="5"
+                  fill="currentColor"
+                  className="text-[hsl(var(--synervion-primary-500))]"
                 />
               </svg>
-              <span 
-                style={{ 
+              <span
+                style={{
                   fontFamily: 'var(--synervion-font-heading)',
                   fontSize: '20px',
                   fontWeight: 600,
@@ -106,8 +105,8 @@ export function Navigation() {
 
             {/* Right: Action Buttons (Desktop) */}
             <div className="hidden lg:flex items-center gap-3">
-              <BrandButton 
-                variant="primary" 
+              <BrandButton
+                variant="primary"
                 size="md"
                 onClick={() => smoothScroll('#contact')}
                 className="min-h-[44px]"
@@ -142,7 +141,7 @@ export function Navigation() {
             className="fixed inset-0 bg-black/50 z-40 lg:hidden"
             onClick={() => setMobileMenuOpen(false)}
           />
-          
+
           <motion.div
             initial={{ x: '100%' }}
             animate={{ x: 0 }}
@@ -153,8 +152,8 @@ export function Navigation() {
             <div className="flex flex-col h-full">
               {/* Mobile Menu Header */}
               <div className="flex items-center justify-between p-4 border-b border-[hsl(var(--synervion-border-light))]">
-                <span 
-                  style={{ 
+                <span
+                  style={{
                     fontFamily: 'var(--synervion-font-heading)',
                     fontSize: '18px',
                     fontWeight: 600,
@@ -196,9 +195,9 @@ export function Navigation() {
 
               {/* Mobile Menu CTA */}
               <div className="p-4 border-t border-[hsl(var(--synervion-border-light))]">
-                <BrandButton 
-                  variant="primary" 
-                  size="lg" 
+                <BrandButton
+                  variant="primary"
+                  size="lg"
                   className="w-full min-h-[48px]"
                   onClick={() => smoothScroll('#contact')}
                 >

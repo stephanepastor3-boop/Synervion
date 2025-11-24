@@ -21,14 +21,14 @@ export function Footer() {
       { label: 'Our Science', action: () => smoothScroll('#origin') },
       { label: 'Research', action: () => smoothScroll('#rnd') },
     ],
-    Partnerships: [
-      { label: 'Partnership Models', action: () => smoothScroll('#partners') },
+    Collabs: [
+      { label: 'Collab Models', action: () => smoothScroll('#partners') },
       { label: 'White-Label', action: () => smoothScroll('#partners') },
       { label: 'Co-Brand', action: () => smoothScroll('#partners') },
       { label: 'Custom Formulation', action: () => smoothScroll('#partners') },
     ],
     Resources: [
-      { label: 'Features', action: () => smoothScroll('#features') },
+      { label: 'Benefits', action: () => smoothScroll('#features') },
       { label: 'Testing', action: () => smoothScroll('#rnd') },
       { label: 'Contact', action: () => smoothScroll('#contact') },
     ],
@@ -47,7 +47,7 @@ export function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12 mb-12">
           {/* Brand - 4 columns */}
           <div className="lg:col-span-4">
-            <button 
+            <button
               onClick={() => smoothScroll('#hero')}
               className="flex items-center gap-3 mb-6 hover:opacity-80 transition-opacity"
             >
@@ -58,8 +58,8 @@ export function Footer() {
                 />
                 <circle cx="16" cy="16" r="5" fill="hsl(var(--synervion-primary-500))" />
               </svg>
-              <span 
-                style={{ 
+              <span
+                style={{
                   fontFamily: 'var(--synervion-font-heading)',
                   fontSize: '20px',
                   fontWeight: 600,
@@ -69,7 +69,7 @@ export function Footer() {
                 Synervion
               </span>
             </button>
-            <p 
+            <p
               className="mb-6 max-w-sm"
               style={{
                 fontFamily: 'var(--synervion-font-body)',
@@ -79,7 +79,7 @@ export function Footer() {
                 color: 'rgba(255, 255, 255, 0.7)'
               }}
             >
-              Premium lab-grown Cordyceps for wellness brands. 
+              Premium lab-grown Cordyceps for wellness brands.
               Science-backed, sustainably produced, 100% traceable.
             </p>
             <div className="flex gap-4">
@@ -102,7 +102,7 @@ export function Footer() {
           {/* Links - 8 columns divided into 3 sections */}
           {Object.entries(links).map(([category, categoryLinks]) => (
             <div key={category} className="lg:col-span-2 sm:col-span-1">
-              <h4 
+              <h4
                 className="mb-4"
                 style={{
                   fontFamily: 'var(--synervion-font-heading)',
@@ -139,7 +139,7 @@ export function Footer() {
 
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p 
+          <p
             style={{
               fontFamily: 'var(--synervion-font-body)',
               fontSize: '13px',
@@ -150,7 +150,7 @@ export function Footer() {
             © 2025 Synervion. All rights reserved.
           </p>
           <div className="flex gap-6">
-            <button 
+            <button
               style={{
                 fontFamily: 'var(--synervion-font-body)',
                 fontSize: '13px',
@@ -161,7 +161,7 @@ export function Footer() {
             >
               Privacy Policy
             </button>
-            <button 
+            <button
               style={{
                 fontFamily: 'var(--synervion-font-body)',
                 fontSize: '13px',

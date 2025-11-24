@@ -1,6 +1,5 @@
 import { BrandButton } from './brand/BrandButton';
-import { BrandBadge } from './brand/BrandBadge';
-import { ArrowRight, Leaf, Microscope, Award, Handshake } from 'lucide-react';
+import { ArrowRight, Microscope, Award, Handshake } from 'lucide-react';
 import { motion } from 'motion/react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import heroImage from '../assets/images/hero-cordyceps-macro.png';
@@ -37,11 +36,6 @@ export function Hero() {
             transition={{ duration: 0.8 }}
             className="lg:col-span-6"
           >
-            {/* Badge */}
-            <BrandBadge variant="primary" className="mb-4 sm:mb-6">
-              Lab-Grown Excellence
-            </BrandBadge>
-
             {/* H1 - Responsive: 32px mobile → 48px tablet → 64px desktop */}
             <h1 className="mb-4 sm:mb-6 text-[32px] sm:text-[48px] lg:text-[64px] font-heading font-bold leading-tight tracking-tight text-foreground">
               The <span className="text-primary">Cordyceps</span> Partner for Brands
@@ -55,37 +49,27 @@ export function Hero() {
 
             {/* Feature Icons - Mobile: 2 columns, Desktop: 4 columns */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-8 sm:mb-10">
-              {features.map((feature, index) => {
-                const isImageIcon = feature.iconType === 'image';
-                const IconComponent = !isImageIcon && 'icon' in feature ? feature.icon : null;
-                const imageSrc = isImageIcon && 'iconSrc' in feature ? feature.iconSrc : '';
-
-                return (
-                  <motion.div
-                    key={feature.label}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2 + index * 0.1, duration: 0.5 }}
-                    className="group flex flex-col items-center gap-2 p-3 sm:p-4 rounded-xl bg-card border border-border hover:border-primary/30 hover:shadow-lg transition-all duration-300"
-                  >
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                      {isImageIcon ? (
-                        <ImageWithFallback
-                          src={imageSrc}
-                          alt={feature.label}
-                          className={feature.label === 'Flexible Collabs' ? 'w-8 h-8 sm:w-9 sm:h-9' : 'w-5 h-5 sm:w-6 sm:h-6'}
-                          style={{ objectFit: 'contain' }}
-                        />
-                      ) : IconComponent ? (
-                        <IconComponent className="w-5 h-5 sm:w-6 sm:h-6 text-primary" strokeWidth={1.5} />
-                      ) : null}
-                    </div>
-                    <span className="text-center text-xs sm:text-[12px] font-body text-foreground">
-                      {feature.label}
-                    </span>
-                  </motion.div>
-                );
-              })}
+              {features.map((feature, index) => (
+                <motion.div
+                  key={feature.label}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 + index * 0.1, duration: 0.5 }}
+                  className="group flex flex-col items-center gap-2 p-3 sm:p-4 rounded-xl bg-card border border-border hover:border-primary/30 hover:shadow-lg transition-all duration-300"
+                >
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <ImageWithFallback
+                      src={feature.iconSrc}
+                      alt={feature.label}
+                      className={feature.label === 'Flexible Collabs' ? 'w-8 h-8 sm:w-9 sm:h-9' : 'w-5 h-5 sm:w-6 sm:h-6'}
+                      style={{ objectFit: 'contain' }}
+                    />
+                  </div>
+                  <span className="text-center text-xs sm:text-[12px] font-body text-foreground">
+                    {feature.label}
+                  </span>
+                </motion.div>
+              ))}
             </div>
 
             {/* CTA Buttons - Mobile: Stack vertically, Desktop: Side by side */}
