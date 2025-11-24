@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { BrandCard } from './brand/BrandCard';
 import { BrandBadge } from './brand/BrandBadge';
 import { IconPillar } from './brand/IconPillar';
-import productLineup from '../assets/images/product-lineup.png';
 import { EnergyResearchModal } from './research/EnergyResearchModal';
 import { ImmuneResearchModal } from './research/ImmuneResearchModal';
 import { useScrollAnimation } from './ui/use-scroll-animation';
@@ -12,7 +11,6 @@ export function ProductBenefits() {
   const [showEnergyResearch, setShowEnergyResearch] = useState(false);
   const [showImmuneResearch, setShowImmuneResearch] = useState(false);
   const headerAnimation = useScrollAnimation();
-  const imageAnimation = useScrollAnimation();
 
   const benefits = [
     {
@@ -80,25 +78,6 @@ export function ProductBenefits() {
             Each metric represents peer-reviewed findings.
           </p>
         </header>
-
-        {/* Product Lineup Image */}
-        <div
-          ref={imageAnimation.ref as React.RefObject<HTMLDivElement>}
-          className={cn(
-            "mb-12 sm:mb-16 lg:mb-20 flex justify-center transition-opacity duration-500",
-            imageAnimation.isVisible ? "opacity-100" : "opacity-0"
-          )}
-        >
-          <div className="w-full max-w-[800px]">
-            <div className="relative aspect-square w-full">
-              <img
-                src={productLineup}
-                alt="Synervion Cordyceps product lineup - coffee, liquid drops, energy bars"
-                className="w-full h-full object-cover"
-              />
-            </div>
-          </div>
-        </div>
 
         {/* Benefits Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 lg:gap-6">

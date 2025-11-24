@@ -1,6 +1,6 @@
 import { BrandBadge } from './brand/BrandBadge';
 import { CheckCircle2, Microscope, Leaf, TrendingUp, Award } from 'lucide-react';
-import labCultureImage from '../assets/images/lab-grown-advantage.png';
+import technicianImage from '../assets/images/Technician-RevaFlora1.png';
 import { useScrollAnimation } from './ui/use-scroll-animation';
 import { cn } from './ui/utils';
 
@@ -110,9 +110,9 @@ export function LabGrownAdvantage() {
             <div className="w-full max-w-[800px]">
               <div className="relative aspect-square w-full">
                 <img
-                  src={labCultureImage}
-                  alt="Lab-grown Cordyceps cultivation shelves with culture containers"
-                  className="w-full h-full object-cover"
+                  src={technicianImage}
+                  alt="Synervion lab technician working with Cordyceps culture samples"
+                  className="w-full h-full object-cover rounded-2xl shadow-xl"
                 />
               </div>
             </div>

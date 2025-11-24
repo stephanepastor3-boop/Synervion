@@ -2,14 +2,16 @@ import { BrandCard } from './brand/BrandCard';
 import { BrandBadge } from './brand/BrandBadge';
 import { BrandButton } from './brand/BrandButton';
 import { Package, Sparkles, Beaker, ArrowRight, Globe, CheckCircle2 } from 'lucide-react';
-import whiteLabelPackaging from '../assets/images/vision-bg.png';
-import revaFloraFacility from '../assets/images/lab-grown-advantage.png';
+import productAll from '../assets/images/products-all1.png';
+import productDrops from '../assets/images/product-drops1.png';
+import productEnergyBar from '../assets/images/product-energybar1.png';
+import productPills from '../assets/images/product-pills1.png';
+import labRevaFlora from '../assets/images/Lab-RevaFlora1.png';
 import { useScrollAnimation } from './ui/use-scroll-animation';
 import { cn } from './ui/utils';
 
 export function PartnershipModels() {
   const headerAnimation = useScrollAnimation();
-  const imageAnimation = useScrollAnimation();
   const revaAnimation = useScrollAnimation();
 
   const models = [
@@ -107,6 +109,30 @@ export function PartnershipModels() {
           })}
         </div>
 
+
+
+
+        {/* Available Formats Grid */}
+        <div className="grid grid-cols-2 gap-6 sm:gap-8 mb-12 sm:mb-16 max-w-4xl mx-auto">
+          {[
+            { img: productAll, label: 'Product Portfolio' },
+            { img: productDrops, label: 'Liquid Extracts' },
+            { img: productEnergyBar, label: 'Energy Bars' },
+            { img: productPills, label: 'Capsules' },
+          ].map((item, index) => (
+            <div key={index} className="group text-center">
+              <div className="relative aspect-square rounded-xl overflow-hidden bg-white border border-border shadow-md mb-4 group-hover:border-primary/30 group-hover:shadow-lg transition-all">
+                <img
+                  src={item.img}
+                  alt={item.label}
+                  className="w-full h-full object-contain p-6 group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <p className="text-base font-semibold font-heading text-foreground">{item.label}</p>
+            </div>
+          ))}
+        </div>
+
         {/* Reva Flora Partnership */}
         <div
           ref={revaAnimation.ref as React.RefObject<HTMLDivElement>}
@@ -147,8 +173,8 @@ export function PartnershipModels() {
           <div className="order-1 lg:order-2">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl">
               <img
-                src={revaFloraFacility}
-                alt="Reva Flora Culture - Synervion partner facility"
+                src={labRevaFlora}
+                alt="Synervion Lab-RevaFlora facility - Advanced research and cultivation center"
                 className="w-full h-auto"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
@@ -170,24 +196,6 @@ export function PartnershipModels() {
           </div>
         </div>
 
-        {/* White-Label Showcase Image */}
-        <div
-          ref={imageAnimation.ref as React.RefObject<HTMLDivElement>}
-          className={cn(
-            "flex justify-center mb-10 sm:mb-12 lg:mb-16 transition-opacity duration-500",
-            imageAnimation.isVisible ? "opacity-100" : "opacity-0"
-          )}
-        >
-          <div className="w-full max-w-[800px]">
-            <div className="relative aspect-square w-full">
-              <img
-                src={whiteLabelPackaging}
-                alt="White-label Cordyceps product packaging showcase"
-                className="w-full h-full object-cover"
-              />
-            </div>
-          </div>
-        </div>
 
         {/* CTA Section */}
         <div className="text-center">
