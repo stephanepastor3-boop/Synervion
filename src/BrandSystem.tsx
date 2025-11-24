@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { BrandButton } from './components/brand/BrandButton';
 import { BrandCard } from './components/brand/BrandCard';
 import { BrandBadge } from './components/brand/BrandBadge';
-import { 
-  Copy, Check, Zap, Shield, Package, ArrowRight, 
-  Leaf, Microscope, Award, Menu, X, Download, ChevronRight,
+import {
+  Copy, Check, Zap, Shield, Package, ArrowRight,
+  Leaf, Microscope, Award, Download, ChevronRight,
   Heart, Clock, TrendingUp, Users, Globe, Code
 } from 'lucide-react';
 
@@ -273,11 +273,10 @@ export default function BrandSystem() {
                 <button
                   key={section.id}
                   onClick={() => setActiveSection(section.id)}
-                  className={`px-4 sm:px-6 py-3 sm:py-4 text-sm whitespace-nowrap border-b-2 transition-colors ${
-                    activeSection === section.id
+                  className={`px-4 sm:px-6 py-3 sm:py-4 text-sm whitespace-nowrap border-b-2 transition-colors ${activeSection === section.id
                       ? 'border-[hsl(var(--synervion-primary-500))] text-[hsl(var(--synervion-primary-500))]'
                       : 'border-transparent text-[hsl(var(--synervion-text-secondary))] hover:text-[hsl(var(--synervion-text-primary))]'
-                  }`}
+                    }`}
                   style={{ fontFamily: 'var(--synervion-font-heading)' }}
                 >
                   {section.label}
@@ -304,7 +303,7 @@ export default function BrandSystem() {
                 Synervion Brand Identity
               </h2>
               <p className="text-base sm:text-lg text-[hsl(var(--synervion-text-secondary))]">
-                Premium lab-grown Cordyceps for modern wellness brands. Our identity reflects the perfect balance 
+                Premium lab-grown Cordyceps for modern wellness brands. Our identity reflects the perfect balance
                 of cutting-edge science, traditional wisdom, and sustainable innovation.
               </p>
             </div>
@@ -322,7 +321,7 @@ export default function BrandSystem() {
                     <div className="absolute -top-3 left-6 px-3 py-1 rounded-full bg-[hsl(var(--synervion-primary-500))] text-white text-xs">
                       Brand Keyword
                     </div>
-                    
+
                     <div className="w-14 h-14 rounded-xl bg-[hsl(var(--synervion-primary-500))]/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                       <Icon className="w-7 h-7 text-[hsl(var(--synervion-primary-500))]" strokeWidth={1.5} />
                     </div>
@@ -353,8 +352,8 @@ export default function BrandSystem() {
                   India's Premier Lab-Grown Cordyceps Partner
                 </h2>
                 <p className="text-base sm:text-lg text-white/90 leading-relaxed mb-8">
-                  Synervion delivers premium, science-backed Cordyceps ingredients through sustainable lab cultivation. 
-                  We combine traditional wellness wisdom with cutting-edge biotechnology to provide brands with 
+                  Synervion delivers premium, science-backed Cordyceps ingredients through sustainable lab cultivation.
+                  We combine traditional wellness wisdom with cutting-edge biotechnology to provide brands with
                   transparent, traceable, and consistently superior functional ingredients.
                 </p>
                 <div className="grid sm:grid-cols-3 gap-6">
@@ -391,7 +390,7 @@ export default function BrandSystem() {
                 Color System
               </h2>
               <p className="text-base sm:text-lg text-[hsl(var(--synervion-text-secondary))]">
-                Our color palette is inspired by the warm amber tones of Cordyceps mushrooms, balanced with 
+                Our color palette is inspired by the warm amber tones of Cordyceps mushrooms, balanced with
                 professional grays for a premium, scientific aesthetic.
               </p>
             </div>
@@ -439,7 +438,7 @@ export default function BrandSystem() {
                               ★ Primary
                             </div>
                           )}
-                          
+
                           <button
                             onClick={(e) => {
                               e.stopPropagation();
@@ -454,7 +453,7 @@ export default function BrandSystem() {
                             )}
                           </button>
                         </div>
-                        
+
                         {/* Color Info */}
                         <div className="p-4 bg-white">
                           <div className="mb-3">
@@ -465,7 +464,7 @@ export default function BrandSystem() {
                               {color.usage}
                             </div>
                           </div>
-                          
+
                           <div className="space-y-1">
                             <div className="flex items-center justify-between text-xs">
                               <span className="text-[hsl(var(--synervion-text-tertiary))]">HEX</span>
@@ -497,7 +496,7 @@ export default function BrandSystem() {
                 <div className="p-6 rounded-xl bg-white border border-[hsl(var(--synervion-border-light))]">
                   <div className="text-sm mb-3 text-[hsl(var(--synervion-text-tertiary))]">CSS Variables</div>
                   <pre className="p-4 rounded-lg bg-gray-900 text-green-400 text-xs overflow-x-auto font-mono">
-{`/* Primary Brand Color */
+                    {`/* Primary Brand Color */
 bg-[hsl(var(--synervion-primary-500))]
 
 /* Text Colors */
@@ -511,7 +510,7 @@ border-[hsl(var(--synervion-border-light))]`}
                 <div className="p-6 rounded-xl bg-white border border-[hsl(var(--synervion-border-light))]">
                   <div className="text-sm mb-3 text-[hsl(var(--synervion-text-tertiary))]">Direct HSL Usage</div>
                   <pre className="p-4 rounded-lg bg-gray-900 text-blue-400 text-xs overflow-x-auto font-mono">
-{`/* In CSS */
+                    {`/* In CSS */
 background: hsl(28 85% 58%);
 
 /* In Tailwind */
@@ -613,7 +612,7 @@ className="bg-[hsl(28_85%_58%)]/10"`}
                           {type.usage}
                         </div>
                       </div>
-                      
+
                       <div className="grid grid-cols-2 gap-3 text-xs">
                         <div>
                           <div className="text-[hsl(var(--synervion-text-tertiary))] mb-1">Size</div>
@@ -668,7 +667,7 @@ className="bg-[hsl(28_85%_58%)]/10"`}
                 <div>
                   <div className="text-sm mb-3 text-white/70">Using CSS Variables</div>
                   <pre className="p-4 rounded-lg bg-black/30 text-green-400 text-xs overflow-x-auto font-mono">
-{`h1 {
+                    {`h1 {
   font-family: var(--synervion-font-heading);
   font-size: var(--synervion-text-h1);
   font-weight: var(--synervion-weight-bold);
@@ -679,7 +678,7 @@ className="bg-[hsl(28_85%_58%)]/10"`}
                 <div>
                   <div className="text-sm mb-3 text-white/70">Using Tailwind + Inline Styles</div>
                   <pre className="p-4 rounded-lg bg-black/30 text-blue-400 text-xs overflow-x-auto font-mono">
-{`<h1 
+                    {`<h1 
   className="text-4xl sm:text-6xl"
   style={{
     fontFamily: 'var(--synervion-font-heading)'
@@ -723,7 +722,7 @@ className="bg-[hsl(28_85%_58%)]/10"`}
                   8px Foundation
                 </div>
               </div>
-              
+
               <div className="space-y-4">
                 {spacingScale.map((space) => (
                   <div key={space.value} className="group p-4 rounded-xl hover:bg-[hsl(var(--synervion-bg-gray-50))] transition-colors">
@@ -735,7 +734,7 @@ className="bg-[hsl(28_85%_58%)]/10"`}
                           style={{ width: space.value }}
                         />
                       </div>
-                      
+
                       {/* Info */}
                       <div className="flex-1 grid sm:grid-cols-3 gap-4">
                         <div>
@@ -840,7 +839,7 @@ className="bg-[hsl(28_85%_58%)]/10"`}
                 <div className="p-4 rounded-lg bg-white border border-[hsl(var(--synervion-border-light))]">
                   <div className="text-sm mb-2 text-[hsl(var(--synervion-text-tertiary))]">12-Column Grid</div>
                   <pre className="text-xs font-mono text-[hsl(var(--synervion-text-primary))]">
-{`<div className="synervion-grid-12">
+                    {`<div className="synervion-grid-12">
   <div className="col-span-6">Half width</div>
   <div className="col-span-4">Third width</div>
 </div>`}
@@ -849,7 +848,7 @@ className="bg-[hsl(28_85%_58%)]/10"`}
                 <div className="p-4 rounded-lg bg-white border border-[hsl(var(--synervion-border-light))]">
                   <div className="text-sm mb-2 text-[hsl(var(--synervion-text-tertiary))]">Responsive Container</div>
                   <pre className="text-xs font-mono text-[hsl(var(--synervion-text-primary))]">
-{`<div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16">
+                    {`<div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16">
   {/* Content */}
 </div>`}
                   </pre>
@@ -959,7 +958,7 @@ className="bg-[hsl(28_85%_58%)]/10"`}
               {/* Code Example */}
               <div className="p-4 rounded-lg bg-gray-900 text-blue-400">
                 <pre className="text-xs font-mono overflow-x-auto">
-{`import { BrandButton } from './components/brand/BrandButton';
+                  {`import { BrandButton } from './components/brand/BrandButton';
 
 <BrandButton variant="primary" size="lg">
   Explore Partnerships
@@ -1021,7 +1020,7 @@ className="bg-[hsl(28_85%_58%)]/10"`}
               {/* Code Example */}
               <div className="p-4 rounded-lg bg-gray-900 text-green-400">
                 <pre className="text-xs font-mono overflow-x-auto">
-{`import { BrandCard } from './components/brand/BrandCard';
+                  {`import { BrandCard } from './components/brand/BrandCard';
 
 <BrandCard
   variant="benefit"
@@ -1073,7 +1072,7 @@ className="bg-[hsl(28_85%_58%)]/10"`}
               {/* Code Example */}
               <div className="p-4 rounded-lg bg-gray-900 text-purple-400">
                 <pre className="text-xs font-mono overflow-x-auto">
-{`import { BrandBadge } from './components/brand/BrandBadge';
+                  {`import { BrandBadge } from './components/brand/BrandBadge';
 
 <BrandBadge variant="primary">Premium</BrandBadge>
 <BrandBadge variant="success" size="sm">Verified</BrandBadge>`}
@@ -1261,7 +1260,7 @@ className="bg-[hsl(28_85%_58%)]/10"`}
               {/* Usage Example */}
               <div className="mt-8 p-4 rounded-lg bg-gray-900 text-yellow-400">
                 <pre className="text-xs font-mono overflow-x-auto">
-{`import { Zap, Shield, Leaf } from 'lucide-react';
+                  {`import { Zap, Shield, Leaf } from 'lucide-react';
 
 <Zap 
   className="w-6 h-6 text-[hsl(var(--synervion-primary-500))]" 
@@ -1325,7 +1324,7 @@ className="bg-[hsl(28_85%_58%)]/10"`}
                     Installation
                   </h4>
                   <pre className="p-4 rounded-lg bg-black/30 text-green-400 text-xs overflow-x-auto font-mono">
-{`npm install lucide-react motion \\
+                    {`npm install lucide-react motion \\
   class-variance-authority \\
   clsx tailwind-merge`}
                   </pre>
@@ -1335,7 +1334,7 @@ className="bg-[hsl(28_85%_58%)]/10"`}
                     Import Fonts
                   </h4>
                   <pre className="p-4 rounded-lg bg-black/30 text-blue-400 text-xs overflow-x-auto font-mono">
-{`<link href="https://fonts.googleapis.com/
+                    {`<link href="https://fonts.googleapis.com/
 css2?family=Manrope:wght@400;500;600;
 700&family=Inter:wght@400;500;600;
 700&display=swap" />`}
@@ -1351,7 +1350,7 @@ css2?family=Manrope:wght@400;500;600;
               </h3>
               <div className="p-6 rounded-xl bg-[hsl(var(--synervion-bg-gray-50))] font-mono text-sm">
                 <pre className="text-[hsl(var(--synervion-text-primary))]">
-{`/
+                  {`/
 ├── styles/
 │   └── globals.css          # Design tokens & base styles
 ├── components/
@@ -1433,7 +1432,7 @@ css2?family=Manrope:wght@400;500;600;
                 Version 1.0
               </h3>
               <p className="text-white/90 mb-6 max-w-2xl mx-auto">
-                Complete design system ready for production use and developer handoff. 
+                Complete design system ready for production use and developer handoff.
                 Includes colors, typography, spacing, components, and full documentation.
               </p>
               <div className="flex flex-wrap justify-center gap-4 text-sm">

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { BrandButton } from './brand/BrandButton';
+import { Logo } from './Logo';
 import { motion } from 'motion/react';
 import { Menu, X } from 'lucide-react';
 
@@ -45,8 +46,8 @@ export function Navigation() {
         animate={{ y: 0 }}
         transition={{ duration: 0.6 }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
-            ? 'bg-[hsl(var(--synervion-bg-white))]/95 backdrop-blur-md shadow-sm'
-            : 'bg-[hsl(var(--synervion-bg-white))]/80 backdrop-blur-sm'
+          ? 'bg-[hsl(var(--synervion-bg-white))]/95 backdrop-blur-md shadow-sm'
+          : 'bg-[hsl(var(--synervion-bg-white))]/80 backdrop-blur-sm'
           }`}
       >
         {/* Desktop & Mobile Navigation Container */}
@@ -54,35 +55,13 @@ export function Navigation() {
           <div className="flex items-center justify-between h-16 lg:h-20">
 
             {/* Left: Logo + Wordmark (Grouped) */}
-            <button
+            <Logo
+              variant="color"
+              size="md"
+              showWordmark={true}
               onClick={() => smoothScroll('#hero')}
-              className="flex items-center gap-3 hover:opacity-80 transition-opacity flex-shrink-0"
-            >
-              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" className="w-7 h-7 sm:w-8 sm:h-8">
-                <path
-                  d="M16 4C9.373 4 4 9.373 4 16s5.373 12 12 12 12-5.373 12-12S22.627 4 16 4zm0 2c5.514 0 10 4.486 10 10s-4.486 10-10 10S6 21.514 6 16 10.486 6 16 6z"
-                  fill="currentColor"
-                  className="text-[hsl(var(--synervion-secondary-800))]"
-                />
-                <circle
-                  cx="16"
-                  cy="16"
-                  r="5"
-                  fill="currentColor"
-                  className="text-[hsl(var(--synervion-primary-500))]"
-                />
-              </svg>
-              <span
-                style={{
-                  fontFamily: 'var(--synervion-font-heading)',
-                  fontSize: '20px',
-                  fontWeight: 600,
-                  color: 'hsl(var(--synervion-text-primary))'
-                }}
-              >
-                Synervion
-              </span>
-            </button>
+              className="flex-shrink-0"
+            />
 
             {/* Center: Menu (Desktop Only) - 32px spacing between items */}
             <nav className="hidden lg:flex items-center gap-8">

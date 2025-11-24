@@ -1,6 +1,6 @@
 import energyIconTransparent from '../../assets/images/icon-immune.png';
 import immuneIconTransparent from '../../assets/images/icon-vitality.png';
-import vitalityIconTransparent from '../../assets/images/icon-longevity.png';
+
 import longevityIconTransparent from '../../assets/images/icon-energy.png';
 import longevityFlowerIcon from '../../assets/images/icon-check.png';
 

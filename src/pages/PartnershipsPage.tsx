@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { motion } from 'motion/react';
-import { BrandCard } from '../components/brand/BrandCard';
 import { BrandBadge } from '../components/brand/BrandBadge';
 import { BrandButton } from '../components/brand/BrandButton';
 import { Input } from '../components/ui/input';
@@ -9,8 +8,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { Label } from '../components/ui/label';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
 import {
-  Package, Sparkles, Beaker, ArrowRight, CheckCircle2,
-  TrendingUp, Users, Clock, Shield, Leaf
+  Package, Sparkles, Beaker, ArrowRight,
+  TrendingUp, Clock, Shield, Leaf
 } from 'lucide-react';
 import productMockups from '../assets/images/research-bg.png';
 
@@ -160,7 +159,7 @@ export function PartnershipsPage() {
             transition={{ delay: 0.3, duration: 0.6 }}
             className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto"
           >
-            {benefits.map((benefit, index) => {
+            {benefits.map((benefit) => {
               const Icon = benefit.icon;
               return (
                 <div
@@ -462,7 +461,7 @@ export function PartnershipsPage() {
                     <Label htmlFor="partnershipType">Partnership Interest *</Label>
                     <Select
                       value={formData.partnershipType}
-                      onValueChange={(value) => setFormData({ ...formData, partnershipType: value })}
+                      onValueChange={(value: string) => setFormData({ ...formData, partnershipType: value })}
                     >
                       <SelectTrigger className="border-[hsl(var(--synervion-border-light))] focus:border-[hsl(var(--synervion-primary-500))]">
                         <SelectValue placeholder="Select partnership type" />

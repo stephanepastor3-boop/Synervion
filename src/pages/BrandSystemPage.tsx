@@ -10,7 +10,6 @@ import {
 } from 'lucide-react';
 import { useState } from 'react';
 import cordycepsImage from '../assets/images/hero-cordyceps-macro.png';
-import foundersImage from '../assets/images/contact-bg.png';
 import teamLabImage from '../assets/images/mission-bg.png';
 import revaFloraFacility from '../assets/images/lab-grown-advantage.png';
 import labCultureImage from '../assets/images/partnership-bg.png';
@@ -80,7 +79,7 @@ export function BrandSystemPage({ onNavigate }: BrandSystemPageProps) {
 
   return (
     <div className="min-h-screen bg-[hsl(var(--synervion-bg-white))]">
-      <Navigation onNavigate={onNavigate} />
+      <Navigation />
 
       <main className="pt-16 lg:pt-20">
         {/* Hero Section */}
@@ -983,7 +982,7 @@ export function BrandSystemPage({ onNavigate }: BrandSystemPageProps) {
         </section>
       </main>
 
-      <Footer onNavigate={onNavigate} />
+      <Footer />
     </div>
   );
 }

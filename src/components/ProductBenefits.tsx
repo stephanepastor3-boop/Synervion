@@ -4,12 +4,16 @@ import { BrandBadge } from './brand/BrandBadge';
 import { IconPillar } from './brand/IconPillar';
 import { EnergyResearchModal } from './research/EnergyResearchModal';
 import { ImmuneResearchModal } from './research/ImmuneResearchModal';
+import { LongevityResearchModal } from './research/LongevityResearchModal';
+import { VitalityResearchModal } from './research/VitalityResearchModal';
 import { useScrollAnimation } from './ui/use-scroll-animation';
 import { cn } from './ui/utils';
 
 export function ProductBenefits() {
   const [showEnergyResearch, setShowEnergyResearch] = useState(false);
   const [showImmuneResearch, setShowImmuneResearch] = useState(false);
+  const [showLongevityResearch, setShowLongevityResearch] = useState(false);
+  const [showVitalityResearch, setShowVitalityResearch] = useState(false);
   const headerAnimation = useScrollAnimation();
 
   const benefits = [
@@ -65,13 +69,13 @@ export function ProductBenefits() {
             headerAnimation.isVisible ? "opacity-100" : "opacity-0"
           )}
         >
-          <BrandBadge variant="primary" className="mb-4 sm:mb-6">
-            Product Benefits
-          </BrandBadge>
-
           <h2 className="mb-4 sm:mb-6 text-[28px] sm:text-[40px] lg:text-[48px] px-4 font-heading font-semibold leading-tight tracking-tight text-foreground">
             Four Pillars of <span className="text-primary">Wellness</span>
           </h2>
+
+          <BrandBadge variant="primary" className="mb-4 sm:mb-6">
+            Product Benefits
+          </BrandBadge>
 
           <p className="max-w-3xl mx-auto text-base lg:text-lg px-4 font-body font-normal leading-relaxed text-muted-foreground">
             Science-backed benefits proven through rigorous lab testing and clinical research.
@@ -81,13 +85,17 @@ export function ProductBenefits() {
 
         {/* Benefits Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 lg:gap-6">
-          {benefits.map((benefit, index) => {
+          {benefits.map((benefit) => {
             const cardAnimation = useScrollAnimation();
             const handleClick = () => {
               if (benefit.title === 'Energy Enhancement') {
                 setShowEnergyResearch(true);
               } else if (benefit.title === 'Immune Support') {
                 setShowImmuneResearch(true);
+              } else if (benefit.title === 'Longevity Support') {
+                setShowLongevityResearch(true);
+              } else if (benefit.title === 'Vitality & Wellness') {
+                setShowVitalityResearch(true);
               }
             };
 
@@ -96,7 +104,7 @@ export function ProductBenefits() {
               iconElement = <IconPillar variant={benefit.iconVariant} />;
             }
 
-            const isClickable = benefit.title === 'Energy Enhancement' || benefit.title === 'Immune Support';
+            const isClickable = benefit.title === 'Energy Enhancement' || benefit.title === 'Immune Support' || benefit.title === 'Longevity Support' || benefit.title === 'Vitality & Wellness';
 
             return (
               <div
@@ -132,12 +140,20 @@ export function ProductBenefits() {
 
       {/* Research Modals */}
       <EnergyResearchModal
-        open={showEnergyResearch}
+        isOpen={showEnergyResearch}
         onClose={() => setShowEnergyResearch(false)}
       />
       <ImmuneResearchModal
-        open={showImmuneResearch}
+        isOpen={showImmuneResearch}
         onClose={() => setShowImmuneResearch(false)}
+      />
+      <LongevityResearchModal
+        isOpen={showLongevityResearch}
+        onClose={() => setShowLongevityResearch(false)}
+      />
+      <VitalityResearchModal
+        isOpen={showVitalityResearch}
+        onClose={() => setShowVitalityResearch(false)}
       />
     </section>
   );

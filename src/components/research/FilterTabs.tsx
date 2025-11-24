@@ -1,30 +1,26 @@
 import { motion } from 'motion/react';
 
 interface FilterTabsProps {
-  activeFilter: string;
-  onFilterChange: (filter: string) => void;
+  categories: string[];
+  selectedCategory: string;
+  onSelectCategory: (category: string) => void;
 }
 
-const filters = [
-  'All',
-  'Energy Metabolism',
-  'Antioxidant Defense',
-  'Endurance Performance'
-];
 
-export function FilterTabs({ activeFilter, onFilterChange }: FilterTabsProps) {
+
+export function FilterTabs({ categories, selectedCategory, onSelectCategory }: FilterTabsProps) {
   return (
-    <div 
+    <div
       className="flex flex-wrap items-center justify-center gap-3 mb-12"
       style={{ padding: '0 16px' }}
     >
-      {filters.map((filter) => {
-        const isActive = activeFilter === filter;
-        
+      {categories.map((category) => {
+        const isActive = selectedCategory === category;
+
         return (
           <motion.button
-            key={filter}
-            onClick={() => onFilterChange(filter)}
+            key={category}
+            onClick={() => onSelectCategory(category)}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.98 }}
             style={{
@@ -38,8 +34,8 @@ export function FilterTabs({ activeFilter, onFilterChange }: FilterTabsProps) {
               color: isActive ? '#FFFFFF' : '#333',
               cursor: 'pointer',
               transition: 'all 200ms ease-in-out',
-              boxShadow: isActive 
-                ? '0 4px 12px rgba(229,139,0,0.25)' 
+              boxShadow: isActive
+                ? '0 4px 12px rgba(229,139,0,0.25)'
                 : '0 2px 4px rgba(0,0,0,0.04)',
               whiteSpace: 'nowrap'
             }}
@@ -54,7 +50,7 @@ export function FilterTabs({ activeFilter, onFilterChange }: FilterTabsProps) {
               }
             }}
           >
-            {filter}
+            {category}
           </motion.button>
         );
       })}

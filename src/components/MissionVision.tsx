@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { BrandCard } from './brand/BrandCard';
+
 import { Target, TrendingUp } from 'lucide-react';
 
 export function MissionVision() {
@@ -23,7 +23,7 @@ export function MissionVision() {
               </div>
 
               {/* H3 - Responsive: 24px mobile → 28px tablet → 32px desktop */}
-              <h3 
+              <h3
                 className="mb-4 sm:mb-6 text-2xl sm:text-[28px] lg:text-[32px]"
                 style={{
                   fontFamily: 'var(--synervion-font-heading)',
@@ -36,7 +36,7 @@ export function MissionVision() {
               </h3>
 
               {/* Body - Responsive: 16px mobile → 18px desktop */}
-              <p 
+              <p
                 className="mb-6 text-base lg:text-lg"
                 style={{
                   fontFamily: 'var(--synervion-font-body)',
@@ -45,15 +45,15 @@ export function MissionVision() {
                   color: 'hsl(var(--synervion-text-secondary))'
                 }}
               >
-                To revolutionize the wellness industry by providing premium, lab-grown Cordyceps 
-                that combines scientific rigor with sustainable practices. We empower brands to 
+                To revolutionize the wellness industry by providing premium, lab-grown Cordyceps
+                that combines scientific rigor with sustainable practices. We empower brands to
                 create products that deliver real, measurable benefits.
               </p>
 
               {/* Stats */}
               <div className="grid grid-cols-2 gap-3 sm:gap-4 pt-4 sm:pt-6 border-t border-[hsl(var(--synervion-border-light))]">
                 <div>
-                  <div 
+                  <div
                     className="text-2xl sm:text-3xl lg:text-[32px] mb-1"
                     style={{
                       fontFamily: 'var(--synervion-font-heading)',
@@ -63,7 +63,7 @@ export function MissionVision() {
                   >
                     5+
                   </div>
-                  <div 
+                  <div
                     className="text-xs sm:text-sm"
                     style={{
                       fontFamily: 'var(--synervion-font-body)',
@@ -74,7 +74,7 @@ export function MissionVision() {
                   </div>
                 </div>
                 <div>
-                  <div 
+                  <div
                     className="text-2xl sm:text-3xl lg:text-[32px] mb-1"
                     style={{
                       fontFamily: 'var(--synervion-font-heading)',
@@ -84,7 +84,7 @@ export function MissionVision() {
                   >
                     100%
                   </div>
-                  <div 
+                  <div
                     className="text-xs sm:text-sm"
                     style={{
                       fontFamily: 'var(--synervion-font-body)',
@@ -113,7 +113,7 @@ export function MissionVision() {
               </div>
 
               {/* H3 - Responsive: 24px mobile → 28px tablet → 32px desktop */}
-              <h3 
+              <h3
                 className="mb-4 sm:mb-6 text-2xl sm:text-[28px] lg:text-[32px]"
                 style={{
                   fontFamily: 'var(--synervion-font-heading)',
@@ -126,7 +126,7 @@ export function MissionVision() {
               </h3>
 
               {/* Body - Responsive: 16px mobile → 18px desktop */}
-              <p 
+              <p
                 className="mb-6 text-base lg:text-lg"
                 style={{
                   fontFamily: 'var(--synervion-font-body)',
@@ -135,15 +135,15 @@ export function MissionVision() {
                   color: 'hsl(var(--synervion-text-secondary))'
                 }}
               >
-                To become the global standard for functional fungi ingredients, setting new benchmarks 
-                for quality, transparency, and sustainability. We envision a future where every wellness 
+                To become the global standard for functional fungi ingredients, setting new benchmarks
+                for quality, transparency, and sustainability. We envision a future where every wellness
                 brand has access to scientifically superior ingredients.
               </p>
 
               {/* Stats */}
               <div className="grid grid-cols-2 gap-3 sm:gap-4 pt-4 sm:pt-6 border-t border-[hsl(var(--synervion-border-light))]">
                 <div>
-                  <div 
+                  <div
                     className="text-2xl sm:text-3xl lg:text-[32px] mb-1"
                     style={{
                       fontFamily: 'var(--synervion-font-heading)',
@@ -153,7 +153,7 @@ export function MissionVision() {
                   >
                     50+
                   </div>
-                  <div 
+                  <div
                     className="text-xs sm:text-sm"
                     style={{
                       fontFamily: 'var(--synervion-font-body)',
@@ -164,7 +164,7 @@ export function MissionVision() {
                   </div>
                 </div>
                 <div>
-                  <div 
+                  <div
                     className="text-2xl sm:text-3xl lg:text-[32px] mb-1"
                     style={{
                       fontFamily: 'var(--synervion-font-heading)',
@@ -174,7 +174,7 @@ export function MissionVision() {
                   >
                     90%
                   </div>
-                  <div 
+                  <div
                     className="text-xs sm:text-sm"
                     style={{
                       fontFamily: 'var(--synervion-font-body)',

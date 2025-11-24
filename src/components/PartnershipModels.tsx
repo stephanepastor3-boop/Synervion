@@ -6,7 +6,7 @@ import productAll from '../assets/images/products-all1.png';
 import productDrops from '../assets/images/product-drops1.png';
 import productEnergyBar from '../assets/images/product-energybar1.png';
 import productPills from '../assets/images/product-pills1.png';
-import labRevaFlora from '../assets/images/Lab-RevaFlora1.png';
+import labRevaFlora from '../assets/images/Lab-RevaFlora1.1.jpg';
 import { useScrollAnimation } from './ui/use-scroll-animation';
 import { cn } from './ui/utils';
 
@@ -67,13 +67,13 @@ export function PartnershipModels() {
             headerAnimation.isVisible ? "opacity-100" : "opacity-0"
           )}
         >
-          <BrandBadge variant="primary" className="mb-4 sm:mb-6">
-            Partnership Models
-          </BrandBadge>
-
           <h2 className="mb-4 sm:mb-6 text-[28px] sm:text-[40px] lg:text-[48px] px-4 font-heading font-semibold leading-tight tracking-tight text-foreground">
             Flexible <span className="text-primary">Collaboration</span> Options
           </h2>
+
+          <BrandBadge variant="primary" className="mb-4 sm:mb-6">
+            Partnership Models
+          </BrandBadge>
 
           <p className="max-w-3xl mx-auto text-base lg:text-lg px-4 font-body font-normal leading-relaxed text-muted-foreground">
             Choose the partnership model that aligns with your business goals.
@@ -153,11 +153,16 @@ export function PartnershipModels() {
           id="rnd"
           ref={revaAnimation.ref as React.RefObject<HTMLDivElement>}
           className={cn(
-            "grid lg:grid-cols-2 gap-8 lg:gap-16 items-center mb-16 sm:mb-24 transition-opacity duration-500",
+            "space-y-8 mb-16 sm:mb-24 transition-opacity duration-500",
             revaAnimation.isVisible ? "opacity-100" : "opacity-0"
           )}
         >
-          <div className="order-2 lg:order-1 space-y-4 sm:space-y-6">
+          {/* Text Content */}
+          <div className="max-w-4xl mx-auto space-y-4 sm:space-y-6">
+            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-heading font-semibold">
+              Powering Innovation with <span className="text-primary">Reva Flora</span>
+            </h3>
+
             <div className="flex flex-wrap gap-2">
               <BrandBadge variant="primary">
                 Lab-Grown Excellence
@@ -166,10 +171,6 @@ export function PartnershipModels() {
                 Strategic Partnership
               </BrandBadge>
             </div>
-
-            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-heading font-semibold">
-              Powering Innovation with <span className="text-primary">Reva Flora</span>
-            </h3>
 
             <p className="text-base text-muted-foreground leading-relaxed">
               Partnering with Reva Flora, India's leading botanical research institute,
@@ -191,7 +192,8 @@ export function PartnershipModels() {
             </div>
           </div>
 
-          <div className="order-1 lg:order-2">
+          {/* Image - Below text, takes most horizontal space */}
+          <div className="w-full max-w-6xl mx-auto">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl">
               <img
                 src={labRevaFlora}
@@ -200,14 +202,15 @@ export function PartnershipModels() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
 
-              <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6 bg-white/95 backdrop-blur-sm rounded-xl p-4 shadow-lg">
-                <div className="flex items-center gap-3">
-                  <Globe className="w-8 h-8 text-primary" />
+              {/* Smaller overlay banner */}
+              <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 bg-white/95 backdrop-blur-sm rounded-lg p-2 sm:p-3 shadow-lg max-w-xs">
+                <div className="flex items-center gap-2">
+                  <Globe className="w-5 h-5 sm:w-6 sm:h-6 text-primary flex-shrink-0" />
                   <div>
-                    <div className="text-sm font-semibold font-heading">
+                    <div className="text-xs sm:text-sm font-semibold font-heading">
                       Reva Flora Facility
                     </div>
-                    <div className="text-xs text-muted-foreground">
+                    <div className="text-[10px] sm:text-xs text-muted-foreground">
                       Joint Research Initiative
                     </div>
                   </div>

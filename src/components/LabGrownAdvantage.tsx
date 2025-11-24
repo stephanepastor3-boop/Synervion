@@ -54,13 +54,13 @@ export function LabGrownAdvantage() {
               headerAnimation.isVisible ? "opacity-100" : "opacity-0"
             )}
           >
-            <BrandBadge variant="secondary" className="mb-4 sm:mb-6">
-              Lab-Grown Excellence
-            </BrandBadge>
-
             <h2 className="mb-4 sm:mb-6 text-[28px] sm:text-[40px] lg:text-[48px] font-heading font-semibold leading-tight tracking-tight text-foreground">
               The <span className="text-primary">Scientific</span> Advantage
             </h2>
+
+            <BrandBadge variant="primary" className="mb-4 sm:mb-6">
+              Lab-Grown Excellence
+            </BrandBadge>
 
             <p className="mb-6 sm:mb-8 text-base lg:text-lg font-body font-normal leading-relaxed text-muted-foreground">
               Our proprietary lab cultivation process delivers superior quality that wild-harvested
@@ -69,7 +69,7 @@ export function LabGrownAdvantage() {
 
             {/* Advantages List */}
             <div className="space-y-4 sm:space-y-6">
-              {advantages.map((advantage, index) => {
+              {advantages.map((advantage) => {
                 const Icon = advantage.icon;
                 const itemAnimation = useScrollAnimation();
 
@@ -134,7 +134,7 @@ export function LabGrownAdvantage() {
           </div>
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-            {certifications.map((cert, index) => (
+            {certifications.map((cert) => (
               <div
                 key={cert.name}
                 className="group p-4 sm:p-6 rounded-xl bg-white border border-border hover:border-primary/30 hover:shadow-lg transition-all text-center"

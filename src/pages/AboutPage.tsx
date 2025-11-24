@@ -2,15 +2,12 @@ import { motion } from 'motion/react';
 import { BrandCard } from '../components/brand/BrandCard';
 import { BrandBadge } from '../components/brand/BrandBadge';
 import { BrandButton } from '../components/brand/BrandButton';
-import { ImageWithFallback } from '../components/figma/ImageWithFallback';
 import {
   Award, CheckCircle2, Leaf, Users,
   Target, TrendingUp, Globe, Shield
 } from 'lucide-react';
-import foundersImage from '../assets/images/contact-bg.png';
 import teamLabImage from '../assets/images/mission-bg.png';
 import revaFloraFacility from '../assets/images/lab-grown-advantage.png';
-import cordycepsImage from '../assets/images/hero-cordyceps-macro.png';
 
 export function AboutPage() {
   const certifications = [
@@ -173,7 +170,7 @@ export function AboutPage() {
           </motion.div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-            {values.map((value, index) => {
+            {values.map((value) => {
               const Icon = value.icon;
               return (
                 <BrandCard

@@ -4,9 +4,9 @@ import { BrandBadge } from '../components/brand/BrandBadge';
 import { Input } from '../components/ui/input';
 import { Textarea } from '../components/ui/textarea';
 import { Label } from '../components/ui/label';
-import { 
-  Mail, Phone, MapPin, Clock, MessageCircle, 
-  ArrowRight, Send, Users, Award
+import {
+  Mail, Phone, MapPin, Clock, MessageCircle,
+  ArrowRight, Send, Users
 } from 'lucide-react';
 
 export function ContactPage() {
@@ -126,13 +126,13 @@ export function ContactPage() {
             <BrandBadge variant="primary" className="mb-4 sm:mb-6">
               Get In Touch
             </BrandBadge>
-            
+
             <h1 className="mb-4 sm:mb-6 text-3xl sm:text-4xl lg:text-5xl xl:text-6xl" style={{ fontFamily: 'Manrope, sans-serif' }}>
               Let's Build Something <span className="text-[hsl(var(--synervion-primary-500))]">Great Together</span>
             </h1>
-            
+
             <p className="text-base sm:text-lg text-[hsl(var(--synervion-text-secondary))] mb-8 sm:mb-12 px-4 leading-relaxed">
-              Our partnership team is here to answer your questions and help you find 
+              Our partnership team is here to answer your questions and help you find
               the perfect collaboration model for your brand's wellness journey.
             </p>
           </motion.div>
@@ -197,8 +197,8 @@ export function ContactPage() {
           {/* Journey Visualization */}
           <div className="relative max-w-5xl mx-auto">
             {/* Connection Line - Desktop */}
-            <div className="hidden md:block absolute top-12 left-0 right-0 h-1 bg-gradient-to-r from-[hsl(var(--synervion-primary-500))] to-[hsl(var(--synervion-success))]" 
-                 style={{ width: 'calc(100% - 6rem)', marginLeft: '3rem' }} />
+            <div className="hidden md:block absolute top-12 left-0 right-0 h-1 bg-gradient-to-r from-[hsl(var(--synervion-primary-500))] to-[hsl(var(--synervion-success))]"
+              style={{ width: 'calc(100% - 6rem)', marginLeft: '3rem' }} />
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
               {journeySteps.map((step, index) => (
@@ -211,11 +211,10 @@ export function ContactPage() {
                   className="relative"
                 >
                   {/* Step Circle */}
-                  <div className={`w-20 h-20 sm:w-24 sm:h-24 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 relative z-10 shadow-lg ${
-                    step.color === 'success' 
-                      ? 'bg-[hsl(var(--synervion-success))]' 
+                  <div className={`w-20 h-20 sm:w-24 sm:h-24 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 relative z-10 shadow-lg ${step.color === 'success'
+                      ? 'bg-[hsl(var(--synervion-success))]'
                       : 'bg-[hsl(var(--synervion-primary-500))]'
-                  }`}>
+                    }`}>
                     <span className="text-xl sm:text-2xl text-white" style={{ fontFamily: 'Manrope, sans-serif' }}>
                       {step.number}
                     </span>
@@ -362,7 +361,7 @@ export function ContactPage() {
                   Our Offices
                 </h3>
                 <div className="space-y-4">
-                  {offices.map((office, index) => (
+                  {offices.map((office) => (
                     <div
                       key={office.city}
                       className="p-4 sm:p-6 rounded-xl bg-[hsl(var(--synervion-bg-gray-50))] border border-[hsl(var(--synervion-border-light))] hover:border-[hsl(var(--synervion-primary-500))]/30 transition-colors"

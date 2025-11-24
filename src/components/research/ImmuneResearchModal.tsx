@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { X, BarChart3 } from 'lucide-react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, LineChart, Line, ComposedChart } from 'recharts';
-import { ExternalLink } from 'lucide-react';
+import { X, ExternalLink } from 'lucide-react';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, LineChart, Line } from 'recharts';
+import { ImmuneAnimation } from './ImmuneAnimation';
 
 interface Study {
   id: number;
@@ -119,8 +119,8 @@ export function ImmuneResearchModal({ isOpen, onClose }: ImmuneResearchModalProp
   const [activeFilter, setActiveFilter] = useState('All');
   const [selectedStudy, setSelectedStudy] = useState<Study | null>(null);
 
-  const filteredStudies = activeFilter === 'All' 
-    ? immuneStudies 
+  const filteredStudies = activeFilter === 'All'
+    ? immuneStudies
     : immuneStudies.filter(study => study.category === activeFilter);
 
   const renderChart = (study: Study) => {
@@ -137,18 +137,18 @@ export function ImmuneResearchModal({ isOpen, onClose }: ImmuneResearchModalProp
             <ResponsiveContainer width="100%" height={280}>
               <BarChart data={cytokineData} margin={{ top: 20, right: 30, left: 20, bottom: 20 }} layout="vertical">
                 <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
-                <XAxis 
+                <XAxis
                   type="number"
                   domain={[-50, 0]}
                   style={{ fontFamily: 'IBM Plex Mono', fontSize: '12px', fill: '#6B7280' }}
                   label={{ value: 'Change (%)', position: 'bottom', style: { fontFamily: 'IBM Plex Mono', fontSize: '12px' } }}
                 />
-                <YAxis 
+                <YAxis
                   type="category"
-                  dataKey="name" 
+                  dataKey="name"
                   style={{ fontFamily: 'IBM Plex Mono', fontSize: '12px', fill: '#6B7280' }}
                 />
-                <Tooltip 
+                <Tooltip
                   contentStyle={{ background: '#FFF', border: '1px solid #E5E7EB', borderRadius: '8px' }}
                 />
                 <Bar dataKey="value" radius={[0, 8, 8, 0]}>
@@ -177,11 +177,11 @@ export function ImmuneResearchModal({ isOpen, onClose }: ImmuneResearchModalProp
             <ResponsiveContainer width="100%" height={280}>
               <LineChart data={nkData} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
-                <XAxis 
-                  dataKey="week" 
+                <XAxis
+                  dataKey="week"
                   style={{ fontFamily: 'IBM Plex Mono', fontSize: '12px', fill: '#6B7280' }}
                 />
-                <YAxis 
+                <YAxis
                   label={{ value: 'NK Cell Activity (%)', angle: -90, position: 'insideLeft', style: { fontFamily: 'IBM Plex Mono', fontSize: '12px' } }}
                   style={{ fontFamily: 'IBM Plex Mono', fontSize: '12px', fill: '#6B7280' }}
                   domain={[90, 140]}
@@ -209,7 +209,7 @@ export function ImmuneResearchModal({ isOpen, onClose }: ImmuneResearchModalProp
                 <text x="120" y="145" textAnchor="middle" fill="#E58B00" fontWeight="600" fontSize="16" fontFamily="var(--synervion-font-body)">Th1</text>
                 <text x="120" y="165" textAnchor="middle" fill="#666" fontSize="12" fontFamily="var(--synervion-font-body)">Type 1</text>
               </g>
-              
+
               {/* Balance symbol */}
               <motion.g
                 animate={{ rotate: [0, 5, -5, 0] }}
@@ -220,14 +220,14 @@ export function ImmuneResearchModal({ isOpen, onClose }: ImmuneResearchModalProp
                 <path d="M 185 140 Q 200 155 215 140" fill="none" stroke="#00B27A" strokeWidth="2" />
                 <path d="M 185 140 Q 200 125 215 140" fill="#00B27A" />
               </motion.g>
-              
+
               {/* Th2 side */}
               <g>
                 <circle cx="280" cy="140" r="50" fill="#00B27A" opacity="0.3" />
                 <text x="280" y="145" textAnchor="middle" fill="#00B27A" fontWeight="600" fontSize="16" fontFamily="var(--synervion-font-body)">Th2</text>
                 <text x="280" y="165" textAnchor="middle" fill="#666" fontSize="12" fontFamily="var(--synervion-font-body)">Type 2</text>
               </g>
-              
+
               {/* Arrow showing balance */}
               <text x="200" y="220" textAnchor="middle" fill="#333" fontWeight="600" fontSize="14" fontFamily="var(--synervion-font-body)">
                 Homeostatic Balance
@@ -260,7 +260,7 @@ export function ImmuneResearchModal({ isOpen, onClose }: ImmuneResearchModalProp
               {/* Convergence to balance */}
               <line x1="130" y1="120" x2="180" y2="160" stroke="#E58B00" strokeWidth="3" />
               <line x1="270" y1="120" x2="220" y2="160" stroke="#00B27A" strokeWidth="3" />
-              
+
               {/* Balance node */}
               <motion.g animate={{ scale: [1, 1.15, 1] }} transition={{ duration: 2, repeat: Infinity, delay: 1 }}>
                 <circle cx="200" cy="180" r="45" fill="#FFD700" opacity="0.2" />
@@ -288,11 +288,11 @@ export function ImmuneResearchModal({ isOpen, onClose }: ImmuneResearchModalProp
             <ResponsiveContainer width="100%" height={280}>
               <BarChart data={mechanismData} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
-                <XAxis 
-                  dataKey="name" 
+                <XAxis
+                  dataKey="name"
                   style={{ fontFamily: 'IBM Plex Mono', fontSize: '12px', fill: '#6B7280' }}
                 />
-                <YAxis 
+                <YAxis
                   label={{ value: 'Change (%)', angle: -90, position: 'insideLeft', style: { fontFamily: 'IBM Plex Mono', fontSize: '12px' } }}
                   style={{ fontFamily: 'IBM Plex Mono', fontSize: '12px', fill: '#6B7280' }}
                   domain={[-50, 40]}
@@ -428,9 +428,13 @@ export function ImmuneResearchModal({ isOpen, onClose }: ImmuneResearchModalProp
                   padding: '0 20px'
                 }}
               >
-                Clinical and molecular studies confirm Cordyceps militaris supports immune regulation, 
+                Clinical and molecular studies confirm Cordyceps militaris supports immune regulation,
                 reduces inflammatory cytokines, and enhances cellular defense.
               </p>
+
+              <div style={{ marginTop: '32px', padding: '0 20px' }}>
+                <ImmuneAnimation />
+              </div>
             </div>
 
             {/* Filter Tabs */}
@@ -517,7 +521,7 @@ export function ImmuneResearchModal({ isOpen, onClose }: ImmuneResearchModalProp
               {/* Credibility Footer */}
               <div style={{ textAlign: 'center', padding: '24px', background: '#FFF', borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
                 <p style={{ fontSize: '13px', color: '#8C8C8C', lineHeight: '1.6' }}>
-                  All studies are peer-reviewed and published in recognized scientific journals. 
+                  All studies are peer-reviewed and published in recognized scientific journals.
                   Results represent independent research. Individual results may vary.
                 </p>
               </div>

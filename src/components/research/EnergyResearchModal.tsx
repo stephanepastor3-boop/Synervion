@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { X, BarChart3 } from 'lucide-react';
+import { X } from 'lucide-react';
 import { ResearchCard } from './ResearchCard';
 import { FilterTabs } from './FilterTabs';
 import { StudyModal } from './StudyModal';
-import { CompareChart } from './CompareChart';
+import { EnergyAnimation } from './EnergyAnimation';
 
 interface Study {
   id: number;
@@ -102,23 +102,17 @@ interface EnergyResearchModalProps {
 export function EnergyResearchModal({ isOpen, onClose }: EnergyResearchModalProps) {
   const [activeFilter, setActiveFilter] = useState('All');
   const [selectedStudy, setSelectedStudy] = useState<Study | null>(null);
-  const [showCompare, setShowCompare] = useState(false);
 
-  const filteredStudies = activeFilter === 'All' 
-    ? energyStudies 
+
+  const filteredStudies = activeFilter === 'All'
+    ? energyStudies
     : energyStudies.filter(study => study.category === activeFilter);
 
   const handleStudyClick = (study: Study) => {
     setSelectedStudy(study);
   };
 
-  const handleCompareStudyClick = (studyId: number) => {
-    const study = energyStudies.find(s => s.id === studyId);
-    if (study) {
-      setShowCompare(false);
-      setTimeout(() => setSelectedStudy(study), 300);
-    }
-  };
+
 
   return (
     <AnimatePresence>
@@ -227,79 +221,52 @@ export function EnergyResearchModal({ isOpen, onClose }: EnergyResearchModalProp
                   padding: '0 20px'
                 }}
               >
-                Independent research confirms Cordyceps militaris enhances endurance, energy metabolism, 
+                Independent research confirms Cordyceps militaris enhances endurance, energy metabolism,
                 and recovery through measurable cellular mechanisms.
               </p>
+
+              <div style={{ marginTop: '32px', padding: '0 20px' }}>
+                <EnergyAnimation />
+              </div>
             </div>
 
-            {/* Compare Toggle */}
-            <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '24px' }}>
-              <button
-                onClick={() => setShowCompare(!showCompare)}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  padding: '12px 24px',
-                  background: showCompare ? '#E58B00' : '#FFFFFF',
-                  color: showCompare ? '#FFFFFF' : '#333',
-                  border: showCompare ? 'none' : '2px solid #E58B00',
-                  borderRadius: '12px',
-                  fontFamily: 'var(--synervion-font-body)',
-                  fontSize: '15px',
-                  fontWeight: 600,
-                  cursor: 'pointer',
-                  transition: 'all 250ms ease',
-                  boxShadow: showCompare 
-                    ? '0 4px 12px rgba(229,139,0,0.3)' 
-                    : '0 2px 8px rgba(0,0,0,0.08)'
-                }}
-              >
-                <BarChart3 size={18} />
-                {showCompare ? 'Show Study Cards' : 'Compare Studies'}
-              </button>
-            </div>
+
 
             {/* Content */}
             <div style={{ padding: '0 20px' }}>
-              {showCompare ? (
-                <CompareChart onStudyClick={handleCompareStudyClick} />
-              ) : (
-                <>
-                  <FilterTabs 
-                    activeFilter={activeFilter} 
-                    onFilterChange={setActiveFilter} 
-                  />
-                  <div
-                    style={{
-                      display: 'grid',
-                      gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-                      gap: '24px',
-                      marginBottom: '40px'
-                    }}
+              <FilterTabs
+                categories={['All', 'Energy Metabolism', 'Antioxidant Defense', 'Endurance Performance']}
+                selectedCategory={activeFilter}
+                onSelectCategory={setActiveFilter}
+              />
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+                  gap: '24px',
+                  marginBottom: '40px'
+                }}
+              >
+                {filteredStudies.map((study, index) => (
+                  <motion.div
+                    key={study.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 20 }}
+                    transition={{ duration: 0.4, delay: index * 0.1 }}
                   >
-                    {filteredStudies.map((study, index) => (
-                      <motion.div
-                        key={study.id}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 20 }}
-                        transition={{ duration: 0.4, delay: index * 0.1 }}
-                      >
-                        <ResearchCard
-                          title={study.title}
-                          journal={study.journal}
-                          year={study.year}
-                          summary={study.summary}
-                          icon={study.icon}
-                          category={study.category}
-                          onClick={() => handleStudyClick(study)}
-                        />
-                      </motion.div>
-                    ))}
-                  </div>
-                </>
-              )}
+                    <ResearchCard
+                      title={study.title}
+                      journal={study.journal}
+                      year={study.year}
+                      summary={study.summary}
+                      icon={study.icon}
+                      category={study.category}
+                      onClick={() => handleStudyClick(study)}
+                    />
+                  </motion.div>
+                ))}
+              </div>
 
               {/* Credibility Footer */}
               <div
@@ -319,8 +286,8 @@ export function EnergyResearchModal({ isOpen, onClose }: EnergyResearchModalProp
                     lineHeight: '1.6'
                   }}
                 >
-                  All studies are peer-reviewed and published in recognized scientific journals. 
-                  Results represent independent research and are not sponsored by Synervion. 
+                  All studies are peer-reviewed and published in recognized scientific journals.
+                  Results represent independent research and are not sponsored by Synervion.
                   Individual results may vary.
                 </p>
               </div>

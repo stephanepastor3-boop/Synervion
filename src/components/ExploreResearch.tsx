@@ -2,8 +2,7 @@ import { useState } from 'react';
 import { ResearchCard } from './research/ResearchCard';
 import { FilterTabs } from './research/FilterTabs';
 import { StudyModal } from './research/StudyModal';
-import { CompareChart } from './research/CompareChart';
-import { BarChart3 } from 'lucide-react';
+
 import { BrandBadge } from './brand/BrandBadge';
 import { useScrollAnimation } from './ui/use-scroll-animation';
 
@@ -101,15 +100,15 @@ export function ExploreResearch() {
   const [selectedCategory, setSelectedCategory] = useState('All Studies');
   const [selectedStudy, setSelectedStudy] = useState<Study | null>(null);
   const headerAnimation = useScrollAnimation();
-  const chartAnimation = useScrollAnimation();
+
 
   const filteredStudies = selectedCategory === 'All Studies'
     ? studies
     : studies.filter(study => study.category === selectedCategory);
 
   return (
-    <section 
-      id="rnd" 
+    <section
+      id="rnd"
       className="relative overflow-hidden bg-gradient-to-b from-[hsl(var(--synervion-bg-white))] via-[#FAFAF5]/50 to-[hsl(var(--synervion-bg-white))] pt-16 pb-16 sm:pt-24 sm:pb-24 lg:pt-32 lg:pb-32"
     >
       <div className="w-full max-w-[1280px] mx-auto px-4 sm:px-8 lg:px-16">
@@ -123,7 +122,7 @@ export function ExploreResearch() {
             Research & Testing
           </BrandBadge>
 
-          <h2 
+          <h2
             className="mb-4 sm:mb-6 text-[28px] sm:text-[40px] lg:text-[48px] px-4"
             style={{
               fontFamily: 'var(--synervion-font-heading)',
@@ -136,7 +135,7 @@ export function ExploreResearch() {
             <span style={{ color: 'hsl(var(--synervion-primary-500))' }}>Peer-Reviewed</span> Research
           </h2>
 
-          <p 
+          <p
             className="max-w-3xl mx-auto text-base lg:text-lg px-4"
             style={{
               fontFamily: 'var(--synervion-font-body)',
@@ -145,7 +144,7 @@ export function ExploreResearch() {
               color: 'hsl(var(--synervion-text-secondary))'
             }}
           >
-            Our Cordyceps formulations are backed by rigorous scientific research 
+            Our Cordyceps formulations are backed by rigorous scientific research
             published in leading journals. Explore the clinical evidence.
           </p>
         </header>
@@ -159,9 +158,9 @@ export function ExploreResearch() {
 
         {/* Research Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 mb-12 sm:mb-16 lg:mb-20">
-          {filteredStudies.map((study, index) => {
+          {filteredStudies.map((study) => {
             const cardAnimation = useScrollAnimation();
-            
+
             return (
               <div
                 key={study.id}
@@ -170,44 +169,20 @@ export function ExploreResearch() {
                 style={{ opacity: cardAnimation.isVisible ? 1 : 0 }}
                 onClick={() => setSelectedStudy(study)}
               >
-                <ResearchCard study={study} />
+                <ResearchCard {...study} onClick={() => setSelectedStudy(study)} />
               </div>
             );
           })}
         </div>
 
-        {/* Comparison Chart */}
-        <div
-          ref={chartAnimation.ref as React.RefObject<HTMLDivElement>}
-          className="transition-opacity duration-500"
-          style={{ opacity: chartAnimation.isVisible ? 1 : 0 }}
-        >
-          <div className="bg-[hsl(var(--synervion-bg-white))] rounded-2xl border border-[hsl(var(--synervion-border-light))] p-6 sm:p-8 lg:p-10">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-[hsl(var(--synervion-primary-500))]/10 flex items-center justify-center">
-                <BarChart3 className="w-5 h-5 text-[hsl(var(--synervion-primary-500))]" strokeWidth={1.5} />
-              </div>
-              <h3 
-                className="text-lg sm:text-xl"
-                style={{
-                  fontFamily: 'var(--synervion-font-heading)',
-                  fontWeight: 600,
-                  color: 'hsl(var(--synervion-text-primary))'
-                }}
-              >
-                Performance Metrics Comparison
-              </h3>
-            </div>
-            <CompareChart />
-          </div>
-        </div>
+
       </div>
 
       {/* Study Modal */}
       {selectedStudy && (
         <StudyModal
           study={selectedStudy}
-          open={!!selectedStudy}
+          isOpen={!!selectedStudy}
           onClose={() => setSelectedStudy(null)}
         />
       )}
