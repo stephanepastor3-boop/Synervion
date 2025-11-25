@@ -156,10 +156,10 @@ const CalculatorPage: React.FC = () => {
                                                 <button
                                                     key={opt.id}
                                                     onClick={() => handleSelect('activity', opt.id)}
-                                                    className="p-4 rounded-xl bg-neutral-800 border border-neutral-700 hover:border-orange-500/50 hover:bg-neutral-700 transition-all text-left group"
+                                                    className="p-4 rounded-xl bg-neutral-800 border border-neutral-600 hover:border-orange-500/50 hover:bg-neutral-700 transition-all text-left group"
                                                 >
-                                                    <div className="font-semibold text-lg group-hover:text-orange-400 transition-colors">{opt.label}</div>
-                                                    <div className="text-sm text-neutral-300">{opt.desc}</div>
+                                                    <div className="font-semibold text-lg text-white group-hover:text-orange-400 transition-colors">{opt.label}</div>
+                                                    <div className="text-sm text-neutral-200">{opt.desc}</div>
                                                 </button>
                                             ))}
                                         </div>
@@ -187,10 +187,10 @@ const CalculatorPage: React.FC = () => {
                                                 <button
                                                     key={opt.id}
                                                     onClick={() => handleSelect('energy', opt.id)}
-                                                    className="p-4 rounded-xl bg-neutral-800 border border-neutral-700 hover:border-orange-500/50 hover:bg-neutral-700 transition-all text-left group"
+                                                    className="p-4 rounded-xl bg-neutral-800 border border-neutral-600 hover:border-orange-500/50 hover:bg-neutral-700 transition-all text-left group"
                                                 >
-                                                    <div className="font-semibold text-lg group-hover:text-orange-400 transition-colors">{opt.label}</div>
-                                                    <div className="text-sm text-neutral-300">{opt.desc}</div>
+                                                    <div className="font-semibold text-lg text-white group-hover:text-orange-400 transition-colors">{opt.label}</div>
+                                                    <div className="text-sm text-neutral-200">{opt.desc}</div>
                                                 </button>
                                             ))}
                                         </div>
@@ -219,10 +219,10 @@ const CalculatorPage: React.FC = () => {
                                                 <button
                                                     key={opt.id}
                                                     onClick={() => handleSelect('goal', opt.id)}
-                                                    className="p-4 rounded-xl bg-neutral-800 border border-neutral-700 hover:border-orange-500/50 hover:bg-neutral-700 transition-all text-left group"
+                                                    className="p-4 rounded-xl bg-neutral-800 border border-neutral-600 hover:border-orange-500/50 hover:bg-neutral-700 transition-all text-left group"
                                                 >
-                                                    <div className="font-semibold text-lg group-hover:text-orange-400 transition-colors">{opt.label}</div>
-                                                    <div className="text-sm text-neutral-300">{opt.desc}</div>
+                                                    <div className="font-semibold text-lg text-white group-hover:text-orange-400 transition-colors">{opt.label}</div>
+                                                    <div className="text-sm text-neutral-200">{opt.desc}</div>
                                                 </button>
                                             ))}
                                         </div>

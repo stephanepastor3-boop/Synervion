@@ -4,11 +4,13 @@ import { HomePage } from './pages/HomePage';
 import CalculatorPage from './pages/CalculatorPage';
 import { ArticleTemplate } from './components/ArticleTemplate';
 import { articles } from './data/articles';
+import ScrollToHashElement from './components/ScrollToHashElement';
 
 export default function App() {
   return (
     <HelmetProvider>
       <Router>
+        <ScrollToHashElement />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/calculator/cordyceps-goal-planner" element={<CalculatorPage />} />
