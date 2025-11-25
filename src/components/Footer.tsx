@@ -1,4 +1,4 @@
-import { Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
+import { Facebook, Linkedin, Instagram } from 'lucide-react';
 
 export function Footer() {
   const smoothScroll = (href: string) => {
@@ -35,10 +35,9 @@ export function Footer() {
   };
 
   const socialLinks = [
-    { icon: Facebook, href: '#', label: 'Facebook' },
-    { icon: Twitter, href: '#', label: 'Twitter' },
-    { icon: Linkedin, href: '#', label: 'LinkedIn' },
-    { icon: Instagram, href: '#', label: 'Instagram' },
+    { icon: Facebook, href: 'https://www.facebook.com/synervion', label: 'Facebook' },
+    { icon: Linkedin, href: 'https://www.linkedin.com/company/synervion/', label: 'LinkedIn' },
+    { icon: Instagram, href: 'https://www.instagram.com/synervion/', label: 'Instagram' },
   ];
 
   return (
