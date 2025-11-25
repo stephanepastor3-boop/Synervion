@@ -21,6 +21,12 @@ export function Footer() {
       { label: 'Our Science', action: () => smoothScroll('#origin') },
       { label: 'Research', action: () => smoothScroll('#rnd') },
     ],
+    Learn: [
+      { label: 'Altitude Training', href: '/cordyceps-for-high-altitude-training' },
+      { label: 'Vegan Muscle', href: '/cordyceps-supplement-for-vegan-bodybuilders' },
+      { label: 'Immune Support', href: '/cordyceps-for-immune-system-support' },
+      { label: 'Mental Clarity', href: '/cordyceps-for-mental-clarity' },
+    ],
     Collabs: [
       { label: 'Collab Models', action: () => smoothScroll('#partners') },
       { label: 'White-Label', action: () => smoothScroll('#partners') },
@@ -126,7 +132,7 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Links - 8 columns divided into 3 sections */}
+          {/* Links - 8 columns divided into 4 sections */}
           {Object.entries(links).map(([category, categoryLinks]) => (
             <div key={category} className="lg:col-span-2 sm:col-span-1">
               <h4
@@ -145,18 +151,33 @@ export function Footer() {
               <ul className="space-y-3">
                 {categoryLinks.map((link) => (
                   <li key={link.label}>
-                    <button
-                      onClick={link.action}
-                      style={{
-                        fontFamily: 'var(--synervion-font-body)',
-                        fontSize: '14px',
-                        fontWeight: 400,
-                        color: 'rgba(255, 255, 255, 0.7)'
-                      }}
-                      className="hover:text-white transition-colors text-left"
-                    >
-                      {link.label}
-                    </button>
+                    {(link as any).href ? (
+                      <a
+                        href={(link as any).href}
+                        style={{
+                          fontFamily: 'var(--synervion-font-body)',
+                          fontSize: '14px',
+                          fontWeight: 400,
+                          color: 'rgba(255, 255, 255, 0.7)'
+                        }}
+                        className="hover:text-white transition-colors text-left block"
+                      >
+                        {link.label}
+                      </a>
+                    ) : (
+                      <button
+                        onClick={(link as any).action}
+                        style={{
+                          fontFamily: 'var(--synervion-font-body)',
+                          fontSize: '14px',
+                          fontWeight: 400,
+                          color: 'rgba(255, 255, 255, 0.7)'
+                        }}
+                        className="hover:text-white transition-colors text-left"
+                      >
+                        {link.label}
+                      </button>
+                    )}
                   </li>
                 ))}
               </ul>
