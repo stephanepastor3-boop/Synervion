@@ -38,13 +38,13 @@ export function Hero() {
           >
             {/* H1 - Responsive: 32px mobile → 48px tablet → 64px desktop */}
             <h1 className="mb-4 sm:mb-6 text-[32px] sm:text-[48px] lg:text-[64px] font-heading font-bold leading-tight tracking-tight text-foreground">
-              The <span className="text-primary">Cordyceps</span> Partner for Brands
+              Premium <span className="text-primary">Cordyceps</span> Ingredients for Wellness Brands
             </h1>
 
             {/* Body - Responsive: 16px mobile → 18px desktop */}
             <p className="mb-8 sm:mb-10 max-w-xl text-base lg:text-lg font-body font-normal leading-relaxed text-muted-foreground">
-              Science-backed, sustainably lab-grown Cordyceps for premium wellness brands.
-              Transparent sourcing, proven efficacy, and flexible partnership models.
+              Lab-grown Cordyceps militaris extract and biomass for your product formulations.
+              B2B ingredient supply with full traceability, proven efficacy, and flexible partnership models.
             </p>
 
             {/* Feature Icons - Mobile: 2 columns, Desktop: 4 columns */}

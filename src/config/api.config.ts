@@ -20,17 +20,18 @@
 
 export const contactFormConfig = {
   // Toggle between mock API (development) and real API (production)
-  USE_MOCK_API: true,
-  
+  USE_MOCK_API: false,
+
   // Your Hostinger domain - replace 'yourdomain.com' with actual domain
+  // For now, will use mailto as fallback
   API_ENDPOINT: 'https://yourdomain.com/save_contact.php',
-  
+
   // Show developer notice banner
-  SHOW_DEV_NOTICE: true,
-  
+  SHOW_DEV_NOTICE: false,
+
   // Mock API settings
   MOCK_DELAY: 1000, // Simulate network delay in milliseconds
-  
+
   // Form validation settings
   MAX_MESSAGE_LENGTH: 5000,
   MAX_NAME_LENGTH: 100,

@@ -161,7 +161,7 @@ try {
     // Uncomment and configure this section if you want to receive email notifications
 
     /*
-    $to = "partnerships@synervion.com";
+    $to = "info@synervion.com";
     $email_subject = "New Contact Form Submission - Synervion";
     $email_body = "
     New contact form submission received:

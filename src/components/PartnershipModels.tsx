@@ -127,25 +127,36 @@ export function PartnershipModels() {
 
 
 
-        {/* Available Formats Grid */}
-        <div className="grid grid-cols-2 gap-6 sm:gap-8 mb-12 sm:mb-16 max-w-4xl mx-auto">
-          {[
-            { img: productAll, label: 'Product Portfolio' },
-            { img: productDrops, label: 'Liquid Extracts' },
-            { img: productEnergyBar, label: 'Energy Bars' },
-            { img: productPills, label: 'Capsules' },
-          ].map((item, index) => (
-            <div key={index} className="group text-center">
-              <div className="relative aspect-square rounded-xl overflow-hidden bg-white border border-border shadow-md mb-4 group-hover:border-primary/30 group-hover:shadow-lg transition-all">
-                <img
-                  src={item.img}
-                  alt={item.label}
-                  className="w-full h-full object-contain p-6 group-hover:scale-105 transition-transform duration-500"
-                />
+        {/* Application Examples */}
+        <div className="mb-12 sm:mb-16">
+          <h3 className="text-2xl sm:text-3xl font-heading font-semibold text-foreground mb-4 text-center">
+            Application Examples: What Brands Create With Our Ingredients
+          </h3>
+          <p className="text-base text-muted-foreground text-center max-w-3xl mx-auto mb-8">
+            These images show example products that wellness brands have created using our Cordyceps ingredients.
+            Synervion supplies the raw material—you create the finished product under your brand.
+          </p>
+
+          {/* Available Formats Grid */}
+          <div className="grid grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto">
+            {[
+              { img: productAll, label: 'Sample Applications' },
+              { img: productDrops, label: 'Tincture/Drops Format' },
+              { img: productEnergyBar, label: 'Food Integration' },
+              { img: productPills, label: 'Supplement Format' },
+            ].map((item, index) => (
+              <div key={index} className="group text-center">
+                <div className="relative aspect-square rounded-xl overflow-hidden bg-white border border-border shadow-md mb-4 group-hover:border-primary/30 group-hover:shadow-lg transition-all">
+                  <img
+                    src={item.img}
+                    alt={item.label}
+                    className="w-full h-full object-contain p-6 group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <p className="text-base font-semibold font-heading text-foreground">{item.label}</p>
               </div>
-              <p className="text-base font-semibold font-heading text-foreground">{item.label}</p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
 
         {/* Reva Flora Partnership */}

@@ -81,7 +81,7 @@ export function Footer() {
               Premium lab-grown Cordyceps for wellness brands.
               Science-backed, sustainably produced, 100% traceable.
             </p>
-            <div className="flex gap-4">
+            <div className="flex gap-4 mb-6">
               {socialLinks.map((social) => {
                 const Icon = social.icon;
                 return (
@@ -95,6 +95,34 @@ export function Footer() {
                   </a>
                 );
               })}
+            </div>
+            <div className="space-y-2">
+              <a
+                href="mailto:info@synervion.com"
+                className="block hover:text-[hsl(var(--synervion-primary-500))] transition-colors"
+                style={{
+                  fontFamily: 'var(--synervion-font-body)',
+                  fontSize: '14px',
+                  fontWeight: 400,
+                  lineHeight: '1.6',
+                  color: 'rgba(255, 255, 255, 0.7)'
+                }}
+              >
+                info@synervion.com
+              </a>
+              <a
+                href="tel:+918823888238"
+                className="block hover:text-[hsl(var(--synervion-primary-500))] transition-colors"
+                style={{
+                  fontFamily: 'var(--synervion-font-body)',
+                  fontSize: '14px',
+                  fontWeight: 400,
+                  lineHeight: '1.6',
+                  color: 'rgba(255, 255, 255, 0.7)'
+                }}
+              >
+                +91 88238 88238
+              </a>
             </div>
           </div>
 

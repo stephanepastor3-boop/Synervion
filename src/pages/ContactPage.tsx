@@ -14,16 +14,16 @@ export function ContactPage() {
     {
       icon: Mail,
       title: 'Email',
-      value: 'partnerships@synervion.com',
+      value: 'info@synervion.com',
       description: 'For general inquiries and partnership requests',
-      action: 'mailto:partnerships@synervion.com',
+      action: 'mailto:info@synervion.com',
     },
     {
       icon: Phone,
       title: 'Phone',
-      value: '+91 80 1234 5678',
+      value: '+91 88238 88238',
       description: 'Mon-Fri, 9:00 AM - 6:00 PM IST',
-      action: 'tel:+918012345678',
+      action: 'tel:+918823888238',
     },
     {
       icon: MapPin,
@@ -212,8 +212,8 @@ export function ContactPage() {
                 >
                   {/* Step Circle */}
                   <div className={`w-20 h-20 sm:w-24 sm:h-24 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 relative z-10 shadow-lg ${step.color === 'success'
-                      ? 'bg-[hsl(var(--synervion-success))]'
-                      : 'bg-[hsl(var(--synervion-primary-500))]'
+                    ? 'bg-[hsl(var(--synervion-success))]'
+                    : 'bg-[hsl(var(--synervion-primary-500))]'
                     }`}>
                     <span className="text-xl sm:text-2xl text-white" style={{ fontFamily: 'Manrope, sans-serif' }}>
                       {step.number}

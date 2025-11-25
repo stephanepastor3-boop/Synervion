@@ -45,9 +45,8 @@ export function MissionVision() {
                   color: 'hsl(var(--synervion-text-secondary))'
                 }}
               >
-                To revolutionize the wellness industry by providing premium, lab-grown Cordyceps
-                that combines scientific rigor with sustainable practices. We empower brands to
-                create products that deliver real, measurable benefits.
+                To supply wellness brands with the highest-quality lab-grown Cordyceps ingredients,
+                enabling them to create products that deliver real, measurable health benefits to consumers.
               </p>
 
               {/* Stats */}

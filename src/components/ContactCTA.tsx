@@ -108,8 +108,8 @@ export function ContactCTA() {
                 Direct Contact
               </div>
               <div className="text-sm font-body font-normal leading-relaxed text-white/80">
-                partnerships@synervion.com<br />
-                +91 80 1234 5678
+                <a href="mailto:info@synervion.com" className="hover:text-primary transition-colors">info@synervion.com</a><br />
+                <a href="tel:+918823888238" className="hover:text-primary transition-colors">+91 88238 88238</a>
               </div>
             </div>
           </div>

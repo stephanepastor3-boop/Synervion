@@ -70,16 +70,16 @@ export function ProductBenefits() {
           )}
         >
           <h2 className="mb-4 sm:mb-6 text-[28px] sm:text-[40px] lg:text-[48px] px-4 font-heading font-semibold leading-tight tracking-tight text-foreground">
-            Four Pillars of <span className="text-primary">Wellness</span>
+            Ingredient Benefits <span className="text-primary">Your Customers</span> Will Love
           </h2>
 
           <BrandBadge variant="primary" className="mb-4 sm:mb-6">
-            Product Benefits
+            Ingredient Applications
           </BrandBadge>
 
           <p className="max-w-3xl mx-auto text-base lg:text-lg px-4 font-body font-normal leading-relaxed text-muted-foreground">
-            Science-backed benefits proven through rigorous lab testing and clinical research.
-            Each metric represents peer-reviewed findings.
+            What your Cordyceps-enhanced products can offer consumers. Each benefit backed by peer-reviewed research
+            and proven through rigorous clinical trials.
           </p>
         </header>
 
@@ -133,7 +133,7 @@ export function ProductBenefits() {
         {/* Bottom Note */}
         <div className="mt-8 sm:mt-10 lg:mt-12 text-center px-4">
           <p className="text-xs sm:text-sm font-body font-normal text-[hsl(var(--synervion-text-tertiary))] italic">
-            *Based on 8-week clinical trials. Individual results may vary.
+            *These benefits are what end consumers experience when brands formulate with our Cordyceps ingredients. Based on 8-week clinical trials.
           </p>
         </div>
       </div>

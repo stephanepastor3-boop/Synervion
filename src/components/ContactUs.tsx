@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'motion/react';
-import { Mail, CheckCircle2, AlertCircle } from 'lucide-react';
+import { CheckCircle2, AlertCircle } from 'lucide-react';
 import { contactFormConfig } from '../config/api.config';
 
 export function ContactUs() {
@@ -30,12 +30,12 @@ export function ContactUs() {
 
     try {
       // Load configuration from centralized config file
-      const { USE_MOCK_API, API_ENDPOINT, MOCK_DELAY } = contactFormConfig;
+      const { USE_MOCK_API, MOCK_DELAY } = contactFormConfig;
 
       if (USE_MOCK_API) {
         // Mock API for development/preview - simulates backend behavior
         await new Promise(resolve => setTimeout(resolve, MOCK_DELAY));
-        
+
         // Simulate validation
         if (!formData.email.includes('@')) {
           throw new Error('Invalid email format');
@@ -75,8 +75,8 @@ export function ContactUs() {
           setStatus('error');
         }
       } else {
-        // Real API call for production
-        const response = await fetch(API_ENDPOINT, {
+        // Production mode: Call Vercel serverless function
+        const response = await fetch('/api/send-contact', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -125,7 +125,7 @@ export function ContactUs() {
   return (
     <section className="py-16 sm:py-20 lg:py-24 bg-[hsl(var(--synervion-bg-gray-50))]">
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16">
-        
+
         {/* Developer Notice - Remove in production */}
         {SHOW_DEV_NOTICE && (
           <motion.div
@@ -139,7 +139,7 @@ export function ContactUs() {
                   <span style={{ fontSize: '12px' }}>ℹ️</span>
                 </div>
                 <div>
-                  <p style={{ 
+                  <p style={{
                     fontFamily: 'var(--synervion-font-body)',
                     fontSize: '14px',
                     color: '#1e40af',
@@ -148,13 +148,13 @@ export function ContactUs() {
                   }}>
                     Development Mode
                   </p>
-                  <p style={{ 
+                  <p style={{
                     fontFamily: 'var(--synervion-font-body)',
                     fontSize: '13px',
                     color: '#1e3a8a',
                     lineHeight: '1.5'
                   }}>
-                    This form is using mock data. Submissions will be logged to console but not saved. 
+                    This form is using mock data. Submissions will be logged to console but not saved.
                     See <code style={{ background: '#dbeafe', padding: '2px 6px', borderRadius: '3px' }}>/backend/QUICK_START.md</code> to connect to your Hostinger backend.
                   </p>
                 </div>
@@ -171,13 +171,8 @@ export function ContactUs() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12 sm:mb-16"
         >
-          {/* Icon Badge */}
-          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-[hsl(var(--synervion-primary-500))]/10 mb-6">
-            <Mail className="w-7 h-7 text-[hsl(var(--synervion-primary-500))]" strokeWidth={1.5} />
-          </div>
-
           {/* Heading */}
-          <h2 
+          <h2
             className="mb-4 sm:mb-6"
             style={{
               fontFamily: 'var(--synervion-font-heading)',
@@ -192,7 +187,7 @@ export function ContactUs() {
           </h2>
 
           {/* Subtext */}
-          <p 
+          <p
             className="max-w-2xl mx-auto"
             style={{
               fontFamily: 'var(--synervion-font-body)',
@@ -214,7 +209,7 @@ export function ContactUs() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="max-w-[720px] mx-auto"
         >
-          <div 
+          <div
             className="bg-white rounded-2xl p-8 sm:p-10 lg:p-12"
             style={{
               boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03)'
@@ -223,7 +218,7 @@ export function ContactUs() {
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Full Name */}
               <div>
-                <label 
+                <label
                   htmlFor="fullName"
                   style={{
                     fontFamily: 'var(--synervion-font-body)',
@@ -255,7 +250,7 @@ export function ContactUs() {
 
               {/* Email */}
               <div>
-                <label 
+                <label
                   htmlFor="email"
                   style={{
                     fontFamily: 'var(--synervion-font-body)',
@@ -287,7 +282,7 @@ export function ContactUs() {
 
               {/* Company */}
               <div>
-                <label 
+                <label
                   htmlFor="company"
                   style={{
                     fontFamily: 'var(--synervion-font-body)',
@@ -318,7 +313,7 @@ export function ContactUs() {
 
               {/* Subject */}
               <div>
-                <label 
+                <label
                   htmlFor="subject"
                   style={{
                     fontFamily: 'var(--synervion-font-body)',
@@ -349,7 +344,7 @@ export function ContactUs() {
 
               {/* Message */}
               <div>
-                <label 
+                <label
                   htmlFor="message"
                   style={{
                     fontFamily: 'var(--synervion-font-body)',
@@ -485,14 +480,24 @@ export function ContactUs() {
               }}
             >
               Prefer email? Reach us at{' '}
-              <a 
-                href="mailto:partnerships@synervion.com"
+              <a
+                href="mailto:info@synervion.com"
                 className="text-[hsl(var(--synervion-primary-500))] hover:underline"
                 style={{
                   fontWeight: 500
                 }}
               >
-                partnerships@synervion.com
+                info@synervion.com
+              </a>{' '}
+              or call us at{' '}
+              <a
+                href="tel:+918823888238"
+                className="text-[hsl(var(--synervion-primary-500))] hover:underline"
+                style={{
+                  fontWeight: 500
+                }}
+              >
+                +91 88238 88238
               </a>
             </p>
           </motion.div>
