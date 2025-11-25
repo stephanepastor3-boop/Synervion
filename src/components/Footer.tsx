@@ -1,4 +1,5 @@
 import { Facebook, Linkedin, Instagram } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export function Footer() {
   const smoothScroll = (href: string) => {
@@ -153,8 +154,8 @@ export function Footer() {
                 {categoryLinks.map((link) => (
                   <li key={link.label}>
                     {(link as any).href ? (
-                      <a
-                        href={(link as any).href}
+                      <Link
+                        to={(link as any).href}
                         style={{
                           fontFamily: 'var(--synervion-font-body)',
                           fontSize: '14px',
@@ -164,7 +165,7 @@ export function Footer() {
                         className="hover:text-white transition-colors text-left block"
                       >
                         {link.label}
-                      </a>
+                      </Link>
                     ) : (
                       <button
                         onClick={(link as any).action}
