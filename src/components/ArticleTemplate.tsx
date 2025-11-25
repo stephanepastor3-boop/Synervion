@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Link } from 'react-router-dom';
 import { Article } from '../data/articles';
 import { Navigation } from './Navigation';
 import { Footer } from './Footer';
