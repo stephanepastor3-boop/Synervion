@@ -4,63 +4,58 @@ import { Resend } from 'resend';
 // Initialize Resend with API key from environment variable
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-// CORS headers for browser requests
-const corsHeaders = {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'POST, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type',
-};
+
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-    // Handle preflight OPTIONS request
-    if (req.method === 'OPTIONS') {
-        return res.status(200).json({ message: 'OK' });
+  // Handle preflight OPTIONS request
+  if (req.method === 'OPTIONS') {
+    return res.status(200).json({ message: 'OK' });
+  }
+
+  // Only allow POST requests
+  if (req.method !== 'POST') {
+    return res.status(405).json({
+      success: false,
+      message: 'Method not allowed. Only POST requests are accepted.'
+    });
+  }
+
+  try {
+    const { full_name, email, company, subject, message } = req.body;
+
+    // Validate required fields
+    if (!full_name || !email || !message) {
+      return res.status(400).json({
+        success: false,
+        message: 'Required fields are missing: full_name, email, and message are required.'
+      });
     }
 
-    // Only allow POST requests
-    if (req.method !== 'POST') {
-        return res.status(405).json({
-            success: false,
-            message: 'Method not allowed. Only POST requests are accepted.'
-        });
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return res.status(400).json({
+        success: false,
+        message: 'Invalid email address format.'
+      });
     }
 
-    try {
-        const { full_name, email, company, subject, message } = req.body;
+    // Check for Resend API key
+    if (!process.env.RESEND_API_KEY) {
+      console.error('RESEND_API_KEY is not set in environment variables');
+      return res.status(500).json({
+        success: false,
+        message: 'Email service is not configured. Please contact support.'
+      });
+    }
 
-        // Validate required fields
-        if (!full_name || !email || !message) {
-            return res.status(400).json({
-                success: false,
-                message: 'Required fields are missing: full_name, email, and message are required.'
-            });
-        }
-
-        // Validate email format
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            return res.status(400).json({
-                success: false,
-                message: 'Invalid email address format.'
-            });
-        }
-
-        // Check for Resend API key
-        if (!process.env.RESEND_API_KEY) {
-            console.error('RESEND_API_KEY is not set in environment variables');
-            return res.status(500).json({
-                success: false,
-                message: 'Email service is not configured. Please contact support.'
-            });
-        }
-
-        // Send email using Resend
-        const { data, error } = await resend.emails.send({
-            from: 'Contact Form <onboarding@resend.dev>', // Will use verified domain in production
-            to: ['info@synervion.com'],
-            replyTo: email,
-            subject: `Contact Form: ${subject || 'General Inquiry'}`,
-            html: `
+    // Send email using Resend
+    const { data, error } = await resend.emails.send({
+      from: 'Contact Form <onboarding@resend.dev>', // Will use verified domain in production
+      to: ['info@synervion.com'],
+      replyTo: email,
+      subject: `Contact Form: ${subject || 'General Inquiry'}`,
+      html: `
         <!DOCTYPE html>
         <html>
           <head>
@@ -115,28 +110,28 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           </body>
         </html>
       `,
-        });
+    });
 
-        if (error) {
-            console.error('Resend API error:', error);
-            return res.status(500).json({
-                success: false,
-                message: 'Failed to send email. Please try again later.'
-            });
-        }
-
-        // Success response
-        return res.status(200).json({
-            success: true,
-            message: 'Your message has been successfully submitted. We will get back to you soon!',
-            submission_id: data?.id
-        });
-
-    } catch (error) {
-        console.error('Contact form error:', error);
-        return res.status(500).json({
-            success: false,
-            message: 'An unexpected error occurred. Please try again later.'
-        });
+    if (error) {
+      console.error('Resend API error:', error);
+      return res.status(500).json({
+        success: false,
+        message: 'Failed to send email. Please try again later.'
+      });
     }
+
+    // Success response
+    return res.status(200).json({
+      success: true,
+      message: 'Your message has been successfully submitted. We will get back to you soon!',
+      submission_id: data?.id
+    });
+
+  } catch (error) {
+    console.error('Contact form error:', error);
+    return res.status(500).json({
+      success: false,
+      message: 'An unexpected error occurred. Please try again later.'
+    });
+  }
 }
