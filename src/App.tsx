@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { HomePage } from './pages/HomePage';
+import CalculatorPage from './pages/CalculatorPage';
 import { ArticleTemplate } from './components/ArticleTemplate';
 import { articles } from './data/articles';
 
@@ -10,6 +11,7 @@ export default function App() {
       <Router>
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/calculator/cordyceps-goal-planner" element={<CalculatorPage />} />
           {articles.map((article) => (
             <Route
               key={article.slug}
