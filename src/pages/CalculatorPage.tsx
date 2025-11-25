@@ -121,7 +121,7 @@ const CalculatorPage: React.FC = () => {
                             <div className="flex items-center justify-between mb-8">
                                 {[1, 2, 3].map((s) => (
                                     <div key={s} className="flex items-center">
-                                        <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-colors ${step >= s ? 'bg-orange-500 text-white' : 'bg-neutral-800 text-neutral-500'
+                                        <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-colors ${step >= s ? 'bg-orange-500 text-white' : 'bg-neutral-800 text-neutral-400'
                                             }`}>
                                             {s}
                                         </div>
@@ -142,7 +142,7 @@ const CalculatorPage: React.FC = () => {
                                         exit={{ opacity: 0, x: -20 }}
                                         className="space-y-6"
                                     >
-                                        <h2 className="text-2xl font-semibold flex items-center gap-3">
+                                        <h2 className="text-2xl font-semibold flex items-center gap-3 text-white">
                                             <Activity className="text-orange-500" />
                                             What's your activity level?
                                         </h2>
@@ -174,7 +174,7 @@ const CalculatorPage: React.FC = () => {
                                         exit={{ opacity: 0, x: -20 }}
                                         className="space-y-6"
                                     >
-                                        <h2 className="text-2xl font-semibold flex items-center gap-3">
+                                        <h2 className="text-2xl font-semibold flex items-center gap-3 text-white">
                                             <Battery className="text-orange-500" />
                                             How are your energy levels?
                                         </h2>
@@ -205,7 +205,7 @@ const CalculatorPage: React.FC = () => {
                                         exit={{ opacity: 0, x: -20 }}
                                         className="space-y-6"
                                     >
-                                        <h2 className="text-2xl font-semibold flex items-center gap-3">
+                                        <h2 className="text-2xl font-semibold flex items-center gap-3 text-white">
                                             <Target className="text-orange-500" />
                                             What is your primary goal?
                                         </h2>

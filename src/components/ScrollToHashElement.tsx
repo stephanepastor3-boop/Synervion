@@ -6,17 +6,23 @@ export default function ScrollToHashElement() {
 
     useEffect(() => {
         if (location.hash) {
-            const element = document.getElementById(location.hash.slice(1));
-            if (element) {
-                element.scrollIntoView({ behavior: "smooth", block: "start" });
-            } else {
-                // Retry once in case content is loading
-                setTimeout(() => {
-                    const retryElement = document.getElementById(location.hash.slice(1));
-                    if (retryElement) {
-                        retryElement.scrollIntoView({ behavior: "smooth", block: "start" });
-                    }
-                }, 500);
+            const scrollToElement = () => {
+                const element = document.getElementById(location.hash.slice(1));
+                if (element) {
+                    element.scrollIntoView({ behavior: "smooth", block: "start" });
+                    return true;
+                }
+                return false;
+            };
+
+            // Try immediately
+            if (!scrollToElement()) {
+                // Retry at intervals
+                const timeouts = [100, 300, 600, 1000].map(delay =>
+                    setTimeout(() => scrollToElement(), delay)
+                );
+
+                return () => timeouts.forEach(clearTimeout);
             }
         }
     }, [location]);
