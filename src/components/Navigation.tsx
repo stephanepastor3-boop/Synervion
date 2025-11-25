@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { BrandButton } from './brand/BrandButton';
 import { Logo } from './Logo';
 import { motion } from 'motion/react';
@@ -7,6 +8,8 @@ import { Menu, X } from 'lucide-react';
 export function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,22 +24,43 @@ export function Navigation() {
     { label: 'Why Lab-Grown', href: '#origin' },
     { label: 'Collabs', href: '#partners' },
     { label: 'Research', href: '#rnd' },
+    { label: 'Calculator', href: '/calculator/cordyceps-goal-planner' },
     { label: 'Contact', href: '#contact' },
   ];
 
-  const smoothScroll = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      const navHeight = 80;
-      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
-      const offsetPosition = elementPosition - navHeight;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-    }
+  const handleNavigation = (href: string) => {
     setMobileMenuOpen(false);
+
+    if (href.startsWith('#')) {
+      if (location.pathname === '/') {
+        // We are on the home page, scroll to section
+        const element = document.querySelector(href);
+        if (element) {
+          const navHeight = 80;
+          const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+          const offsetPosition = elementPosition - navHeight;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      } else {
+        // We are on another page, navigate to home with hash
+        // Note: We might need a useEffect in HomePage to handle the scroll after navigation
+        // For now, we rely on browser's default hash handling or we can pass state
+        navigate('/' + href);
+
+        // Small timeout to allow navigation to happen before trying to scroll (if needed by browser)
+        // But standard anchor navigation usually works if the element exists on load. 
+        // Since it's a SPA, the element might not be there immediately.
+        // Let's just navigate for now.
+      }
+    } else {
+      // It's a route, just navigate
+      navigate(href);
+      window.scrollTo(0, 0);
+    }
   };
 
   return (
@@ -59,7 +83,7 @@ export function Navigation() {
               variant="color"
               size="md"
               showWordmark={true}
-              onClick={() => smoothScroll('#hero')}
+              onClick={() => handleNavigation('#hero')}
               className="flex-shrink-0"
             />
 
@@ -68,7 +92,7 @@ export function Navigation() {
               {navLinks.map((link) => (
                 <button
                   key={link.label}
-                  onClick={() => smoothScroll(link.href)}
+                  onClick={() => handleNavigation(link.href)}
                   style={{
                     fontFamily: 'var(--synervion-font-body)',
                     fontSize: '15px',
@@ -87,7 +111,7 @@ export function Navigation() {
               <BrandButton
                 variant="primary"
                 size="md"
-                onClick={() => smoothScroll('#contact')}
+                onClick={() => handleNavigation('#contact')}
                 className="min-h-[44px]"
               >
                 Get Started
@@ -156,7 +180,7 @@ export function Navigation() {
                   {navLinks.map((link) => (
                     <li key={link.label}>
                       <button
-                        onClick={() => smoothScroll(link.href)}
+                        onClick={() => handleNavigation(link.href)}
                         style={{
                           fontFamily: 'var(--synervion-font-body)',
                           fontSize: '16px',
@@ -178,7 +202,7 @@ export function Navigation() {
                   variant="primary"
                   size="lg"
                   className="w-full min-h-[48px]"
-                  onClick={() => smoothScroll('#contact')}
+                  onClick={() => handleNavigation('#contact')}
                 >
                   Get Started
                 </BrandButton>
