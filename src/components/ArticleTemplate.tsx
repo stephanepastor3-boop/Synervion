@@ -14,18 +14,63 @@ export function ArticleTemplate({ article }: ArticleTemplateProps) {
         window.scrollTo(0, 0);
     }, [article.slug]);
 
-    const faqSchema = {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": article.faq.map(item => ({
-            "@type": "Question",
-            "name": item.question,
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": item.answer
+    const schemas: any[] = [
+        {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": article.faq.map(item => ({
+                "@type": "Question",
+                "name": item.question,
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": item.answer
+                }
+            }))
+        }
+    ];
+
+    if (article.factCheck) {
+        schemas.push({
+            "@context": "https://schema.org",
+            "@type": "FactCheck",
+            "claimReviewed": article.factCheck.claim,
+            "itemReviewed": {
+                "@type": "Claim",
+                "author": {
+                    "@type": "Organization",
+                    "name": article.factCheck.author
+                },
+                "datePublished": article.factCheck.datePublished,
+                "appearance": [
+                    {
+                        "@type": "CreativeWork",
+                        "url": `https://www.synervion.com/${article.slug}`
+                    }
+                ]
+            },
+            "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": "5",
+                "bestRating": "5",
+                "alternateName": "True"
             }
-        }))
-    };
+        });
+    }
+
+    if (article.howTo) {
+        schemas.push({
+            "@context": "https://schema.org",
+            "@type": "HowTo",
+            "name": article.howTo.name,
+            "step": article.howTo.step.map((step, index) => ({
+                "@type": "HowToStep",
+                "position": index + 1,
+                "name": step.name,
+                "text": step.text,
+                ...(step.image && { "image": step.image })
+            }))
+        });
+    }
 
     return (
         <div className="min-h-screen bg-white">
@@ -42,9 +87,11 @@ export function ArticleTemplate({ article }: ArticleTemplateProps) {
                 <meta property="og:url" content={`https://www.synervion.com/${article.slug}`} />
 
                 {/* Schema */}
-                <script type="application/ld+json">
-                    {JSON.stringify(faqSchema)}
-                </script>
+                {schemas.map((schema, index) => (
+                    <script key={index} type="application/ld+json">
+                        {JSON.stringify(schema)}
+                    </script>
+                ))}
             </Helmet>
 
             <Navigation />
