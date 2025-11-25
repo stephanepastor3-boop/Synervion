@@ -36,7 +36,7 @@ export function Logo({
     return (
         <button
             onClick={onClick}
-            className={`flex items-center gap-2 sm:gap-3 hover:opacity-80 transition-opacity ${className}`}
+            className={`flex items-center gap-1.5 hover:opacity-80 transition-opacity ${className}`}
             aria-label={showWordmark ? 'Synervion' : 'Synervion logo'}
         >
             <img
