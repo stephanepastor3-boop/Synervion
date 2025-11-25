@@ -155,7 +155,6 @@ export function ContactUs() {
                     lineHeight: '1.5'
                   }}>
                     This form is using mock data. Submissions will be logged to console but not saved.
-                    See <code style={{ background: '#dbeafe', padding: '2px 6px', borderRadius: '3px' }}>/backend/QUICK_START.md</code> to connect to your Hostinger backend.
                   </p>
                 </div>
               </div>

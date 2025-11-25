@@ -1,0 +1,10 @@
+{
+    "providers": {
+        "perplexity": {
+            "apiBase": "https://api.perplexity.ai/v1",
+            "model": "pplx-70b-online",
+            "apiKeyEnv": "PERPLEXITY_API_KEY"
+        }
+    },
+    "defaultProvider": "perplexity"
+}
