@@ -1,4 +1,5 @@
 import { motion, AnimatePresence } from 'motion/react';
+import { Helmet } from 'react-helmet-async';
 import { X, ExternalLink, Quote, Linkedin, Mail } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, ComposedChart, Legend } from 'recharts';
 import imageCellularOptimization from '../../assets/images/image-CellularOptimization.png';
@@ -301,6 +302,15 @@ export function StudyModal({ study, isOpen, onClose }: StudyModalProps) {
               <X size={20} />
             </button>
 
+            <Helmet>
+              <title>{study.title} | Synervion Research</title>
+              <meta name="description" content={study.summary} />
+              <meta property="og:title" content={study.title} />
+              <meta property="og:description" content={study.summary} />
+              <meta property="og:image" content={window.location.origin + study.imageUrl} />
+              <meta name="twitter:card" content="summary_large_image" />
+            </Helmet>
+
             {/* Hero Section */}
             <div className="relative h-64 sm:h-80 w-full">
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-10" />
@@ -420,14 +430,20 @@ export function StudyModal({ study, isOpen, onClose }: StudyModalProps) {
                   </p>
                   <div className="flex items-center justify-center gap-4">
                     <button
-                      onClick={() => window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(window.location.href)}`, '_blank')}
+                      onClick={() => {
+                        const shareUrl = `${window.location.origin}/?studyId=${study.id}#rnd`;
+                        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`, '_blank');
+                      }}
                       className="p-2 rounded-full bg-neutral-100 text-neutral-500 hover:bg-[#0077b5] hover:text-white transition-all duration-200"
                       aria-label="Share on LinkedIn"
                     >
                       <Linkedin size={18} />
                     </button>
                     <button
-                      onClick={() => window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(study.title)}&url=${encodeURIComponent(window.location.href)}`, '_blank')}
+                      onClick={() => {
+                        const shareUrl = `${window.location.origin}/?studyId=${study.id}#rnd`;
+                        window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(study.title)}&url=${encodeURIComponent(shareUrl)}`, '_blank');
+                      }}
                       className="p-2 rounded-full bg-neutral-100 text-neutral-500 hover:bg-black hover:text-white transition-all duration-200"
                       aria-label="Share on X"
                     >
@@ -436,7 +452,10 @@ export function StudyModal({ study, isOpen, onClose }: StudyModalProps) {
                       </svg>
                     </button>
                     <button
-                      onClick={() => window.location.href = `mailto:?subject=${encodeURIComponent(study.title)}&body=${encodeURIComponent(`Check out this research: ${study.title}\n\n${window.location.href}`)}`}
+                      onClick={() => {
+                        const shareUrl = `${window.location.origin}/?studyId=${study.id}#rnd`;
+                        window.location.href = `mailto:?subject=${encodeURIComponent(study.title)}&body=${encodeURIComponent(`Check out this research: ${study.title}\n\n${shareUrl}`)}`;
+                      }}
                       className="p-2 rounded-full bg-neutral-100 text-neutral-500 hover:bg-[#EA4335] hover:text-white transition-all duration-200"
                       aria-label="Share via Email"
                     >

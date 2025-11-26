@@ -2,6 +2,7 @@ import { motion } from 'motion/react';
 import { ArrowRight, Linkedin, Mail } from 'lucide-react';
 
 interface ResearchCardProps {
+  id: number;
   title: string;
   journal: string;
   year: string;
@@ -13,6 +14,7 @@ interface ResearchCardProps {
 }
 
 export function ResearchCard({
+  id,
   title,
   journal,
   year,
@@ -161,7 +163,8 @@ export function ResearchCard({
             <button
               onClick={(e) => {
                 e.stopPropagation();
-                window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(window.location.href)}`, '_blank');
+                const shareUrl = `${window.location.origin}/?studyId=${id}#rnd`;
+                window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`, '_blank');
               }}
               className="text-gray-400 hover:text-[#0077b5] transition-colors duration-200"
               aria-label="Share on LinkedIn"
@@ -171,7 +174,8 @@ export function ResearchCard({
             <button
               onClick={(e) => {
                 e.stopPropagation();
-                window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(window.location.href)}`, '_blank');
+                const shareUrl = `${window.location.origin}/?studyId=${id}#rnd`;
+                window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(shareUrl)}`, '_blank');
               }}
               className="text-gray-400 hover:text-black transition-colors duration-200"
               aria-label="Share on X"
@@ -183,7 +187,8 @@ export function ResearchCard({
             <button
               onClick={(e) => {
                 e.stopPropagation();
-                window.location.href = `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(`Check out this research: ${title}\n\n${window.location.href}`)}`;
+                const shareUrl = `${window.location.origin}/?studyId=${id}#rnd`;
+                window.location.href = `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(`Check out this research: ${title}\n\n${shareUrl}`)}`;
               }}
               className="text-gray-400 hover:text-[#EA4335] transition-colors duration-200"
               aria-label="Share via Email"

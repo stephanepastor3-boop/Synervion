@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { ResearchCard } from './research/ResearchCard';
 import { FilterTabs } from './research/FilterTabs';
 import { StudyModal } from './research/StudyModal';
@@ -390,6 +391,32 @@ export function ExploreResearch() {
     ? studies
     : studies.filter(study => study.category === selectedCategory);
 
+  // Deep linking logic
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  useEffect(() => {
+    const studyId = searchParams.get('studyId');
+    if (studyId) {
+      const study = studies.find(s => s.id === Number(studyId));
+      if (study) {
+        setSelectedStudy(study);
+        // Optional: Scroll to section
+        const element = document.getElementById('rnd');
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    }
+  }, [searchParams]);
+
+  const handleCloseModal = () => {
+    setSelectedStudy(null);
+    // Remove query param without refreshing
+    const newParams = new URLSearchParams(searchParams);
+    newParams.delete('studyId');
+    setSearchParams(newParams, { replace: true });
+  };
+
   return (
     <section
       id="rnd"
@@ -467,7 +494,7 @@ export function ExploreResearch() {
         <StudyModal
           study={selectedStudy}
           isOpen={!!selectedStudy}
-          onClose={() => setSelectedStudy(null)}
+          onClose={handleCloseModal}
         />
       )}
     </section>
