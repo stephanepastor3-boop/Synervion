@@ -5,94 +5,10 @@ import { ResearchCard } from './ResearchCard';
 import { FilterTabs } from './FilterTabs';
 import { StudyModal } from './StudyModal';
 import { EnergyAnimation } from './EnergyAnimation';
+import { Study } from '../../types';
+import studiesData from '../../data/studies.json';
 
-interface Study {
-  id: number;
-  title: string;
-  journal: string;
-  year: string;
-  summary: string;
-  icon: string;
-  category: string;
-  doi: string;
-  keyFindings: string[];
-  chartType: 'bar' | 'pathway' | 'dual' | 'line';
-}
-
-const energyStudies: Study[] = [
-  {
-    id: 1,
-    title: 'Cordyceps militaris Improves Exercise Tolerance in Humans',
-    journal: 'J. Dietary Supplements',
-    year: '2017',
-    summary: 'Increased VO₂max by 10.9% and ventilatory threshold by 41% after 3 weeks at 4 g/day.',
-    icon: '🏃',
-    category: 'Endurance Performance',
-    doi: 'https://doi.org/10.1080/19390211.2016.1203386',
-    keyFindings: [
-      '↑ VO₂max by 10.9%',
-      '↑ Ventilatory threshold by 41%',
-      'Improved time to exhaustion (+8%)',
-      'Benefits observed after 3 weeks',
-      'Dosage: 4g/day Cordyceps militaris'
-    ],
-    chartType: 'bar'
-  },
-  {
-    id: 2,
-    title: 'Beneficial Effect of C. militaris on Exercise Performance',
-    journal: 'Mycobiology',
-    year: '2020',
-    summary: 'Enhanced ATP generation via AMPK and GLUT4 activation, comparable to red ginseng.',
-    icon: '⚡',
-    category: 'Energy Metabolism',
-    doi: 'https://doi.org/10.1080/12298093.2020.1831135',
-    keyFindings: [
-      '↑ AMPK pathway activation',
-      '↑ GLUT4 glucose transporter',
-      'Enhanced ATP production',
-      'Comparable efficacy to red ginseng',
-      'Improved cellular energy metabolism'
-    ],
-    chartType: 'pathway'
-  },
-  {
-    id: 3,
-    title: 'Studies on the Antifatigue Activities of C. militaris Extract',
-    journal: 'Evid-Based Compl. Alt. Med.',
-    year: '2015',
-    summary: 'Activated AMPK and AKT/mTOR pathways, increased antioxidant enzymes, reduced ROS.',
-    icon: '🧬',
-    category: 'Antioxidant Defense',
-    doi: 'https://doi.org/10.1155/2015/174616',
-    keyFindings: [
-      '↑ SOD activity by 25%',
-      '↑ GSH-Px activity by 45%',
-      '↓ ROS levels by 30%',
-      'Activated AMPK and AKT/mTOR pathways',
-      'Enhanced antioxidant defense system'
-    ],
-    chartType: 'dual'
-  },
-  {
-    id: 4,
-    title: 'Anti-fatigue Property of Cereal Grains Mixed with C. militaris',
-    journal: 'J. Int. Soc. Sports Nutrition',
-    year: '2017',
-    summary: 'Extended endurance and glycogen storage; lowered lactic acid and BUN levels.',
-    icon: '🏃',
-    category: 'Endurance Performance',
-    doi: 'https://doi.org/10.1186/s12970-017-0171-1',
-    keyFindings: [
-      '↑ Endurance duration by 39%',
-      '↑ Glycogen storage capacity',
-      '↓ Lactic acid accumulation',
-      '↓ Blood urea nitrogen (BUN)',
-      'Delayed onset of fatigue'
-    ],
-    chartType: 'line'
-  }
-];
+const energyStudies = (studiesData as Study[]).filter(s => [1, 2, 3, 18].includes(s.id));
 
 interface EnergyResearchModalProps {
   isOpen: boolean;
@@ -256,12 +172,14 @@ export function EnergyResearchModal({ isOpen, onClose }: EnergyResearchModalProp
                     transition={{ duration: 0.4, delay: index * 0.1 }}
                   >
                     <ResearchCard
+                      id={study.id}
                       title={study.title}
                       journal={study.journal}
                       year={study.year}
                       summary={study.summary}
                       icon={study.icon}
                       category={study.category}
+                      imageUrl={study.imageUrl}
                       onClick={() => handleStudyClick(study)}
                     />
                   </motion.div>
