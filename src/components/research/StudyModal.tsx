@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from 'motion/react';
 import { X, ExternalLink, Quote } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, ComposedChart, Legend } from 'recharts';
+import imageCellularOptimization from '../../assets/images/image-CellularOptimization.png';
 
 interface Study {
   id: number;
@@ -17,6 +18,7 @@ interface Study {
   chartType: 'bar' | 'pathway' | 'dual' | 'line' | 'comparison';
   imageUrl: string;
   relevance: string;
+  sources?: { citation: string; url: string }[];
 }
 
 interface StudyModalProps {
@@ -172,37 +174,12 @@ export function StudyModal({ study, isOpen, onClose }: StudyModalProps) {
       case 'pathway':
         // Study #2: Energy metabolism pathway
         return (
-          <div className="flex flex-col items-center justify-center h-full py-4">
-            <svg width="100%" height="200" viewBox="0 0 400 200">
-              {/* AMPK Node */}
-              <motion.g animate={{ scale: [1, 1.05, 1] }} transition={{ duration: 2, repeat: Infinity }}>
-                <circle cx="80" cy="100" r="35" fill="#FFF5E6" stroke="#E58B00" strokeWidth="2" />
-                <text x="80" y="105" textAnchor="middle" fill="#E58B00" fontWeight="700" fontSize="14">AMPK</text>
-              </motion.g>
-
-              {/* Arrow to GLUT4 */}
-              <line x1="125" y1="100" x2="195" y2="100" stroke="#E5E7EB" strokeWidth="2" strokeDasharray="4 4" />
-              <polygon points="195,95 205,100 195,105" fill="#9CA3AF" />
-
-              {/* GLUT4 Node */}
-              <motion.g animate={{ scale: [1, 1.05, 1] }} transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}>
-                <circle cx="240" cy="100" r="35" fill="#ECFDF5" stroke="#059669" strokeWidth="2" />
-                <text x="240" y="105" textAnchor="middle" fill="#059669" fontWeight="700" fontSize="14">GLUT4</text>
-              </motion.g>
-
-              {/* Arrow to ATP */}
-              <line x1="285" y1="100" x2="355" y2="100" stroke="#E5E7EB" strokeWidth="2" strokeDasharray="4 4" />
-              <polygon points="355,95 365,100 355,105" fill="#9CA3AF" />
-
-              {/* ATP Node */}
-              <motion.g animate={{ scale: [1, 1.1, 1] }} transition={{ duration: 2, repeat: Infinity, delay: 1 }}>
-                <circle cx="400" cy="100" r="35" fill="#FEFCE8" stroke="#CA8A04" strokeWidth="2" />
-                <text x="400" y="105" textAnchor="middle" fill="#CA8A04" fontWeight="700" fontSize="14">ATP</text>
-              </motion.g>
-            </svg>
-            <p className="text-sm text-neutral-500 text-center mt-2">
-              Cordyceps activates the AMPK pathway, leading to increased ATP production.
-            </p>
+          <div className="flex flex-col items-center justify-center h-full w-full">
+            <img
+              src={imageCellularOptimization}
+              alt="Cellular Energy Optimization Pathway"
+              className="w-full h-full object-contain rounded-lg"
+            />
           </div>
         );
 
@@ -395,26 +372,45 @@ export function StudyModal({ study, isOpen, onClose }: StudyModalProps) {
 
               {/* Sidebar Column (Data & Actions) */}
               <div className="bg-neutral-50/50 p-6 sm:p-10 flex flex-col h-full">
-                <div className="bg-white rounded-xl border border-neutral-100 shadow-sm p-6 mb-8">
-                  <h4 className="text-sm font-bold text-neutral-400 uppercase tracking-wider mb-6 text-center">
-                    Data Visualization
-                  </h4>
+                <div className="bg-white rounded-2xl p-6 h-full flex flex-col justify-center items-center shadow-sm border border-neutral-100">
                   {renderChart()}
                 </div>
 
                 <div className="mt-auto">
-                  <a
-                    href={study.doi}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 w-full bg-neutral-900 hover:bg-neutral-800 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-200 group"
-                  >
-                    Read Full Study
-                    <ExternalLink size={18} className="group-hover:translate-x-1 transition-transform" />
-                  </a>
-                  <p className="text-center text-xs text-neutral-400 mt-4">
-                    Published in {study.journal}, {study.year}
-                  </p>
+                  {study.sources ? (
+                    <div className="space-y-3">
+                      <h4 className="text-sm font-bold text-neutral-400 uppercase tracking-wider mb-2">
+                        References
+                      </h4>
+                      {study.sources.map((source, index) => (
+                        <a
+                          key={index}
+                          href={source.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center justify-between w-full bg-white border border-neutral-200 hover:border-orange-300 hover:bg-orange-50 text-neutral-700 text-sm font-medium py-3 px-4 rounded-lg transition-all duration-200 group"
+                        >
+                          <span className="truncate mr-2">{source.citation}</span>
+                          <ExternalLink size={14} className="text-neutral-400 group-hover:text-orange-500 flex-shrink-0" />
+                        </a>
+                      ))}
+                    </div>
+                  ) : (
+                    <>
+                      <a
+                        href={study.doi}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center gap-2 w-full bg-neutral-900 hover:bg-neutral-800 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-200 group"
+                      >
+                        Read Full Study
+                        <ExternalLink size={18} className="group-hover:translate-x-1 transition-transform" />
+                      </a>
+                      <p className="text-center text-xs text-neutral-400 mt-4">
+                        Published in {study.journal}, {study.year}
+                      </p>
+                    </>
+                  )}
                 </div>
               </div>
 

@@ -27,6 +27,7 @@ interface Study {
   chartConfig?: any;
   imageUrl: string;
   relevance: string;
+  sources?: { citation: string; url: string }[];
 }
 
 const studies: Study[] = [
@@ -81,23 +82,30 @@ const studies: Study[] = [
   },
   {
     id: 2,
-    title: 'Beneficial Effect of C. militaris on Exercise Performance',
+    title: 'Cordyceps militaris: Mechanisms for Cellular Energy Enhancement',
     journal: 'Mycobiology',
     year: '2020',
-    summary: 'Enhanced ATP generation via AMPK and GLUT4 activation, comparable to red ginseng.',
+    summary: 'The hypothesis that Cordyceps militaris improves energy relies on its ability to enhance core cellular metabolic pathways, rather than acting as a simple external stimulant. Cordycepin targets metabolic master switches and supports efficient energy generation.',
     icon: '⚡',
     category: 'Energy Metabolism',
     doi: 'https://doi.org/10.1080/12298093.2020.1831135',
     keyFindings: [
-      '↑ AMPK pathway activation',
-      '↑ GLUT4 glucose transporter',
-      'Enhanced ATP production',
-      'Comparable efficacy to red ginseng',
-      'Improved cellular energy metabolism'
+      '↑ AMP-activated protein kinase (AMPK) activation',
+      'Enhanced ATP production efficiency',
+      'Supports mitochondrial oxidative phosphorylation',
+      'Cordycepin prevents hyperlipidemia',
+      'Central energy metabolites (AMP, ADP, ATP) are regulated'
     ],
     chartType: 'pathway',
     imageUrl: researchEnergy,
-    relevance: "This explains the 'clean energy' feeling. By activating the AMPK pathway—your body's master energy switch—Cordyceps helps your cells produce more ATP naturally. It's not a stimulant like caffeine; it's fuel efficiency for your mitochondria."
+    relevance: "Activating the AMPK pathway and promoting mitochondrial efficiency translates directly to improved energy use and systemic metabolic health. It's not just about a temporary boost; it's about optimizing your body's fuel efficiency at a cellular level.",
+    sources: [
+      { citation: 'Guo, P., et al. (2010). J Pharm Sci', url: 'https://pubmed.ncbi.nlm.nih.gov/20821822/' },
+      { citation: 'Raethong, N., et al. (2020). Comput Struct Biotechnol J', url: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7283446/' },
+      { citation: 'Wongsa, B., et al. (2020). Genomics', url: 'https://pubmed.ncbi.nlm.nih.gov/31150822/' },
+      { citation: 'Lusakunwiwat, P., et al. (2024). Gene', url: 'https://pubmed.ncbi.nlm.nih.gov/39270921/' },
+      { citation: 'Ma, Y.-C., et al. (2023). Bioresource Technology', url: 'https://pubmed.ncbi.nlm.nih.gov/36736630/' }
+    ]
   },
   {
     id: 3,
@@ -127,7 +135,7 @@ const studies: Study[] = [
     summary: 'Increased time to exhaustion by 58%, reduced lactate and improved glucose metabolism.',
     icon: '🥣',
     category: 'Sports Nutrition',
-    doi: 'https://doi.org/10.1186/s12970-016-0159-0',
+    doi: 'https://doi.org/10.1186/s12970-017-0171-1',
     keyFindings: [
       '↑ Time to exhaustion by 58%',
       '↓ Blood lactate accumulation',
@@ -144,41 +152,30 @@ const studies: Study[] = [
     title: 'IoT-Driven Fermentation System for Enhanced Cordycepin Production',
     journal: 'Int. J. Med. Mushrooms',
     year: '2025',
-    summary: 'Utilized IoT for precise control of fermentation conditions, significantly enhancing cordycepin yield under hypoxic conditions.',
+    summary: 'Researchers developed a novel solution to enhance cordycepin yield using modern technology. An Active Air-Feed Regulation Fermentation System (AAFRFS) utilizing IoT architecture achieved superior yields.',
     icon: '📡',
     category: 'Biotech Innovation',
-    doi: '#',
+    doi: 'https://doi.org/10.1615/IntJMedMushrooms.2024057399',
     keyFindings: [
-      '↑ Cordycepin production with IoT control',
-      'Optimized hypoxic conditions',
-      'Real-time monitoring of fermentation',
-      'Enhanced reproducibility',
-      'Scalable production method'
-    ],
-    chartType: 'line',
-    imageUrl: researchBiotech,
-    relevance: "This represents the future of functional mushroom cultivation. By using Internet of Things (IoT) technology to precisely control oxygen levels, we can significantly boost the production of cordycepin, ensuring every batch is as potent as possible."
-  },
-  {
-    id: 6,
-    title: 'Biotechnological Production and Applications of Cordyceps militaris',
-    journal: 'Crit. Rev. Biotechnol.',
-    year: '2015',
-    summary: 'A comprehensive review on the biotechnological advances in producing Cordyceps militaris and its bioactive compounds.',
-    icon: '⚗️',
-    category: 'Biotechnology',
-    doi: 'https://doi.org/10.3109/07388551.2014.900604',
-    keyFindings: [
-      'Review of submerged fermentation',
-      'Optimization of culture media',
-      'Bioactive compound extraction',
-      'Industrial scalability',
-      'Therapeutic applications'
+      'Highest Production: Peak cordycepin production reached 1.445 g/L',
+      'Optimal Hypoxia: Achieved by maintaining 3000 ppm metabolic CO2',
+      'Technological Integration: Uses IoT, MCU, and PID/PWM for real-time control',
+      'Yield Improvement: 1.7- to 7.1-fold increase over conventional methods',
+      'Enhanced Monitoring: Early detection of microbial contamination within 12-24h'
     ],
     chartType: 'bar',
+    chartData: [
+      { name: 'Conventional', value: 0.2, label: 'Low Yield' },
+      { name: 'IoT-Driven', value: 1.45, label: '1.45 g/L' }
+    ],
+    chartConfig: {
+      yAxisLabel: 'Cordycepin Yield (g/L)',
+      barColor: '#E58B00'
+    },
     imageUrl: researchBiotech,
-    relevance: "A foundational review confirming that lab-grown Cordyceps militaris is not just a viable alternative to wild harvest, but often superior in consistency and sustainability. It validates the shift towards controlled biotechnological production."
+    relevance: "This technology represents a significant leap forward in the cultivation of medicinal fungi. By using IoT to precisely control oxygen levels (hypoxia), we can achieve a 7-fold increase in cordycepin yield compared to traditional methods, ensuring a highly potent and scalable product."
   },
+
   {
     id: 7,
     title: 'Development of High Cordycepin-Producing Cordyceps militaris Strains',
