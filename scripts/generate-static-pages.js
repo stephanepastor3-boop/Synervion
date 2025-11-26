@@ -6,7 +6,7 @@ const __dirname = path.dirname(__filename);
 
 const studies = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../src/data/studies.json'), 'utf-8'));
 
-const distPath = path.resolve(__dirname, '../build');
+const distPath = path.resolve(__dirname, '../dist');
 const templatePath = path.join(distPath, 'index.html');
 
 // Ensure dist exists (it should after build)

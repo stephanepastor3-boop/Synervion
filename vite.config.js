@@ -49,7 +49,7 @@ export default defineConfig({
     },
     build: {
         target: 'esnext',
-        outDir: 'build',
+        outDir: 'dist',
         chunkSizeWarningLimit: 1600,
     },
     server: {
