@@ -1,0 +1,442 @@
+import { useState } from 'react';
+import { Helmet } from 'react-helmet-async';
+import { ExternalLink, Quote, Linkedin, Mail, Link as LinkIcon, Check } from 'lucide-react';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, ComposedChart, Legend } from 'recharts';
+import imageCellularOptimization from '../../assets/images/image-CellularOptimization.png';
+import { Study } from '../../types';
+
+interface StudyDetailsProps {
+    study: Study;
+    shareUrl?: string;
+}
+
+export function StudyDetails({ study, shareUrl }: StudyDetailsProps) {
+    const [copied, setCopied] = useState(false);
+    const finalShareUrl = shareUrl || window.location.href;
+
+    const handleCopyLink = () => {
+        navigator.clipboard.writeText(finalShareUrl);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+    };
+
+    const renderChart = () => {
+        if (study.chartData) {
+            if (study.chartType === 'bar') {
+                return (
+                    <div>
+                        <ResponsiveContainer width="100%" height={220}>
+                            <BarChart data={study.chartData} margin={{ top: 20, right: 10, left: 0, bottom: 0 }}>
+                                <defs>
+                                    <linearGradient id="barGradient" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" stopColor="#E58B00" stopOpacity={1} />
+                                        <stop offset="100%" stopColor="#FFD48A" stopOpacity={0.8} />
+                                    </linearGradient>
+                                </defs>
+                                <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" vertical={false} />
+                                <XAxis
+                                    dataKey="name"
+                                    axisLine={false}
+                                    tickLine={false}
+                                    style={{ fontFamily: 'var(--synervion-font-body)', fontSize: '12px', fill: '#6B7280' }}
+                                />
+                                <YAxis
+                                    hide
+                                />
+                                <Tooltip
+                                    cursor={{ fill: 'transparent' }}
+                                    contentStyle={{
+                                        background: '#FFF',
+                                        border: 'none',
+                                        borderRadius: '8px',
+                                        boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                                        fontFamily: 'var(--synervion-font-body)'
+                                    }}
+                                />
+                                <Bar dataKey="value" fill={study.chartConfig?.barColor || "url(#barGradient)"} radius={[6, 6, 0, 0]} barSize={60} />
+                            </BarChart>
+                        </ResponsiveContainer>
+                        <div className="mt-4 text-center">
+                            {study.chartConfig?.yAxisLabel && (
+                                <p className="text-xs text-neutral-500 mt-2">{study.chartConfig.yAxisLabel}</p>
+                            )}
+                        </div>
+                    </div>
+                );
+            } else if (study.chartType === 'comparison') {
+                return (
+                    <div>
+                        <ResponsiveContainer width="100%" height={250}>
+                            <BarChart data={study.chartData} margin={{ top: 20, right: 10, left: 0, bottom: 0 }}>
+                                <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" vertical={false} />
+                                <XAxis
+                                    dataKey="name"
+                                    axisLine={false}
+                                    tickLine={false}
+                                    style={{ fontFamily: 'var(--synervion-font-body)', fontSize: '12px', fill: '#6B7280' }}
+                                />
+                                <YAxis
+                                    hide
+                                />
+                                <Tooltip
+                                    cursor={{ fill: 'transparent' }}
+                                    contentStyle={{
+                                        background: '#FFF',
+                                        border: 'none',
+                                        borderRadius: '8px',
+                                        boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                                        fontFamily: 'var(--synervion-font-body)'
+                                    }}
+                                />
+                                <Legend
+                                    verticalAlign="top"
+                                    height={36}
+                                    iconType="circle"
+                                    formatter={(value) => <span style={{ color: '#374151', fontSize: '12px', fontWeight: 500 }}>{value}</span>}
+                                />
+                                <Bar dataKey="Natural" name="Natural O. sinensis" fill={study.chartConfig?.naturalColor || "#94A3B8"} radius={[4, 4, 0, 0]} barSize={30} />
+                                <Bar dataKey="Cultivated" name="Cultivated C. militaris" fill={study.chartConfig?.cultivatedColor || "#E58B00"} radius={[4, 4, 0, 0]} barSize={30} />
+                            </BarChart>
+                        </ResponsiveContainer>
+                        <div className="mt-2 text-center">
+                            {study.chartConfig?.yAxisLabel && (
+                                <p className="text-xs text-neutral-500">{study.chartConfig.yAxisLabel}</p>
+                            )}
+                            <div className="mt-3 inline-block bg-orange-50 text-orange-800 px-3 py-1 rounded-full text-xs font-semibold border border-orange-100">
+                                ★ Significantly Higher Bioactive Content
+                            </div>
+                        </div>
+                    </div>
+                );
+            }
+            // Add other dynamic types here if needed, or fall back to switch
+        }
+
+        switch (study.chartType) {
+            case 'bar':
+                // Study #1: VO2max improvement
+                const vo2Data = [
+                    { name: 'Before', value: 44.0, label: '44.0' },
+                    { name: 'After', value: 48.8, label: '48.8' }
+                ];
+                return (
+                    <div>
+                        <ResponsiveContainer width="100%" height={220}>
+                            <BarChart data={vo2Data} margin={{ top: 20, right: 10, left: 0, bottom: 0 }}>
+                                <defs>
+                                    <linearGradient id="barGradient" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" stopColor="#E58B00" stopOpacity={1} />
+                                        <stop offset="100%" stopColor="#FFD48A" stopOpacity={0.8} />
+                                    </linearGradient>
+                                </defs>
+                                <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" vertical={false} />
+                                <XAxis
+                                    dataKey="name"
+                                    axisLine={false}
+                                    tickLine={false}
+                                    style={{ fontFamily: 'var(--synervion-font-body)', fontSize: '12px', fill: '#6B7280' }}
+                                />
+                                <YAxis
+                                    hide
+                                />
+                                <Tooltip
+                                    cursor={{ fill: 'transparent' }}
+                                    contentStyle={{
+                                        background: '#FFF',
+                                        border: 'none',
+                                        borderRadius: '8px',
+                                        boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                                        fontFamily: 'var(--synervion-font-body)'
+                                    }}
+                                />
+                                <Bar dataKey="value" fill="url(#barGradient)" radius={[6, 6, 0, 0]} barSize={60} />
+                            </BarChart>
+                        </ResponsiveContainer>
+                        <div className="mt-4 text-center">
+                            <div className="inline-block bg-green-50 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">
+                                ↑ +10.9% VO₂max Improvement
+                            </div>
+                            <p className="text-xs text-neutral-500 mt-2">Ventilatory Threshold: +41% ↑</p>
+                        </div>
+                    </div>
+                );
+
+            case 'pathway':
+                // Study #2: Energy metabolism pathway
+                return (
+                    <div className="flex flex-col items-center justify-center h-full w-full">
+                        <img
+                            src={imageCellularOptimization}
+                            alt="Cellular Energy Optimization Pathway"
+                            className="w-full h-full object-contain rounded-lg"
+                        />
+                    </div>
+                );
+
+            case 'dual':
+                // Study #3: Antioxidant effects
+                const antioxidantData = [
+                    { name: 'SOD', value: 25, color: '#059669' },
+                    { name: 'GSH-Px', value: 45, color: '#059669' },
+                    { name: 'ROS', value: -30, color: '#EF4444' }
+                ];
+                return (
+                    <div>
+                        <ResponsiveContainer width="100%" height={220}>
+                            <BarChart data={antioxidantData} margin={{ top: 20, right: 10, left: 0, bottom: 0 }}>
+                                <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" vertical={false} />
+                                <XAxis
+                                    dataKey="name"
+                                    axisLine={false}
+                                    tickLine={false}
+                                    style={{ fontFamily: 'var(--synervion-font-body)', fontSize: '12px', fill: '#6B7280' }}
+                                />
+                                <YAxis hide domain={[-40, 50]} />
+                                <Tooltip
+                                    cursor={{ fill: 'transparent' }}
+                                    contentStyle={{
+                                        background: '#FFF',
+                                        border: 'none',
+                                        borderRadius: '8px',
+                                        boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                                        fontFamily: 'var(--synervion-font-body)'
+                                    }}
+                                />
+                                <Bar dataKey="value" radius={[4, 4, 4, 4]} barSize={50}>
+                                    {antioxidantData.map((entry, index) => (
+                                        <Cell key={`cell-${index}`} fill={entry.color} />
+                                    ))}
+                                </Bar>
+                            </BarChart>
+                        </ResponsiveContainer>
+                        <div className="flex justify-center gap-4 mt-4">
+                            <div className="flex items-center gap-2 text-xs font-medium text-emerald-700 bg-emerald-50 px-2 py-1 rounded">
+                                ↑ Antioxidants
+                            </div>
+                            <div className="flex items-center gap-2 text-xs font-medium text-red-700 bg-red-50 px-2 py-1 rounded">
+                                ↓ Oxidative Stress
+                            </div>
+                        </div>
+                    </div>
+                );
+
+            case 'line':
+                // Study #4: Endurance time
+                const enduranceData = [
+                    { name: 'Control', value: 6.8 },
+                    { name: 'Cordyceps', value: 9.5 }
+                ];
+                return (
+                    <div>
+                        <ResponsiveContainer width="100%" height={220}>
+                            <ComposedChart data={enduranceData} margin={{ top: 20, right: 10, left: 0, bottom: 0 }}>
+                                <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" vertical={false} />
+                                <XAxis
+                                    dataKey="name"
+                                    axisLine={false}
+                                    tickLine={false}
+                                    style={{ fontFamily: 'var(--synervion-font-body)', fontSize: '12px', fill: '#6B7280' }}
+                                />
+                                <YAxis hide domain={[0, 12]} />
+                                <Tooltip
+                                    cursor={{ fill: 'transparent' }}
+                                    contentStyle={{
+                                        background: '#FFF',
+                                        border: 'none',
+                                        borderRadius: '8px',
+                                        boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                                        fontFamily: 'var(--synervion-font-body)'
+                                    }}
+                                />
+                                <Bar dataKey="value" fill="#E58B00" radius={[6, 6, 0, 0]} barSize={60} />
+                            </ComposedChart>
+                        </ResponsiveContainer>
+                        <div className="mt-4 text-center">
+                            <div className="inline-block bg-green-50 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">
+                                ↑ +39% Endurance Time
+                            </div>
+                        </div>
+                    </div>
+                );
+
+            default:
+                return null;
+        }
+    };
+
+    return (
+        <>
+            <Helmet>
+                <title>{study.title} | Synervion Research</title>
+                <meta name="description" content={study.summary} />
+                <meta property="og:title" content={study.title} />
+                <meta property="og:description" content={study.summary} />
+                <meta property="og:image" content={window.location.origin + study.imageUrl} />
+                <meta name="twitter:card" content="summary_large_image" />
+            </Helmet>
+
+            {/* Hero Section */}
+            <div className="relative h-64 sm:h-80 w-full">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-10" />
+                <img
+                    src={study.imageUrl}
+                    alt={study.title}
+                    className="w-full h-full object-cover"
+                />
+                <div className="absolute bottom-0 left-0 w-full p-6 sm:p-10 z-20">
+                    <div className="flex items-center gap-3 mb-4">
+                        <span className="bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                            {study.category}
+                        </span>
+                        <span className="text-white/80 text-sm font-medium">
+                            {study.journal} • {study.year}
+                        </span>
+                    </div>
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white leading-tight max-w-4xl font-heading">
+                        {study.title}
+                    </h2>
+                </div>
+            </div>
+
+            {/* Content Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_350px] divide-y lg:divide-y-0 lg:divide-x divide-neutral-100">
+
+                {/* Main Content Column */}
+                <div className="p-6 sm:p-10">
+                    {/* The Breakdown */}
+                    <div className="mb-10">
+                        <h3 className="text-lg font-bold text-neutral-900 mb-4 flex items-center gap-2">
+                            <span className="w-1 h-6 bg-orange-500 rounded-full"></span>
+                            The Breakdown
+                        </h3>
+                        <p className="text-lg text-neutral-600 leading-relaxed">
+                            {study.summary}
+                        </p>
+                    </div>
+
+                    {/* Why It Matters */}
+                    <div className="mb-10 bg-orange-50 rounded-xl p-6 sm:p-8 border border-orange-100">
+                        <h3 className="text-lg font-bold text-orange-900 mb-4 flex items-center gap-2">
+                            <Quote size={20} className="text-orange-500 fill-orange-500" />
+                            Why It Matters
+                        </h3>
+                        <p className="text-neutral-700 leading-relaxed font-medium">
+                            {study.relevance}
+                        </p>
+                    </div>
+
+                    {/* Key Insights */}
+                    <div>
+                        <h3 className="text-lg font-bold text-neutral-900 mb-6 flex items-center gap-2">
+                            <span className="w-1 h-6 bg-neutral-800 rounded-full"></span>
+                            Key Insights
+                        </h3>
+                        <ul className="space-y-4">
+                            {study.keyFindings.map((finding, index) => (
+                                <li key={index} className="flex items-start gap-4 group">
+                                    <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-orange-500 group-hover:scale-150 transition-transform duration-300 flex-shrink-0" />
+                                    <span className="text-neutral-700 leading-relaxed group-hover:text-neutral-900 transition-colors">
+                                        {finding}
+                                    </span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
+
+                {/* Sidebar Column (Data & Actions) */}
+                <div className="bg-neutral-50/50 p-6 sm:p-10 flex flex-col h-full">
+                    <div className="bg-white rounded-2xl p-6 h-full flex flex-col justify-center items-center shadow-sm border border-neutral-100">
+                        {renderChart()}
+                    </div>
+
+                    <div className="mt-auto">
+                        {study.sources ? (
+                            <div className="space-y-3">
+                                <h4 className="text-sm font-bold text-neutral-400 uppercase tracking-wider mb-2">
+                                    References
+                                </h4>
+                                {study.sources.map((source, index) => (
+                                    <a
+                                        key={index}
+                                        href={source.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="flex items-center justify-between w-full bg-white border border-neutral-200 hover:border-orange-300 hover:bg-orange-50 text-neutral-700 text-sm font-medium py-3 px-4 rounded-lg transition-all duration-200 group"
+                                    >
+                                        <span className="truncate mr-2">{source.citation}</span>
+                                        <ExternalLink size={14} className="text-neutral-400 group-hover:text-orange-500 flex-shrink-0" />
+                                    </a>
+                                ))}
+                            </div>
+                        ) : (
+                            <>
+                                <a
+                                    href={study.doi}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center justify-center gap-2 w-full bg-neutral-900 hover:bg-neutral-800 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-200 group"
+                                >
+                                    Read Full Study
+                                    <ExternalLink size={18} className="group-hover:translate-x-1 transition-transform" />
+                                </a>
+                                <p className="text-center text-xs text-neutral-400 mt-4">
+                                    Published in {study.journal}, {study.year}
+                                </p>
+                            </>
+                        )}
+                    </div>
+
+                    {/* Share Buttons */}
+                    <div className="mt-6 pt-6 border-t border-neutral-200">
+                        <p className="text-xs font-bold text-neutral-400 uppercase tracking-wider mb-3 text-center">
+                            Share Research
+                        </p>
+                        <div className="flex items-center justify-center gap-4">
+                            <button
+                                onClick={() => {
+                                    window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(finalShareUrl)}`, '_blank');
+                                }}
+                                className="p-2 rounded-full bg-neutral-100 text-neutral-500 hover:bg-[#0077b5] hover:text-white transition-all duration-200"
+                                aria-label="Share on LinkedIn"
+                            >
+                                <Linkedin size={18} />
+                            </button>
+                            <button
+                                onClick={() => {
+                                    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(study.title)}&url=${encodeURIComponent(finalShareUrl)}`, '_blank');
+                                }}
+                                className="p-2 rounded-full bg-neutral-100 text-neutral-500 hover:bg-black hover:text-white transition-all duration-200"
+                                aria-label="Share on X"
+                            >
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                                    <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" />
+                                </svg>
+                            </button>
+                            <button
+                                onClick={() => {
+                                    window.location.href = `mailto:?subject=${encodeURIComponent(study.title)}&body=${encodeURIComponent(`Check out this research: ${study.title}\n\n${finalShareUrl}`)}`;
+                                }}
+                                className="p-2 rounded-full bg-neutral-100 text-neutral-500 hover:bg-[#EA4335] hover:text-white transition-all duration-200"
+                                aria-label="Share via Email"
+                            >
+                                <Mail size={18} />
+                            </button>
+                            <button
+                                onClick={handleCopyLink}
+                                className={`p-2 rounded-full transition-all duration-200 ${copied
+                                        ? 'bg-green-100 text-green-600'
+                                        : 'bg-neutral-100 text-neutral-500 hover:bg-neutral-200 hover:text-neutral-700'
+                                    }`}
+                                aria-label="Copy Link"
+                            >
+                                {copied ? <Check size={18} /> : <LinkIcon size={18} />}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </>
+    );
+}

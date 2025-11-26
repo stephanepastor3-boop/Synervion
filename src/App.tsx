@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { HomePage } from './pages/HomePage';
+import { StudyPage } from './pages/StudyPage';
 import CalculatorPage from './pages/CalculatorPage';
 import { ArticleTemplate } from './components/ArticleTemplate';
 import { articles } from './data/articles';
@@ -13,6 +14,7 @@ export default function App() {
         <ScrollToHashElement />
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/study/:id" element={<StudyPage />} />
           <Route path="/calculator/cordyceps-goal-planner" element={<CalculatorPage />} />
           {articles.map((article) => (
             <Route

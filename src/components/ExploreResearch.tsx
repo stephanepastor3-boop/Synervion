@@ -13,25 +13,19 @@ import researchAntioxidant from '../assets/images/research-antioxidant.png';
 import researchNutrition from '../assets/images/research-nutrition.png';
 import researchBiotech from '../assets/images/research-biotech.png';
 
-interface Study {
-  id: number;
-  title: string;
-  journal: string;
-  year: string;
-  summary: string;
-  icon: string;
-  category: string;
-  doi: string;
-  keyFindings: string[];
-  chartType: 'bar' | 'pathway' | 'dual' | 'line' | 'comparison';
-  chartData?: any[];
-  chartConfig?: any;
-  imageUrl: string;
-  relevance: string;
-  sources?: { citation: string; url: string }[];
-}
+// New Images
+import researchComparison from '../assets/images/research-cordyceps-comparison.png';
+import researchAntiFatigue from '../assets/images/research-anti-fatigue.png';
+import researchIoT from '../assets/images/research-iot-fermentation.png';
+import researchHighStrain from '../assets/images/research-high-strain-dna.png';
+import researchEpigenetics from '../assets/images/research-epigenetics.png';
+import researchQuality from '../assets/images/research-quality-control.png';
+import researchSustainable from '../assets/images/research-sustainable-production.png';
 
-const studies: Study[] = [
+
+import { Study } from '../types';
+
+export const studies: Study[] = [
   {
     id: 17,
     title: 'Cordyceps militaris: A Superior, Cultivated Alternative',
@@ -58,7 +52,7 @@ const studies: Study[] = [
       naturalColor: '#94A3B8',
       cultivatedColor: '#E58B00'
     },
-    imageUrl: researchBiotech,
+    imageUrl: researchComparison,
     relevance: "O. sinensis is scarce, costly, and its natural population is decreasing due to over-collection. This research confirms that cultivated C. militaris, which can be easily produced on a large scale, is not merely a viable substitute, but potentially a chemically superior source for key medicinal compounds. This ensures a sustainable supply of high-potency product."
   },
   {
@@ -129,7 +123,7 @@ const studies: Study[] = [
     relevance: "Recovery is just as important as training. By boosting your body's natural antioxidant enzymes (SOD and GSH-Px), Cordyceps helps neutralize the oxidative stress caused by intense physical activity, potentially speeding up recovery and reducing muscle fatigue."
   },
   {
-    id: 4,
+    id: 18,
     title: 'Anti-fatigue Property of Cereal Grains Mixed with C. militaris',
     journal: 'J. Int. Soc. Sports Nutrition',
     year: '2016',
@@ -145,11 +139,11 @@ const studies: Study[] = [
       'Synergistic effect with cereal grains'
     ],
     chartType: 'line',
-    imageUrl: researchNutrition,
+    imageUrl: researchAntiFatigue,
     relevance: "This study highlights the synergistic power of combining Cordyceps with whole grains. It's not just about the mushroom; it's about how it integrates with your diet to optimize glucose metabolism and keep your energy levels stable during prolonged exertion."
   },
   {
-    id: 5,
+    id: 19,
     title: 'IoT-Driven Fermentation System for Enhanced Cordycepin Production',
     journal: 'Int. J. Med. Mushrooms',
     year: '2025',
@@ -173,12 +167,12 @@ const studies: Study[] = [
       yAxisLabel: 'Cordycepin Yield (g/L)',
       barColor: '#E58B00'
     },
-    imageUrl: researchBiotech,
+    imageUrl: researchIoT,
     relevance: "This technology represents a significant leap forward in the cultivation of medicinal fungi. By using IoT to precisely control oxygen levels (hypoxia), we can achieve a 7-fold increase in cordycepin yield compared to traditional methods, ensuring a highly potent and scalable product."
   },
 
   {
-    id: 7,
+    id: 20,
     title: 'Development of High Cordycepin-Producing Cordyceps militaris Strains',
     journal: 'Mycobiology',
     year: '2017',
@@ -194,11 +188,11 @@ const studies: Study[] = [
       'Commercial viability'
     ],
     chartType: 'bar',
-    imageUrl: researchAntioxidant,
+    imageUrl: researchHighStrain,
     relevance: "Not all mushrooms are created equal. This study highlights the importance of genetic selection. By breeding specific high-yield strains, we can deliver a product with therapeutic potency far exceeding generic market standards."
   },
   {
-    id: 8,
+    id: 21,
     title: 'Enhancement of Cordycepin Production by Epigenetic Modification',
     journal: 'Biotechnol. Lett.',
     year: '2022',
@@ -214,11 +208,11 @@ const studies: Study[] = [
       'Non-GMO yield improvement'
     ],
     chartType: 'pathway',
-    imageUrl: researchAntioxidant,
+    imageUrl: researchEpigenetics,
     relevance: "Unlocking the hidden potential of fungal DNA without genetic modification. This research shows how subtle environmental tweaks can 'switch on' the genes responsible for producing cordycepin, maximizing the mushroom's natural medicinal power."
   },
   {
-    id: 9,
+    id: 22,
     title: 'Characterization of Newly Bred Cordyceps militaris Strains',
     journal: 'J. Microbiol. Biotechnol.',
     year: '2017',
@@ -234,11 +228,11 @@ const studies: Study[] = [
       'Quality assurance metrics'
     ],
     chartType: 'bar',
-    imageUrl: researchEnergy,
+    imageUrl: researchQuality,
     relevance: "Rigorous testing ensures quality. Using advanced HPLC and PCR analysis allows us to verify the exact chemical profile of our strains, guaranteeing that you get a standardized, effective dose of cordycepin every time."
   },
   {
-    id: 10,
+    id: 23,
     title: 'High-Level Production of Cordycepin by Xylose-Utilizing Strain',
     journal: 'Bioresource Tech.',
     year: '2023',
@@ -254,7 +248,7 @@ const studies: Study[] = [
       'Cost-effective production'
     ],
     chartType: 'bar',
-    imageUrl: researchNutrition,
+    imageUrl: researchSustainable,
     relevance: "Sustainability meets potency. This study demonstrates how Cordyceps can efficiently convert plant sugars (xylose) into valuable cordycepin, paving the way for eco-friendly production methods that don't compromise on quality."
   },
   {
@@ -376,10 +370,118 @@ const studies: Study[] = [
     chartType: 'pathway',
     imageUrl: researchEnergy,
     relevance: "Mapping the road less traveled. Identifying alternative metabolic pathways gives us more options to steer the mushroom's metabolism towards producing cordycepin, ensuring high yields even under varying conditions."
+  },
+  {
+    id: 18,
+    title: 'Psilocybin Mushrooms Extend Cellular Lifespan',
+    journal: 'NPJ Aging',
+    year: '2025',
+    summary: 'A landmark study reveals that psilocybin and its metabolite psilocin extended cellular lifespan by 57% and improved markers of healthy aging in mice.',
+    icon: '🍄',
+    category: 'Longevity Science',
+    doi: 'https://www.nature.com/articles/s41514-025-00244-x',
+    keyFindings: [
+      'Psilocybin/psilocin slow cellular senescence',
+      'Maintained telomeres (DNA caps of youth)',
+      'Younger organ and skin phenotypes in treated animals',
+      'Upregulated longevity protein SIRT1',
+      'Reduced oxidative damage'
+    ],
+    chartType: 'bar',
+    chartData: [
+      { name: 'Control', value: 100, label: 'Baseline' },
+      { name: 'Psilocybin', value: 157, label: '+57%' }
+    ],
+    chartConfig: {
+      yAxisLabel: 'Cellular Lifespan (%)',
+      barColor: '#E58B00'
+    },
+    imageUrl: researchBiotech,
+    relevance: "We’re witnessing the dawn of biohacking through nature. The implications are huge: new classes of nutraceuticals, therapies for age-related diseases, or even next-gen personalized longevity protocols could soon be built on the humble mushroom."
+  },
+  {
+    id: 19,
+    title: 'Golden Oyster Mushrooms May Protect Aging Brains',
+    journal: 'Frontiers in Aging Neuroscience',
+    year: '2025',
+    summary: 'A randomized trial tracking nearly 600 adults found that daily Golden Oyster mushroom powder, rich in ergothioneine, may slow cognitive decline.',
+    icon: '🧠',
+    category: 'Cognitive Health',
+    doi: 'https://www.frontiersin.org/journals/aging-neuroscience/articles/10.3389/fnagi.2025.1588493/full',
+    keyFindings: [
+      'Rich natural source of ergothioneine ("longevity vitamin")',
+      'Potential to slow cognitive decline',
+      'Reduced Alzheimer’s risk',
+      'Reversed inflammatory gene expression',
+      'Linked to "epigenetic age" markers'
+    ],
+    chartType: 'bar',
+    imageUrl: researchNutrition,
+    relevance: "This is nutrition at the cutting-edge. Imagine a simple food that could become part of global guidelines for dementia prevention, healthy aging, and brain wellness for millions."
+  },
+  {
+    id: 20,
+    title: 'Mushrooms on the Cancer Front',
+    journal: 'PubMed Central',
+    year: '2025',
+    summary: 'A deep-dive review showcases how mushrooms like reishi and oyster produce molecules that naturally boost the immune system to recognize and destroy cancer cells.',
+    icon: '🛡️',
+    category: 'Immune Oncology',
+    doi: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC12256995/',
+    keyFindings: [
+      'Beta-glucans amplify immune tumor response',
+      'Synergy with chemo/radiotherapy',
+      'Reduced side effects of conventional therapies',
+      'Modulate tumor biology and inflammation',
+      'Potential as adjuvant therapies'
+    ],
+    chartType: 'bar',
+    imageUrl: researchAntioxidant,
+    relevance: "This is redefining “food as medicine.” With mushroom-derived molecules already showing tumor-shrinking and immune-activating properties, we’re approaching a world where functional foods are part of the survival toolkit."
+  },
+  {
+    id: 21,
+    title: 'Edible Mushrooms: Health Meets Sustainability',
+    journal: 'Science of the Total Environment',
+    year: '2025',
+    summary: 'Research highlights edible mushrooms for their nutrient profile and role in a sustainable food supply, growing on waste with a tiny footprint.',
+    icon: '🌍',
+    category: 'Sustainability',
+    doi: 'https://www.sciencedirect.com/science/article/abs/pii/S0048969725017334',
+    keyFindings: [
+      'Rich in antioxidants and essential minerals',
+      'Grows on agricultural waste',
+      'Tiny environmental footprint',
+      'Addresses health disparities',
+      'Supports food security'
+    ],
+    chartType: 'bar',
+    imageUrl: researchBiotech,
+    relevance: "Your next meal could help save the planet. Mushrooms are the rare “dual-action” food: good for you, good for the Earth, offering nutrition and eco-impact."
+  },
+  {
+    id: 22,
+    title: 'Medicinal Mushrooms in Beverages and Supplements',
+    journal: 'PubMed Central',
+    year: '2025',
+    summary: 'A review reveals the explosive growth of medicinal mushrooms in functional foods and maps the science supporting their use for immune and metabolic health.',
+    icon: '🥤',
+    category: 'Functional Foods',
+    doi: 'https://pubmed.ncbi.nlm.nih.gov/40909340/',
+    keyFindings: [
+      'Explosive growth in beverages and supplements',
+      'Validated science for immune/metabolic effects',
+      'Mainstream wellness ingredients',
+      'Innovation in product formats',
+      'Strong consumer and biotech interest'
+    ],
+    chartType: 'bar',
+    imageUrl: researchEnergy,
+    relevance: "Functional mushrooms aren’t niche any longer. The data is broad and deep, driving their global growth as core wellness ingredients and biotech R&D darlings."
   }
 ];
 
-const categories = ['All Studies', 'Comparative Analysis', 'Endurance Performance', 'Energy Metabolism', 'Antioxidant Defense', 'Sports Nutrition'];
+const categories = ['All Studies', 'Comparative Analysis', 'Endurance Performance', 'Energy Metabolism', 'Antioxidant Defense', 'Sports Nutrition', 'Longevity Science', 'Cognitive Health', 'Immune Oncology', 'Sustainability', 'Functional Foods'];
 
 export function ExploreResearch() {
   const [selectedCategory, setSelectedCategory] = useState('All Studies');
