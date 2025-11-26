@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Linkedin, Mail } from 'lucide-react';
 
 interface ResearchCardProps {
   title: string;
@@ -144,6 +144,54 @@ export function ResearchCard({
           Read Analysis
           <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
         </button>
+
+        {/* Share Buttons */}
+        <div className="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between">
+          <span
+            style={{
+              fontFamily: 'var(--synervion-font-body)',
+              fontSize: '12px',
+              color: '#999',
+              fontWeight: 500
+            }}
+          >
+            Share:
+          </span>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(window.location.href)}`, '_blank');
+              }}
+              className="text-gray-400 hover:text-[#0077b5] transition-colors duration-200"
+              aria-label="Share on LinkedIn"
+            >
+              <Linkedin size={16} />
+            </button>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(window.location.href)}`, '_blank');
+              }}
+              className="text-gray-400 hover:text-black transition-colors duration-200"
+              aria-label="Share on X"
+            >
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" />
+              </svg>
+            </button>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                window.location.href = `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(`Check out this research: ${title}\n\n${window.location.href}`)}`;
+              }}
+              className="text-gray-400 hover:text-[#EA4335] transition-colors duration-200"
+              aria-label="Share via Email"
+            >
+              <Mail size={16} />
+            </button>
+          </div>
+        </div>
       </div>
     </motion.div>
   );

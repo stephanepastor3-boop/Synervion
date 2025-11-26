@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'motion/react';
-import { X, ExternalLink, Quote } from 'lucide-react';
+import { X, ExternalLink, Quote, Linkedin, Mail } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, ComposedChart, Legend } from 'recharts';
 import imageCellularOptimization from '../../assets/images/image-CellularOptimization.png';
 
@@ -411,6 +411,38 @@ export function StudyModal({ study, isOpen, onClose }: StudyModalProps) {
                       </p>
                     </>
                   )}
+                </div>
+
+                {/* Share Buttons */}
+                <div className="mt-6 pt-6 border-t border-neutral-200">
+                  <p className="text-xs font-bold text-neutral-400 uppercase tracking-wider mb-3 text-center">
+                    Share Research
+                  </p>
+                  <div className="flex items-center justify-center gap-4">
+                    <button
+                      onClick={() => window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(window.location.href)}`, '_blank')}
+                      className="p-2 rounded-full bg-neutral-100 text-neutral-500 hover:bg-[#0077b5] hover:text-white transition-all duration-200"
+                      aria-label="Share on LinkedIn"
+                    >
+                      <Linkedin size={18} />
+                    </button>
+                    <button
+                      onClick={() => window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(study.title)}&url=${encodeURIComponent(window.location.href)}`, '_blank')}
+                      className="p-2 rounded-full bg-neutral-100 text-neutral-500 hover:bg-black hover:text-white transition-all duration-200"
+                      aria-label="Share on X"
+                    >
+                      <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                        <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" />
+                      </svg>
+                    </button>
+                    <button
+                      onClick={() => window.location.href = `mailto:?subject=${encodeURIComponent(study.title)}&body=${encodeURIComponent(`Check out this research: ${study.title}\n\n${window.location.href}`)}`}
+                      className="p-2 rounded-full bg-neutral-100 text-neutral-500 hover:bg-[#EA4335] hover:text-white transition-all duration-200"
+                      aria-label="Share via Email"
+                    >
+                      <Mail size={18} />
+                    </button>
+                  </div>
                 </div>
               </div>
 
