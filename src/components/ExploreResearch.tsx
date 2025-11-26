@@ -118,10 +118,6 @@ export function ExploreResearch() {
           className="text-center mb-10 sm:mb-12 lg:mb-16 transition-opacity duration-500"
           style={{ opacity: headerAnimation.isVisible ? 1 : 0 }}
         >
-          <BrandBadge variant="primary" className="mb-4 sm:mb-6">
-            Research & Testing
-          </BrandBadge>
-
           <h2
             className="mb-4 sm:mb-6 text-[28px] sm:text-[40px] lg:text-[48px] px-4"
             style={{
@@ -134,6 +130,10 @@ export function ExploreResearch() {
           >
             <span style={{ color: 'hsl(var(--synervion-primary-500))' }}>Peer-Reviewed</span> Research
           </h2>
+
+          <BrandBadge variant="primary" className="mb-4 sm:mb-6">
+            Research & Testing
+          </BrandBadge>
 
           <p
             className="max-w-3xl mx-auto text-base lg:text-lg px-4"

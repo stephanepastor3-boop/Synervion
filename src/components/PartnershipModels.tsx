@@ -1,7 +1,6 @@
 import { BrandCard } from './brand/BrandCard';
 import { BrandBadge } from './brand/BrandBadge';
-import { BrandButton } from './brand/BrandButton';
-import { Package, Sparkles, Beaker, ArrowRight, Globe, CheckCircle2 } from 'lucide-react';
+import { Package, Sparkles, Beaker, Globe, CheckCircle2 } from 'lucide-react';
 import productAll from '../assets/images/products-all1.png';
 import productDrops from '../assets/images/product-drops1.png';
 import productEnergyBar from '../assets/images/product-energybar1.png';
@@ -232,29 +231,7 @@ export function PartnershipModels() {
         </div>
 
 
-        {/* CTA Section */}
-        <div className="text-center">
-          <h3 className="mb-4 text-xl sm:text-2xl font-heading font-semibold text-foreground">
-            Ready to Partner?
-          </h3>
-          <p className="mb-6 sm:mb-8 max-w-2xl mx-auto text-base font-body font-normal leading-relaxed text-muted-foreground">
-            Schedule a consultation to discuss which partnership model is right for your brand.
-          </p>
-          <BrandButton
-            size="lg"
-            variant="primary"
-            className="group"
-            onClick={() => {
-              const contactSection = document.querySelector('#contact');
-              if (contactSection) {
-                contactSection.scrollIntoView({ behavior: 'smooth' });
-              }
-            }}
-          >
-            Schedule Consultation
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </BrandButton>
-        </div>
+
       </div>
     </section>
   );
