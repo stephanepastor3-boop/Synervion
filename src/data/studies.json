@@ -35,7 +35,7 @@
             "naturalColor": "#94A3B8",
             "cultivatedColor": "#E58B00"
         },
-        "imageUrl": "/images/research/research-cordyceps-comparison.png",
+        "imageUrl": "/images/research/research-cordyceps-comparison.jpg",
         "relevance": "O. sinensis is scarce, costly, and its natural population is decreasing due to over-collection. This research confirms that cultivated C. militaris, which can be easily produced on a large scale, is not merely a viable substitute, but potentially a chemically superior source for key medicinal compounds. This ensures a sustainable supply of high-potency product."
     },
     {
@@ -55,7 +55,7 @@
             "Dosage: 4g/day Cordyceps militaris"
         ],
         "chartType": "bar",
-        "imageUrl": "/images/research/research-endurance.png",
+        "imageUrl": "/images/research/research-endurance.jpg",
         "relevance": "For athletes and fitness enthusiasts, this means you can push harder for longer. A 10.9% increase in VO2max is significant—comparable to months of dedicated training. This study confirms Cordyceps as a potent tool for breaking through performance plateaus."
     },
     {
@@ -75,7 +75,7 @@
             "Central energy metabolites (AMP, ADP, ATP) are regulated"
         ],
         "chartType": "pathway",
-        "imageUrl": "/images/research/research-energy.png",
+        "imageUrl": "/images/research/research-energy.jpg",
         "relevance": "Activating the AMPK pathway and promoting mitochondrial efficiency translates directly to improved energy use and systemic metabolic health. It's not just about a temporary boost; it's about optimizing your body's fuel efficiency at a cellular level.",
         "sources": [
             {
@@ -117,7 +117,7 @@
             "Enhanced antioxidant defense system"
         ],
         "chartType": "dual",
-        "imageUrl": "/images/research/research-antioxidant.png",
+        "imageUrl": "/images/research/research-antioxidant.jpg",
         "relevance": "Recovery is just as important as training. By boosting your body's natural antioxidant enzymes (SOD and GSH-Px), Cordyceps helps neutralize the oxidative stress caused by intense physical activity, potentially speeding up recovery and reducing muscle fatigue."
     },
     {
@@ -137,7 +137,7 @@
             "Synergistic effect with cereal grains"
         ],
         "chartType": "line",
-        "imageUrl": "/images/research/research-anti-fatigue.png",
+        "imageUrl": "/images/research/research-anti-fatigue.jpg",
         "relevance": "This study highlights the synergistic power of combining Cordyceps with whole grains. It's not just about the mushroom; it's about how it integrates with your diet to optimize glucose metabolism and keep your energy levels stable during prolonged exertion."
     },
     {
@@ -173,7 +173,7 @@
             "yAxisLabel": "Cordycepin Yield (g/L)",
             "barColor": "#E58B00"
         },
-        "imageUrl": "/images/research/research-iot-fermentation.png",
+        "imageUrl": "/images/research/research-iot-fermentation.jpg",
         "relevance": "This technology represents a significant leap forward in the cultivation of medicinal fungi. By using IoT to precisely control oxygen levels (hypoxia), we can achieve a 7-fold increase in cordycepin yield compared to traditional methods, ensuring a highly potent and scalable product."
     },
     {
@@ -193,7 +193,7 @@
             "Commercial viability"
         ],
         "chartType": "bar",
-        "imageUrl": "/images/research/research-high-strain-dna.png",
+        "imageUrl": "/images/research/research-high-strain-dna.jpg",
         "relevance": "Not all mushrooms are created equal. This study highlights the importance of genetic selection. By breeding specific high-yield strains, we can deliver a product with therapeutic potency far exceeding generic market standards."
     },
     {
@@ -213,7 +213,7 @@
             "Non-GMO yield improvement"
         ],
         "chartType": "pathway",
-        "imageUrl": "/images/research/research-epigenetics.png",
+        "imageUrl": "/images/research/research-epigenetics.jpg",
         "relevance": "Unlocking the hidden potential of fungal DNA without genetic modification. This research shows how subtle environmental tweaks can 'switch on' the genes responsible for producing cordycepin, maximizing the mushroom's natural medicinal power."
     },
     {
@@ -233,7 +233,7 @@
             "Quality assurance metrics"
         ],
         "chartType": "bar",
-        "imageUrl": "/images/research/research-quality-control.png",
+        "imageUrl": "/images/research/research-quality-control.jpg",
         "relevance": "Rigorous testing ensures quality. Using advanced HPLC and PCR analysis allows us to verify the exact chemical profile of our strains, guaranteeing that you get a standardized, effective dose of cordycepin every time."
     },
     {
@@ -253,7 +253,7 @@
             "Cost-effective production"
         ],
         "chartType": "bar",
-        "imageUrl": "/images/research/research-sustainable-production.png",
+        "imageUrl": "/images/research/research-sustainable-production.jpg",
         "relevance": "Sustainability meets potency. This study demonstrates how Cordyceps can efficiently convert plant sugars (xylose) into valuable cordycepin, paving the way for eco-friendly production methods that don't compromise on quality."
     }
 ]

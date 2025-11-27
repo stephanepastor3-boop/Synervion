@@ -1,11 +1,11 @@
 import { BrandCard } from './brand/BrandCard';
 import { BrandBadge } from './brand/BrandBadge';
 import { Package, Sparkles, Beaker, Globe, CheckCircle2 } from 'lucide-react';
-import productAll from '../assets/images/products-all1.png';
-import productDrops from '../assets/images/product-drops1.png';
-import productEnergyBar from '../assets/images/product-energybar1.png';
-import productPills from '../assets/images/product-pills1.png';
-import labRevaFlora from '../assets/images/Lab-RevaFlora1.1.jpg';
+import productAll from '../assets/images/products-all1.jpg';
+import productDrops from '../assets/images/product-drops1.jpg';
+import productEnergyBar from '../assets/images/product-energybar1.jpg';
+import productPills from '../assets/images/product-pills1.jpg';
+import labRevaFlora from '../assets/images/Lab-RevaFlora1.1-opt.jpg';
 import { useScrollAnimation } from './ui/use-scroll-animation';
 import { cn } from './ui/utils';
 
@@ -150,6 +150,9 @@ export function PartnershipModels() {
                     src={item.img}
                     alt={item.label}
                     className="w-full h-full object-contain p-6 group-hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
+                    width="400"
+                    height="400"
                   />
                 </div>
                 <p className="text-base font-semibold font-heading text-foreground">{item.label}</p>
@@ -209,6 +212,9 @@ export function PartnershipModels() {
                 src={labRevaFlora}
                 alt="Synervion Lab-RevaFlora facility - Advanced research and cultivation center"
                 className="w-full h-auto"
+                loading="lazy"
+                width="1200"
+                height="800"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
 

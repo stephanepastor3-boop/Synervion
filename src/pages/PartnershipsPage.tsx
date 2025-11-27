@@ -11,7 +11,7 @@ import {
   Package, Sparkles, Beaker, ArrowRight,
   TrendingUp, Clock, Shield, Leaf
 } from 'lucide-react';
-import productMockups from '../assets/images/product-lineup.png';
+import productMockups from '../assets/images/product-lineup.jpg';
 
 export function PartnershipsPage() {
   const [formData, setFormData] = useState({
@@ -219,6 +219,9 @@ export function PartnershipsPage() {
                 src={productMockups}
                 alt="Synervion product format options - energy bars, liquid drops, bottles, pouches"
                 className="w-full h-auto"
+                loading="lazy"
+                width="1200"
+                height="800"
               />
             </div>
           </motion.div>

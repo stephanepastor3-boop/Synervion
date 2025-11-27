@@ -1,6 +1,6 @@
 import { BrandBadge } from './brand/BrandBadge';
 import { CheckCircle2, Microscope, Leaf, TrendingUp, Award } from 'lucide-react';
-import technicianImage from '../assets/images/Technician-RevaFlora1.png';
+import technicianImage from '../assets/images/Technician-RevaFlora1.jpg';
 import { useScrollAnimation } from './ui/use-scroll-animation';
 import { cn } from './ui/utils';
 
@@ -113,6 +113,9 @@ export function LabGrownAdvantage() {
                   src={technicianImage}
                   alt="Synervion lab technician working with Cordyceps culture samples"
                   className="w-full h-full object-cover rounded-2xl shadow-xl"
+                  loading="lazy"
+                  width="800"
+                  height="800"
                 />
               </div>
             </div>

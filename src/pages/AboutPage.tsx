@@ -2,12 +2,9 @@ import { motion } from 'motion/react';
 import { BrandCard } from '../components/brand/BrandCard';
 import { BrandBadge } from '../components/brand/BrandBadge';
 import { BrandButton } from '../components/brand/BrandButton';
-import {
-  Award, CheckCircle2, Leaf, Users,
-  Target, TrendingUp, Globe, Shield
-} from 'lucide-react';
-import teamLabImage from '../assets/images/Technician-RevaFlora1.png';
-import revaFloraFacility from '../assets/images/lab-grown-advantage.png';
+import { CheckCircle2, Users, Globe, Award, Leaf, Target, Shield, TrendingUp } from 'lucide-react';
+import technicianImage from '../assets/images/Technician-RevaFlora1.jpg';
+import labFacilityImage from '../assets/images/lab-grown-advantage.jpg';
 
 export function AboutPage() {
   const certifications = [
@@ -94,9 +91,12 @@ export function AboutPage() {
             >
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                 <img
-                  src={teamLabImage}
+                  src={technicianImage}
                   alt="Synervion team in lab with Cordyceps culture samples - 6 team members"
                   className="w-full h-auto"
+                  loading="lazy"
+                  width="800"
+                  height="600"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
               </div>
@@ -235,9 +235,12 @@ export function AboutPage() {
             >
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                 <img
-                  src={revaFloraFacility}
+                  src={labFacilityImage}
                   alt="Reva Flora Culture - Synervion partner facility"
                   className="w-full h-auto"
+                  loading="lazy"
+                  width="800"
+                  height="600"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
 

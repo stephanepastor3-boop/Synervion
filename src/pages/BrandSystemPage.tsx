@@ -9,13 +9,13 @@ import {
   Check, Grid3x3, Type, Palette, Box
 } from 'lucide-react';
 import { useState } from 'react';
-import cordycepsImage from '../assets/images/hero-cordyceps-macro.png';
-import teamLabImage from '../assets/images/Technician-RevaFlora1.png';
-import revaFloraFacility from '../assets/images/lab-grown-advantage.png';
-import labCultureImage from '../assets/images/Lab-RevaFlora1.1.jpg';
-import productLineup from '../assets/images/product-lineup.png';
-import whiteLabelPackaging from '../assets/images/vision-bg.png';
-import productMockups from '../assets/images/product-lineup.png';
+import cordycepsImage from '../assets/images/hero-cordyceps-macro.jpg';
+import teamLabImage from '../assets/images/Technician-RevaFlora1.jpg';
+import revaFloraFacility from '../assets/images/lab-grown-advantage.jpg';
+import labCultureImage from '../assets/images/Lab-RevaFlora1.1-opt.jpg';
+import productLineup from '../assets/images/product-lineup.jpg';
+import whiteLabelPackaging from '../assets/images/vision-bg.jpg';
+import productMockups from '../assets/images/product-lineup.jpg';
 
 interface BrandSystemPageProps {
   onNavigate?: (page: string) => void;
