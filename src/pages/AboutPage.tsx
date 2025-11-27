@@ -6,7 +6,7 @@ import {
   Award, CheckCircle2, Leaf, Users,
   Target, TrendingUp, Globe, Shield
 } from 'lucide-react';
-import teamLabImage from '../assets/images/mission-bg.png';
+import teamLabImage from '../assets/images/Technician-RevaFlora1.png';
 import revaFloraFacility from '../assets/images/lab-grown-advantage.png';
 
 export function AboutPage() {

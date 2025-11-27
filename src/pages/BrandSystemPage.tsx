@@ -10,12 +10,12 @@ import {
 } from 'lucide-react';
 import { useState } from 'react';
 import cordycepsImage from '../assets/images/hero-cordyceps-macro.png';
-import teamLabImage from '../assets/images/mission-bg.png';
+import teamLabImage from '../assets/images/Technician-RevaFlora1.png';
 import revaFloraFacility from '../assets/images/lab-grown-advantage.png';
-import labCultureImage from '../assets/images/partnership-bg.png';
+import labCultureImage from '../assets/images/Lab-RevaFlora1.1.jpg';
 import productLineup from '../assets/images/product-lineup.png';
 import whiteLabelPackaging from '../assets/images/vision-bg.png';
-import productMockups from '../assets/images/research-bg.png';
+import productMockups from '../assets/images/product-lineup.png';
 
 interface BrandSystemPageProps {
   onNavigate?: (page: string) => void;

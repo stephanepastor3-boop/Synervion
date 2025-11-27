@@ -11,7 +11,7 @@ import {
   Package, Sparkles, Beaker, ArrowRight,
   TrendingUp, Clock, Shield, Leaf
 } from 'lucide-react';
-import productMockups from '../assets/images/research-bg.png';
+import productMockups from '../assets/images/product-lineup.png';
 
 export function PartnershipsPage() {
   const [formData, setFormData] = useState({
