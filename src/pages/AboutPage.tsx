@@ -5,6 +5,9 @@ import { BrandButton } from '../components/brand/BrandButton';
 import { CheckCircle2, Users, Globe, Award, Leaf, Target, Shield, TrendingUp } from 'lucide-react';
 import technicianImage from '../assets/images/Technician-RevaFlora1.jpg';
 import labFacilityImage from '../assets/images/lab-grown-advantage.jpg';
+import { SEO } from '../components/SEO';
+import { Navigation } from '../components/Navigation';
+import { Footer } from '../components/Footer';
 
 export function AboutPage() {
   const certifications = [
@@ -46,6 +49,12 @@ export function AboutPage() {
 
   return (
     <div className="min-h-screen bg-white">
+      <SEO
+        title="About Synervion | Pioneering Lab-Grown Cordyceps"
+        description="Founded in 2019, Synervion leads the industry in sustainable, lab-grown Cordyceps militaris. Learn about our mission, values, and partnership with Reva Flora."
+        canonical="/about"
+      />
+      <Navigation />
       {/* Hero Section */}
       <section className="pt-24 sm:pt-28 lg:pt-32 pb-12 sm:pb-16 lg:pb-20 bg-gradient-to-br from-white via-[hsl(var(--synervion-bg-gray-50))] to-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-5">
@@ -394,6 +403,7 @@ export function AboutPage() {
           </motion.div>
         </div>
       </section>
+      <Footer />
     </div>
   );
 }

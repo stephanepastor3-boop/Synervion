@@ -8,6 +8,9 @@ import {
   Mail, Phone, MapPin, Clock, MessageCircle,
   ArrowRight, Send, Users
 } from 'lucide-react';
+import { SEO } from '../components/SEO';
+import { Navigation } from '../components/Navigation';
+import { Footer } from '../components/Footer';
 
 export function ContactPage() {
   const contactMethods = [
@@ -107,6 +110,12 @@ export function ContactPage() {
 
   return (
     <div className="min-h-screen bg-white">
+      <SEO
+        title="Contact Synervion | Partner with Us"
+        description="Get in touch with Synervion for partnership inquiries, product samples, or to schedule a facility tour. We respond within 24 hours."
+        canonical="/contact"
+      />
+      <Navigation />
       {/* Hero Section */}
       <section className="pt-24 sm:pt-28 lg:pt-32 pb-12 sm:pb-16 lg:pb-20 bg-gradient-to-br from-white via-[hsl(var(--synervion-bg-gray-50))] to-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-5">
@@ -478,6 +487,7 @@ export function ContactPage() {
           </div>
         </div>
       </section>
+      <Footer />
     </div>
   );
 }

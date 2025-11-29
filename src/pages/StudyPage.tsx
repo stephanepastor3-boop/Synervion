@@ -3,6 +3,7 @@ import { ArrowLeft } from 'lucide-react';
 import { studies } from '../components/ExploreResearch';
 import { StudyDetails } from '../components/research/StudyDetails';
 import { Navigation } from '../components/Navigation';
+import { SEO } from '../components/SEO';
 
 export function StudyPage() {
     const { id } = useParams();
@@ -11,6 +12,7 @@ export function StudyPage() {
     if (!study) {
         return (
             <div className="min-h-screen bg-neutral-50 flex flex-col items-center justify-center p-4">
+                <SEO title="Study Not Found | Synervion" canonical="/study" />
                 <h1 className="text-2xl font-bold text-neutral-900 mb-4">Study Not Found</h1>
                 <Link
                     to="/"
@@ -25,6 +27,11 @@ export function StudyPage() {
 
     return (
         <div className="min-h-screen bg-neutral-50">
+            <SEO
+                title={`${study.title} | Synervion Research`}
+                description={study.summary || "Read the full study details."}
+                canonical={`/study/${study.id}`}
+            />
             <Navigation />
             <div className="pt-24 pb-12 px-4 max-w-7xl mx-auto">
                 <Link

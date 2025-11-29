@@ -1,4 +1,36 @@
 {
+    "redirects": [
+        {
+            "source": "/index.php",
+            "destination": "/",
+            "permanent": true
+        },
+        {
+            "source": "/aboutus.php",
+            "destination": "/about",
+            "permanent": true
+        },
+        {
+            "source": "/contactus.php",
+            "destination": "/contact",
+            "permanent": true
+        },
+        {
+            "source": "/lab.php",
+            "destination": "/about",
+            "permanent": true
+        },
+        {
+            "source": "/privacy-policy.php",
+            "destination": "/",
+            "permanent": true
+        },
+        {
+            "source": "/terms.php",
+            "destination": "/",
+            "permanent": true
+        }
+    ],
     "headers": [
         {
             "source": "/api/(.*)",

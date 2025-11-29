@@ -12,6 +12,9 @@ import {
   TrendingUp, Clock, Shield, Leaf
 } from 'lucide-react';
 import productMockups from '../assets/images/product-lineup.jpg';
+import { SEO } from '../components/SEO';
+import { Navigation } from '../components/Navigation';
+import { Footer } from '../components/Footer';
 
 export function PartnershipsPage() {
   const [formData, setFormData] = useState({
@@ -122,6 +125,12 @@ export function PartnershipsPage() {
 
   return (
     <div className="min-h-screen bg-white">
+      <SEO
+        title="Partnerships | Synervion"
+        description="Partner with Synervion for white-label, co-branded, or custom Cordyceps solutions. Scale your wellness brand with our premium, lab-grown ingredients."
+        canonical="/partnerships"
+      />
+      <Navigation />
       {/* Hero Section */}
       <section className="pt-24 sm:pt-28 lg:pt-32 pb-12 sm:pb-16 lg:pb-20 bg-gradient-to-br from-white via-[hsl(var(--synervion-bg-gray-50))] to-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-5">
@@ -560,6 +569,7 @@ export function PartnershipsPage() {
           </div>
         </div>
       </section>
+      <Footer />
     </div>
   );
 }

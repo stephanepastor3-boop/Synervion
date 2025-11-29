@@ -4,6 +4,7 @@ import { Footer } from '../components/Footer';
 import { BrandButton } from '../components/brand/BrandButton';
 import { BrandBadge } from '../components/brand/BrandBadge';
 import { BrandCard } from '../components/brand/BrandCard';
+import { SEO } from '../components/SEO';
 import {
   Zap, Shield, Package, Download, Copy,
   Check, Grid3x3, Type, Palette, Box
@@ -79,6 +80,11 @@ export function BrandSystemPage({ onNavigate }: BrandSystemPageProps) {
 
   return (
     <div className="min-h-screen bg-[hsl(var(--synervion-bg-white))]">
+      <SEO
+        title="Brand System | Synervion"
+        description="Synervion's comprehensive design system for building consistent, premium wellness brand experiences."
+        canonical="/brand-system"
+      />
       <Navigation />
 
       <main className="pt-16 lg:pt-20">

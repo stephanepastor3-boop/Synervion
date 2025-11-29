@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Activity, Battery, Target, Info, CheckCircle2, AlertCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
+import { SEO } from '../components/SEO';
 
 type ActivityLevel = 'sedentary' | 'moderate' | 'active' | 'athlete';
 type EnergyLevel = 'low' | 'moderate' | 'high';
@@ -98,11 +98,12 @@ const CalculatorPage: React.FC = () => {
 
     return (
         <div className="min-h-screen bg-neutral-950 text-white pt-24 pb-12 px-4">
-            <Helmet>
-                <title>Cordyceps Dosage Calculator | Synervion</title>
-                <meta name="description" content="Calculate your optimal Cordyceps dosage for endurance, recovery, and focus with our science-backed tool." />
-                <script type="application/ld+json">{JSON.stringify(schema)}</script>
-            </Helmet>
+            <SEO
+                title="Cordyceps Dosage Calculator | Synervion"
+                description="Calculate your optimal Cordyceps dosage for endurance, recovery, and focus with our science-backed tool."
+                canonical="/calculator/cordyceps-goal-planner"
+            />
+            <script type="application/ld+json">{JSON.stringify(schema)}</script>
 
             <div className="max-w-3xl mx-auto">
                 <div className="text-center mb-12">
