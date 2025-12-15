@@ -1,10 +1,11 @@
+import { useNavigate } from 'react-router-dom';
 import { BrandButton } from './brand/BrandButton';
 import { ArrowRight, Mail } from 'lucide-react';
 import { useScrollAnimation } from './ui/use-scroll-animation';
-import { ContactModal } from './ContactModal';
 import { cn } from './ui/utils';
 
 export function ContactCTA() {
+  const navigate = useNavigate();
   const headerAnimation = useScrollAnimation();
   const statsAnimation = useScrollAnimation();
 
@@ -50,26 +51,24 @@ export function ContactCTA() {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
-              <ContactModal>
-                <BrandButton
-                  variant="primary"
-                  size="lg"
-                  className="group w-full sm:w-auto min-h-[48px]"
-                >
-                  Start Partnership
-                  <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
-                </BrandButton>
-              </ContactModal>
+              <BrandButton
+                variant="primary"
+                size="lg"
+                className="group w-full sm:w-auto min-h-[48px]"
+                onClick={() => navigate('/contact')}
+              >
+                Start Partnership
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
+              </BrandButton>
 
-              <ContactModal>
-                <BrandButton
-                  variant="outline"
-                  size="lg"
-                  className="border-white text-white hover:bg-white hover:text-[hsl(var(--synervion-secondary-800))] w-full sm:w-auto min-h-[48px]"
-                >
-                  Contact Us
-                </BrandButton>
-              </ContactModal>
+              <BrandButton
+                variant="outline"
+                size="lg"
+                className="border-white text-white hover:bg-white hover:text-[hsl(var(--synervion-secondary-800))] w-full sm:w-auto min-h-[48px]"
+                onClick={() => navigate('/contact')}
+              >
+                Contact Us
+              </BrandButton>
             </div>
           </div>
 

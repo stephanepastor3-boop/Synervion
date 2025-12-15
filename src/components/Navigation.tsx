@@ -25,7 +25,7 @@ export function Navigation() {
     { label: 'Collabs', href: '#partners' },
     { label: 'Research', href: '#rnd' },
     { label: 'Calculator', href: '/calculator/cordyceps-goal-planner' },
-    { label: 'Contact', href: '#contact' },
+    { label: 'Contact', href: '/contact' },
   ];
 
   const handleNavigation = (href: string) => {
@@ -111,7 +111,7 @@ export function Navigation() {
               <BrandButton
                 variant="primary"
                 size="md"
-                onClick={() => handleNavigation('#contact')}
+                onClick={() => handleNavigation('/contact')}
                 className="min-h-[44px]"
               >
                 Get Started
@@ -202,7 +202,7 @@ export function Navigation() {
                   variant="primary"
                   size="lg"
                   className="w-full min-h-[48px]"
-                  onClick={() => handleNavigation('#contact')}
+                  onClick={() => handleNavigation('/contact')}
                 >
                   Get Started
                 </BrandButton>

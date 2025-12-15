@@ -39,23 +39,19 @@ export function ContactPage() {
 
   const offices = [
     {
-      city: 'Bangalore',
-      country: 'India',
-      address: '123 Innovation Park, Electronic City Phase 1',
-      type: 'Headquarters & Lab',
+      name: 'Synervion HQ',
+      location: 'Madhya Pradesh, India',
+      address: 'Survey No. 36/1/2, Village - Bedia, District - Khargone, Madhya Pradesh 451113',
+      type: 'Headquarters',
+      mapLink: 'https://www.google.com/maps/place/Synervion+(HQ)/@22.0305022,74.911862,17z/data=!3m1!4b1!4m6!3m5!1s0x3961f9005d3782bb:0x81dda667a2e630de!8m2!3d22.0304972!4d74.9144369!16s%2Fg%2F11ybnfw2vx?entry=ttu&g_ep=EgoyMDI1MTIwOS4wIKXMDSoKLDEwMDc5MjA2N0gBUAM%3D'
     },
     {
-      city: 'Mumbai',
-      country: 'India',
-      address: '456 Business Tower, Bandra Kurla Complex',
-      type: 'Sales Office',
-    },
-    {
-      city: 'New Delhi',
-      country: 'India',
-      address: '789 Corporate Centre, Connaught Place',
-      type: 'Regional Office',
-    },
+      name: 'Synervion Labs',
+      location: 'Madhya Pradesh, India',
+      address: 'Survey No. 104/2, Village - Bedia, District - Khargone, Madhya Pradesh 451113',
+      type: 'R&D Facility',
+      mapLink: 'https://www.google.com/maps/place/Synervion+Labs/@22.0430188,75.0207156,17z/data=!3m1!4b1!4m6!3m5!1s0x39620300488bc205:0x7cca84a2184251be!8m2!3d22.0430138!4d75.0232905!16s%2Fg%2F11wv_h4n3l?entry=ttu&g_ep=EgoyMDI1MTIwOS4wIKXMDSoKLDEwMDc5MjA2N0gBUAM%3D'
+    }
   ];
 
   const journeySteps = [
@@ -96,7 +92,7 @@ export function ContactPage() {
     },
     {
       question: 'Do you offer facility tours?',
-      answer: 'Yes! We welcome potential partners to visit our Bangalore facility. Schedule a tour through our contact form.',
+      answer: 'Yes! We welcome potential partners to visit our facility. Schedule a tour through our contact form.',
     },
     {
       question: 'What are your minimum order quantities?',
@@ -132,9 +128,7 @@ export function ContactPage() {
             transition={{ duration: 0.8 }}
             className="text-center max-w-4xl mx-auto"
           >
-            <BrandBadge variant="primary" className="mb-4 sm:mb-6">
-              Get In Touch
-            </BrandBadge>
+            {/* Removed Get In Touch Pill */}
 
             <h1 className="mb-4 sm:mb-6 text-3xl sm:text-4xl lg:text-5xl xl:text-6xl" style={{ fontFamily: 'Manrope, sans-serif' }}>
               Let's Build Something <span className="text-[hsl(var(--synervion-primary-500))]">Great Together</span>
@@ -230,7 +224,7 @@ export function ContactPage() {
                   </div>
 
                   {/* Content */}
-                  <div className="text-center p-4 sm:p-6 rounded-xl bg-white border border-[hsl(var(--synervion-border-light))]">
+                  <div className="text-center p-4 sm:p-6 rounded-xl bg-white border border-[hsl(var(--synervion-border-light))] shadow-sm hover:shadow-md transition-shadow">
                     <h4 className="mb-2 text-base sm:text-lg" style={{ fontFamily: 'Manrope, sans-serif' }}>
                       {step.title}
                     </h4>
@@ -371,29 +365,35 @@ export function ContactPage() {
                 </h3>
                 <div className="space-y-4">
                   {offices.map((office) => (
-                    <div
-                      key={office.city}
-                      className="p-4 sm:p-6 rounded-xl bg-[hsl(var(--synervion-bg-gray-50))] border border-[hsl(var(--synervion-border-light))] hover:border-[hsl(var(--synervion-primary-500))]/30 transition-colors"
+                    <a
+                      key={office.name}
+                      href={office.mapLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block p-4 sm:p-6 rounded-xl bg-[hsl(var(--synervion-bg-gray-50))] border border-[hsl(var(--synervion-border-light))] hover:border-[hsl(var(--synervion-primary-500))] transition-colors group"
                     >
                       <div className="flex items-start gap-3 sm:gap-4">
-                        <div className="w-10 h-10 rounded-lg bg-[hsl(var(--synervion-primary-500))]/10 flex items-center justify-center flex-shrink-0">
+                        <div className="w-10 h-10 rounded-lg bg-[hsl(var(--synervion-primary-500))]/10 flex items-center justify-center flex-shrink-0 group-hover:bg-[hsl(var(--synervion-primary-500))]/20 transition-colors">
                           <MapPin className="w-5 h-5 text-[hsl(var(--synervion-primary-500))]" />
                         </div>
                         <div className="flex-1">
                           <div className="flex items-start justify-between mb-2">
-                            <h4 className="text-base sm:text-lg" style={{ fontFamily: 'Manrope, sans-serif' }}>
-                              {office.city}, {office.country}
+                            <h4 className="text-base sm:text-lg font-semibold" style={{ fontFamily: 'Manrope, sans-serif' }}>
+                              {office.name}
                             </h4>
                             <BrandBadge variant="outline" size="sm">
                               {office.type}
                             </BrandBadge>
                           </div>
-                          <p className="text-xs sm:text-sm text-[hsl(var(--synervion-text-secondary))]">
+                          <p className="text-sm text-[hsl(var(--synervion-text-secondary))] mb-1">
+                            {office.location}
+                          </p>
+                          <p className="text-xs text-[hsl(var(--synervion-text-secondary))]">
                             {office.address}
                           </p>
                         </div>
                       </div>
-                    </div>
+                    </a>
                   ))}
                 </div>
               </div>
