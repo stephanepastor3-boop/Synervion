@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { Article } from '../data/articles';
 import { Navigation } from './Navigation';
 import { Footer } from './Footer';
+import { ScienceCTA } from './ScienceCTA';
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
 
 interface ArticleTemplateProps {
@@ -117,6 +118,9 @@ export function ArticleTemplate({ article }: ArticleTemplateProps) {
                         className="prose prose-lg prose-slate mx-auto prose-headings:font-bold prose-headings:text-slate-900 prose-a:text-orange-600 prose-a:no-underline hover:prose-a:underline prose-img:rounded-xl"
                         dangerouslySetInnerHTML={{ __html: article.content }}
                     />
+
+                    {/* Science CTA */}
+                    <ScienceCTA />
 
                     {/* FAQ Section */}
                     <section className="mt-16 pt-16 border-t border-slate-200">
