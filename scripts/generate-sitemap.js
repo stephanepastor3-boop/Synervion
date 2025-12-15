@@ -28,7 +28,9 @@ const staticRoutes = [
     { loc: '/contact', changefreq: 'monthly', priority: '0.8' },
     { loc: '/partnerships', changefreq: 'monthly', priority: '0.8' },
     { loc: '/brand-system', changefreq: 'monthly', priority: '0.5' },
-    { loc: '/calculator/cordyceps-goal-planner', changefreq: 'monthly', priority: '0.8' }
+    { loc: '/calculator/cordyceps-goal-planner', changefreq: 'monthly', priority: '0.8' },
+    { loc: '/terms', changefreq: 'monthly', priority: '0.5' },
+    { loc: '/privacy-policy', changefreq: 'monthly', priority: '0.5' }
 ];
 
 // Read Studies

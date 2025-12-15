@@ -1,7 +1,9 @@
 import { motion } from 'motion/react';
-import { BrandCard } from '../components/brand/BrandCard';
 import { BrandBadge } from '../components/brand/BrandBadge';
-import { ShieldCheck, Microscope, Sprout, Activity, Globe, Users, Database, Layers, CheckCircle2, Factory } from 'lucide-react';
+import {
+  Database, Layers, Activity, ShieldCheck, Sprout, CheckCircle2,
+  Users, Globe, Factory
+} from 'lucide-react';
 import technicianImage from '../assets/images/Technician-RevaFlora1.jpg';
 import labFacilityImage from '../assets/images/lab-grown-advantage.jpg';
 import { SEO } from '../components/SEO';
