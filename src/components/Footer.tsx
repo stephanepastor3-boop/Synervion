@@ -38,7 +38,7 @@ export function Footer() {
       { label: 'Benefits', action: () => smoothScroll('#features') },
       { label: 'Dosage Calculator', href: '/calculator/cordyceps-goal-planner' },
       { label: 'Testing', action: () => smoothScroll('#rnd') },
-      { label: 'Contact', action: () => smoothScroll('#contact') },
+      { label: 'Contact', href: '/contact' },
     ],
   };
 
@@ -200,7 +200,8 @@ export function Footer() {
             © 2025 Synervion. All rights reserved.
           </p>
           <div className="flex gap-6">
-            <button
+            <Link
+              to="/privacy-policy"
               style={{
                 fontFamily: 'var(--synervion-font-body)',
                 fontSize: '13px',
@@ -210,8 +211,9 @@ export function Footer() {
               className="hover:text-white transition-colors"
             >
               Privacy Policy
-            </button>
-            <button
+            </Link>
+            <Link
+              to="/terms"
               style={{
                 fontFamily: 'var(--synervion-font-body)',
                 fontSize: '13px',
@@ -221,7 +223,7 @@ export function Footer() {
               className="hover:text-white transition-colors"
             >
               Terms of Service
-            </button>
+            </Link>
           </div>
         </div>
       </div>

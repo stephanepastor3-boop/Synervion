@@ -12,6 +12,8 @@ const AboutPage = lazy(() => import('./pages/AboutPage').then(module => ({ defau
 const ContactPage = lazy(() => import('./pages/ContactPage').then(module => ({ default: module.ContactPage })));
 const PartnershipsPage = lazy(() => import('./pages/PartnershipsPage').then(module => ({ default: module.PartnershipsPage })));
 const BrandSystemPage = lazy(() => import('./pages/BrandSystemPage').then(module => ({ default: module.BrandSystemPage })));
+const TermsPage = lazy(() => import('./pages/TermsPage').then(module => ({ default: module.TermsPage })));
+const PrivacyPage = lazy(() => import('./pages/PrivacyPage').then(module => ({ default: module.PrivacyPage })));
 
 const PageLoader = () => (
   <div className="min-h-screen flex items-center justify-center bg-white">
@@ -31,6 +33,8 @@ export default function App() {
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/partnerships" element={<PartnershipsPage />} />
             <Route path="/brand-system" element={<BrandSystemPage />} />
+            <Route path="/terms" element={<TermsPage />} />
+            <Route path="/privacy-policy" element={<PrivacyPage />} />
             <Route path="/study/:id" element={<StudyPage />} />
             <Route path="/calculator/cordyceps-goal-planner" element={<CalculatorPage />} />
             {articles.map((article) => (

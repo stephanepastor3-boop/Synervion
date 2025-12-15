@@ -1,11 +1,6 @@
 {
     "redirects": [
         {
-            "source": "/index.php",
-            "destination": "https://www.synervion.com/",
-            "permanent": true
-        },
-        {
             "source": "/(.*)",
             "has": [
                 {
@@ -14,6 +9,36 @@
                 }
             ],
             "destination": "https://www.synervion.com/$1",
+            "permanent": true
+        },
+        {
+            "source": "/index.php",
+            "destination": "https://www.synervion.com/",
+            "permanent": true
+        },
+        {
+            "source": "/lab.php",
+            "destination": "https://www.synervion.com/",
+            "permanent": true
+        },
+        {
+            "source": "/aboutus.php",
+            "destination": "https://www.synervion.com/about",
+            "permanent": true
+        },
+        {
+            "source": "/contactus.php",
+            "destination": "https://www.synervion.com/contact",
+            "permanent": true
+        },
+        {
+            "source": "/privacy-policy.php",
+            "destination": "https://www.synervion.com/privacy-policy",
+            "permanent": true
+        },
+        {
+            "source": "/terms.php",
+            "destination": "https://www.synervion.com/terms",
             "permanent": true
         }
     ],
