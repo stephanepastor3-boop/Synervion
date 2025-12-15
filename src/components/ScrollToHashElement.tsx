@@ -24,6 +24,9 @@ export default function ScrollToHashElement() {
 
                 return () => timeouts.forEach(clearTimeout);
             }
+        } else {
+            // Scroll to top if no hash
+            window.scrollTo(0, 0);
         }
     }, [location]);
 

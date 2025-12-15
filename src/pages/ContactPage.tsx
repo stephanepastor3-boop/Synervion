@@ -31,9 +31,9 @@ export function ContactPage() {
     {
       icon: MapPin,
       title: 'Headquarters',
-      value: 'Bangalore, Karnataka, India',
+      value: 'Khargone, Madhya Pradesh, India',
       description: 'Visit our state-of-the-art cultivation facility',
-      action: '#',
+      action: 'https://www.google.com/maps/place/Synervion+(HQ)/@22.0305022,74.911862,17z/data=!3m1!4b1!4m6!3m5!1s0x3961f9005d3782bb:0x81dda667a2e630de!8m2!3d22.0304972!4d74.9144369!16s%2Fg%2F11ybnfw2vx?entry=ttu&g_ep=EgoyMDI1MTIwOS4wIKXMDSoKLDEwMDc5MjA2N0gBUAM%3D',
     },
   ];
 
@@ -370,27 +370,40 @@ export function ContactPage() {
                       href={office.mapLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="block p-4 sm:p-6 rounded-xl bg-[hsl(var(--synervion-bg-gray-50))] border border-[hsl(var(--synervion-border-light))] hover:border-[hsl(var(--synervion-primary-500))] transition-colors group"
+                      className="block group overflow-hidden rounded-2xl bg-white border border-[hsl(var(--synervion-border-light))] hover:border-[hsl(var(--synervion-primary-500))] hover:shadow-lg transition-all"
                     >
-                      <div className="flex items-start gap-3 sm:gap-4">
-                        <div className="w-10 h-10 rounded-lg bg-[hsl(var(--synervion-primary-500))]/10 flex items-center justify-center flex-shrink-0 group-hover:bg-[hsl(var(--synervion-primary-500))]/20 transition-colors">
-                          <MapPin className="w-5 h-5 text-[hsl(var(--synervion-primary-500))]" />
+                      {/* Pseudo-Map Header */}
+                      <div className="h-24 bg-[hsl(var(--synervion-bg-gray-100))] relative overflow-hidden group-hover:bg-[hsl(var(--synervion-bg-gray-200))] transition-colors">
+                        {/* Abstract map pattern or grid */}
+                        <div className="absolute inset-0 opacity-10" style={{
+                          backgroundImage: `radial-gradient(circle at 2px 2px, black 1px, transparent 0)`,
+                          backgroundSize: '16px 16px'
+                        }} />
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <span className="flex items-center gap-2 text-sm font-semibold text-[hsl(var(--synervion-primary-700))] bg-white/80 backdrop-blur-sm px-3 py-1.5 rounded-full shadow-sm group-hover:bg-white group-hover:scale-105 transition-all">
+                            <MapPin className="w-4 h-4" /> View on Google Maps
+                          </span>
                         </div>
-                        <div className="flex-1">
-                          <div className="flex items-start justify-between mb-2">
-                            <h4 className="text-base sm:text-lg font-semibold" style={{ fontFamily: 'Manrope, sans-serif' }}>
-                              {office.name}
-                            </h4>
-                            <BrandBadge variant="outline" size="sm">
-                              {office.type}
-                            </BrandBadge>
-                          </div>
-                          <p className="text-sm text-[hsl(var(--synervion-text-secondary))] mb-1">
-                            {office.location}
-                          </p>
-                          <p className="text-xs text-[hsl(var(--synervion-text-secondary))]">
-                            {office.address}
-                          </p>
+                      </div>
+
+                      <div className="p-5 sm:p-6">
+                        <div className="flex items-start justify-between mb-2">
+                          <h4 className="text-lg font-bold text-[hsl(var(--synervion-secondary-900))]" style={{ fontFamily: 'Manrope, sans-serif' }}>
+                            {office.name}
+                          </h4>
+                          <BrandBadge variant="outline" size="sm" className="bg-[hsl(var(--synervion-bg-gray-50))]">
+                            {office.type}
+                          </BrandBadge>
+                        </div>
+                        <p className="text-sm font-medium text-[hsl(var(--synervion-text-primary))] mb-1">
+                          {office.location}
+                        </p>
+                        <p className="text-xs text-[hsl(var(--synervion-text-secondary))] leading-relaxed mb-4">
+                          {office.address}
+                        </p>
+
+                        <div className="flex items-center text-xs font-semibold text-[hsl(var(--synervion-primary-600))] group-hover:underline">
+                          Get Directions <ArrowRight className="w-3 h-3 ml-1" />
                         </div>
                       </div>
                     </a>
