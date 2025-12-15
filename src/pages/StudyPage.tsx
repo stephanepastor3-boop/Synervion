@@ -44,6 +44,19 @@ export function StudyPage() {
 
                 <div className="bg-white rounded-2xl overflow-hidden shadow-xl">
                     <StudyDetails study={study} />
+
+                    <div className="bg-slate-50 border-t border-slate-100 p-6 md:p-8">
+                        <h3 className="text-lg font-bold text-slate-900 mb-2">From Lab to Daily Life</h3>
+                        <p className="text-slate-600 mb-4">
+                            Understanding the science is the first step. See how these metabolic mechanisms compare to stimulant-based energy in our practical guide:
+                        </p>
+                        <Link
+                            to="/cordyceps-vs-caffeine-daily-energy"
+                            className="text-orange-600 font-bold hover:text-orange-700 inline-flex items-center gap-2"
+                        >
+                            Read: Cordyceps vs. Caffeine - The Energy Comparison →
+                        </Link>
+                    </div>
                 </div>
             </div>
         </div>

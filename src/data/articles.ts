@@ -82,7 +82,7 @@ export const articles: Article[] = [
       <p>Cyclists are always looking for that extra watt. Whether you're climbing steep gradients or pushing through a century ride, <strong>Cordyceps militaris</strong> offers a natural, legal performance boost. But getting the <strong>Cordyceps dosage for cycling</strong> right is key to unlocking these benefits.</p>
       
       <h3>How Do You Find Your Dosage Sweet Spot?</h3>
-      <p>Most studies on endurance performance suggest a dosage range of 1g to 3g of dried fruiting body per day. For cyclists, timing is also crucial.</p>
+      <p>Most studies on endurance performance suggest a dosage range of 1g to 3g of dried fruiting body per day. For cyclists, timing is also crucial. (See our guide on <a href="/cordyceps-for-stamina-who-it-helps">Cordyceps for Stamina</a> for a deeper dive).</p>
       
       <ul>
         <li><strong>Maintenance Phase:</strong> 1g daily to build systemic levels.</li>
@@ -288,7 +288,7 @@ export const articles: Article[] = [
       <p>Brain fog kills productivity. While often marketed for physical energy, <strong>Cordyceps for mental clarity</strong> is a powerful nootropic application. Your brain consumes 20% of your body's oxygen; feed it what it needs.</p>
       
       <h3>How Does Oxygen Equal Brain Power?</h3>
-      <p>By improving oxygen utilization, Cordyceps ensures your brain gets the fuel it needs to process information, focus, and recall memory efficiently.</p>
+      <p>By improving oxygen utilization, Cordyceps ensures your brain gets the fuel it needs to process information, focus, and recall memory efficiently. This creates a state of <a href="/how-to-reduce-caffeine-without-losing-energy">clean energy without the crash</a> common with stimulants.</p>
 
       <div class="e-e-a-t-citation">
         <blockquote>"Improved cerebral oxygenation is linked to better cognitive performance and reduced mental fatigue." – <a href="/science">See Cognitive Studies</a></blockquote>
@@ -355,7 +355,7 @@ export const articles: Article[] = [
       </div>
 
       <h3>Why Should You Choose Potency and Sustainability?</h3>
-      <p>Choose <a href="/product/cordyceps-militaris">Synervion Cordyceps Militaris</a> for a product that is potent, ethical, and affordable.</p>
+      <p>Choose <a href="/product/cordyceps-militaris">Synervion Cordyceps Militaris</a> for a product that is potent, ethical, and affordable. It's the smartest foundation for a <a href="/cordyceps-vs-caffeine-daily-energy">sustainable daily energy strategy</a>.</p>
     `,
     faq: [
       { question: 'Which Cordyceps is better?', answer: 'C. militaris is generally superior for supplements due to higher Cordycepin levels and affordability.' },
