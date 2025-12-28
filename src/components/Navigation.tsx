@@ -38,7 +38,7 @@ export function Navigation() {
         { label: 'Calculator', href: '/calculator/cordyceps-goal-planner' },
       ]
     },
-    { label: 'Contact', href: '/contact' },
+    { label: 'About Us', href: '/about' },
   ];
 
   const handleNavigation = (href?: string) => {
