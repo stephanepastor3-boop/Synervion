@@ -8,8 +8,14 @@ export interface Study {
     category: string;
     doi: string;
     keyFindings: string[];
-    chartData?: Record<string, unknown>[];
-    chartConfig?: Record<string, unknown>;
+    chartData?: any[];
+    chartConfig?: {
+        barColor?: string;
+        yAxisLabel?: string;
+        naturalColor?: string;
+        cultivatedColor?: string;
+        [key: string]: string | undefined;
+    };
     chartType: 'bar' | 'pathway' | 'dual' | 'line' | 'comparison';
     imageUrl: string;
     relevance: string;
