@@ -1,3 +1,17 @@
 User-agent: *
 Allow: /
+
+# Block all legacy PHP URLs (old website)
+Disallow: /*.php$
+Disallow: /index.php
+Disallow: /aboutus.php
+Disallow: /contactus.php
+Disallow: /lab.php
+Disallow: /privacy-policy.php
+Disallow: /terms.php
+
+# Canonical sitemap
 Sitemap: https://www.synervion.com/sitemap.xml
+
+# Canonical host
+Host: https://www.synervion.com
