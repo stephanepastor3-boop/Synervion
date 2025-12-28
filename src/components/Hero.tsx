@@ -74,23 +74,24 @@ export function Hero() {
             </div>
 
             {/* CTA Buttons - Mobile: Stack vertically, Desktop: Side by side */}
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-center sm:items-stretch">
+            <div className="flex flex-col sm:flex-row flex-wrap gap-4 items-center sm:items-center mt-2">
               <BrandButton
                 size="lg"
                 variant="primary"
-                className="group w-full sm:w-auto"
+                className="group w-full sm:w-auto h-14 sm:h-16 px-8 sm:px-10 text-lg font-medium shadow-lg shadow-orange-500/20 hover:shadow-orange-500/30 hover:-translate-y-0.5 transition-all duration-300"
               >
                 Explore Partnerships
-                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-5 h-5 ml-1 group-hover:translate-x-1 transition-transform" />
               </BrandButton>
               <BrandButton
                 size="lg"
                 variant="outline"
-                className="w-full sm:w-auto"
+                className="w-full sm:w-auto h-14 sm:h-16 px-8 sm:px-10 text-lg font-medium border-2 hover:bg-neutral-50 transition-all duration-300"
               >
                 View Research
               </BrandButton>
-              <div className="sm:ml-4">
+
+              <div className="flex items-center">
                 <ProductQuiz />
               </div>
             </div>

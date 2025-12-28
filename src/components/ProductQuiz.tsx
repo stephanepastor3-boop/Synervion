@@ -55,13 +55,14 @@ export function ProductQuiz() {
 
     return (
         <>
-            <button
+            <BrandButton
                 onClick={handleOpen}
-                className="group flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-primary transition-all duration-300 mt-4 sm:mt-0 px-2 py-1 rounded-md hover:bg-primary/5"
+                variant="ghost"
+                className="h-14 sm:h-16 px-6 sm:px-8 text-base sm:text-lg font-medium text-muted-foreground hover:text-primary bg-muted/50 hover:bg-muted transition-all duration-300 gap-2.5 whitespace-nowrap"
             >
-                <Sparkles className="w-4 h-4 text-primary group-hover:rotate-12 transition-transform" />
-                <span className="border-b border-transparent group-hover:border-primary/30">Not sure? Find your match</span>
-            </button>
+                <Sparkles className="w-5 h-5 text-primary/80" />
+                Not sure? Find your match
+            </BrandButton>
 
             <AnimatePresence>
                 {isOpen && (

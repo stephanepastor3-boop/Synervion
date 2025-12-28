@@ -18,7 +18,7 @@ export function Footer() {
 
   const links = {
     Company: [
-      { label: 'About Us', action: () => smoothScroll('#hero') },
+      { label: 'About Us', href: '/about' },
       { label: 'Our Science', action: () => smoothScroll('#origin') },
       { label: 'Research', action: () => smoothScroll('#rnd') },
     ],

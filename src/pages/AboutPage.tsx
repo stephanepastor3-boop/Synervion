@@ -4,8 +4,12 @@ import {
   Database, Layers, Activity, ShieldCheck, Sprout, CheckCircle2,
   Users, Globe, Factory
 } from 'lucide-react';
-import technicianImage from '../assets/images/Technician-RevaFlora1.jpg';
-import labFacilityImage from '../assets/images/lab-grown-advantage.jpg';
+import technicianVideo from '../assets/videos/TechnicianLab-video.mp4';
+
+import cordycepsVideo2 from '../assets/videos/Lab-cordyceps-video2.mp4';
+import revaFloraVideo from '../assets/videos/SynervionXRevaFlora2_1.mp4';
+import foundingTeamImage from '../assets/images/FoundingTeam-image.jpg';
+
 import { SEO } from '../components/SEO';
 import { Navigation } from '../components/Navigation';
 import { Footer } from '../components/Footer';
@@ -122,14 +126,14 @@ export function AboutPage() {
               transition={{ duration: 0.6 }}
               className="relative"
             >
-              <div className="rounded-2xl overflow-hidden shadow-2xl">
-                <img
-                  src={technicianImage}
-                  alt="Synervion scientist working in controlled cultivation lab"
-                  className="w-full h-auto object-cover"
-                  loading="lazy"
-                  width="800"
-                  height="600"
+              <div className="rounded-2xl overflow-hidden shadow-2xl h-full min-h-[400px]">
+                <video
+                  src={technicianVideo}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[hsl(var(--synervion-secondary-900))]/40 to-transparent" />
               </div>
@@ -145,7 +149,7 @@ export function AboutPage() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center max-w-3xl mx-auto mb-16"
+            className="text-center max-w-3xl mx-auto mb-12"
           >
             <BrandBadge variant="outline" className="mb-4">Methodology</BrandBadge>
             <h2 className="text-3xl lg:text-4xl font-bold mb-6" style={{ fontFamily: 'Manrope, sans-serif' }}>
@@ -156,48 +160,67 @@ export function AboutPage() {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-8 lg:gap-16">
-            {/* Factors */}
+          <div className="grid lg:grid-cols-2 gap-12 items-start">
+            {/* Left Column: Video */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="bg-[hsl(var(--synervion-bg-gray-50))] p-8 rounded-2xl border border-[hsl(var(--synervion-border-light))]"
+              className="rounded-2xl overflow-hidden shadow-2xl h-[500px]"
             >
-              <h3 className="text-xl font-bold mb-6 flex items-center gap-3">
-                <Sprout className="w-6 h-6 text-[hsl(var(--synervion-primary-500))]" />
-                Critical Dependencies
-              </h3>
-              <ul className="space-y-4">
-                {cultivationFactors.map((item) => (
-                  <li key={item} className="flex items-center gap-3 text-[hsl(var(--synervion-text-secondary))]">
-                    <div className="w-2 h-2 rounded-full bg-[hsl(var(--synervion-primary-500))]" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
+              <video
+                src={cordycepsVideo2}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover"
+              />
             </motion.div>
 
-            {/* Benefits */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="bg-[hsl(var(--synervion-secondary-900))] text-white p-8 rounded-2xl border border-[hsl(var(--synervion-secondary-700))]"
-            >
-              <h3 className="text-xl font-bold mb-6 flex items-center gap-3">
-                <CheckCircle2 className="w-6 h-6 text-[hsl(var(--synervion-primary-500))]" />
-                Synervion Standard
-              </h3>
-              <ul className="space-y-4">
-                {cultivationBenefits.map((item) => (
-                  <li key={item} className="flex items-center gap-3 text-gray-300">
-                    <CheckCircle2 className="w-5 h-5 text-[hsl(var(--synervion-primary-500))]" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
+            {/* Right Column: Comparison Cards */}
+            <div className="space-y-6">
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="bg-[hsl(var(--synervion-bg-gray-50))] p-8 rounded-2xl border border-[hsl(var(--synervion-border-light))]"
+              >
+                <h3 className="text-xl font-bold mb-4 flex items-center gap-3">
+                  <Sprout className="w-6 h-6 text-[hsl(var(--synervion-primary-500))]" />
+                  Critical Dependencies
+                </h3>
+                <ul className="space-y-3">
+                  {cultivationFactors.map((item) => (
+                    <li key={item} className="flex items-center gap-3 text-[hsl(var(--synervion-text-secondary))]">
+                      <div className="w-2 h-2 rounded-full bg-[hsl(var(--synervion-primary-500))]" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                className="bg-[hsl(var(--synervion-secondary-900))] text-white p-8 rounded-2xl border border-[hsl(var(--synervion-secondary-700))]"
+              >
+                <h3 className="text-xl font-bold mb-4 flex items-center gap-3 text-white">
+                  <CheckCircle2 className="w-6 h-6 text-[hsl(var(--synervion-primary-500))]" />
+                  Synervion Standard
+                </h3>
+                <ul className="space-y-3">
+                  {cultivationBenefits.map((item) => (
+                    <li key={item} className="flex items-center gap-3 text-gray-300">
+                      <CheckCircle2 className="w-5 h-5 text-[hsl(var(--synervion-primary-500))]" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -248,58 +271,110 @@ export function AboutPage() {
       {/* Transparency */}
       <section className="py-20 bg-white">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16">
-          <div className="flex flex-col lg:flex-row gap-16 items-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="max-w-4xl mx-auto space-y-8"
+          >
+            <div className="text-center">
+              <div className="flex justify-center mb-4">
+                <BrandBadge variant="success">Trust & Safety</BrandBadge>
+              </div>
+              <h2 className="text-3xl lg:text-4xl font-bold mb-6" style={{ fontFamily: 'Manrope, sans-serif' }}>
+                Transparency as a Core Principle
+              </h2>
+              <p className="text-lg text-[hsl(var(--synervion-text-secondary))] max-w-3xl mx-auto">
+                Trust in wellness requires evidence. Synervion integrates transparency directly into its operating model. This commitment allows customers and partners to evaluate quality based on verifiable data, not assumptions.
+              </p>
+            </div>
+
+            <ul className="grid sm:grid-cols-2 gap-4">
+              {[
+                'Independent third-party testing',
+                'Quantified bioactive markers',
+                'Batch-level traceability',
+                'Clear disclosure of sourcing'
+              ].map((item) => (
+                <li key={item} className="flex items-center gap-4 p-4 bg-[hsl(var(--synervion-bg-gray-50))] rounded-lg text-left">
+                  <ShieldCheck className="w-6 h-6 text-[hsl(var(--synervion-primary-500))]" />
+                  <span className="font-medium text-[hsl(var(--synervion-secondary-900))]">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Cultivation in Action - Video Grid */}
+      <section className="py-20 bg-[hsl(var(--synervion-secondary-900))]">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl lg:text-4xl font-bold mb-4 text-white" style={{ fontFamily: 'Manrope, sans-serif' }}>
+              Cultivation in Action
+            </h2>
+            <p className="text-lg text-gray-300">
+              See the precision and quality of our lab-grown process.
+            </p>
+          </div>
+          <div className="max-w-4xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="rounded-xl overflow-hidden shadow-lg border border-white/10 aspect-video"
+            >
+              <video
+                src={revaFloraVideo}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover"
+              />
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Founding Team */}
+      <section className="py-20 bg-white border-y border-[hsl(var(--synervion-border-light))]">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="lg:w-1/2"
             >
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-[hsl(var(--synervion-border-light))]">
-                <img
-                  src={labFacilityImage}
-                  alt="Synervion lab facility - Advanced Cordyceps cultivation center"
-                  className="w-full h-auto"
-                  loading="lazy"
-                  width="800"
-                  height="600"
-                />
-                <div className="absolute inset-0 bg-[hsl(var(--synervion-secondary-900))]/20" />
-              </div>
+              <BrandBadge variant="primary" className="mb-4">Leadership</BrandBadge>
+              <h2 className="text-3xl lg:text-4xl font-bold mb-6" style={{ fontFamily: 'Manrope, sans-serif' }}>
+                Driven by Science & Passion
+              </h2>
+              <p className="text-lg text-[hsl(var(--synervion-text-secondary))] mb-6 leading-relaxed">
+                Synervion was founded on the belief that nature’s most potent compounds can be optimized through science. Our team combines expertise in biotechnology, mycology, and functional wellness to create products that truly perform.
+              </p>
+              <p className="text-lg text-[hsl(var(--synervion-text-secondary))] leading-relaxed">
+                We are not just distributors; we are growers, researchers, and engineers committed to setting a new standard for purity and potency in the supplement industry.
+              </p>
             </motion.div>
-
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="lg:w-1/2 space-y-8"
+              className="relative"
             >
-              <div>
-                <BrandBadge variant="success" className="mb-4">Trust & Safety</BrandBadge>
-                <h2 className="text-3xl lg:text-4xl font-bold mb-6" style={{ fontFamily: 'Manrope, sans-serif' }}>
-                  Transparency as a Core Principle
-                </h2>
-                <p className="text-lg text-[hsl(var(--synervion-text-secondary))]">
-                  Trust in wellness requires evidence. Synervion integrates transparency directly into its operating model. This commitment allows customers and partners to evaluate quality based on verifiable data, not assumptions.
-                </p>
+              <div className="rounded-2xl overflow-hidden shadow-2xl">
+                <img
+                  src={foundingTeamImage}
+                  alt="Synervion Founding Team"
+                  className="w-full h-auto object-cover"
+                  loading="lazy"
+                />
               </div>
-
-              <ul className="space-y-4">
-                {[
-                  'Independent third-party testing',
-                  'Quantified bioactive markers',
-                  'Batch-level traceability',
-                  'Clear disclosure of sourcing'
-                ].map((item) => (
-                  <li key={item} className="flex items-center gap-4 p-4 bg-[hsl(var(--synervion-bg-gray-50))] rounded-lg">
-                    <ShieldCheck className="w-6 h-6 text-[hsl(var(--synervion-primary-500))]" />
-                    <span className="font-medium text-[hsl(var(--synervion-secondary-900))]">{item}</span>
-                  </li>
-                ))}
-              </ul>
             </motion.div>
           </div>
         </div>
+
       </section>
 
       {/* Vision */}
@@ -311,7 +386,7 @@ export function AboutPage() {
             viewport={{ once: true }}
             className="max-w-3xl mx-auto"
           >
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-8" style={{ fontFamily: 'Manrope, sans-serif' }}>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-8 text-white" style={{ fontFamily: 'Manrope, sans-serif' }}>
               More Than a Brand
             </h2>
             <p className="text-lg sm:text-xl text-gray-300 mb-12 leading-relaxed">
@@ -321,11 +396,11 @@ export function AboutPage() {
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <div className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/10 flex-1">
                 <h3 className="text-xl font-bold text-[hsl(var(--synervion-primary-500))] mb-2">DTC Brand</h3>
-                <p className="text-sm text-gray-400">Premium supplements for end-users</p>
+                <p className="text-sm text-gray-200">Premium supplements for end-users</p>
               </div>
               <div className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/10 flex-1">
                 <h3 className="text-xl font-bold text-[hsl(var(--synervion-primary-500))] mb-2">B2B Core</h3>
-                <p className="text-sm text-gray-400">Ingredient platform for partners</p>
+                <p className="text-sm text-gray-200">Ingredient platform for partners</p>
               </div>
             </div>
           </motion.div>

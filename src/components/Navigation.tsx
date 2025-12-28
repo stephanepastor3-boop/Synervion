@@ -2,12 +2,19 @@ import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { BrandButton } from './brand/BrandButton';
 import { Logo } from './Logo';
-import { motion } from 'motion/react';
-import { Menu, X } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
+import { Menu, X, ChevronDown, ChevronUp } from 'lucide-react';
+
+interface NavLink {
+  label: string;
+  href?: string;
+  children?: { label: string; href: string }[];
+}
 
 export function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [expandedMobileItem, setExpandedMobileItem] = useState<string | null>(null);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -19,22 +26,27 @@ export function Navigation() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navLinks = [
+  const navLinks: NavLink[] = [
     { label: 'Benefits', href: '#features' },
     { label: 'Why Lab-Grown', href: '#origin' },
     { label: 'Collabs', href: '#partners' },
-    { label: 'Research', href: '#rnd' },
-    { label: 'Guides', href: '#articles' },
-    { label: 'Calculator', href: '/calculator/cordyceps-goal-planner' },
+    {
+      label: 'Resources',
+      children: [
+        { label: 'Research', href: '#rnd' },
+        { label: 'Guides', href: '#articles' },
+        { label: 'Calculator', href: '/calculator/cordyceps-goal-planner' },
+      ]
+    },
     { label: 'Contact', href: '/contact' },
   ];
 
-  const handleNavigation = (href: string) => {
+  const handleNavigation = (href?: string) => {
+    if (!href) return;
     setMobileMenuOpen(false);
 
     if (href.startsWith('#')) {
       if (location.pathname === '/') {
-        // We are on the home page, scroll to section
         const element = document.querySelector(href);
         if (element) {
           const navHeight = 80;
@@ -47,20 +59,19 @@ export function Navigation() {
           });
         }
       } else {
-        // We are on another page, navigate to home with hash
-        // Note: We might need a useEffect in HomePage to handle the scroll after navigation
-        // For now, we rely on browser's default hash handling or we can pass state
         navigate('/' + href);
-
-        // Small timeout to allow navigation to happen before trying to scroll (if needed by browser)
-        // But standard anchor navigation usually works if the element exists on load. 
-        // Since it's a SPA, the element might not be there immediately.
-        // Let's just navigate for now.
       }
     } else {
-      // It's a route, just navigate
       navigate(href);
       window.scrollTo(0, 0);
+    }
+  };
+
+  const toggleMobileItem = (label: string) => {
+    if (expandedMobileItem === label) {
+      setExpandedMobileItem(null);
+    } else {
+      setExpandedMobileItem(label);
     }
   };
 
@@ -75,11 +86,10 @@ export function Navigation() {
           : 'bg-[hsl(var(--synervion-bg-white))]/80 backdrop-blur-sm'
           }`}
       >
-        {/* Desktop & Mobile Navigation Container */}
         <div className="w-full max-w-[1280px] mx-auto px-4 sm:px-8 lg:px-16">
           <div className="flex items-center justify-between h-16 lg:h-20">
 
-            {/* Left: Logo + Wordmark (Grouped) */}
+            {/* Left: Logo */}
             <Logo
               variant="color"
               size="md"
@@ -88,26 +98,60 @@ export function Navigation() {
               className="flex-shrink-0"
             />
 
-            {/* Center: Menu (Desktop Only) - 32px spacing between items */}
+            {/* Center: Menu (Desktop) */}
             <nav className="hidden lg:flex items-center gap-8">
               {navLinks.map((link) => (
-                <button
-                  key={link.label}
-                  onClick={() => handleNavigation(link.href)}
-                  style={{
-                    fontFamily: 'var(--synervion-font-body)',
-                    fontSize: '15px',
-                    fontWeight: 500,
-                    color: 'hsl(var(--synervion-text-primary))'
-                  }}
-                  className="hover:text-[hsl(var(--synervion-primary-500))] transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-[hsl(var(--synervion-primary-500))] after:transition-all hover:after:w-full"
-                >
-                  {link.label}
-                </button>
+                <div key={link.label} className="relative group">
+                  {link.children ? (
+                    <button
+                      className="flex items-center gap-1 hover:text-[hsl(var(--synervion-primary-500))] transition-colors"
+                      style={{
+                        fontFamily: 'var(--synervion-font-body)',
+                        fontSize: '15px',
+                        fontWeight: 500,
+                        color: 'hsl(var(--synervion-text-primary))'
+                      }}
+                    >
+                      {link.label}
+                      <ChevronDown size={14} className="group-hover:rotate-180 transition-transform duration-200" />
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => handleNavigation(link.href)}
+                      style={{
+                        fontFamily: 'var(--synervion-font-body)',
+                        fontSize: '15px',
+                        fontWeight: 500,
+                        color: 'hsl(var(--synervion-text-primary))'
+                      }}
+                      className="hover:text-[hsl(var(--synervion-primary-500))] transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-[hsl(var(--synervion-primary-500))] after:transition-all hover:after:w-full"
+                    >
+                      {link.label}
+                    </button>
+                  )}
+
+                  {/* Desktop Dropdown */}
+                  {link.children && (
+                    <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 w-48">
+                      <div className="bg-white rounded-xl shadow-xl border border-slate-100 overflow-hidden py-1">
+                        {link.children.map((child) => (
+                          <button
+                            key={child.label}
+                            onClick={() => handleNavigation(child.href)}
+                            className="block w-full text-left px-4 py-2.5 text-sm text-slate-600 hover:text-orange-600 hover:bg-orange-50 transition-colors"
+                            style={{ fontFamily: 'var(--synervion-font-body)' }}
+                          >
+                            {child.label}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
               ))}
             </nav>
 
-            {/* Right: Action Buttons (Desktop) */}
+            {/* Right: Actions */}
             <div className="hidden lg:flex items-center gap-3">
               <BrandButton
                 variant="primary"
@@ -119,7 +163,7 @@ export function Navigation() {
               </BrandButton>
             </div>
 
-            {/* Mobile Hamburger Button */}
+            {/* Mobile Hamburger */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="lg:hidden w-11 h-11 flex items-center justify-center rounded-lg hover:bg-[hsl(var(--synervion-bg-gray-100))] transition-colors"
@@ -136,24 +180,24 @@ export function Navigation() {
       </motion.nav>
 
       {/* Mobile Menu Overlay */}
-      {mobileMenuOpen && (
-        <>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 z-40 lg:hidden"
-            onClick={() => setMobileMenuOpen(false)}
-          />
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+              onClick={() => setMobileMenuOpen(false)}
+            />
 
-          <motion.div
-            initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '100%' }}
-            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed top-0 right-0 bottom-0 w-[280px] bg-[hsl(var(--synervion-bg-white))] shadow-2xl z-50 lg:hidden"
-          >
-            <div className="flex flex-col h-full">
+            <motion.div
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              className="fixed top-0 right-0 bottom-0 w-[280px] bg-[hsl(var(--synervion-bg-white))] shadow-2xl z-50 lg:hidden flex flex-col"
+            >
               {/* Mobile Menu Header */}
               <div className="flex items-center justify-between p-4 border-b border-[hsl(var(--synervion-border-light))]">
                 <span
@@ -169,35 +213,73 @@ export function Navigation() {
                 <button
                   onClick={() => setMobileMenuOpen(false)}
                   className="w-11 h-11 flex items-center justify-center rounded-lg hover:bg-[hsl(var(--synervion-bg-gray-100))] transition-colors"
-                  aria-label="Close menu"
                 >
                   <X className="w-6 h-6 text-[hsl(var(--synervion-text-primary))]" />
                 </button>
               </div>
 
-              {/* Mobile Menu Links */}
-              <nav className="flex-1 py-6 px-4">
+              {/* Mobile Links */}
+              <nav className="flex-1 py-6 px-4 overflow-y-auto">
                 <ul className="space-y-2">
                   {navLinks.map((link) => (
                     <li key={link.label}>
-                      <button
-                        onClick={() => handleNavigation(link.href)}
-                        style={{
-                          fontFamily: 'var(--synervion-font-body)',
-                          fontSize: '16px',
-                          fontWeight: 500,
-                          color: 'hsl(var(--synervion-text-primary))'
-                        }}
-                        className="block w-full text-left py-3 px-4 rounded-lg hover:bg-[hsl(var(--synervion-primary-500))]/10 hover:text-[hsl(var(--synervion-primary-500))] transition-colors"
-                      >
-                        {link.label}
-                      </button>
+                      {link.children ? (
+                        <div>
+                          <button
+                            onClick={() => toggleMobileItem(link.label)}
+                            className="flex items-center justify-between w-full text-left py-3 px-4 rounded-lg hover:bg-slate-50 transition-colors"
+                            style={{
+                              fontFamily: 'var(--synervion-font-body)',
+                              fontSize: '16px',
+                              fontWeight: 500,
+                              color: 'hsl(var(--synervion-text-primary))'
+                            }}
+                          >
+                            {link.label}
+                            {expandedMobileItem === link.label ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+                          </button>
+                          <AnimatePresence>
+                            {expandedMobileItem === link.label && (
+                              <motion.div
+                                initial={{ height: 0, opacity: 0 }}
+                                animate={{ height: 'auto', opacity: 1 }}
+                                exit={{ height: 0, opacity: 0 }}
+                                className="overflow-hidden"
+                              >
+                                <div className="pl-4 border-l-2 border-slate-100 ml-4 mt-1 space-y-1">
+                                  {link.children.map(child => (
+                                    <button
+                                      key={child.label}
+                                      onClick={() => handleNavigation(child.href)}
+                                      className="block w-full text-left py-2 px-4 text-sm text-slate-600 hover:text-orange-600"
+                                    >
+                                      {child.label}
+                                    </button>
+                                  ))}
+                                </div>
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
+                        </div>
+                      ) : (
+                        <button
+                          onClick={() => handleNavigation(link.href)}
+                          style={{
+                            fontFamily: 'var(--synervion-font-body)',
+                            fontSize: '16px',
+                            fontWeight: 500,
+                            color: 'hsl(var(--synervion-text-primary))'
+                          }}
+                          className="block w-full text-left py-3 px-4 rounded-lg hover:bg-[hsl(var(--synervion-primary-500))]/10 hover:text-[hsl(var(--synervion-primary-500))] transition-colors"
+                        >
+                          {link.label}
+                        </button>
+                      )}
                     </li>
                   ))}
                 </ul>
               </nav>
 
-              {/* Mobile Menu CTA */}
               <div className="p-4 border-t border-[hsl(var(--synervion-border-light))]">
                 <BrandButton
                   variant="primary"
@@ -208,10 +290,10 @@ export function Navigation() {
                   Get Started
                 </BrandButton>
               </div>
-            </div>
-          </motion.div>
-        </>
-      )}
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </>
   );
 }
