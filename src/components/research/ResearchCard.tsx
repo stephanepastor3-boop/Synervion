@@ -46,6 +46,9 @@ export function ResearchCard({
           src={imageUrl}
           alt={title}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          loading="lazy"
+          width="400"
+          height="300"
         />
         <div className="absolute top-4 left-4 z-20 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-neutral-900 shadow-sm flex items-center gap-2">
           <span>{icon}</span>

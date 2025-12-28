@@ -2,7 +2,7 @@ import { BrandButton } from './brand/BrandButton';
 import { ArrowRight, Microscope, Award, Handshake } from 'lucide-react';
 import { motion } from 'motion/react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
-import heroImage from '../assets/images/hero-cordyceps-macro.jpg';
+
 import sustainabilityLeafIcon from '../assets/images/icon-leaf-sustainable.png';
 import labGrownMicroscopeIcon from '../assets/images/icon-microscope-lab.png';
 import premiumQualityIcon from '../assets/images/icon-award-premium.png';
@@ -101,7 +101,7 @@ export function Hero() {
           >
             <div className="relative rounded-2xl overflow-hidden shadow-2xl">
               <img
-                src={heroImage}
+                src="/assets/hero-cordyceps-macro.png"
                 alt="Lab-grown Cordyceps macro - premium quality mushroom structure"
                 className="w-full h-auto"
                 width="800"
