@@ -49,6 +49,7 @@ export const articles: Article[] = [
     isPillar: true,
     datePublished: '2025-12-28',
     dateModified: '2025-12-28',
+    ogImage: 'https://www.synervion.com/assets/og-cordyceps-benefits.png',
     content: `
       <div class="pillar-intro bg-gradient-to-r from-orange-50 to-amber-50 p-6 rounded-xl border border-orange-100 mb-8">
         <p class="text-lg text-slate-700 m-0"><strong>Cordyceps Militaris: Benefits, Uses, Dosage & Science</strong> — This comprehensive guide covers everything you need to know about Cordyceps militaris, from how it works in your body to specific applications for energy, endurance, immunity, and cognition.</p>
@@ -1029,6 +1030,7 @@ export const articles: Article[] = [
     pillarSlug: 'cordyceps-militaris-benefits',
     datePublished: '2025-12-28',
     dateModified: '2025-12-28',
+    ogImage: 'https://www.synervion.com/assets/og-when-to-take.png',
     content: `
       <div class="pillar-context bg-gradient-to-r from-slate-50 to-slate-100 p-4 rounded-lg border-l-4 border-orange-500 mb-8">
         <p class="text-sm text-slate-600 m-0">This article is part of our complete guide to <a href="/cordyceps-militaris-benefits" class="text-orange-600 font-medium hover:underline">Cordyceps Militaris Benefits</a>. Here we focus specifically on optimal timing strategies for maximum results.</p>
@@ -1171,6 +1173,9 @@ export const articles: Article[] = [
     description: 'A science-first look at why metabolic energy consistency matters more than stimulation for active professionals.',
     category: 'Energy & Focus',
     keywords: ['cordyceps vs caffeine', 'cordyceps for daily energy', 'natural energy supplements', 'caffeine free energy', 'sustainable energy for training'],
+    datePublished: '2024-03-15',
+    dateModified: '2025-12-28',
+    ogImage: 'https://www.synervion.com/assets/og-cordyceps-vs-caffeine.png',
     content: `
       <h2>Why Energy Consistency Matters More Than Stimulation</h2>
       <p>For professionals balancing full-time cognitive demands with a 3–4 day training split, the "energy equation" is often solved with more caffeine. While effective for acute alertness, stimulants rely on borrowing energy rather than creating it.</p>
