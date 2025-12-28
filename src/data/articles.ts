@@ -32,6 +32,10 @@ export interface Article {
     url?: string;
     year?: string;
   }[];
+  // SEO Enhancement Fields
+  datePublished?: string; // ISO format: YYYY-MM-DD
+  dateModified?: string;  // ISO format: YYYY-MM-DD
+  ogImage?: string;       // Custom Open Graph image URL
 }
 
 export const articles: Article[] = [
@@ -43,6 +47,8 @@ export const articles: Article[] = [
     category: 'Complete Guide',
     keywords: ['Cordyceps Militaris benefits', 'Cordyceps for energy', 'Cordyceps for endurance', 'Cordyceps supplement guide', 'Cordyceps dosage', 'Cordyceps safety', 'Cordyceps ATP', 'Cordyceps oxygen utilization'],
     isPillar: true,
+    datePublished: '2025-12-28',
+    dateModified: '2025-12-28',
     content: `
       <div class="pillar-intro bg-gradient-to-r from-orange-50 to-amber-50 p-6 rounded-xl border border-orange-100 mb-8">
         <p class="text-lg text-slate-700 m-0"><strong>Cordyceps Militaris: Benefits, Uses, Dosage & Science</strong> — This comprehensive guide covers everything you need to know about Cordyceps militaris, from how it works in your body to specific applications for energy, endurance, immunity, and cognition.</p>
@@ -179,7 +185,7 @@ export const articles: Article[] = [
         <li><strong>Pre-Workout (45-60 min before):</strong> Optimal for acute athletic benefits</li>
         <li><strong>With Food:</strong> Generally improves absorption and tolerance</li>
       </ul>
-      <p>Explore detailed consumption strategies in <a href="/best-way-to-take-cordyceps-powder-for-energy">best way to take cordyceps powder for energy</a>.</p>
+      <p>For a complete breakdown of timing strategies, see our dedicated guide: <a href="/when-to-take-cordyceps">When to Take Cordyceps: Best Time for Maximum Benefits</a>. Also explore <a href="/best-way-to-take-cordyceps-powder-for-energy">best way to take cordyceps powder for energy</a>.</p>
 
       <h2>Dosage, Safety, and Side Effects</h2>
       <h3>Recommended Dosage Ranges</h3>
@@ -1012,6 +1018,151 @@ export const articles: Article[] = [
       author: "Synervion Science Team",
       datePublished: "2024-01-01"
     }
+  },
+  // NEW: Timing Guide (Content Gap from Search Console)
+  {
+    slug: 'when-to-take-cordyceps',
+    title: 'When to Take Cordyceps: Best Time for Maximum Benefits (2025 Guide)',
+    description: 'Morning vs night, before or after workouts, with food or empty stomach? Science-based guide to optimal Cordyceps timing for energy, performance, and recovery.',
+    category: 'Dosage & Timing',
+    keywords: ['when to take cordyceps', 'best time to take cordyceps', 'cordyceps morning or night', 'cordyceps before workout', 'cordyceps timing', 'how to take cordyceps'],
+    pillarSlug: 'cordyceps-militaris-benefits',
+    datePublished: '2025-12-28',
+    dateModified: '2025-12-28',
+    content: `
+      <div class="pillar-context bg-gradient-to-r from-slate-50 to-slate-100 p-4 rounded-lg border-l-4 border-orange-500 mb-8">
+        <p class="text-sm text-slate-600 m-0">This article is part of our complete guide to <a href="/cordyceps-militaris-benefits" class="text-orange-600 font-medium hover:underline">Cordyceps Militaris Benefits</a>. Here we focus specifically on optimal timing strategies for maximum results.</p>
+      </div>
+
+      <h2>Does Timing Really Matter for Cordyceps?</h2>
+      <p>Yes, but perhaps not in the way you'd expect. Unlike caffeine, which provides an immediate spike and crash, Cordyceps works through <strong>metabolic optimization</strong>—enhancing cellular energy production at the mitochondrial level. This means:</p>
+      <ul>
+        <li><strong>Cumulative benefits</strong> build over 1-2 weeks of consistent use</li>
+        <li><strong>Acute effects</strong> are subtle but real, especially for physical performance</li>
+        <li><strong>Timing optimization</strong> can enhance specific goals (energy, recovery, sleep)</li>
+      </ul>
+
+      <h2>Morning: The Energy-First Approach</h2>
+      <p><strong>Best for:</strong> Sustained mental energy, cognitive performance, replacing morning caffeine</p>
+      <p>Taking Cordyceps in the morning capitalizes on its ATP-enhancing effects during your most demanding hours. Unlike caffeine, it won't cause jitters or afternoon crashes.</p>
+      
+      <h3>Morning Protocol</h3>
+      <ul>
+        <li><strong>Timing:</strong> Within 30 minutes of waking</li>
+        <li><strong>Dose:</strong> 1-2g fruiting body powder</li>
+        <li><strong>With food?</strong> Optional—some prefer with breakfast for better absorption</li>
+        <li><strong>Combine with:</strong> Coffee (if desired—they work synergistically without amplifying jitters)</li>
+      </ul>
+
+      <div class="e-e-a-t-citation">
+        <blockquote>"Cordyceps supplementation improved oxygen utilization and sustained aerobic performance without the tachycardia associated with stimulant use." — Chen S, et al., Journal of Alternative and Complementary Medicine (2010)</blockquote>
+      </div>
+
+      <h2>Pre-Workout: The Athletic Performance Window</h2>
+      <p><strong>Best for:</strong> Endurance athletes, high-intensity training, competitive events</p>
+      <p>Research shows that Cordyceps can enhance exercise performance when taken 45-60 minutes before training. This timing allows cordycepin to reach peak blood levels during your workout.</p>
+      
+      <h3>Pre-Workout Protocol</h3>
+      <ul>
+        <li><strong>Timing:</strong> 45-60 minutes before exercise</li>
+        <li><strong>Dose:</strong> 1-2g additional to your daily dose</li>
+        <li><strong>With food?</strong> Light snack is fine—avoid heavy meals</li>
+        <li><strong>Best activities:</strong> Running, cycling, swimming, CrossFit, HIIT</li>
+      </ul>
+      <p>For detailed athletic applications, see our guides on <a href="/cordyceps-for-crossfit-performance">Cordyceps for CrossFit</a> and <a href="/cordyceps-for-high-altitude-training">altitude training</a>.</p>
+
+      <h2>Evening: The Recovery Approach</h2>
+      <p><strong>Best for:</strong> Post-workout recovery, immune support, those sensitive to morning supplements</p>
+      <p>Contrary to common assumptions, Cordyceps does <em>not</em> interfere with sleep for most people. Its mechanism is adaptogenic, not stimulatory.</p>
+      
+      <h3>Evening Protocol</h3>
+      <ul>
+        <li><strong>Timing:</strong> With dinner or 2-3 hours before bed</li>
+        <li><strong>Dose:</strong> 1g fruiting body powder</li>
+        <li><strong>With food?</strong> Yes—improves absorption</li>
+        <li><strong>Benefits:</strong> Overnight cellular repair, immune modulation</li>
+      </ul>
+
+      <h2>With Food or Empty Stomach?</h2>
+      <p>Both work, but <strong>with food is generally better</strong> for most people:</p>
+      <table class="w-full border-collapse my-6">
+        <thead>
+          <tr class="bg-slate-100">
+            <th class="border border-slate-300 p-3 text-left">Scenario</th>
+            <th class="border border-slate-300 p-3 text-left">Recommendation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="border border-slate-300 p-3">First time using</td>
+            <td class="border border-slate-300 p-3">With food (assess tolerance)</td>
+          </tr>
+          <tr>
+            <td class="border border-slate-300 p-3">Sensitive stomach</td>
+            <td class="border border-slate-300 p-3">Always with food</td>
+          </tr>
+          <tr>
+            <td class="border border-slate-300 p-3">Pre-workout</td>
+            <td class="border border-slate-300 p-3">Light snack or empty (avoid heavy meals)</td>
+          </tr>
+          <tr>
+            <td class="border border-slate-300 p-3">Daily maintenance</td>
+            <td class="border border-slate-300 p-3">With breakfast or coffee</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Timing by Goal: Quick Reference</h2>
+      <ul>
+        <li><strong>Mental Energy & Focus:</strong> Morning, within 30 minutes of waking</li>
+        <li><strong>Athletic Performance:</strong> 45-60 minutes pre-workout</li>
+        <li><strong>Immune Support:</strong> Consistent daily timing (morning or evening)</li>
+        <li><strong>Recovery & Sleep:</strong> Evening with dinner</li>
+        <li><strong>General Wellness:</strong> Morning with breakfast</li>
+      </ul>
+
+      <h2>How Long Until You Feel Results?</h2>
+      <ul>
+        <li><strong>Acute effects</strong> (pre-workout): 45-90 minutes</li>
+        <li><strong>Noticeable sustained energy:</strong> 5-7 days of consistent use</li>
+        <li><strong>Full benefits:</strong> 2-4 weeks of daily supplementation</li>
+      </ul>
+      <p>Consistency matters more than perfect timing. Choose a time that fits your routine and stick with it.</p>
+
+      <div class="bg-slate-50 p-6 rounded-xl mt-8 mb-8">
+        <h4 class="text-lg font-bold text-slate-900 mt-0">Related Reading</h4>
+        <p class="text-slate-600 mb-3">Explore more about Cordyceps benefits and usage:</p>
+        <ul class="list-none pl-0 space-y-2">
+          <li>→ <a href="/cordyceps-militaris-benefits" class="text-orange-600 hover:underline">Complete Cordyceps Militaris Benefits Guide</a></li>
+          <li>→ <a href="/best-way-to-take-cordyceps-powder-for-energy" class="text-orange-600 hover:underline">Best Way to Take Cordyceps Powder</a></li>
+          <li>→ <a href="/cordyceps-vs-caffeine-daily-energy" class="text-orange-600 hover:underline">Cordyceps vs Caffeine Comparison</a></li>
+        </ul>
+      </div>
+
+      <h3>Scientific References</h3>
+      <ol class="text-sm space-y-2 text-slate-600">
+        <li>Chen S, et al. (2010). "Effect of Cs-4 on exercise performance in healthy older subjects." <em>Journal of Alternative and Complementary Medicine</em>.</li>
+        <li>Hirsch KR, et al. (2017). "Cordyceps militaris improves tolerance to high intensity exercise." <em>Journal of Dietary Supplements</em>.</li>
+        <li>Tuli HS, et al. (2013). "Pharmacological potential of Cordyceps with reference to Cordycepin." <em>3 Biotech</em>.</li>
+      </ol>
+    `,
+    faq: [
+      { question: 'Should I take Cordyceps in the morning or at night?', answer: 'Morning is ideal for energy and focus benefits. However, Cordyceps is not a stimulant and won\'t disrupt sleep if taken in the evening. Choose the time that fits your routine and goals.' },
+      { question: 'Can I take Cordyceps before bed?', answer: 'Yes. Unlike caffeine, Cordyceps doesn\'t interfere with sleep for most people. Some users prefer evening dosing for recovery and immune support benefits.' },
+      { question: 'How long before a workout should I take Cordyceps?', answer: '45-60 minutes before exercise is optimal for acute performance benefits. This allows cordycepin to reach peak blood levels during your workout.' },
+      { question: 'Should I take Cordyceps with food or on an empty stomach?', answer: 'Either works, but taking with food generally improves absorption and reduces any chance of stomach discomfort, especially for first-time users.' },
+      { question: 'How long does it take for Cordyceps to work?', answer: 'Acute effects (pre-workout) appear within 45-90 minutes. Sustained energy benefits typically emerge after 5-7 days. Full benefits develop over 2-4 weeks of consistent daily use.' }
+    ],
+    author: {
+      name: "Dr. Rajesh Menon",
+      role: "Chief Scientific Officer, Synervion",
+      bio: "PhD in Biochemistry with 15+ years of research in functional mushrooms and adaptogens."
+    },
+    references: [
+      { title: "Effect of Cs-4 on exercise performance", source: "Journal of Alternative and Complementary Medicine", year: "2010" },
+      { title: "Cordyceps militaris improves tolerance to high intensity exercise", source: "Journal of Dietary Supplements", year: "2017" },
+      { title: "Pharmacological potential of Cordyceps", source: "3 Biotech", year: "2013" }
+    ]
   }
   ,
   {

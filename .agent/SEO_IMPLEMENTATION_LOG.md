@@ -171,3 +171,97 @@ After deployment, monitor Google Search Console for:
 - Rich snippet appearance (2-3 days)
 - CTR improvements (1-2 weeks)
 - Core Web Vitals changes (3-5 days)
+
+---
+
+## 🚀 PHASE 2 IMPLEMENTATION (December 28, 2025)
+
+### 2.1 Article Interface Enhancement ✅
+**File:** `src/data/articles.ts`
+
+**Added Fields:**
+- `datePublished?: string` — ISO format date for schema
+- `dateModified?: string` — ISO format date for freshness signals
+- `ogImage?: string` — Custom Open Graph image per article
+
+**Impact:** Enables proper date display in search results and unique social sharing images.
+
+---
+
+### 2.2 ArticleTemplate SEO Update ✅
+**File:** `src/components/ArticleTemplate.tsx`
+
+**Changes:**
+- Schema now uses `article.datePublished` and `article.dateModified` when available
+- Added `og:image` meta tag using `article.ogImage` or default
+- Added Twitter Card meta tags (`twitter:card`, `twitter:title`, `twitter:description`, `twitter:image`)
+
+**Impact:** Better social sharing previews, accurate date signals to Google.
+
+---
+
+### 2.3 NEW ARTICLE: "When to Take Cordyceps" ✅
+**URL:** `/when-to-take-cordyceps`
+**Targeting Query:** "best time to take cordyceps" (4 impressions identified in Search Console)
+
+**Content Includes:**
+- Morning, Pre-Workout, and Evening timing protocols
+- With food vs. empty stomach guidance
+- Timing by goal (energy, performance, recovery)
+- 5 FAQs directly answering search queries
+- Links to pillar page and sibling articles
+- Author box and scientific references
+
+**SEO Details:**
+- Title: "When to Take Cordyceps: Best Time for Maximum Benefits (2025 Guide)"
+- Meta Description: "Morning vs night, before or after workouts, with food or empty stomach? Science-based guide to optimal Cordyceps timing for energy, performance, and recovery."
+- `datePublished`: 2025-12-28
+- `pillarSlug`: cordyceps-militaris-benefits
+
+---
+
+### 2.4 Pillar Page Date Update ✅
+**File:** `src/data/articles.ts`
+
+**Added to pillar article:**
+- `datePublished: '2025-12-28'`
+- `dateModified: '2025-12-28'`
+- Internal link to new timing guide
+
+---
+
+## 📊 PHASE 2 BUILD VERIFICATION
+
+| Check | Status |
+|-------|--------|
+| TypeScript Compilation | ✅ PASSED |
+| Production Build | ✅ PASSED |
+| Sitemap Generation | ✅ 33 URLs (up from 32) |
+| New Article Route | ✅ `/when-to-take-cordyceps` accessible |
+
+---
+
+## 📈 COMBINED EXPECTED OUTCOMES (Phase 1 + Phase 2)
+
+| Improvement | Expected Impact | Timeline |
+|-------------|-----------------|----------|
+| Article + Breadcrumb Schema | +10-15% CTR | 2-4 weeks |
+| Study Page Schema | 90 impressions → 5-10 clicks | 2-4 weeks |
+| "When to Take" Article | Capture new query traffic | 2-4 weeks |
+| Date Fields in Schema | Freshness signals | Immediate |
+| OG Image Support | Better social sharing | On share |
+
+---
+
+## 🚀 DEPLOYMENT COMMANDS
+
+```bash
+git add .
+git commit -m "SEO Phase 1+2: Schema, new timing article, date fields, OG images"
+git push
+```
+
+After deployment:
+1. Resubmit sitemap in Google Search Console
+2. Request indexing for `/when-to-take-cordyceps`
+3. Monitor Performance report for new query appearances

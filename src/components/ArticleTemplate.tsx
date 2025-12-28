@@ -15,8 +15,10 @@ export function ArticleTemplate({ article }: ArticleTemplateProps) {
         window.scrollTo(0, 0);
     }, [article.slug]);
 
-    // Generate date strings for schema
-    const currentDate = new Date().toISOString().split('T')[0];
+    // Use article dates or fallback to defaults
+    const datePublished = article.datePublished || article.factCheck?.datePublished || '2025-01-01';
+    const dateModified = article.dateModified || new Date().toISOString().split('T')[0];
+    const ogImage = article.ogImage || 'https://www.synervion.com/assets/hero-cordyceps-macro-B95TAOQ7.png';
     const authorName = article.author?.name || 'Synervion Science Team';
 
     const schemas: any[] = [
@@ -39,14 +41,14 @@ export function ArticleTemplate({ article }: ArticleTemplateProps) {
                     "url": "https://www.synervion.com/logo-favicon-180x180.png"
                 }
             },
-            "datePublished": article.factCheck?.datePublished || "2025-01-01",
-            "dateModified": currentDate,
+            "datePublished": datePublished,
+            "dateModified": dateModified,
             "mainEntityOfPage": {
                 "@type": "WebPage",
                 "@id": `https://www.synervion.com/${article.slug}`
             },
             "url": `https://www.synervion.com/${article.slug}`,
-            "image": "https://www.synervion.com/assets/hero-cordyceps-macro-B95TAOQ7.png"
+            "image": ogImage
         },
         // BreadcrumbList Schema - for breadcrumb display in SERPs
         {
@@ -143,6 +145,13 @@ export function ArticleTemplate({ article }: ArticleTemplateProps) {
                 <meta property="og:description" content={article.description} />
                 <meta property="og:type" content="article" />
                 <meta property="og:url" content={`https://www.synervion.com/${article.slug}`} />
+                <meta property="og:image" content={ogImage} />
+
+                {/* Twitter Card */}
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content={article.title} />
+                <meta name="twitter:description" content={article.description} />
+                <meta name="twitter:image" content={ogImage} />
 
                 {/* Schema */}
                 {schemas.map((schema, index) => (
