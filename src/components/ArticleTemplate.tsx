@@ -15,7 +15,64 @@ export function ArticleTemplate({ article }: ArticleTemplateProps) {
         window.scrollTo(0, 0);
     }, [article.slug]);
 
+    // Generate date strings for schema
+    const currentDate = new Date().toISOString().split('T')[0];
+    const authorName = article.author?.name || 'Synervion Science Team';
+
     const schemas: any[] = [
+        // Article Schema - for rich snippets
+        {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": article.title,
+            "description": article.description,
+            "author": {
+                "@type": article.author ? "Person" : "Organization",
+                "name": authorName,
+                ...(article.author && { "jobTitle": article.author.role })
+            },
+            "publisher": {
+                "@type": "Organization",
+                "name": "Synervion",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://www.synervion.com/logo-favicon-180x180.png"
+                }
+            },
+            "datePublished": article.factCheck?.datePublished || "2025-01-01",
+            "dateModified": currentDate,
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": `https://www.synervion.com/${article.slug}`
+            },
+            "url": `https://www.synervion.com/${article.slug}`,
+            "image": "https://www.synervion.com/assets/hero-cordyceps-macro-B95TAOQ7.png"
+        },
+        // BreadcrumbList Schema - for breadcrumb display in SERPs
+        {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://www.synervion.com/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": article.category || "Articles",
+                    "item": `https://www.synervion.com/#articles`
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": article.title
+                }
+            ]
+        },
+        // FAQPage Schema
         {
             "@context": "https://schema.org",
             "@type": "FAQPage",

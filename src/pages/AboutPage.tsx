@@ -123,7 +123,14 @@ export function AboutPage() {
               className="relative"
             >
               <div className="rounded-2xl overflow-hidden shadow-2xl">
-                <img src={technicianImage} alt="Scientist in lab" className="w-full h-auto object-cover" />
+                <img
+                  src={technicianImage}
+                  alt="Synervion scientist working in controlled cultivation lab"
+                  className="w-full h-auto object-cover"
+                  loading="lazy"
+                  width="800"
+                  height="600"
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-[hsl(var(--synervion-secondary-900))]/40 to-transparent" />
               </div>
             </motion.div>
@@ -249,7 +256,14 @@ export function AboutPage() {
               className="lg:w-1/2"
             >
               <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-[hsl(var(--synervion-border-light))]">
-                <img src={labFacilityImage} alt="Lab facility" className="w-full h-auto" />
+                <img
+                  src={labFacilityImage}
+                  alt="Synervion lab facility - Advanced Cordyceps cultivation center"
+                  className="w-full h-auto"
+                  loading="lazy"
+                  width="800"
+                  height="600"
+                />
                 <div className="absolute inset-0 bg-[hsl(var(--synervion-secondary-900))]/20" />
               </div>
             </motion.div>

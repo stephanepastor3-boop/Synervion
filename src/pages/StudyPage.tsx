@@ -1,9 +1,9 @@
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
 import { studies } from '../components/ExploreResearch';
 import { StudyDetails } from '../components/research/StudyDetails';
 import { Navigation } from '../components/Navigation';
-import { SEO } from '../components/SEO';
 
 export function StudyPage() {
     const { id } = useParams();
@@ -12,7 +12,10 @@ export function StudyPage() {
     if (!study) {
         return (
             <div className="min-h-screen bg-neutral-50 flex flex-col items-center justify-center p-4">
-                <SEO title="Study Not Found | Synervion" canonical="/study" />
+                <Helmet>
+                    <title>Study Not Found | Synervion Research</title>
+                    <meta name="robots" content="noindex" />
+                </Helmet>
                 <h1 className="text-2xl font-bold text-neutral-900 mb-4">Study Not Found</h1>
                 <Link
                     to="/"
@@ -25,13 +28,84 @@ export function StudyPage() {
         );
     }
 
+    // Enhanced meta description with key findings
+    const enhancedDescription = study.summary
+        ? `${study.title}: ${study.summary.substring(0, 150)}... Read the full scientific research.`
+        : `Scientific research on Cordyceps: ${study.title}. Peer-reviewed study with key findings and methodology.`;
+
+    // Schema markup for structured data
+    const schemas = [
+        // ScholarlyArticle Schema
+        {
+            "@context": "https://schema.org",
+            "@type": "ScholarlyArticle",
+            "headline": study.title,
+            "description": study.summary || enhancedDescription,
+            "author": {
+                "@type": "Organization",
+                "name": "Synervion Research"
+            },
+            "publisher": {
+                "@type": "Organization",
+                "name": "Synervion",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://www.synervion.com/logo-favicon-180x180.png"
+                }
+            },
+            "datePublished": "2024-01-01",
+            "url": `https://www.synervion.com/study/${study.id}`,
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": `https://www.synervion.com/study/${study.id}`
+            }
+        },
+        // BreadcrumbList Schema
+        {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://www.synervion.com/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Research",
+                    "item": "https://www.synervion.com/#rnd"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": study.title
+                }
+            ]
+        }
+    ];
+
     return (
         <div className="min-h-screen bg-neutral-50">
-            <SEO
-                title={`${study.title} | Synervion Research`}
-                description={study.summary || "Read the full study details."}
-                canonical={`/study/${study.id}`}
-            />
+            <Helmet>
+                <title>{study.title} | Synervion Research</title>
+                <meta name="description" content={enhancedDescription} />
+                <link rel="canonical" href={`https://www.synervion.com/study/${study.id}`} />
+
+                {/* Open Graph */}
+                <meta property="og:title" content={`${study.title} | Synervion Research`} />
+                <meta property="og:description" content={enhancedDescription} />
+                <meta property="og:type" content="article" />
+                <meta property="og:url" content={`https://www.synervion.com/study/${study.id}`} />
+
+                {/* Schema */}
+                {schemas.map((schema, index) => (
+                    <script key={index} type="application/ld+json">
+                        {JSON.stringify(schema)}
+                    </script>
+                ))}
+            </Helmet>
             <Navigation />
             <div className="pt-24 pb-12 px-4 max-w-7xl mx-auto">
                 <Link
@@ -62,3 +136,4 @@ export function StudyPage() {
         </div>
     );
 }
+
