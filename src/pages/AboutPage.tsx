@@ -126,16 +126,16 @@ export function AboutPage() {
               transition={{ duration: 0.6 }}
               className="relative"
             >
-              <div className="rounded-2xl overflow-hidden shadow-2xl h-full min-h-[400px]">
+              <div className="rounded-2xl overflow-hidden shadow-2xl transform-gpu">
                 <video
                   src={technicianVideo}
                   autoPlay
                   loop
                   muted
                   playsInline
-                  className="w-full h-full object-cover"
+                  className="w-full h-auto block rounded-2xl"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[hsl(var(--synervion-secondary-900))]/40 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[hsl(var(--synervion-secondary-900))]/40 to-transparent rounded-2xl" />
               </div>
             </motion.div>
           </div>
