@@ -23,9 +23,11 @@ export interface Article {
     name: string;
     role: string;
     bio: string;
+    image?: string;
   };
   isPillar?: boolean;
   pillarSlug?: string; // For supporting articles, links back to pillar
+  referenceStudyId?: number;
   references?: {
     title: string;
     source: string;
@@ -1521,6 +1523,104 @@ export const articles: Article[] = [
       claim: "Cordyceps enhances ATP production, providing a cellular energy currency that functions independently of central nervous system cleaning.",
       author: "Synervion Science Team",
       datePublished: "2024-03-01"
+    }
+  },
+  {
+    slug: 'cordyceps-for-athletes-runners-cyclists',
+    title: 'Cordyceps for Athletes: The Ultimate Guide to Endurance & VO2 Max (2025 Edition)',
+    description: 'Why elite runners and cyclists are switching to Functional Mushrooms. A deep dive into ATP production, oxygen utilization, and non-stimulant performance enhancement.',
+    category: 'Athletic Performance',
+    keywords: ['cordyceps for runners', 'cordyceps cycling', 'increase vo2 max naturally', 'cordyceps dosage for athletes', 'legal performance enhancers', 'cordyceps pre workout'],
+    pillarSlug: 'cordyceps-militaris-benefits',
+    datePublished: '2025-12-28',
+    dateModified: '2025-12-28',
+    ogImage: 'https://www.synervion.com/assets/og-cordyceps-athletes.png',
+    content: `
+      <div class="pillar-intro bg-slate-50 p-6 rounded-xl border border-slate-200 mb-8">
+        <p class="text-lg text-slate-700 m-0"><strong>In this Guide:</strong> We break down the clinical science behind Cordyceps militaris as a performance enhancer, specifically for endurance sports like running, cycling, and CrossFit. Learn why it's called "The Himalayan Gold" of athletics.</p>
+      </div>
+
+      <h2>The "Legal Doping" Question</h2>
+      <p>In 1993, at the Chinese National Games, three female runners broke <strong>nine world records</strong> in a single week. The performance was so staggering that authorities immediately suspected rigorous doping protocols.</p>
+      <p>The tests came back negative. Their coach's secret? A rigorous training regime supplemented with a daily tonic of <strong>Cordyceps sinensis</strong>.</p>
+      <p>While the modern athlete's toolkit has evolved, the biology remains the same: <strong>Oxygen is fuel</strong>. And few natural substances optimize oxygen utilization like Cordyceps militaris.</p>
+
+      <h3>How It Works: The "ATP Engine"</h3>
+      <p>Unlike caffeine, which stimulates the central nervous system (often increasing heart rate and anxiety), Cordyceps works at the <strong>cellular level</strong>. It contains <strong>Cordycepin</strong> (3'-deoxyadenosine), a molecular twin of Adenosine.</p>
+      <p>This allows it to rapidly integrate into your cellular energy cycle, directly boosting the production of <strong>ATP (Adenosine Triphosphate)</strong>—the primary energy currency of your muscles.</p>
+      
+      <div class="bg-orange-50 p-6 rounded-xl border-l-4 border-orange-500 my-8">
+        <h4 class="text-orange-900 font-bold mb-2 m-0 text-xl">The Science of VO2 Max</h4>
+        <p class="text-orange-800 m-0">A landmark 2017 study published in the <em>Journal of Dietary Supplements</em> found that supplementation with 4g of Cordyceps militaris for just 3 weeks resulted in a <strong>10.9% increase in VO2 Max</strong> and a <strong>41% increase in Ventilatory Threshold</strong>.</p>
+        <div class="mt-4">
+          <a href="/study/1" class="text-xs uppercase font-bold tracking-wider text-orange-600 hover:text-orange-800">View The Clinical Data →</a>
+        </div>
+      </div>
+
+      <h2>Running & Cycling: Delaying the "Burn"</h2>
+      <p>Every endurance athlete knows "The Wall"—that moment when lactate accumulation outpaces your body's ability to clear it. Your muscles burn, and power output drops.</p>
+      <p>Cordyceps helps delay this point through two mechanisms:</p>
+      <ol>
+        <li><strong>Vasodilation:</strong> By relaxing blood vessel walls, it improves blood flow to working muscles. (Contrast this with caffeine, which is a vasoconstrictor).</li>
+        <li><strong>Lactate Clearance:</strong> Studies suggest improved lactate threshold, allowing you to sustain higher wattage or pace for longer durations.</li>
+      </ol>
+
+      <div class="mb-8">
+        <h3 class="text-2xl font-bold mb-4">The Synervion Loading Protocol</h3>
+        <p>If you have a race, marathon, or competition coming up, generic dosing won't work. Based on clinical trials, we recommend a "Loading Phase."</p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+          <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+            <h4 class="font-bold text-lg mb-2 text-slate-900">Phase 1: Maintenance (Baseline)</h4>
+            <p class="text-sm text-slate-600 mb-2"><strong>Goal:</strong> Daily Cellular Support</p>
+            <p class="text-2xl font-bold text-orange-600">1g / day</p>
+            <p class="text-xs text-slate-500 mt-2">Taken with morning coffee or smoothie.</p>
+          </div>
+          <div class="bg-slate-900 p-6 rounded-xl shadow-sm text-white">
+            <h4 class="font-bold text-lg mb-2 text-white">Phase 2: Loading (Race Prep)</h4>
+            <p class="text-sm text-slate-300 mb-2"><strong>Goal:</strong> Peak Saturation</p>
+            <p class="text-2xl font-bold text-orange-400">3g - 4g / day</p>
+            <p class="text-xs text-slate-400 mt-2">Start 2 weeks before competition. Split dose: AM and Pre-Workout.</p>
+          </div>
+        </div>
+      </div>
+
+      <h2>Which Form is Best? (Biomass vs. Extract)</h2>
+      <p>For athletes, we generally recommend a <strong>Full-Spectrum approach</strong> or a high-concentration dual extract. While pure cordycepin is potent, the polysaccharides found in the fruit body also support the immune system—crucial for athletes who are prone to "overtraining flu" post-race.</p>
+      <p>Check our <a href="/cordyceps-militaris-benefits" class="text-orange-600 font-medium hover:underline">Complete Benefits Guide</a> for a detailed breakdown of extraction methods.</p>
+
+      <h3>Summary</h3>
+      <p>If you rely on pre-workout stimulants, you are borrowing energy from tomorrow to use today. Cordyceps offers a different path: building a bigger biological engine so you generate more energy naturally.</p>
+    `,
+    faq: [
+      {
+        question: 'Should I take it before my run?',
+        answer: 'Yes. Taking 1-2g about 45-60 minutes before training allows peak blood concentration during your workout.'
+      },
+      {
+        question: 'Is it safe for drug testing (WADA)?',
+        answer: 'Yes. Cordyceps is a natural functional food and is not on the WADA prohibited list. However, always ensure your source is third-party tested for contaminants (like Synervion is).'
+      },
+      {
+        question: 'Can I stack it with Creatine?',
+        answer: 'Absolutely. Creatine aids the phosphagen system (0-10 seconds power), while Cordyceps aids aerobic/anaerobic capacity (endurance). They cover different energy systems perfectly.'
+      },
+      {
+        question: 'Does it taste like mushrooms?',
+        answer: 'Extracts have an earthy, savory umami flavor. Most athletes mix it into coffee, pre-workout shakes, or smoothies where the taste is easily masked.'
+      }
+    ],
+    referenceStudyId: 1, // Linking directly to the Exercise Tolerance study
+    author: {
+      name: "Dr. A. Singh",
+      role: "Lead Researcher",
+      bio: "Expert in mycological sports applications and functional nutrition.",
+      image: "/assets/team/dr-singh.png"
+    },
+    factCheck: {
+      claim: "Supplementation with Cordyceps militaris contributes to measurable improvements in VO2 Max and ventilatory threshold in human subjects.",
+      author: "Synervion Science Team",
+      datePublished: "2025-12-28"
     }
   }
 ];

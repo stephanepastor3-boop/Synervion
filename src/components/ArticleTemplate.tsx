@@ -192,11 +192,19 @@ export function ArticleTemplate({ article }: ArticleTemplateProps) {
                     {article.author && (
                         <section className="mt-12 p-6 bg-gradient-to-r from-slate-50 to-slate-100 rounded-xl border border-slate-200">
                             <div className="flex items-start gap-4">
-                                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center flex-shrink-0">
-                                    <span className="text-white text-xl font-bold">
-                                        {article.author.name.split(' ').map(n => n[0]).join('')}
-                                    </span>
-                                </div>
+                                {article.author.image ? (
+                                    <img
+                                        src={article.author.image}
+                                        alt={article.author.name}
+                                        className="w-16 h-16 rounded-full object-cover border-2 border-orange-100 flex-shrink-0"
+                                    />
+                                ) : (
+                                    <div className="w-16 h-16 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center flex-shrink-0">
+                                        <span className="text-white text-xl font-bold">
+                                            {article.author.name.split(' ').map(n => n[0]).join('')}
+                                        </span>
+                                    </div>
+                                )}
                                 <div>
                                     <h3 className="text-lg font-bold text-slate-900 mb-1">
                                         {article.author.name}
