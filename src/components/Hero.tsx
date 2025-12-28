@@ -1,3 +1,4 @@
+import { ProductQuiz } from './ProductQuiz';
 import { BrandButton } from './brand/BrandButton';
 import { ArrowRight, Microscope, Award, Handshake } from 'lucide-react';
 import { motion } from 'motion/react';
@@ -73,7 +74,7 @@ export function Hero() {
             </div>
 
             {/* CTA Buttons - Mobile: Stack vertically, Desktop: Side by side */}
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-center sm:items-stretch">
               <BrandButton
                 size="lg"
                 variant="primary"
@@ -89,6 +90,9 @@ export function Hero() {
               >
                 View Research
               </BrandButton>
+              <div className="sm:ml-4">
+                <ProductQuiz />
+              </div>
             </div>
           </motion.div>
 
