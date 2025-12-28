@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { X, ArrowRight, Check, Sparkles, Coffee, Pill, Activity, Brain, ShieldCheck } from 'lucide-react';
+import { X, ArrowRight, Check, Sparkles, Coffee, Pill, Activity, Brain, ShieldCheck, LucideIcon } from 'lucide-react';
 import { BrandButton } from './brand/BrandButton';
 
 interface QuizState {
@@ -57,10 +57,10 @@ export function ProductQuiz() {
         <>
             <button
                 onClick={handleOpen}
-                className="group flex items-center gap-2 text-sm font-semibold text-slate-600 hover:text-orange-600 transition-colors mt-4 sm:mt-0"
+                className="group flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-primary transition-all duration-300 mt-4 sm:mt-0 px-2 py-1 rounded-md hover:bg-primary/5"
             >
-                <Sparkles className="w-4 h-4 text-orange-500" />
-                <span>Not sure? Find your match</span>
+                <Sparkles className="w-4 h-4 text-primary group-hover:rotate-12 transition-transform" />
+                <span className="border-b border-transparent group-hover:border-primary/30">Not sure? Find your match</span>
             </button>
 
             <AnimatePresence>
@@ -72,7 +72,7 @@ export function ProductQuiz() {
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             onClick={handleClose}
-                            className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"
+                            className="absolute inset-0 bg-background/80 backdrop-blur-sm"
                         />
 
                         {/* Modal */}
@@ -80,17 +80,17 @@ export function ProductQuiz() {
                             initial={{ opacity: 0, scale: 0.95, y: 20 }}
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                            className="relative w-full max-w-lg bg-white rounded-2xl shadow-2xl overflow-hidden"
+                            className="relative w-full max-w-lg bg-card rounded-2xl shadow-2xl border border-border overflow-hidden"
                         >
                             {/* Header */}
-                            <div className="flex items-center justify-between p-6 border-b border-slate-100">
-                                <div className="flex items-center gap-2 text-orange-600">
+                            <div className="flex items-center justify-between p-6 border-b border-border">
+                                <div className="flex items-center gap-2 text-primary">
                                     <Sparkles className="w-5 h-5" />
-                                    <span className="font-bold text-sm tracking-wide uppercase">Product Finder</span>
+                                    <span className="font-bold text-sm tracking-wide uppercase font-heading">Product Finder</span>
                                 </div>
                                 <button
                                     onClick={handleClose}
-                                    className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-50 rounded-full transition-colors"
+                                    className="p-2 text-muted-foreground hover:text-foreground hover:bg-secondary rounded-full transition-colors"
                                 >
                                     <X className="w-5 h-5" />
                                 </button>
@@ -98,11 +98,12 @@ export function ProductQuiz() {
 
                             {/* Progress Bar */}
                             {step > 0 && step < 4 && (
-                                <div className="h-1 bg-slate-100 w-full">
+                                <div className="h-1 bg-secondary w-full">
                                     <motion.div
                                         initial={{ width: 0 }}
                                         animate={{ width: `${(step / 3) * 100}%` }}
-                                        className="h-full bg-orange-500"
+                                        className="h-full bg-primary"
+                                        transition={{ duration: 0.5, ease: "circOut" }}
                                     />
                                 </div>
                             )}
@@ -120,8 +121,8 @@ export function ProductQuiz() {
                                             exit={{ opacity: 0, x: -20 }}
                                             className="text-center"
                                         >
-                                            <h2 className="text-3xl font-bold text-slate-900 mb-4">Discover Your Ideal Cordyceps</h2>
-                                            <p className="text-slate-600 mb-8">Answer 3 quick questions to find the perfect format for your goals (or your customers' goals).</p>
+                                            <h2 className="text-3xl font-bold text-foreground mb-4 font-heading">Discover Your Ideal Cordyceps</h2>
+                                            <p className="text-muted-foreground mb-8 text-lg">Answer 3 quick questions to find the perfect format for your goals (or your customers' goals).</p>
                                             <BrandButton size="lg" onClick={nextStep} className="w-full sm:w-auto">
                                                 Start Quiz <ArrowRight className="w-4 h-4 ml-2" />
                                             </BrandButton>
@@ -136,7 +137,7 @@ export function ProductQuiz() {
                                             animate={{ opacity: 1, x: 0 }}
                                             exit={{ opacity: 0, x: -20 }}
                                         >
-                                            <h3 className="text-xl font-bold text-slate-900 mb-6">What is the primary goal?</h3>
+                                            <h3 className="text-xl font-bold text-foreground mb-6 font-heading">What is the primary goal?</h3>
                                             <div className="space-y-3">
                                                 <QuizOption
                                                     icon={Activity}
@@ -168,7 +169,7 @@ export function ProductQuiz() {
                                             animate={{ opacity: 1, x: 0 }}
                                             exit={{ opacity: 0, x: -20 }}
                                         >
-                                            <h3 className="text-xl font-bold text-slate-900 mb-6">Preferred format?</h3>
+                                            <h3 className="text-xl font-bold text-foreground mb-6 font-heading">Preferred format?</h3>
                                             <div className="space-y-3">
                                                 <QuizOption
                                                     icon={Coffee}
@@ -194,18 +195,18 @@ export function ProductQuiz() {
                                             animate={{ opacity: 1, scale: 1 }}
                                             className="text-center"
                                         >
-                                            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                                            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 ring-4 ring-green-50">
                                                 <Check className="w-8 h-8 text-green-600" />
                                             </div>
-                                            <span className="text-orange-600 font-bold uppercase tracking-wider text-sm">Best Switch for You</span>
-                                            <h2 className="text-3xl font-bold text-slate-900 mt-2 mb-4">{recommendation.title}</h2>
-                                            <p className="text-slate-600 mb-8">{recommendation.description}</p>
+                                            <span className="text-primary font-bold uppercase tracking-wider text-sm">Best Switch for You</span>
+                                            <h2 className="text-3xl font-bold text-foreground mt-2 mb-4 font-heading">{recommendation.title}</h2>
+                                            <p className="text-muted-foreground mb-8 text-lg leading-relaxed">{recommendation.description}</p>
 
                                             <BrandButton size="lg" onClick={() => { handleClose(); window.location.href = recommendation.link; }} className="w-full">
                                                 View Product Details
                                             </BrandButton>
 
-                                            <button onClick={handleOpen} className="text-sm text-slate-500 hover:text-slate-800 mt-4 underline">
+                                            <button onClick={handleOpen} className="text-sm text-muted-foreground hover:text-foreground mt-6 underline underline-offset-4 decoration-muted-foreground/30 hover:decoration-foreground transition-all">
                                                 Retake Quiz
                                             </button>
                                         </motion.div>
@@ -221,20 +222,20 @@ export function ProductQuiz() {
     );
 }
 
-function QuizOption({ icon: Icon, label, desc, onClick }: { icon: any, label: string, desc: string, onClick: () => void }) {
+function QuizOption({ icon: Icon, label, desc, onClick }: { icon: LucideIcon, label: string, desc: string, onClick: () => void }) {
     return (
         <button
             onClick={onClick}
-            className="w-full flex items-center gap-4 p-4 rounded-xl border border-slate-200 hover:border-orange-500 hover:bg-orange-50/50 transition-all group text-left"
+            className="w-full flex items-center gap-4 p-4 rounded-xl border border-border bg-card hover:border-primary hover:bg-primary/5 hover:shadow-md transition-all group text-left duration-200"
         >
-            <div className="w-12 h-12 rounded-lg bg-white border border-slate-100 flex items-center justify-center text-slate-500 group-hover:text-orange-500 group-hover:border-orange-200 transition-colors shadow-sm">
+            <div className="w-12 h-12 rounded-lg bg-secondary/50 border border-border flex items-center justify-center text-muted-foreground group-hover:text-primary group-hover:border-primary/20 group-hover:bg-white transition-colors shadow-sm">
                 <Icon className="w-6 h-6" />
             </div>
             <div>
-                <div className="font-bold text-slate-900 group-hover:text-orange-700">{label}</div>
-                <div className="text-sm text-slate-500">{desc}</div>
+                <div className="font-bold text-foreground group-hover:text-primary transition-colors font-heading">{label}</div>
+                <div className="text-sm text-muted-foreground group-hover:text-muted-foreground/80">{desc}</div>
             </div>
-            <ArrowRight className="w-4 h-4 ml-auto text-slate-300 group-hover:text-orange-500 opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0" />
+            <ArrowRight className="w-4 h-4 ml-auto text-muted-foreground/30 group-hover:text-primary opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0" />
         </button>
     );
 }

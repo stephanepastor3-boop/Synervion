@@ -1,6 +1,6 @@
 import { ProductQuiz } from './ProductQuiz';
 import { BrandButton } from './brand/BrandButton';
-import { ArrowRight, Microscope, Award, Handshake } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { motion } from 'motion/react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 
@@ -12,9 +12,9 @@ import flexibleCollabsIcon from '../assets/images/icon-handshake-flexible.png';
 export function Hero() {
   const features = [
     { iconType: 'image' as const, iconSrc: sustainabilityLeafIcon, label: 'Sustainable' },
-    { iconType: 'image' as const, iconSrc: labGrownMicroscopeIcon, label: 'Lab-Grown', fallbackIcon: Microscope },
-    { iconType: 'image' as const, iconSrc: premiumQualityIcon, label: 'Premium Quality', fallbackIcon: Award },
-    { iconType: 'image' as const, iconSrc: flexibleCollabsIcon, label: 'Flexible Collabs', fallbackIcon: Handshake },
+    { iconType: 'image' as const, iconSrc: labGrownMicroscopeIcon, label: 'Lab-Grown' },
+    { iconType: 'image' as const, iconSrc: premiumQualityIcon, label: 'Premium Quality' },
+    { iconType: 'image' as const, iconSrc: flexibleCollabsIcon, label: 'Flexible Collabs' },
   ];
 
   return (

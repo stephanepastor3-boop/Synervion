@@ -36,6 +36,7 @@ export function Footer() {
     ],
     Resources: [
       { label: 'Benefits', action: () => smoothScroll('#features') },
+      { label: 'Guides', action: () => smoothScroll('#articles') },
       { label: 'Dosage Calculator', href: '/calculator/cordyceps-goal-planner' },
       { label: 'Testing', action: () => smoothScroll('#rnd') },
       { label: 'Contact', href: '/contact' },

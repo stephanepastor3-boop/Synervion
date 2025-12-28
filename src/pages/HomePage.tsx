@@ -5,6 +5,7 @@ import { LabGrownAdvantage } from '../components/LabGrownAdvantage';
 import { WhatWeSupply } from '../components/WhatWeSupply';
 import { PartnershipModels } from '../components/PartnershipModels';
 import { ExploreResearch } from '../components/ExploreResearch';
+import { FeaturedArticles } from '../components/FeaturedArticles';
 import { ContactCTA } from '../components/ContactCTA';
 import { Footer } from '../components/Footer';
 import { SEO } from '../components/SEO';
@@ -21,6 +22,7 @@ export function HomePage() {
         <WhatWeSupply />
         <PartnershipModels />
         <ExploreResearch />
+        <FeaturedArticles />
         <ContactCTA />
       </main>
       <Footer />

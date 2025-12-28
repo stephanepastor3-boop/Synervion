@@ -8,8 +8,8 @@ export interface Study {
     category: string;
     doi: string;
     keyFindings: string[];
-    chartData?: any[];
-    chartConfig?: any;
+    chartData?: Record<string, unknown>[];
+    chartConfig?: Record<string, unknown>;
     chartType: 'bar' | 'pathway' | 'dual' | 'line' | 'comparison';
     imageUrl: string;
     relevance: string;

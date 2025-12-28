@@ -24,6 +24,7 @@ export function Navigation() {
     { label: 'Why Lab-Grown', href: '#origin' },
     { label: 'Collabs', href: '#partners' },
     { label: 'Research', href: '#rnd' },
+    { label: 'Guides', href: '#articles' },
     { label: 'Calculator', href: '/calculator/cordyceps-goal-planner' },
     { label: 'Contact', href: '/contact' },
   ];
