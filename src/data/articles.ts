@@ -51,7 +51,7 @@ export const articles: Article[] = [
     isPillar: true,
     datePublished: '2025-12-28',
     dateModified: '2025-12-28',
-    ogImage: 'https://www.synervion.com/assets/og-cordyceps-benefits.png',
+    ogImage: '/assets/hero_cordyceps_real.png',
     content: `
       <div class="pillar-intro bg-gradient-to-r from-orange-50 to-amber-50 p-6 rounded-xl border border-orange-100 mb-8">
         <p class="text-lg text-slate-700 m-0"><strong>Cordyceps Militaris: Benefits, Uses, Dosage & Science</strong> — This comprehensive guide covers everything you need to know about Cordyceps militaris, from how it works in your body to specific applications for energy, endurance, immunity, and cognition.</p>
@@ -307,6 +307,7 @@ export const articles: Article[] = [
     category: 'Endurance Sports',
     keywords: ['Cordyceps for high-altitude training', 'Cordyceps for mountaineering', 'oxygen uptake supplements', 'altitude sickness natural remedies', 'VO2 max booster', 'hypoxia adaptation'],
     pillarSlug: 'cordyceps-militaris-benefits',
+    ogImage: '/assets/hero_altitude_real.png',
     content: `
       <div class="pillar-context bg-gradient-to-r from-slate-50 to-slate-100 p-4 rounded-lg border-l-4 border-orange-500 mb-8">
         <p class="text-sm text-slate-600 m-0">This article is part of our complete guide to <a href="/cordyceps-militaris-benefits" class="text-orange-600 font-medium hover:underline">Cordyceps Militaris Benefits</a>. Here we focus specifically on high-altitude training and hypoxia adaptation.</p>
@@ -817,6 +818,7 @@ export const articles: Article[] = [
     category: 'Energy & Focus',
     keywords: ['Cordyceps for mental clarity', 'natural nootropic', 'brain fog supplements', 'focus and concentration', 'mushroom for brain health', 'cognitive performance'],
     pillarSlug: 'cordyceps-militaris-benefits',
+    ogImage: '/assets/hero_focus_real.png',
     content: `
       <div class="pillar-context bg-gradient-to-r from-slate-50 to-slate-100 p-4 rounded-lg border-l-4 border-orange-500 mb-8">
         <p class="text-sm text-slate-600 m-0">This article is part of our complete guide to <a href="/cordyceps-militaris-benefits" class="text-orange-600 font-medium hover:underline">Cordyceps Militaris Benefits</a>. Here we focus specifically on cognitive performance and mental clarity.</p>
