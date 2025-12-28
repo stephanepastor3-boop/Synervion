@@ -122,6 +122,30 @@ export function ArticleTemplate({ article }: ArticleTemplateProps) {
                     {/* Science CTA */}
                     <ScienceCTA />
 
+                    {/* Author Box - E-E-A-T */}
+                    {article.author && (
+                        <section className="mt-12 p-6 bg-gradient-to-r from-slate-50 to-slate-100 rounded-xl border border-slate-200">
+                            <div className="flex items-start gap-4">
+                                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center flex-shrink-0">
+                                    <span className="text-white text-xl font-bold">
+                                        {article.author.name.split(' ').map(n => n[0]).join('')}
+                                    </span>
+                                </div>
+                                <div>
+                                    <h3 className="text-lg font-bold text-slate-900 mb-1">
+                                        {article.author.name}
+                                    </h3>
+                                    <p className="text-sm text-orange-600 font-medium mb-2">
+                                        {article.author.role}
+                                    </p>
+                                    <p className="text-sm text-slate-600">
+                                        {article.author.bio}
+                                    </p>
+                                </div>
+                            </div>
+                        </section>
+                    )}
+
                     {/* FAQ Section */}
                     <section className="mt-16 pt-16 border-t border-slate-200">
                         <h2 className="text-3xl font-bold text-slate-900 mb-8">Frequently Asked Questions</h2>
