@@ -10,6 +10,8 @@ import { ContactCTA } from '../components/ContactCTA';
 import { Footer } from '../components/Footer';
 import { SEO } from '../components/SEO';
 
+import { ProductShowcase } from '../components/products/ProductShowcase';
+
 export function HomePage() {
   return (
     <div className="min-h-screen bg-[hsl(var(--synervion-bg-white))]">
@@ -19,6 +21,7 @@ export function HomePage() {
         <Hero />
         <ProductBenefits />
         <LabGrownAdvantage />
+        <ProductShowcase />
         <WhatWeSupply />
         <PartnershipModels />
         <ExploreResearch />
