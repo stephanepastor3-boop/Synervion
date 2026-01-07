@@ -36,6 +36,8 @@ export interface Product {
     description: string;
     price: number;
     image: string;
+    imageScale?: number;
+    imageOffsetY?: string; // e.g. "10%" or "20px" to push image down
     category: 'performance' | 'immunity' | 'cognition' | 'recovery';
     tags: string[]; // e.g., "VO2 Max", "ATP"
 

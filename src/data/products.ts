@@ -85,6 +85,7 @@ export const products: Product[] = [
         description: 'Micronized fruiting body for daily wellness and holistic blends.',
         price: 0,
         image: productRootPowders,
+        imageScale: 1.2,
         gallery: [
             { type: 'ingredient', src: productRootPowders, label: 'Bulk Powder' },
             { type: 'texture', src: actionOmni, label: 'Food Matrix' },

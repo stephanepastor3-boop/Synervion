@@ -44,12 +44,19 @@ export function ProductCard({ product, relatedStudies = [], onQuickAdd }: Produc
                                 style={{ transform: `translateX(-${currentImageIndex * 100}%)` }}
                             >
                                 {product.gallery?.map((item, idx) => (
-                                    <div key={idx} className="w-full h-full flex-shrink-0 flex items-center justify-center">
-                                        <img
-                                            src={item.src}
-                                            alt={`${product.title} - ${item.label}`}
-                                            className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-                                        />
+                                    <div key={idx} className="w-full h-full flex-shrink-0 flex items-end justify-center">
+                                        <div
+                                            className="w-full h-full transition-transform duration-700 flex items-center justify-center transform-gpu"
+                                            style={{
+                                                transform: `scale(${product.imageScale || 1}) translateY(${product.imageOffsetY || '0'})`
+                                            }}
+                                        >
+                                            <img
+                                                src={item.src}
+                                                alt={`${product.title} - ${item.label}`}
+                                                className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                                            />
+                                        </div>
                                     </div>
                                 ))}
                             </div>
