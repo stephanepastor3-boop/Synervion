@@ -7,6 +7,9 @@ import productRootPowders from '../assets/product-root-powders.png';
 import actionFlow from '../assets/action-flow.png';
 import actionOmni from '../assets/action-omni.png';
 
+import actionRootTexture from '../assets/action-root-texture.png';
+import applicationRootLifestyle from '../assets/application-root-lifestyle.png';
+
 import applicationPulseLiquids from '../assets/application-pulse-liquids.png';
 import productPulseHero from '../assets/product-pulse-hero.png'; // New Hero Image
 import endProductOmni from '../assets/end-product-omni.png';
@@ -85,11 +88,10 @@ export const products: Product[] = [
         description: 'Micronized fruiting body for daily wellness and holistic blends.',
         price: 0,
         image: productRootPowders,
-        imageScale: 1.2,
         gallery: [
             { type: 'ingredient', src: productRootPowders, label: 'Bulk Powder' },
-            { type: 'texture', src: actionOmni, label: 'Food Matrix' },
-            { type: 'application', src: endProductOmni, label: 'Consumer CPG' }
+            { type: 'texture', src: actionRootTexture, label: 'Food Matrix' },
+            { type: 'application', src: applicationRootLifestyle, label: 'Daily Wellness' }
         ],
         category: 'immunity',
         tags: ['Broad Spectrum', 'Whole Food', 'High Fiber'],

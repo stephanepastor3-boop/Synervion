@@ -37,7 +37,7 @@ export function ProductCard({ product, relatedStudies = [], onQuickAdd }: Produc
                     <div className="h-full w-full bg-white rounded-[2rem] overflow-hidden shadow-2xl flex flex-col relative group border border-slate-100">
 
                         {/* --- IMAGE CAROUSEL SECTION --- */}
-                        <div className="w-full aspect-square relative overflow-hidden group/image bg-gray-50">
+                        <div className="w-full aspect-square relative overflow-hidden group/image bg-gray-50 shrink-0">
                             {/* Image Slides */}
                             <div
                                 className="absolute inset-0 flex transition-transform duration-500 ease-out"
