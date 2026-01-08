@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { ProductInfoSlide } from '../components/ProductInfoSlide';
 
 import cardHeroCore from '../assets/hero-core-v2.png';
