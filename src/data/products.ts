@@ -1,18 +1,17 @@
 import { Product } from '../types';
 import productCoreCaps from '../assets/product-core-caps.png';
 import applicationCoreCaps from '../assets/application-core-caps.png';
-import infoCoreCaps from '../assets/info-core-caps.png'; // New Image
-
+import infoCoreCaps from '../assets/info-core-caps-v3.png'; // New Image
 import productRootPowders from '../assets/product-root-powders.png';
 import actionFlow from '../assets/action-flow.png';
-import actionOmni from '../assets/action-omni.png';
 
 import actionRootTexture from '../assets/action-root-texture.png';
 import applicationRootLifestyle from '../assets/application-root-lifestyle.png';
+import infoRootPowders from '../assets/info-root-powders-v3.png';
 
 import applicationPulseLiquids from '../assets/application-pulse-liquids.png';
-import productPulseHero from '../assets/product-pulse-hero.png'; // New Hero Image
-import endProductOmni from '../assets/end-product-omni.png';
+import productPulseHero from '../assets/product-pulse-hero.png';
+import infoPulseLiquids from '../assets/info-pulse-liquids-v3.png'; // New Hero Image
 
 export const products: Product[] = [
     {
@@ -44,8 +43,8 @@ export const products: Product[] = [
         ],
         relatedStudyIds: [1, 3, 17],
         options: [
-            { label: 'Lab Sample', weight: '50g', price: 150, cta: 'Order Sample' },
-            { label: 'Production', weight: '1kg', price: 0, cta: 'Request Quote' }
+            { label: 'Lab Sample', weight: '30g (60ct)', price: 90, cta: 'Order Sample' },
+            { label: 'Production', weight: '1kg MOQ', price: 0, cta: 'Request Quote' }
         ]
     },
     {
@@ -57,6 +56,7 @@ export const products: Product[] = [
         image: productPulseHero,
         gallery: [
             { type: 'application', src: productPulseHero, label: 'Private Label' },
+            { type: 'info', src: infoPulseLiquids, label: 'Specifications' },
             { type: 'texture', src: actionFlow, label: 'Instant Digestion' },
             { type: 'application', src: applicationPulseLiquids, label: 'Dosing' }
         ],
@@ -66,7 +66,7 @@ export const products: Product[] = [
         activeCompound: 'Bio-Available Matrix',
         formatLabel: 'For Drinks & Liquids',
         applicationExamples: [
-            'Energy Shots (50ml)',
+            'Energy Shots (30ml)',
             'Functional Coffee/Tea',
             'Liquid Drops'
         ],
@@ -77,8 +77,8 @@ export const products: Product[] = [
         ],
         relatedStudyIds: [2, 19],
         options: [
-            { label: 'Lab Sample', weight: '50g', price: 180, cta: 'Order Sample' },
-            { label: 'Production', weight: '1kg', price: 0, cta: 'Request Quote' }
+            { label: 'Lab Sample', weight: '30ml', price: 180, cta: 'Order Sample' },
+            { label: 'Production', weight: '1 Gallon', price: 0, cta: 'Request Quote' }
         ]
     },
     {
@@ -90,6 +90,7 @@ export const products: Product[] = [
         image: productRootPowders,
         gallery: [
             { type: 'ingredient', src: productRootPowders, label: 'Bulk Powder' },
+            { type: 'info', src: infoRootPowders, label: 'Formats' },
             { type: 'texture', src: actionRootTexture, label: 'Food Matrix' },
             { type: 'application', src: applicationRootLifestyle, label: 'Daily Wellness' }
         ],
@@ -110,8 +111,8 @@ export const products: Product[] = [
         ],
         relatedStudyIds: [3, 18],
         options: [
-            { label: 'Lab Sample', weight: '100g', price: 90, cta: 'Order Sample' },
-            { label: 'Production', weight: '5kg', price: 0, cta: 'Request Quote' }
+            { label: 'Retail Sample', weight: '100g', price: 90, cta: 'Order Sample' },
+            { label: 'Production', weight: '5kg MOQ', price: 0, cta: 'Request Quote' }
         ]
     }
 ];

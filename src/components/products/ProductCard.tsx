@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'motion/react';
 import {
-    Activity, FlaskConical, ArrowRight, Check
+    FlaskConical, ArrowRight, Check
 } from 'lucide-react';
 import { Product, Study } from '../../types';
 
@@ -23,7 +23,7 @@ export function ProductCard({ product, relatedStudies = [], onQuickAdd }: Produc
 
     return (
         <div
-            className="relative h-[650px] w-full perspective-1000"
+            className="relative h-[800px] w-full perspective-1000"
         >
             <motion.div
                 className="w-full h-full relative preserve-3d transition-all duration-500"
@@ -44,9 +44,9 @@ export function ProductCard({ product, relatedStudies = [], onQuickAdd }: Produc
                                 style={{ transform: `translateX(-${currentImageIndex * 100}%)` }}
                             >
                                 {product.gallery?.map((item, idx) => (
-                                    <div key={idx} className="w-full h-full flex-shrink-0 flex items-end justify-center">
+                                    <div key={idx} className="w-full h-full flex-shrink-0 flex items-start justify-center">
                                         <div
-                                            className="w-full h-full transition-transform duration-700 flex items-center justify-center transform-gpu"
+                                            className="w-full h-full transition-transform duration-700 flex items-start justify-center transform-gpu"
                                             style={{
                                                 transform: `scale(${product.imageScale || 1}) translateY(${product.imageOffsetY || '0'})`
                                             }}
@@ -61,13 +61,7 @@ export function ProductCard({ product, relatedStudies = [], onQuickAdd }: Produc
                                 ))}
                             </div>
 
-                            {/* Potency Badge - More Discreet */}
-                            <div className="absolute top-4 left-4 z-20">
-                                <div className="bg-white/80 backdrop-blur-sm border border-white/40 px-2 py-1 rounded text-[10px] font-bold text-slate-500 uppercase tracking-widest flex items-center gap-1 shadow-sm">
-                                    <Activity className="w-3 h-3 text-orange-500" />
-                                    {product.potency}
-                                </div>
-                            </div>
+                            {/* Carousel Navigation (Dots) */}
 
                             {/* Carousel Navigation (Dots) */}
                             <div className="absolute bottom-4 left-0 right-0 z-20 flex justify-center gap-2">
@@ -99,12 +93,12 @@ export function ProductCard({ product, relatedStudies = [], onQuickAdd }: Produc
                         </div>
 
                         {/* --- CONTENT SECTION --- */}
-                        <div className="flex-1 p-8 flex flex-col justify-between bg-white relative z-20">
+                        <div className="flex-1 p-6 flex flex-col justify-between bg-white relative z-20">
                             <div>
                                 <div className="flex justify-between items-start mb-3">
                                     <div>
                                         <div className="flex items-center gap-2 mb-1">
-                                            <span className="text-[10px] font-bold uppercase tracking-wider text-white bg-slate-900 px-2 py-0.5 rounded-full">
+                                            <span className="text-[10px] font-bold uppercase tracking-wider text-white bg-slate-600 px-2 py-0.5 rounded-full">
                                                 {product.formatLabel || 'Ingredient'}
                                             </span>
                                         </div>
@@ -112,9 +106,7 @@ export function ProductCard({ product, relatedStudies = [], onQuickAdd }: Produc
                                         <p className="text-sm font-medium text-orange-600 mb-2">{product.subtitle}</p>
                                     </div>
                                     <div className="text-right">
-                                        <div className="text-xl font-bold text-slate-900">
-                                            {selectedOption.price > 0 ? `$${selectedOption.price}` : 'Wholesale'}
-                                        </div>
+                                        {/* Price & MOQ removed */}
                                     </div>
                                 </div>
 
@@ -131,9 +123,7 @@ export function ProductCard({ product, relatedStudies = [], onQuickAdd }: Produc
                                     </ul>
                                 </div>
 
-                                <p className="text-xs text-slate-400 leading-relaxed line-clamp-2">
-                                    {product.description}
-                                </p>
+                                {/* Description removed by user request */}
                             </div>
 
                             {/* Footer / Quick Add */}
@@ -156,10 +146,10 @@ export function ProductCard({ product, relatedStudies = [], onQuickAdd }: Produc
 
                                 <button
                                     onClick={(e) => { e.stopPropagation(); onQuickAdd(product, selectedOption); }}
-                                    className="w-full py-4 bg-slate-900 text-white rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-orange-600 transition-colors group/btn shadow-xl shadow-slate-200 hover:shadow-orange-500/20"
+                                    className="w-full py-4 bg-slate-600 text-white rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-slate-500 transition-colors group/btn shadow-xl shadow-slate-200 hover:shadow-slate-600/20"
                                 >
                                     <span>{selectedOption.cta}</span>
-                                    {selectedOption.price > 0 && <span className="opacity-80 font-medium">| ${selectedOption.price}</span>}
+                                    {/* Price removed from button */}
                                     <ArrowRight size={16} className="group-hover/btn:translate-x-1 transition-transform" />
                                 </button>
                             </div>
@@ -168,12 +158,12 @@ export function ProductCard({ product, relatedStudies = [], onQuickAdd }: Produc
                     </div>
                 </div>
 
-                {/* --- BACK FACE (SCIENCE) SAME AS BEFORE --- */}
+                {/* --- BACK FACE (SCIENCE) --- */}
                 <div
-                    className="absolute inset-0 backface-hidden"
+                    className={`absolute inset-0 backface-hidden z-10 ${isFlipped ? '' : 'hidden opacity-0 pointer-events-none'}`}
                     style={{ transform: 'rotateY(180deg)' }}
                 >
-                    <div className="h-full w-full bg-slate-900 text-white rounded-[2rem] overflow-hidden shadow-xl p-8 flex flex-col relative">
+                    <div className="h-full w-full bg-[#475569] text-white rounded-[2rem] overflow-hidden shadow-xl p-8 flex flex-col relative">
                         <button
                             onClick={(e) => { e.stopPropagation(); setIsFlipped(false); }}
                             className="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"

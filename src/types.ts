@@ -50,7 +50,7 @@ export interface Product {
 
     // Display Gallery
     gallery?: {
-        type: 'ingredient' | 'texture' | 'application';
+        type: 'ingredient' | 'texture' | 'application' | 'info';
         src: string;
         label: string;
     }[];

@@ -14,17 +14,13 @@ export function ProductShowcase() {
         ? products
         : products.filter(p => p.category === activeCategory);
 
-    const handleQuickAdd = (product: any, option: any) => {
-        // Dynamic B2B Logic: Split between Direct Sample Purchase and Wholesale Quote
-        if (option.price === 0 || option.cta === 'Request Quote') {
-            // Logic for High-Volume B2B Inquiry
-            console.log(`[B2B Workflow] Initiating quote for ${product.title} (${option.weight})`);
-            // In a real app, this would open a HubSpot form or a dedicated modal
-            alert(`B2B PARTNER REQUEST\n\nInitiating Quote Process for:\nProduct: ${product.title}\nVolume: ${option.weight}\n\nRedirecting to specialized formulation team...`);
+    const handleQuickAdd = (_product: any, _option: any) => {
+        // Redirect all inquire/order clicks to the Contact Form
+        const contactSection = document.getElementById('contact');
+        if (contactSection) {
+            contactSection.scrollIntoView({ behavior: 'smooth' });
         } else {
-            // Logic for R&D/Lab Sample Purchase
-            console.log(`[Sample Workflow] Adding ${product.title} (${option.weight}) to cart`);
-            alert(`LAB SAMPLE ADDED\n\nItem: ${product.title}\nFormat: ${option.weight}\nCost: $${option.price}\n\nProceed to checkout for express shipping.`);
+            console.warn('Contact section not found');
         }
     };
 

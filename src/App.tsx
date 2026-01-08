@@ -4,6 +4,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import { ArticleTemplate } from './components/ArticleTemplate';
 import { articles } from './data/articles';
 import ScrollToHashElement from './components/ScrollToHashElement';
+import { GeneratorPage } from './pages/GeneratorPage';
 
 const HomePage = lazy(() => import('./pages/HomePage').then(module => ({ default: module.HomePage })));
 const StudyPage = lazy(() => import('./pages/StudyPage').then(module => ({ default: module.StudyPage })));
@@ -45,6 +46,7 @@ export default function App() {
                 element={<ArticleTemplate article={article} />}
               />
             ))}
+            <Route path="/generator" element={<GeneratorPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>
