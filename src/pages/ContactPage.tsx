@@ -82,9 +82,9 @@ export function ContactPage() {
     {
       icon: MapPin,
       title: 'Headquarters',
-      value: 'Khargone, Madhya Pradesh, India',
+      value: 'Barwani, Madhya Pradesh, India',
       description: 'Visit our state-of-the-art cultivation facility',
-      action: 'https://maps.app.goo.gl/pj2oZhfsZd9DWQKV8',
+      action: 'https://www.google.com/maps/search/Anjad+Rd,+Barwani,+Madhya+Pradesh+451551,+India',
     },
   ];
 
@@ -92,16 +92,16 @@ export function ContactPage() {
     {
       name: 'Synervion HQ',
       location: 'Madhya Pradesh, India',
-      address: 'Survey No. 36/1/2, Village - Bedia, District - Khargone, Madhya Pradesh 451113', // Verified via Google Maps (using original)
+      address: 'Anjad Rd, Barwani, Madhya Pradesh 451551, India',
       type: 'Headquarters',
-      mapLink: 'https://maps.app.goo.gl/pj2oZhfsZd9DWQKV8'
+      mapLink: 'https://www.google.com/maps/search/Anjad+Rd,+Barwani,+Madhya+Pradesh+451551,+India'
     },
     {
       name: 'Synervion Labs',
       location: 'Madhya Pradesh, India',
-      address: 'Survey No. 104/2, Village - Bedia, District - Khargone, Madhya Pradesh 451113',
+      address: 'Survey No.241, 4, Dist, in front of Saket Ginning, Borlay, Madhya Pradesh 451556, India',
       type: 'R&D Facility',
-      mapLink: 'https://maps.app.goo.gl/H7Zb7q1f1yYBh9JN9'
+      mapLink: 'https://www.google.com/maps/search/Survey+No.241,+4,+Dist,+in+front+of+Saket+Ginning,+Borlay,+Madhya+Pradesh+451556,+India'
     }
   ];
 
