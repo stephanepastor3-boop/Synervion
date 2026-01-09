@@ -53,7 +53,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     // Send notification to admin
     const adminEmailResult = await resend.emails.send({
-      from: 'Contact Form <onboarding@resend.dev>',
+      from: 'Synervion Website <website@send.synervion.com>',
       to: ['info@synervion.com'],
       replyTo: email,
       subject: `Contact Form: ${subject || 'General Inquiry'}`,
@@ -112,7 +112,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     // Send confirmation to user
     try {
       await resend.emails.send({
-        from: 'Synervion <info@synervion.com>',
+        from: 'Synervion <info@send.synervion.com>',
         to: [email],
         subject: 'We received your message - Synervion',
         html: `
