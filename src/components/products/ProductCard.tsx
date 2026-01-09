@@ -39,9 +39,21 @@ export function ProductCard({ product, relatedStudies = [], onQuickAdd }: Produc
                         {/* --- IMAGE CAROUSEL SECTION --- */}
                         <div className="w-full aspect-square relative overflow-hidden group/image bg-gray-50 shrink-0">
                             {/* Image Slides */}
-                            <div
-                                className="absolute inset-0 flex transition-transform duration-500 ease-out"
-                                style={{ transform: `translateX(-${currentImageIndex * 100}%)` }}
+                            <motion.div
+                                className="absolute inset-0 flex"
+                                animate={{ x: `-${currentImageIndex * 100}%` }}
+                                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                                drag="x"
+                                dragConstraints={{ left: 0, right: 0 }}
+                                dragElastic={0.2}
+                                onDragEnd={(_e, { offset }) => {
+                                    const swipeThreshold = 50;
+                                    if (offset.x > swipeThreshold) {
+                                        setCurrentImageIndex(prev => Math.max(prev - 1, 0));
+                                    } else if (offset.x < -swipeThreshold) {
+                                        setCurrentImageIndex(prev => Math.min(prev + 1, (product.gallery?.length || 1) - 1));
+                                    }
+                                }}
                             >
                                 {product.gallery?.map((item, idx) => (
                                     <div key={idx} className="w-full h-full flex-shrink-0 flex items-start justify-center">
@@ -54,12 +66,12 @@ export function ProductCard({ product, relatedStudies = [], onQuickAdd }: Produc
                                             <img
                                                 src={item.src}
                                                 alt={`${product.title} - ${item.label}`}
-                                                className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                                                className="w-full h-full object-cover transition-transform duration-700 hover:scale-105 pointer-events-none"
                                             />
                                         </div>
                                     </div>
                                 ))}
-                            </div>
+                            </motion.div>
 
                             {/* Carousel Navigation (Dots) */}
 

@@ -43,8 +43,9 @@ export const products: Product[] = [
         ],
         relatedStudyIds: [1, 3, 17],
         options: [
-            { label: 'Lab Sample', weight: '30g (60ct)', price: 90, cta: 'Order Sample' },
-            { label: 'Production', weight: '1kg MOQ', price: 0, cta: 'Request Quote' }
+            { label: 'Sample', weight: '60 Caps', price: 90, cta: 'Order Sample' },
+            { label: 'Stock', weight: '120 Caps', price: 0, cta: 'Request Quote' },
+            { label: 'Production', weight: 'Bulk', price: 0, cta: 'Request Quote' }
         ]
     },
     {
@@ -77,8 +78,9 @@ export const products: Product[] = [
         ],
         relatedStudyIds: [2, 19],
         options: [
-            { label: 'Lab Sample', weight: '30ml', price: 180, cta: 'Order Sample' },
-            { label: 'Production', weight: '1 Gallon', price: 0, cta: 'Request Quote' }
+            { label: 'Sample', weight: '30ml', price: 180, cta: 'Order Sample' },
+            { label: 'Stock', weight: '60ml', price: 0, cta: 'Request Quote' },
+            { label: 'Production', weight: 'Bulk', price: 0, cta: 'Request Quote' }
         ]
     },
     {
@@ -111,8 +113,9 @@ export const products: Product[] = [
         ],
         relatedStudyIds: [3, 18],
         options: [
-            { label: 'Retail Sample', weight: '100g', price: 90, cta: 'Order Sample' },
-            { label: 'Production', weight: '5kg MOQ', price: 0, cta: 'Request Quote' }
+            { label: 'Sample', weight: '100g', price: 90, cta: 'Order Sample' },
+            { label: 'Stock', weight: '300g', price: 0, cta: 'Request Quote' },
+            { label: 'Production', weight: 'Bulk', price: 0, cta: 'Request Quote' }
         ]
     }
 ];

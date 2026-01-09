@@ -14,14 +14,16 @@ export function ProductShowcase() {
         ? products
         : products.filter(p => p.category === activeCategory);
 
-    const handleQuickAdd = (_product: any, _option: any) => {
-        // Redirect all inquire/order clicks to the Contact Form
-        const contactSection = document.getElementById('contact');
-        if (contactSection) {
-            contactSection.scrollIntoView({ behavior: 'smooth' });
-        } else {
-            console.warn('Contact section not found');
-        }
+    const handleQuickAdd = (product: any, option: any) => {
+        // Prepare query params for contextual contact page
+        const params = new URLSearchParams({
+            product: product.title,
+            weight: option.weight,
+            intent: 'order'
+        });
+
+        // Redirect to Contact Page with context
+        window.location.href = `/contact?${params.toString()}`;
     };
 
     return (

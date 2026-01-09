@@ -1,4 +1,5 @@
 import { motion } from 'motion/react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { BrandButton } from '../components/brand/BrandButton';
 import { BrandBadge } from '../components/brand/BrandBadge';
 import { Input } from '../components/ui/input';
@@ -6,13 +7,22 @@ import { Textarea } from '../components/ui/textarea';
 import { Label } from '../components/ui/label';
 import {
   Mail, Phone, MapPin, Clock, MessageCircle,
-  ArrowRight, Send, Users
+  ArrowRight, Send, Users, PackageCheck
 } from 'lucide-react';
 import { SEO } from '../components/SEO';
 import { Navigation } from '../components/Navigation';
 import { Footer } from '../components/Footer';
 
 export function ContactPage() {
+  const [searchParams] = useSearchParams();
+  const productContext = searchParams.get('product');
+  const weightContext = searchParams.get('weight');
+  const isOrderIntent = searchParams.get('intent') === 'order';
+
+  const defaultSubject = isOrderIntent && productContext
+    ? `Sample Request: ${productContext}${weightContext ? ` (${weightContext})` : ''}`
+    : '';
+
   const contactMethods = [
     {
       icon: Mail,
@@ -33,7 +43,7 @@ export function ContactPage() {
       title: 'Headquarters',
       value: 'Khargone, Madhya Pradesh, India',
       description: 'Visit our state-of-the-art cultivation facility',
-      action: 'https://www.google.com/maps/place/Synervion+(HQ)/@22.0305022,74.911862,17z/data=!3m1!4b1!4m6!3m5!1s0x3961f9005d3782bb:0x81dda667a2e630de!8m2!3d22.0304972!4d74.9144369!16s%2Fg%2F11ybnfw2vx?entry=ttu&g_ep=EgoyMDI1MTIwOS4wIKXMDSoKLDEwMDc5MjA2N0gBUAM%3D',
+      action: 'https://maps.app.goo.gl/pj2oZhfsZd9DWQKV8',
     },
   ];
 
@@ -43,14 +53,14 @@ export function ContactPage() {
       location: 'Madhya Pradesh, India',
       address: 'Survey No. 36/1/2, Village - Bedia, District - Khargone, Madhya Pradesh 451113',
       type: 'Headquarters',
-      mapLink: 'https://www.google.com/maps/place/Synervion+(HQ)/@22.0305022,74.911862,17z/data=!3m1!4b1!4m6!3m5!1s0x3961f9005d3782bb:0x81dda667a2e630de!8m2!3d22.0304972!4d74.9144369!16s%2Fg%2F11ybnfw2vx?entry=ttu&g_ep=EgoyMDI1MTIwOS4wIKXMDSoKLDEwMDc5MjA2N0gBUAM%3D'
+      mapLink: 'https://maps.app.goo.gl/pj2oZhfsZd9DWQKV8'
     },
     {
       name: 'Synervion Labs',
       location: 'Madhya Pradesh, India',
       address: 'Survey No. 104/2, Village - Bedia, District - Khargone, Madhya Pradesh 451113',
       type: 'R&D Facility',
-      mapLink: 'https://www.google.com/maps/place/Synervion+Labs/@22.0430188,75.0207156,17z/data=!3m1!4b1!4m6!3m5!1s0x39620300488bc205:0x7cca84a2184251be!8m2!3d22.0430138!4d75.0232905!16s%2Fg%2F11wv_h4n3l?entry=ttu&g_ep=EgoyMDI1MTIwOS4wIKXMDSoKLDEwMDc5MjA2N0gBUAM%3D'
+      mapLink: 'https://maps.app.goo.gl/H7Zb7q1f1yYBh9JN9'
     }
   ];
 
@@ -277,11 +287,28 @@ export function ContactPage() {
               transition={{ duration: 0.6 }}
             >
               <div className="mb-6">
+                {isOrderIntent && productContext ? (
+                  <div className="mb-8 p-6 bg-orange-50 border border-orange-100 rounded-2xl">
+                    <div className="flex items-start gap-4">
+                      <div className="p-3 bg-white rounded-xl shadow-sm text-orange-600">
+                        <PackageCheck size={24} />
+                      </div>
+                      <div>
+                        <div className="text-xs font-bold text-orange-600 uppercase tracking-wide mb-1">Order Request</div>
+                        <h3 className="text-xl font-bold text-slate-900 mb-1">{productContext}</h3>
+                        {weightContext && <p className="text-sm text-slate-600">Size: {weightContext}</p>}
+                      </div>
+                    </div>
+                  </div>
+                ) : null}
+
                 <h2 className="mb-3 text-2xl sm:text-3xl lg:text-4xl" style={{ fontFamily: 'Manrope, sans-serif' }}>
-                  Send Us a Message
+                  {isOrderIntent ? 'Request Product Sample' : 'Send Us a Message'}
                 </h2>
                 <p className="text-sm sm:text-base text-[hsl(var(--synervion-text-secondary))]">
-                  Fill out the form below and we'll get back to you within 24 hours.
+                  {isOrderIntent
+                    ? 'Confirm your details below to receive a sample shipment or quote.'
+                    : "Fill out the form below and we'll get back to you within 24 hours."}
                 </p>
               </div>
 
@@ -322,6 +349,7 @@ export function ContactPage() {
                   <Input
                     id="contact-subject"
                     placeholder="What's this about?"
+                    defaultValue={defaultSubject}
                     required
                     className="border-[hsl(var(--synervion-border-light))] focus:border-[hsl(var(--synervion-primary-500))]"
                   />

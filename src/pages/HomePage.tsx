@@ -1,12 +1,9 @@
 import { Helmet } from 'react-helmet-async';
 import { Navigation } from '../components/Navigation';
 import { Hero } from '../components/Hero';
-import { ProductBenefits } from '../components/ProductBenefits';
 import { LabGrownAdvantage } from '../components/LabGrownAdvantage';
-import { WhatWeSupply } from '../components/WhatWeSupply';
 import { PartnershipModels } from '../components/PartnershipModels';
-import { ExploreResearch } from '../components/ExploreResearch';
-import { FeaturedArticles } from '../components/FeaturedArticles';
+import { ScientificEvidence } from '../components/ExploreResearch';
 import { ContactCTA } from '../components/ContactCTA';
 import { Footer } from '../components/Footer';
 import { SEO } from '../components/SEO';
@@ -36,17 +33,81 @@ export function HomePage() {
             ]
           })}
         </script>
+        {/* Product Schema for SEO */}
+        <script type="application/ld+json">
+          {JSON.stringify([
+            {
+              "@context": "https://schema.org/",
+              "@type": "Product",
+              "name": "Synervion® CORE Caps",
+              "image": "https://www.synervion.com/assets/product-core-caps.png",
+              "description": "Capsule-Ready Performance System. High-potency 500mg fill, standard size 0 capsules.",
+              "brand": {
+                "@type": "Brand",
+                "name": "Synervion"
+              },
+              "offers": {
+                "@type": "Offer",
+                "url": "https://www.synervion.com/#card-core",
+                "priceCurrency": "USD",
+                "price": "0",
+                "priceValidUntil": "2025-12-31",
+                "availability": "https://schema.org/InStock",
+                "itemCondition": "https://schema.org/NewCondition"
+              }
+            },
+            {
+              "@context": "https://schema.org/",
+              "@type": "Product",
+              "name": "Synervion® PULSE Liquids",
+              "image": "https://www.synervion.com/assets/product-pulse-hero.png",
+              "description": "Fast-Acting Nano-Extract. Dual-extraction process for drinks and liquids.",
+              "brand": {
+                "@type": "Brand",
+                "name": "Synervion"
+              },
+              "offers": {
+                "@type": "Offer",
+                "url": "https://www.synervion.com/#card-pulse",
+                "priceCurrency": "USD",
+                "price": "180",
+                "priceValidUntil": "2025-12-31",
+                "availability": "https://schema.org/InStock",
+                "itemCondition": "https://schema.org/NewCondition"
+              }
+            },
+            {
+              "@context": "https://schema.org/",
+              "@type": "Product",
+              "name": "Synervion® ROOT Powders",
+              "image": "https://www.synervion.com/assets/product-root-powders.png",
+              "description": "Whole-Food Nutrition Base. 100% fruiting body, micronized <50 mesh.",
+              "brand": {
+                "@type": "Brand",
+                "name": "Synervion"
+              },
+              "offers": {
+                "@type": "Offer",
+                "url": "https://www.synervion.com/#card-root",
+                "priceCurrency": "USD",
+                "price": "0",
+                "priceValidUntil": "2025-12-31",
+                "availability": "https://schema.org/InStock",
+                "itemCondition": "https://schema.org/NewCondition"
+              }
+            }
+          ])}
+        </script>
       </Helmet>
       <Navigation />
       <main>
         <Hero />
-        <ProductBenefits />
-        <LabGrownAdvantage />
+        {/* <ProductBenefits /> - Hidden for better flow */}
         <ProductShowcase />
-        <WhatWeSupply />
+        <LabGrownAdvantage />
+        {/* <WhatWeSupply /> - Replaced by ProductShowcase details */}
+        <ScientificEvidence />
         <PartnershipModels />
-        <ExploreResearch />
-        <FeaturedArticles />
         <ContactCTA />
       </main>
       <Footer />

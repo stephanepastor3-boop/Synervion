@@ -31,7 +31,7 @@ export function Navigation() {
     { label: 'Why Lab-Grown', href: '#origin' },
     { label: 'Collabs', href: '#partners' },
     {
-      label: 'Resources',
+      label: 'Science',
       children: [
         { label: 'Research', href: '#rnd' },
         { label: 'Guides', href: '#articles' },
