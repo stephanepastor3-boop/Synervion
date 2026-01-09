@@ -84,7 +84,7 @@ export function ContactPage() {
       title: 'Headquarters',
       value: 'Barwani, Madhya Pradesh, India',
       description: 'Visit our state-of-the-art cultivation facility',
-      action: 'https://www.google.com/maps/search/Anjad+Rd,+Barwani,+Madhya+Pradesh+451551,+India',
+      action: 'https://maps.app.goo.gl/4cZphEF61RyRTMjG8',
     },
   ];
 
@@ -94,7 +94,7 @@ export function ContactPage() {
       location: 'Madhya Pradesh, India',
       address: 'Anjad Rd, Barwani, Madhya Pradesh 451551, India',
       type: 'Headquarters',
-      mapLink: 'https://www.google.com/maps/search/Anjad+Rd,+Barwani,+Madhya+Pradesh+451551,+India'
+      mapLink: 'https://maps.app.goo.gl/4cZphEF61RyRTMjG8'
     },
     {
       name: 'Synervion Labs',
