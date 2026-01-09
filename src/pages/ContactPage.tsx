@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { BrandButton } from '../components/brand/BrandButton';
 import { BrandBadge } from '../components/brand/BrandBadge';
 import { Input } from '../components/ui/input';
