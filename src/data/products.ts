@@ -43,9 +43,9 @@ export const products: Product[] = [
         ],
         relatedStudyIds: [1, 3, 17],
         options: [
-            { label: 'Sample', weight: '60 Caps', price: 90, cta: 'Order Sample' },
-            { label: 'Stock', weight: '120 Caps', price: 0, cta: 'Request Quote' },
-            { label: 'Production', weight: 'Bulk', price: 0, cta: 'Request Quote' }
+            { label: 'Sample', weight: '60 Caps', price: 90, cta: 'Order Sample', imageIndex: 2 },
+            { label: 'Stock', weight: '120 Caps', price: 0, cta: 'Request Quote', imageIndex: 2 },
+            { label: 'Production', weight: 'Bulk', price: 0, cta: 'Request Quote', imageIndex: 0 }
         ]
     },
     {
@@ -78,9 +78,9 @@ export const products: Product[] = [
         ],
         relatedStudyIds: [2, 19],
         options: [
-            { label: 'Sample', weight: '30ml', price: 180, cta: 'Order Sample' },
-            { label: 'Stock', weight: '60ml', price: 0, cta: 'Request Quote' },
-            { label: 'Production', weight: 'Bulk', price: 0, cta: 'Request Quote' }
+            { label: 'Sample', weight: '30ml', price: 180, cta: 'Order Sample', imageIndex: 0 },
+            { label: 'Stock', weight: '60ml', price: 0, cta: 'Request Quote', imageIndex: 0 },
+            { label: 'Production', weight: 'Bulk', price: 0, cta: 'Request Quote', imageIndex: 2 }
         ]
     },
     {
@@ -113,9 +113,9 @@ export const products: Product[] = [
         ],
         relatedStudyIds: [3, 18],
         options: [
-            { label: 'Sample', weight: '100g', price: 90, cta: 'Order Sample' },
-            { label: 'Stock', weight: '300g', price: 0, cta: 'Request Quote' },
-            { label: 'Production', weight: 'Bulk', price: 0, cta: 'Request Quote' }
+            { label: 'Sample', weight: '100g', price: 90, cta: 'Order Sample', imageIndex: 0 },
+            { label: 'Stock', weight: '300g', price: 0, cta: 'Request Quote', imageIndex: 0 },
+            { label: 'Production', weight: 'Bulk', price: 0, cta: 'Request Quote', imageIndex: 2 }
         ]
     }
 ];

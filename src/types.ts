@@ -68,5 +68,6 @@ export interface Product {
         weight: string; // e.g., "50g Sample", "1kg MOQ"
         price: number;
         cta: string; // "Order Sample" or "Request Quote"
+        imageIndex?: number;
     }[];
 }

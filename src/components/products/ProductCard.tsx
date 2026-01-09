@@ -145,7 +145,13 @@ export function ProductCard({ product, relatedStudies = [], onQuickAdd }: Produc
                                     {product.options.map((opt, idx) => (
                                         <button
                                             key={idx}
-                                            onClick={(e) => { e.stopPropagation(); setSelectedOptionIndex(idx); }}
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                setSelectedOptionIndex(idx);
+                                                if (opt.imageIndex !== undefined) {
+                                                    setCurrentImageIndex(opt.imageIndex);
+                                                }
+                                            }}
                                             className={`flex-1 py-2 text-xs font-bold rounded-lg transition-all ${selectedOptionIndex === idx
                                                 ? 'bg-white text-slate-900 shadow-sm border border-slate-200'
                                                 : 'text-slate-400 hover:text-slate-600'

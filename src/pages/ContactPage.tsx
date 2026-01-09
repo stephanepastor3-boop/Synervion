@@ -12,6 +12,8 @@ import {
 import { SEO } from '../components/SEO';
 import { Navigation } from '../components/Navigation';
 import { Footer } from '../components/Footer';
+import { useState } from 'react';
+import { Toaster, toast } from 'sonner';
 
 export function ContactPage() {
   const [searchParams] = useSearchParams();
@@ -19,9 +21,48 @@ export function ContactPage() {
   const weightContext = searchParams.get('weight');
   const isOrderIntent = searchParams.get('intent') === 'order';
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const defaultSubject = isOrderIntent && productContext
     ? `Sample Request: ${productContext}${weightContext ? ` (${weightContext})` : ''}`
     : '';
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      full_name: formData.get('full_name'),
+      email: formData.get('email'),
+      company: formData.get('company'),
+      subject: formData.get('subject'),
+      message: formData.get('message'),
+    };
+
+    try {
+      const response = await fetch('/api/send-contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        toast.success(result.message); // Show success popup
+        (e.target as HTMLFormElement).reset(); // Reset form
+      } else {
+        toast.error(result.message || 'Something went wrong. Please try again.');
+      }
+    } catch (error) {
+      toast.error('Failed to send message. Please try again later.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   const contactMethods = [
     {
@@ -51,7 +92,7 @@ export function ContactPage() {
     {
       name: 'Synervion HQ',
       location: 'Madhya Pradesh, India',
-      address: 'Survey No. 36/1/2, Village - Bedia, District - Khargone, Madhya Pradesh 451113',
+      address: 'Survey No. 36/1/2, Village - Bedia, District - Khargone, Madhya Pradesh 451113', // Verified via Google Maps (using original)
       type: 'Headquarters',
       mapLink: 'https://maps.app.goo.gl/pj2oZhfsZd9DWQKV8'
     },
@@ -312,21 +353,23 @@ export function ContactPage() {
                 </p>
               </div>
 
-              <form className="space-y-6">
+              <form className="space-y-6" onSubmit={handleSubmit}>
                 <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
                   <div className="space-y-2">
-                    <Label htmlFor="contact-name">Full Name *</Label>
+                    <Label htmlFor="full_name">Full Name *</Label>
                     <Input
-                      id="contact-name"
+                      id="full_name"
+                      name="full_name"
                       placeholder="John Doe"
                       required
                       className="border-[hsl(var(--synervion-border-light))] focus:border-[hsl(var(--synervion-primary-500))]"
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="contact-email">Email *</Label>
+                    <Label htmlFor="email">Email *</Label>
                     <Input
-                      id="contact-email"
+                      id="email"
+                      name="email"
                       type="email"
                       placeholder="john@company.com"
                       required
@@ -336,18 +379,20 @@ export function ContactPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="contact-company">Company Name</Label>
+                  <Label htmlFor="company">Company Name</Label>
                   <Input
-                    id="contact-company"
+                    id="company"
+                    name="company"
                     placeholder="Your Company"
                     className="border-[hsl(var(--synervion-border-light))] focus:border-[hsl(var(--synervion-primary-500))]"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="contact-subject">Subject *</Label>
+                  <Label htmlFor="subject">Subject *</Label>
                   <Input
-                    id="contact-subject"
+                    id="subject"
+                    name="subject"
                     placeholder="What's this about?"
                     defaultValue={defaultSubject}
                     required
@@ -356,9 +401,10 @@ export function ContactPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="contact-message">Message *</Label>
+                  <Label htmlFor="message">Message *</Label>
                   <Textarea
-                    id="contact-message"
+                    id="message"
+                    name="message"
                     placeholder="Tell us more about your inquiry..."
                     rows={6}
                     required
@@ -371,9 +417,10 @@ export function ContactPage() {
                   variant="primary"
                   size="lg"
                   className="w-full group"
+                  disabled={isSubmitting}
                 >
-                  Send Message
-                  <Send className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  {isSubmitting ? 'Sending...' : 'Send Message'}
+                  <Send className={`w-4 h-4 ml-2 transition-transform ${isSubmitting ? 'opacity-0' : 'group-hover:translate-x-1'}`} />
                 </BrandButton>
               </form>
             </motion.div>
@@ -400,13 +447,10 @@ export function ContactPage() {
                       rel="noopener noreferrer"
                       className="block group overflow-hidden rounded-2xl bg-white border border-[hsl(var(--synervion-border-light))] hover:border-[hsl(var(--synervion-primary-500))] hover:shadow-lg transition-all"
                     >
-                      {/* Pseudo-Map Header */}
-                      <div className="h-24 bg-[hsl(var(--synervion-bg-gray-100))] relative overflow-hidden group-hover:bg-[hsl(var(--synervion-bg-gray-200))] transition-colors">
+                      <div className="h-24 bg-[hsl(var(--synervion-bg-gray-100))] relative overflow-hidden group-hover:bg-[hsl(var(--synervion-bg-gray-200))] transition-colors"
+                        style={{ backgroundImage: "url('/assets/map-pattern.png')", backgroundSize: 'cover', backgroundPosition: 'center' }}>
                         {/* Abstract map pattern or grid */}
-                        <div className="absolute inset-0 opacity-10" style={{
-                          backgroundImage: `radial-gradient(circle at 2px 2px, black 1px, transparent 0)`,
-                          backgroundSize: '16px 16px'
-                        }} />
+                        <div className="absolute inset-0 opacity-10" />
                         <div className="absolute inset-0 flex items-center justify-center">
                           <span className="flex items-center gap-2 text-sm font-semibold text-[hsl(var(--synervion-primary-700))] bg-white/80 backdrop-blur-sm px-3 py-1.5 rounded-full shadow-sm group-hover:bg-white group-hover:scale-105 transition-all">
                             <MapPin className="w-4 h-4" /> View on Google Maps
@@ -529,6 +573,7 @@ export function ContactPage() {
         </div>
       </section>
       <Footer />
+      <Toaster position="top-center" richColors />
     </div>
   );
 }
