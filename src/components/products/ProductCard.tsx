@@ -23,18 +23,18 @@ export function ProductCard({ product, relatedStudies = [], onQuickAdd }: Produc
 
     return (
         <div
-            className="relative h-[800px] w-full perspective-1000"
+            className="relative w-full perspective-1000 group"
         >
             <motion.div
-                className="w-full h-full relative preserve-3d transition-all duration-500"
+                className="w-full relative preserve-3d transition-all duration-500"
                 initial={false}
                 animate={{ rotateY: isFlipped ? 180 : 0 }}
                 transition={{ type: "spring", stiffness: 260, damping: 20 }}
                 style={{ transformStyle: 'preserve-3d' }}
             >
                 {/* --- FRONT FACE --- */}
-                <div className="absolute inset-0 backface-hidden">
-                    <div className="h-full w-full bg-white rounded-[2rem] overflow-hidden shadow-2xl flex flex-col relative group border border-slate-100">
+                <div className="relative backface-hidden">
+                    <div className="w-full bg-white rounded-[2rem] overflow-hidden shadow-2xl flex flex-col relative group border border-slate-100">
 
                         {/* --- IMAGE CAROUSEL SECTION --- */}
                         <div className="w-full aspect-square relative overflow-hidden group/image bg-gray-50 shrink-0">
