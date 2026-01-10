@@ -72,7 +72,7 @@ export function ProductShowcase() {
                         const relatedStudies = studies.filter(s => product.relatedStudyIds.includes(s.id));
 
                         return (
-                            <div key={product.id} className="w-full max-w-md mx-auto">
+                            <div key={product.id} id={product.id} className="w-full max-w-md mx-auto scroll-mt-32">
                                 <ProductCard
                                     product={product}
                                     relatedStudies={relatedStudies}
