@@ -15,6 +15,7 @@ const PartnershipsPage = lazy(() => import('./pages/PartnershipsPage').then(modu
 const BrandSystemPage = lazy(() => import('./pages/BrandSystemPage').then(module => ({ default: module.BrandSystemPage })));
 const TermsPage = lazy(() => import('./pages/TermsPage').then(module => ({ default: module.TermsPage })));
 const PrivacyPage = lazy(() => import('./pages/PrivacyPage').then(module => ({ default: module.PrivacyPage })));
+const ProductPage = lazy(() => import('./pages/ProductPage').then(module => ({ default: module.ProductPage })));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage').then(module => ({ default: module.NotFoundPage })));
 
 const PageLoader = () => (
@@ -46,6 +47,7 @@ export default function App() {
                 element={<ArticleTemplate article={article} />}
               />
             ))}
+            <Route path="/product/:id" element={<ProductPage />} />
             <Route path="/generator" element={<GeneratorPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>

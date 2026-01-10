@@ -29,6 +29,11 @@ const staticRoutes = [
     { loc: '/partnerships', changefreq: 'monthly', priority: '0.8' },
     { loc: '/brand-system', changefreq: 'monthly', priority: '0.5' },
     { loc: '/calculator/cordyceps-goal-planner', changefreq: 'monthly', priority: '0.8' },
+    { loc: '/products', changefreq: 'monthly', priority: '0.9' }, // If you have a main shop page, otherwise omit
+    // Core Product Pages
+    { loc: '/product/synv-core', changefreq: 'weekly', priority: '1.0' },
+    { loc: '/product/synv-pulse', changefreq: 'weekly', priority: '1.0' },
+    { loc: '/product/synv-root', changefreq: 'weekly', priority: '1.0' },
     { loc: '/terms', changefreq: 'monthly', priority: '0.5' },
     { loc: '/privacy-policy', changefreq: 'monthly', priority: '0.5' }
 ];
