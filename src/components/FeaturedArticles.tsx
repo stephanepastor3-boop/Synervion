@@ -4,19 +4,23 @@ import { BrandBadge } from './brand/BrandBadge';
 
 export function FeaturedArticles() {
     // Select specific high-value articles to feature (Pillar + 2 specific clusters)
+    // Select specific high-value articles to feature (Prioritize New SEO + Pillar)
+    // Force HMR Update
     const featuredSlugs = [
+        'keeda-jadi-price-india',
+        'cordyceps-manufacturer-india',
         'cordyceps-militaris-benefits',
         'cordyceps-for-high-altitude-training',
-        'cordyceps-for-mental-clarity' // Need to verify this slug exists, checking file content... 
+        'cordyceps-for-mental-clarity'
     ];
 
-    // Fallback to first 3 if specific ones not found, or just first 3
+    // Fallback to first 6 if specific ones not found
     const displayArticles = articles.filter(a => featuredSlugs.includes(a.slug));
-    // If fewer than 3 found, just fill with others.
+    // If fewer than 6 found, just fill with others.
     const finalArticles = [
         ...displayArticles,
         ...articles.filter(a => !featuredSlugs.includes(a.slug))
-    ].slice(0, 3);
+    ].slice(0, 6);
 
     return (
         <section id="articles" className="py-20 sm:py-24 bg-white relative overflow-hidden">

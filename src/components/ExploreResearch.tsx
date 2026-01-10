@@ -10,9 +10,7 @@ import { useScrollAnimation } from './ui/use-scroll-animation';
 import studiesData from '../data/studies.json';
 import { Study } from '../types';
 
-// Article Imports
-import { ArrowRight, BookOpen, Tag } from 'lucide-react';
-import { articles } from '../data/articles';
+// Article Imports removed
 
 export const studies: Study[] = studiesData as Study[];
 
@@ -53,18 +51,6 @@ export function ScientificEvidence() {
     newParams.delete('studyId');
     setSearchParams(newParams, { replace: true });
   };
-
-  // --- Article Logic ---
-  const featuredSlugs = [
-    'cordyceps-militaris-benefits',
-    'cordyceps-for-high-altitude-training',
-    'cordyceps-for-mental-clarity'
-  ];
-  const displayArticles = articles.filter(a => featuredSlugs.includes(a.slug));
-  const finalArticles = [
-    ...displayArticles,
-    ...articles.filter(a => !featuredSlugs.includes(a.slug))
-  ].slice(0, 3);
 
 
   return (
@@ -141,75 +127,16 @@ export function ScientificEvidence() {
         </div>
 
 
-        {/* --- PART 2: Expert Guides (Articles) --- */}
-        <div id="articles" className="scroll-mt-24">
-          <div className="flex items-center gap-4 mb-8">
-            <h3 className="text-2xl font-bold font-heading">Expert Guides</h3>
-            <div className="h-px bg-slate-200 flex-1"></div>
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {finalArticles.map((article) => (
-              <a
-                key={article.slug}
-                href={`/${article.slug}`}
-                className="group flex flex-col h-full bg-white rounded-2xl border border-slate-100 overflow-hidden hover:shadow-xl hover:border-orange-500/30 transition-all duration-300"
-              >
-                <div className="h-48 bg-slate-100 relative overflow-hidden">
-                  {article.ogImage ? (
-                    <img
-                      src={article.ogImage}
-                      alt={article.title}
-                      className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
-                      onError={(e) => {
-                        (e.target as HTMLImageElement).style.display = 'none';
-                      }}
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center text-slate-300">
-                      <BookOpen size={48} />
-                    </div>
-                  )}
-                  <div className="absolute top-4 left-4">
-                    <span className="px-3 py-1 text-xs font-semibold bg-white/90 backdrop-blur-sm text-orange-600 rounded-full shadow-sm">
-                      {article.category}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="flex flex-col flex-grow p-6 sm:p-8">
-                  <h3 className="text-xl font-heading font-bold text-slate-900 mb-3 leading-snug group-hover:text-orange-600 transition-colors line-clamp-2">
-                    {article.title}
-                  </h3>
-                  <p className="text-slate-500 text-sm line-clamp-3 mb-6 flex-grow">
-                    {article.description}
-                  </p>
-
-                  <div className="flex items-center justify-between pt-6 border-t border-slate-100 mt-auto">
-                    <div className="flex items-center gap-2 text-xs text-slate-400">
-                      <Tag size={14} />
-                      <span>{article.category}</span>
-                    </div>
-                    <span className="flex items-center text-sm font-semibold text-orange-600 group-hover:translate-x-1 transition-transform">
-                      Read Guide <ArrowRight size={16} className="ml-1" />
-                    </span>
-                  </div>
-                </div>
-              </a>
-            ))}
-          </div>
-        </div>
-
+        {/* Study Modal */}
+        {selectedStudy && (
+          <StudyModal
+            study={selectedStudy}
+            isOpen={!!selectedStudy}
+            onClose={handleCloseModal}
+          />
+        )}
       </div>
-
-      {/* Study Modal */}
-      {selectedStudy && (
-        <StudyModal
-          study={selectedStudy}
-          isOpen={!!selectedStudy}
-          onClose={handleCloseModal}
-        />
-      )}
     </section>
   );
 }

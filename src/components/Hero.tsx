@@ -39,13 +39,13 @@ export function Hero() {
           >
             {/* H1 - Responsive: 32px mobile → 48px tablet → 64px desktop */}
             <h1 className="mb-4 sm:mb-6 text-[32px] sm:text-[48px] lg:text-[64px] font-heading font-bold leading-tight tracking-tight text-foreground">
-              Premium <span className="text-primary">Cordyceps</span> Ingredients for Wellness Brands
+              India's Premier Lab-Grown <span className="text-primary">Cordyceps</span> Manufacturer
             </h1>
 
             {/* Body - Responsive: 16px mobile → 18px desktop */}
             <p className="mb-8 sm:mb-10 max-w-xl text-base lg:text-lg font-body font-normal leading-relaxed text-muted-foreground">
-              Lab-grown Cordyceps militaris extract and biomass for your product formulations.
-              B2B ingredient supply with full traceability, proven efficacy, and flexible partnership models.
+              Direct from our biotech facility in Madhya Pradesh to your brand.
+              We cultivate high-potency, pure Cordyceps militaris extract and biomass—no middlemen, just science.
             </p>
 
             {/* Feature Icons - Mobile: 2 columns, Desktop: 4 columns */}

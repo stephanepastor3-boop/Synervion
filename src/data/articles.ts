@@ -41,6 +41,135 @@ export interface Article {
 }
 
 export const articles: Article[] = [
+  // NEW: Pillar 3 - Commercial / B2B Authority
+  {
+    slug: 'cordyceps-manufacturer-india',
+    title: 'The Manufacturer Advantage: Sourcing High-Potency Cordyceps in India',
+    description: 'Understand the critical difference between traders and biotech cultivators. A guide for brands seeking traceable, potent, and pure Cordyceps militaris.',
+    category: 'Industry Intelligence',
+    keywords: ['Cordyceps manufacturer India', 'buy wholesale cordyceps', 'cordyceps cultivation India', 'nutraceutical supplier India', 'B2B cordyceps'],
+    ogImage: '/assets/biotech-lab.png',
+    content: `
+      <h2>The Shift to Domestic Biotechnology</h2>
+      <p>For decades, the Indian nutraceutical market heavily relied on imports with opaque supply chains. Today, a new standard is emerging: <strong>precision-biotech cultivation</strong> on Indian soil. As India's premier <strong>biotech manufacturer of Cordyceps militaris</strong>, Synervion is leading this transition toward transparency and potency.</p>
+      
+      <h3>Supply Chain Integrity: Manufacturer vs. Trader</h3>
+      <p>In the functional mushroom industry, the distinction between a 'source' and a 'supplier' is critical for brand owners. Sourcing directly from a <a href="/technology" class="text-orange-600 hover:text-orange-700 font-semibold">biotech cultivator</a> offers distinct advantages over traditional trading models:</p>
+      
+      <table class="w-full text-left border-collapse my-6">
+        <thead>
+          <tr>
+            <th class="border-b-2 border-slate-200 p-3 font-bold text-slate-900">Parameter</th>
+            <th class="border-b-2 border-slate-200 p-3 font-bold text-slate-900">Standard Import/Trade</th>
+            <th class="border-b-2 border-slate-200 p-3 font-bold text-slate-900">Direct Cultivation (Synervion)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="border-b border-slate-100 p-3 text-slate-700"><strong>Traceability</strong></td>
+            <td class="border-b border-slate-100 p-3 text-slate-600">Limited (often aggregated batches)</td>
+            <td class="border-b border-slate-100 p-3 text-slate-600">Full Batch-to-Harvest Tracking</td>
+          </tr>
+          <tr>
+            <td class="border-b border-slate-100 p-3 text-slate-700"><strong>Bioactive Integrity</strong></td>
+            <td class="border-b border-slate-100 p-3 text-slate-600">Degradation during long transit</td>
+            <td class="border-b border-slate-100 p-3 text-slate-600">Optimized Post-Harvest Processing</td>
+          </tr>
+          <tr>
+            <td class="border-b border-slate-100 p-3 text-slate-700"><strong>Purity</strong></td>
+            <td class="border-b border-slate-100 p-3 text-slate-600">Variable (Heavy metal risks)</td>
+            <td class="border-b border-slate-100 p-3 text-slate-600">Lab-Certified, Clean Room Environment</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>The Science of Cultivation</h3>
+      <p>Our facility in <strong>Barwani, Madhya Pradesh</strong>, employs advanced environmental controls to simulate the harsh Himalayan conditions that trigger bio-active compound production. By precisely regulating light spectrum, temperature gradients, and substrate composition, we achieve <strong>Cordycepin levels</strong> that consistently rival or exceed wild specimens. Learn more about our <a href="/cordyceps-militaris-benefits" class="text-orange-600 hover:text-orange-700 font-semibold">scientific validation here</a>.</p>
+
+      <div class="bg-slate-50 p-8 rounded-xl mt-8 mb-8 border-l-4 border-orange-600">
+        <h4 class="text-xl font-heading font-bold text-slate-900 mt-0 mb-2">Partnership Opportunities</h4>
+        <p class="text-slate-600 mb-4 leading-relaxed">We offer bespoke solutions for nutraceutical brands, including bulk extract supply and white-label formulations. Partner with a cultivator that prioritizes science and sustainability.</p>
+        <a href="/contact" class="inline-flex items-center text-orange-700 font-bold hover:text-orange-800 transition-colors">
+            Inquire about Commercial Supply <span class="ml-2">→</span>
+        </a>
+      </div>
+    `,
+    faq: [
+      { question: 'Do you offer white-label services?', answer: 'Yes, we provide end-to-end white-label solutions for brands looking to launch premium mushroom supplements.' },
+      { question: 'Is your facility certified?', answer: 'Our manufacturing unit adheres to stringent FSSAI standards and international Good Manufacturing Practices (GMP).' },
+      { question: 'How do you ensure potency?', answer: 'Every batch undergoes HPLC analysis to quantify Cordycepin and Adenosine levels, ensuring consistent efficacy.' }
+    ],
+    author: {
+      name: "Synervion R&D",
+      role: "Biotech Division",
+      bio: "A multidisciplinary team of mycologists and process engineers dedicated to functional mushroom innovation."
+    }
+  },
+  // NEW: Pillar 4 - Local Consumer Trust (Keeda Jadi)
+  {
+    slug: 'keeda-jadi-price-india',
+    title: 'Keeda Jadi Market Analysis: Understanding Value, Price, and Authenticity',
+    description: 'A comprehensive guide to the Indian Cordyceps market. We analyze the price disparity between wild Yarsagumba and lab-grown Cordyceps Militaris to help you make informed choices.',
+    category: 'Market Intelligence',
+    keywords: ['Keeda Jadi price India', 'original Keeda Jadi', 'Himalayan Cordyceps value', 'Cordyceps militaris vs sinensis', 'buy authentic Keeda Jadi'],
+    ogImage: '/assets/keeda-jadi-gold.png',
+    content: `
+      <h2>The Economics of "Himalayan Gold"</h2>
+      <p>In the world of functional mushrooms, <strong>"Keeda Jadi"</strong> (<em>Ophiocordyceps sinensis</em>) commands a legendary status. Often referred to as "Himalayan Gold," authentic wild specimens can fetch market prices ranging from <strong>₹10 Lakh to ₹15 Lakh per kilogram</strong> due to their extreme scarcity and complex harvesting requirements in the high Himalayas.</p>
+      <p>However, the Indian digital marketplace is often flooded with listings offering "Keeda Jadi" at a fraction of this cost. This significant price disparity necessitates a deeper understanding of the market dynamics.</p>
+
+      <h3>Classifying Cordyceps: Sinensis vs. Militaris</h3>
+      <p>To navigate the market effectively, it is essential to distinguish between the two primary commercially relevant species:</p>
+      <div class="grid md:grid-cols-2 gap-6 my-8">
+        <div class="bg-white p-6 rounded-lg border border-slate-200 shadow-sm">
+            <h4 class="font-bold text-lg mb-2 text-slate-800">1. Wild Ophiocordyceps Sinensis</h4>
+            <ul class="text-sm space-y-2 text-slate-600">
+                <li><strong>Origin:</strong> Wild-harvested from ghost moth caterpillars at high altitudes (>4,000m).</li>
+                <li><strong>Status:</strong> Endangered and extremely rare.</li>
+                <li><strong>Price Point:</strong> ₹800 - ₹2,500 per gram.</li>
+                <li><strong>Availability:</strong> Highly restricted.</li>
+            </ul>
+        </div>
+        <div class="bg-orange-50 p-6 rounded-lg border border-orange-100 shadow-sm">
+            <h4 class="font-bold text-lg mb-2 text-slate-900">2. Cultivated Cordyceps Militaris</h4>
+            <ul class="text-sm space-y-2 text-slate-700">
+                <li><strong>Origin:</strong> Cultivated on nutrient-rich vegan substrates in controlled biotech labs.</li>
+                <li><strong>Status:</strong> Sustainable and scalable.</li>
+                <li><strong>Price Point:</strong> ₹25 - ₹100 per gram.</li>
+                <li><strong>Potency:</strong> Often higher in <a href="/cordyceps-militaris-benefits#compounds" class="underline decoration-orange-400">Cordycepin</a> than wild varieties.</li>
+            </ul>
+        </div>
+      </div>
+
+      <div class="e-e-a-t-citation bg-slate-50 p-6 border-l-4 border-slate-300 italic text-slate-700 my-8">
+        "Comparative chromatography studies suggest that quality-controlled <em>C. militaris</em> cultivation can yield a bioactive profile equivalent or superior to wild <em>C. sinensis</em>, particularly in Adenosine and Cordycepin concentrations." – <a href="/cordyceps-militaris-benefits" class="not-italic text-orange-600 font-semibold hover:underline">Explore the Research Comparison</a>
+      </div>
+
+      <h3>Identifying Authenticity</h3>
+      <p>Consumers should approach "cheap" wild Keeda Jadi with caution. Offers of "Original Wild Himalayan" product for prices under ₹50,000/kg are statistically likely to be unauthentic. These may be adulterated products or simply mislabeled cultivated varieties.</p>
+
+      <h3>The Synervion Approach</h3>
+      <p>At Synervion, we prioritize <strong>transparency and efficacy</strong>. We exclusively cultivate <strong>Cordyceps Militaris</strong> because it allows for:</p>
+      <ul class="list-disc pl-6 space-y-2 mb-6 text-slate-700">
+        <li><strong>Standardized Potency:</strong> We guarantee specific levels of active compounds.</li>
+        <li><strong>Safety Assurance:</strong> Our controlled environment eliminates the risk of heavy metal contamination often found in wild foraged fungi.</li>
+        <li><strong>Ethical Production:</strong> Our process is 100% vegan and does not involve insects.</li>
+      </ul>
+      
+      <p>For those seeking the functional benefits of Cordyceps—energy, endurance, and immunity—cultivated <em>Militaris</em> represents the rational, science-backed choice.</p>
+    `,
+    faq: [
+      { question: 'Do you sell wild Keeda Jadi?', answer: 'No. Synervion specializes in premium, lab-grown Cordyceps Militaris to ensure sustainability, safety, and consistent potency.' },
+      { question: 'Why is there such a price difference?', answer: 'The price of wild Keeda Jadi is driven by its extreme rarity and the difficulty of harvest. Lab-grown Cordyceps benefits from scalable biotechnology.' },
+      { question: 'Is the lab-grown variety effective?', answer: 'Absolutely. Clinical studies and chemical analysis confirm that high-quality cultivated Cordyceps delivers the same key bioactive compounds as the wild variety.' }
+    ],
+    author: {
+      name: "Rajesh Kumar",
+      role: "Lead Market Analyst",
+      bio: "Specialist in medicinal mushroom trade dynamics and quality assurance protocols."
+    }
+  },
+
   // PILLAR PAGE: The main comprehensive guide
   {
     slug: 'cordyceps-militaris-benefits',
@@ -408,6 +537,7 @@ export const articles: Article[] = [
     description: 'Maximize your cycling endurance with the right Cordyceps dosage. Learn how to time your intake for peak power output and recovery.',
     category: 'Endurance Sports',
     keywords: ['Cordyceps dosage for cycling', 'cycling endurance supplements', 'natural cycling performance booster', 'Cordyceps for cyclists', 'FTP increase supplements'],
+    ogImage: '/assets/cycling-performance.png',
     content: `
       <h2>How Can You Pedal Harder and Longer with Cordyceps?</h2>
       <p>Cyclists are always looking for that extra watt. Whether you're climbing steep gradients or pushing through a century ride, <strong>Cordyceps militaris</strong> offers a natural, legal performance boost. But getting the <strong>Cordyceps dosage for cycling</strong> right is key to unlocking these benefits.</p>

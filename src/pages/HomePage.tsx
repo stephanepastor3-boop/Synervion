@@ -8,6 +8,8 @@ import { ContactCTA } from '../components/ContactCTA';
 import { Footer } from '../components/Footer';
 import { SEO } from '../components/SEO';
 
+import { FeaturedArticles } from '../components/FeaturedArticles';
+
 import { ProductShowcase } from '../components/products/ProductShowcase';
 
 export function HomePage() {
@@ -107,6 +109,7 @@ export function HomePage() {
         <LabGrownAdvantage />
         {/* <WhatWeSupply /> - Replaced by ProductShowcase details */}
         <ScientificEvidence />
+        <FeaturedArticles />
         <PartnershipModels />
         <ContactCTA />
       </main>
