@@ -104,7 +104,7 @@ export function ContactPage() {
       address: 'Survey No.241, 4, Dist, in front of Saket Ginning, Borlay, Madhya Pradesh 451556, India',
       type: 'R&D Facility',
       mapLink: 'https://www.google.com/maps/search/Survey+No.241,+4,+Dist,+in+front+of+Saket+Ginning,+Borlay,+Madhya+Pradesh+451556,+India',
-      embedUrl: ''
+      embedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3698.1720330310095!2d75.0232905!3d22.0430138!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39620300488bc205%3A0x7cca84a2184251be!2sSynervion%20Labs!5e0!3m2!1sen!2sin!4v1768119515864!5m2!1sen!2sin'
     }
   ];
 
