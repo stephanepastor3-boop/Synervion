@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import { motion } from 'motion/react';
 import { useSearchParams } from 'react-router-dom';
 import { BrandButton } from '../components/brand/BrandButton';
@@ -94,16 +95,55 @@ export function ContactPage() {
       location: 'Madhya Pradesh, India',
       address: 'Anjad Rd, Barwani, Madhya Pradesh 451551, India',
       type: 'Headquarters',
-      mapLink: 'https://maps.app.goo.gl/4cZphEF61RyRTMjG8'
+      mapLink: 'https://maps.app.goo.gl/4cZphEF61RyRTMjG8',
+      embedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14902.164344837777!2d74.8953185!3d22.0305871!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396207127e4e000d%3A0xc0fb106b12a32c28!2sSynervion!5e1!3m2!1sen!2sin!4v1736605000000!5m2!1sen!2sin'
     },
     {
       name: 'Synervion Labs',
       location: 'Madhya Pradesh, India',
       address: 'Survey No.241, 4, Dist, in front of Saket Ginning, Borlay, Madhya Pradesh 451556, India',
       type: 'R&D Facility',
-      mapLink: 'https://www.google.com/maps/search/Survey+No.241,+4,+Dist,+in+front+of+Saket+Ginning,+Borlay,+Madhya+Pradesh+451556,+India'
+      mapLink: 'https://www.google.com/maps/search/Survey+No.241,+4,+Dist,+in+front+of+Saket+Ginning,+Borlay,+Madhya+Pradesh+451556,+India',
+      embedUrl: ''
     }
   ];
+
+  const hqSchema = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Synervion HQ",
+    "image": "https://www.synervion.com/assets/logo-square.png",
+    "url": "https://www.synervion.com",
+    "telephone": "+918823888238",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Anjad Rd",
+      "addressLocality": "Barwani",
+      "addressRegion": "Madhya Pradesh",
+      "postalCode": "451551",
+      "addressCountry": "IN"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 22.0305871,
+      "longitude": 74.8953185
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        ],
+        "opens": "08:30",
+        "closes": "17:30"
+      }
+    ]
+  };
 
   const journeySteps = [
     {
@@ -433,6 +473,12 @@ export function ContactPage() {
               transition={{ duration: 0.6 }}
               className="space-y-6 sm:space-y-8"
             >
+              <Helmet>
+                <script type="application/ld+json">
+                  {JSON.stringify(hqSchema)}
+                </script>
+              </Helmet>
+
               {/* Office Locations */}
               <div>
                 <h3 className="mb-4 sm:mb-6 text-xl sm:text-2xl" style={{ fontFamily: 'Manrope, sans-serif' }}>
@@ -440,23 +486,36 @@ export function ContactPage() {
                 </h3>
                 <div className="space-y-4">
                   {offices.map((office) => (
-                    <a
+                    <div
                       key={office.name}
-                      href={office.mapLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="block group overflow-hidden rounded-2xl bg-white border border-[hsl(var(--synervion-border-light))] hover:border-[hsl(var(--synervion-primary-500))] hover:shadow-lg transition-all"
+                      className="block group overflow-hidden rounded-2xl bg-white border border-[hsl(var(--synervion-border-light))] transition-all hover:border-[hsl(var(--synervion-primary-500))] hover:shadow-lg"
                     >
-                      <div className="h-24 bg-[hsl(var(--synervion-bg-gray-100))] relative overflow-hidden group-hover:bg-[hsl(var(--synervion-bg-gray-200))] transition-colors"
-                        style={{ backgroundImage: "url('/assets/map-pattern.png')", backgroundSize: 'cover', backgroundPosition: 'center' }}>
-                        {/* Abstract map pattern or grid */}
-                        <div className="absolute inset-0 opacity-10" />
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <span className="flex items-center gap-2 text-sm font-semibold text-[hsl(var(--synervion-primary-700))] bg-white/80 backdrop-blur-sm px-3 py-1.5 rounded-full shadow-sm group-hover:bg-white group-hover:scale-105 transition-all">
-                            <MapPin className="w-4 h-4" /> View on Google Maps
-                          </span>
+                      {office.embedUrl ? (
+                        <div className="h-64 bg-[hsl(var(--synervion-bg-gray-100))] relative overflow-hidden">
+                          <iframe
+                            src={office.embedUrl}
+                            width="100%"
+                            height="100%"
+                            style={{ border: 0 }}
+                            allowFullScreen
+                            loading="lazy"
+                            referrerPolicy="no-referrer-when-downgrade"
+                            title={`Map of ${office.name}`}
+                          />
                         </div>
-                      </div>
+                      ) : (
+                        <a href={office.mapLink} target="_blank" rel="noopener noreferrer" className="block">
+                          <div className="h-24 bg-[hsl(var(--synervion-bg-gray-100))] relative overflow-hidden group-hover:bg-[hsl(var(--synervion-bg-gray-200))] transition-colors"
+                            style={{ backgroundImage: "url('/assets/map-pattern.png')", backgroundSize: 'cover', backgroundPosition: 'center' }}>
+                            <div className="absolute inset-0 opacity-10" />
+                            <div className="absolute inset-0 flex items-center justify-center">
+                              <span className="flex items-center gap-2 text-sm font-semibold text-[hsl(var(--synervion-primary-700))] bg-white/80 backdrop-blur-sm px-3 py-1.5 rounded-full shadow-sm group-hover:bg-white group-hover:scale-105 transition-all">
+                                <MapPin className="w-4 h-4" /> View on Google Maps
+                              </span>
+                            </div>
+                          </div>
+                        </a>
+                      )}
 
                       <div className="p-5 sm:p-6">
                         <div className="flex items-start justify-between mb-2">
@@ -474,11 +533,16 @@ export function ContactPage() {
                           {office.address}
                         </p>
 
-                        <div className="flex items-center text-xs font-semibold text-[hsl(var(--synervion-primary-600))] group-hover:underline">
+                        <a
+                          href={office.mapLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center text-xs font-semibold text-[hsl(var(--synervion-primary-600))] hover:underline"
+                        >
                           Get Directions <ArrowRight className="w-3 h-3 ml-1" />
-                        </div>
+                        </a>
                       </div>
-                    </a>
+                    </div>
                   ))}
                 </div>
               </div>
@@ -494,8 +558,7 @@ export function ContactPage() {
                       Business Hours
                     </h4>
                     <div className="space-y-1 text-sm text-[hsl(var(--synervion-text-secondary))]">
-                      <div>Monday - Friday: 9:00 AM - 6:00 PM IST</div>
-                      <div>Saturday: 10:00 AM - 2:00 PM IST</div>
+                      <div>Monday - Saturday: 8:30 AM - 5:30 PM IST</div>
                       <div>Sunday: Closed</div>
                     </div>
                   </div>
