@@ -96,7 +96,7 @@ export function ContactPage() {
       address: 'Anjad Rd, Barwani, Madhya Pradesh 451551, India',
       type: 'Headquarters',
       mapLink: 'https://maps.app.goo.gl/4cZphEF61RyRTMjG8',
-      embedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14902.164344837777!2d74.8953185!3d22.0305871!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396207127e4e000d%3A0xc0fb106b12a32c28!2sSynervion!5e1!3m2!1sen!2sin!4v1736605000000!5m2!1sen!2sin'
+      embedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14902.164344837777!2d74.8953185!3d22.0305871!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396207127e4e000d%3A0xc0fb106b12a32c28!2sSynervion!5e0!3m2!1sen!2sin!4v1736605000000!5m2!1sen!2sin'
     },
     {
       name: 'Synervion Labs',
