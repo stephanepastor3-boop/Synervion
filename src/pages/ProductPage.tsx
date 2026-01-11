@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { Navigation } from '../components/Navigation';
 import { Footer } from '../components/Footer';
 import { SEO } from '../components/SEO';
+import { ShareButtons } from '../components/ShareButtons';
 import { ProductCard } from '../components/products/ProductCard';
 import { products } from '../data/products';
 import studiesData from '../data/studies.json';
@@ -149,7 +150,10 @@ export function ProductPage() {
 
                             {/* Short Description */}
                             <div>
-                                <h2 className="text-2xl font-bold font-display mb-4">Biological Mechanism</h2>
+                                <div className="flex items-center justify-between mb-4">
+                                    <h2 className="text-2xl font-bold font-display">Biological Mechanism</h2>
+                                    <ShareButtons title={product.title} />
+                                </div>
                                 <p className="text-slate-600 leading-relaxed text-lg">
                                     {product.description}
                                     <br /><br />

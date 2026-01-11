@@ -3,6 +3,7 @@ import { ArrowLeft } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 import { studies } from '../components/ExploreResearch';
 import { StudyDetails } from '../components/research/StudyDetails';
+import { ShareButtons } from '../components/ShareButtons';
 import { Navigation } from '../components/Navigation';
 
 export function StudyPage() {
@@ -117,6 +118,9 @@ export function StudyPage() {
                 </Link>
 
                 <div className="bg-white rounded-2xl overflow-hidden shadow-xl">
+                    <div className="border-b border-gray-100 p-6 flex justify-end">
+                        <ShareButtons title={study.title} />
+                    </div>
                     <StudyDetails study={study} />
 
                     <div className="bg-slate-50 border-t border-slate-100 p-6 md:p-8">
