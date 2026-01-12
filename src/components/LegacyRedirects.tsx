@@ -3,9 +3,11 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 const redirects: Record<string, string> = {
     '/research/cordyceps-for-athletes-vo2-max': '/cordyceps-militaris-benefits',
-    '/research/how-to-take-cordyceps-coffee-smoothies': '/when-to-take-cordyceps', // Best guess mapping
+    '/research/how-to-take-cordyceps-coffee-smoothies': '/when-to-take-cordyceps',
     '/research/sustainable-mushroom-cultivation-vs-wild-harvest': '/cordyceps-manufacturer-india',
     '/research/the-science-of-cordyceps-clinical-review': '/cordyceps-militaris-benefits',
+    '/index.php': '/',
+    '/aboutus.php': '/about',
 };
 
 export function LegacyRedirects() {
