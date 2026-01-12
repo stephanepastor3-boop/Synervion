@@ -198,7 +198,13 @@ async function analyzePost(finalPost: string, currentRules: string[], postId: st
 }
 
 function sanitizePost(text: string) {
-    return text.replace(/\*\*/g, "").replace(/\*/g, "").replace(/__/g, "").trim();
+    return text
+        .replace(/\[Image suggestion:.*?\]/gi, "") // Remove specific image suggestions
+        .replace(/\[.*?\]/g, "") // Remove any other bracketed notes
+        .replace(/\*\*/g, "")
+        .replace(/\*/g, "")
+        .replace(/__/g, "")
+        .trim();
 }
 
 // Brave

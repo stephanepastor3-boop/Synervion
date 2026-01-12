@@ -4,12 +4,15 @@ import path from 'node:path';
 import { Buffer } from 'node:buffer';
 import { setTimeout } from 'node:timers/promises';
 import 'dotenv/config';
+import { Resend } from 'resend';
 
 // --- Configuration ---
 const LINKEDIN_ACCESS_TOKEN = process.env.LINKEDIN_ACCESS_TOKEN;
 const ORGANIZATION_ID = process.env.ORGANIZATION_ID || '105128149';
 const BRAVE_API_KEY = process.env.BRAVE_API_KEY;
 const PERPLEXITY_API_KEY = process.env.PERPLEXITY_API_KEY;
+const RESEND_API_KEY = process.env.RESEND_API_KEY;
+const resend = new Resend(RESEND_API_KEY);
 const GUIDELINES_FILE = path.join(process.cwd(), 'scripts', 'guidelines.json');
 
 // Strategic Topics (Cordyceps & Nutraceuticals)
@@ -86,6 +89,29 @@ async function main() {
         console.log("\nStep 10: Analyst Review (Self-Improvement)...");
         const analystFeedback = await analyzePost(finalPost, guidelines, postResult.id);
         console.log(`   > Analyst Output: ${analystFeedback}`);
+
+        // 8. Send Email Notification
+        if (RESEND_API_KEY) {
+            console.log("\nStep 11: Sending Email Notification...");
+            await resend.emails.send({
+                from: 'Synervion Bot <bot@synervion.com>',
+                to: 'stephane@synervion.com',
+                subject: `[TEST] LinkedIn Post Published: ${topic}`,
+                html: `
+                    <h1>Daily Post Published Successfully!</h1>
+                    <p><strong>Topic:</strong> ${topic}</p>
+                    <p><strong>Link:</strong> <a href="https://www.linkedin.com/feed/update/${postResult.id}">View Post</a></p>
+                    <hr />
+                    <h3>Content:</h3>
+                    <p style="white-space: pre-wrap;">${finalPost}</p>
+                    <br />
+                    <img src="${imageUrl}" alt="Post Image" style="max-width: 100%; border-radius: 8px;" />
+                `
+            });
+            console.log("   > Email sent successfully.");
+        } else {
+            console.warn("\n   > SKIPPING EMAIL: RESEND_API_KEY not found in .env");
+        }
 
         if (analystFeedback && analystFeedback.trim() !== "None" && analystFeedback.trim() !== "No new rules.") {
             updateGuidelines(analystFeedback);
@@ -242,7 +268,13 @@ async function analyzePost(finalPost, currentRules, postId) {
 }
 
 function sanitizePost(text) {
-    return text.replace(/\*\*/g, "").replace(/\*/g, "").replace(/__/g, "").trim();
+    return text
+        .replace(/\[Image suggestion:.*?\]/gi, "") // Remove specific image suggestions
+        .replace(/\[.*?\]/g, "") // Remove any other bracketed notes
+        .replace(/\*\*/g, "")
+        .replace(/\*/g, "")
+        .replace(/__/g, "")
+        .trim();
 }
 
 async function callPerplexity(messages) {
