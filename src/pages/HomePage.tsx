@@ -13,6 +13,10 @@ import { FeaturedArticles } from '../components/FeaturedArticles';
 import { ProductShowcase } from '../components/products/ProductShowcase';
 
 export function HomePage() {
+  const nextYear = new Date();
+  nextYear.setFullYear(nextYear.getFullYear() + 1);
+  const priceValidUntil = nextYear.toISOString().split('T')[0];
+
   return (
     <div className="min-h-screen bg-[hsl(var(--synervion-bg-white))]">
       <SEO canonical="https://www.synervion.com/" />
@@ -53,7 +57,7 @@ export function HomePage() {
                 "url": "https://www.synervion.com/product/synv-core",
                 "priceCurrency": "USD",
                 "price": "0",
-                "priceValidUntil": "2025-12-31",
+                "priceValidUntil": priceValidUntil,
                 "availability": "https://schema.org/InStock",
                 "itemCondition": "https://schema.org/NewCondition",
                 "hasMerchantReturnPolicy": {
@@ -61,7 +65,7 @@ export function HomePage() {
                   "applicableCountry": "IN",
                   "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
                   "merchantReturnDays": "30",
-                  "returnFees": "https://schema.org/ReturnShippingFees",
+                  "returnFees": "https://schema.org/ReturnFeesCustomerResponsibility",
                   "returnMethod": "https://schema.org/ReturnByMail"
                 },
                 "shippingDetails": {
@@ -125,7 +129,7 @@ export function HomePage() {
                 "url": "https://www.synervion.com/product/synv-pulse",
                 "priceCurrency": "USD",
                 "price": "180",
-                "priceValidUntil": "2025-12-31",
+                "priceValidUntil": priceValidUntil,
                 "availability": "https://schema.org/InStock",
                 "itemCondition": "https://schema.org/NewCondition",
                 "hasMerchantReturnPolicy": {
@@ -133,6 +137,7 @@ export function HomePage() {
                   "applicableCountry": "IN",
                   "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
                   "merchantReturnDays": "30",
+                  "returnFees": "https://schema.org/ReturnFeesCustomerResponsibility",
                   "returnMethod": "https://schema.org/ReturnByMail"
                 },
                 "shippingDetails": {
@@ -196,7 +201,7 @@ export function HomePage() {
                 "url": "https://www.synervion.com/product/synv-root",
                 "priceCurrency": "USD",
                 "price": "0",
-                "priceValidUntil": "2025-12-31",
+                "priceValidUntil": priceValidUntil,
                 "availability": "https://schema.org/InStock",
                 "itemCondition": "https://schema.org/NewCondition",
                 "hasMerchantReturnPolicy": {
@@ -204,6 +209,7 @@ export function HomePage() {
                   "applicableCountry": "IN",
                   "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
                   "merchantReturnDays": "30",
+                  "returnFees": "https://schema.org/ReturnFeesCustomerResponsibility",
                   "returnMethod": "https://schema.org/ReturnByMail"
                 },
                 "shippingDetails": {
