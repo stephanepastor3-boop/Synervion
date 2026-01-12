@@ -47,6 +47,7 @@ export function ProductPage() {
             "url": `https://www.synervion.com/product/${product.id}`,
             "priceCurrency": "USD",
             "price": product.price > 0 ? product.price : "0",
+            "priceValidUntil": new Date(new Date().setFullYear(new Date().getFullYear() + 1)).toISOString().split('T')[0],
             "availability": "https://schema.org/InStock",
             "itemCondition": "https://schema.org/NewCondition",
             "hasMerchantReturnPolicy": {

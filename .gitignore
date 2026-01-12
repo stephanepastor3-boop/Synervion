@@ -9,3 +9,5 @@ coverage
 build
 .vercel
 *.tsbuildinfo
+
+mcp_config_read.json

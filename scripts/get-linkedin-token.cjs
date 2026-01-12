@@ -42,7 +42,7 @@ rl.question('Enter Client ID: ', (clientId) => {
         });
 
         server.listen(8080, () => {
-            const authUrl = `https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=${clientId.trim()}&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fcallback&state=random_state_string&scope=w_member_social%20r_liteprofile`;
+            const authUrl = `https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=${clientId.trim()}&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fcallback&state=random_state_string&scope=w_member_social%20r_liteprofile%20w_organization_social%20r_organization_social`;
 
             console.log('\nPlease open the following URL in your browser to authorize:');
             console.log(authUrl);

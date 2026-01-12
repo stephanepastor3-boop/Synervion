@@ -1,0 +1,9 @@
+{
+    "rules": [
+        "Do NOT use bracketed numbers for citations (e.g., [1], [2]). Integrate links naturally into the text.",
+        "Do NOT use markdown bolding (**text**) or italics (*text*). Use Capitalization for emphasis if needed.",
+        "Always include 3-5 relevant hashtags at the end.",
+        "Images must be specific, authentic, and high-quality (Macro, Editorial, Cinematic). Avoid generic stock photos.",
+        "Tone should be professional, authoritative, yet accessible. Avoid AI cliches like 'delve', 'unlock', 'game-changer'."
+    ]
+}

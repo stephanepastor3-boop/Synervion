@@ -7,7 +7,7 @@
                 "@modelcontextprotocol/server-brave-search"
             ],
             "env": {
-                "BRAVE_API_KEY": "YOUR_BRAVE_KEY_HERE"
+                "BRAVE_API_KEY": "BSAnN4gtmG5j9vol6BoI2AyITAySX6x"
             }
         },
         "social-media": {
@@ -17,9 +17,8 @@
                 "social-media-mcp-server"
             ],
             "env": {
-                "TWITTER_API_KEY": "YOUR_KEY",
-                "TWITTER_API_SECRET": "YOUR_SECRET",
-                "LINKEDIN_ACCESS_TOKEN": "YOUR_TOKEN"
+                "LINKEDIN_ACCESS_TOKEN": "AQV1k6vAjWH8is39CLVDKWyUHuj0m8-bhzttkAQQ_Smef_rB45PZdKb-3mK13PkWeRnnmTYXBFLg4F_8F8-UAtlRW2ZUhLcUi52QDav4pdIB8VILnDq8ECkfjhV3pUpEa6ZoyMA2VFg7FpZ9yDQi4Gis4TOuELwlDzodxsYiViLy-iSnYqL25litZTyb9SNgJYxHCZJcqD2N5_-qAZFJJTZ1WmDJhobf29GwV7DFoUdqYPxATZu2EMxNy3hWPxZBzkqDpudkmfaI8hyojerSZ9vqSHusUDwa0pFlw_2iJuLkglAg_J8F3XJXsdygM0Au8C3beP8O_bGVczq9c3_jWo9iF2s6rQ",
+                "ORGANIZATION_ID": "105128149"
             }
         },
         "filesystem": {
@@ -27,7 +26,7 @@
             "args": [
                 "-y",
                 "@modelcontextprotocol/server-filesystem",
-                "/Users/stephane/antigravity/content"
+                "/Users/stephanepastor/antigravity/content"
             ]
         }
     }
