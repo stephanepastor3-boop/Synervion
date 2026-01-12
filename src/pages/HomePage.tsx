@@ -61,6 +61,7 @@ export function HomePage() {
                   "applicableCountry": "IN",
                   "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
                   "merchantReturnDays": "30",
+                  "returnFees": "https://schema.org/ReturnShippingFees",
                   "returnMethod": "https://schema.org/ReturnByMail"
                 },
                 "shippingDetails": {

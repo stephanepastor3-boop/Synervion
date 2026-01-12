@@ -32,6 +32,11 @@ export function ProductPage() {
     };
 
     // Schema for Product
+    // Calculate date for next year for priceValidUntil
+    const nextYear = new Date();
+    nextYear.setFullYear(nextYear.getFullYear() + 1);
+    const priceValidUntil = nextYear.toISOString().split('T')[0];
+
     const productSchema = {
         "@context": "https://schema.org/",
         "@type": "Product",
@@ -47,7 +52,7 @@ export function ProductPage() {
             "url": `https://www.synervion.com/product/${product.id}`,
             "priceCurrency": "USD",
             "price": product.price > 0 ? product.price : "0",
-            "priceValidUntil": new Date(new Date().setFullYear(new Date().getFullYear() + 1)).toISOString().split('T')[0],
+            "priceValidUntil": priceValidUntil,
             "availability": "https://schema.org/InStock",
             "itemCondition": "https://schema.org/NewCondition",
             "hasMerchantReturnPolicy": {
@@ -55,6 +60,7 @@ export function ProductPage() {
                 "applicableCountry": "IN",
                 "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
                 "merchantReturnDays": "30",
+                "returnFees": "https://schema.org/ReturnShippingFees",
                 "returnMethod": "https://schema.org/ReturnByMail"
             },
             "shippingDetails": {
