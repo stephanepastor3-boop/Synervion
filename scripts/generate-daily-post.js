@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { Buffer } from 'node:buffer';
 import { setTimeout } from 'node:timers/promises';
+import 'dotenv/config';
 
 // --- Configuration ---
 const LINKEDIN_ACCESS_TOKEN = process.env.LINKEDIN_ACCESS_TOKEN;
