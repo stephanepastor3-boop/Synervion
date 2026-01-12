@@ -50,7 +50,7 @@ export function HomePage() {
               },
               "offers": {
                 "@type": "Offer",
-                "url": "https://www.synervion.com/#card-core",
+                "url": "https://www.synervion.com/product/synv-core",
                 "priceCurrency": "USD",
                 "price": "0",
                 "priceValidUntil": "2025-12-31",
@@ -121,7 +121,7 @@ export function HomePage() {
               },
               "offers": {
                 "@type": "Offer",
-                "url": "https://www.synervion.com/#card-pulse",
+                "url": "https://www.synervion.com/product/synv-pulse",
                 "priceCurrency": "USD",
                 "price": "180",
                 "priceValidUntil": "2025-12-31",
@@ -192,7 +192,7 @@ export function HomePage() {
               },
               "offers": {
                 "@type": "Offer",
-                "url": "https://www.synervion.com/#card-root",
+                "url": "https://www.synervion.com/product/synv-root",
                 "priceCurrency": "USD",
                 "price": "0",
                 "priceValidUntil": "2025-12-31",

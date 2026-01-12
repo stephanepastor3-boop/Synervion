@@ -18,7 +18,7 @@
         },
         {
             "source": "/lab.php",
-            "destination": "https://www.synervion.com/",
+            "destination": "https://www.synervion.com/#origin",
             "permanent": true
         },
         {

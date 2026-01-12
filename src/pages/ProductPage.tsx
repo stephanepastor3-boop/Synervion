@@ -154,13 +154,22 @@ export function ProductPage() {
                                     <h2 className="text-2xl font-bold font-display">Biological Mechanism</h2>
                                     <ShareButtons title={product.title} />
                                 </div>
-                                <p className="text-slate-600 leading-relaxed text-lg">
-                                    {product.description}
-                                    <br /><br />
-                                    Our {product.title} is engineered using {product.tags.join(', ')} to ensure maximum bioavailability.
-                                    The active compound, {product.activeCompound}, is standardized to {product.potency}, providing consistent
-                                    efficacy for {product.category} applications.
-                                </p>
+                                <div className="text-slate-600 leading-relaxed text-lg space-y-4">
+                                    {product.longDescription ? (
+                                        product.longDescription.split('\n\n').map((paragraph, idx) => (
+                                            <p key={idx}>{paragraph}</p>
+                                        ))
+                                    ) : (
+                                        <>
+                                            <p>{product.description}</p>
+                                            <p>
+                                                Our {product.title} is engineered using {product.tags.join(', ')} to ensure maximum bioavailability.
+                                                The active compound, {product.activeCompound}, is standardized to {product.potency}, providing consistent
+                                                efficacy for {product.category} applications.
+                                            </p>
+                                        </>
+                                    )}
+                                </div>
                             </div>
 
                             {/* Metrics Grid */}

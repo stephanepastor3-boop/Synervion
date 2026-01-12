@@ -3,6 +3,7 @@ import { motion } from 'motion/react';
 import {
     FlaskConical, ArrowRight, Check
 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { Product, Study } from '../../types';
 
 
@@ -116,6 +117,12 @@ export function ProductCard({ product, relatedStudies = [], onQuickAdd }: Produc
                                         </div>
                                         <h3 className="text-2xl font-bold text-slate-900 leading-tight mb-1">{product.title}</h3>
                                         <p className="text-sm font-medium text-orange-600 mb-2">{product.subtitle}</p>
+                                        <Link
+                                            to={`/product/${product.id}`}
+                                            className="inline-flex items-center gap-1 text-xs font-bold text-slate-400 hover:text-orange-600 transition-colors mb-3"
+                                        >
+                                            View Full Details <ArrowRight size={12} />
+                                        </Link>
                                     </div>
                                     <div className="text-right">
                                         {/* Price & MOQ removed */}

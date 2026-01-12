@@ -34,6 +34,7 @@ export interface Product {
     title: string;
     subtitle: string;
     description: string;
+    longDescription?: string;
     price: number;
     image: string;
     imageScale?: number;

@@ -19,6 +19,9 @@ export const products: Product[] = [
         title: 'Synervion® CORE Caps',
         subtitle: 'Capsule-Ready Performance System',
         description: 'Foundational, high-potency extract engineered for precise dosing.',
+        longDescription: `Synervion® CORE Caps represent the gold standard for daily supplementation, offering a stable, high-potency Cordyceps extract optimized for encapsulation. Unlike raw powders that can vary in density, CORE is engineered for consistent flowability and precise dosing, ensuring that every capsule delivers exactly 1.5% active Cordycepin. This foundational system is designed for individuals seeking reliable, all-day metabolic support without the complexity of measuring powders.
+
+        The CORE formulation focuses on "sustained release" metabolic support. By utilizing a specific extraction ratio that balances Cordycepin with natural fungal polysaccharides, it provides steady energy production (ATP) throughout the day. It is the ideal choice for pre-workout stacks, daily productivity protocols, and general wellness maintenance, offering a convenient, tasteless, and highly effective way to integrate functional mushrooms into a modern lifestyle.`,
         price: 0,
         image: productCoreCaps,
         gallery: [
@@ -53,6 +56,9 @@ export const products: Product[] = [
         title: 'Synervion® PULSE Liquids',
         subtitle: 'Fast-Acting Nano-Extract',
         description: 'Nano-encapsulated for speed, circulation, and instant bioavailability.',
+        longDescription: `Synervion® PULSE Liquids utilize advanced nano-emulsion technology to break down hydrophobic bioactive compounds into water-soluble particles smaller than 50 nanometers. This process drastically increases bioavailability, allowing the active Cordycepin and Adenosine to bypass standard digestive breakdown and enter the bloodstream rapidly. PULSE is designed for "instant impact" applications—energy shots, functional beverages, and liquid drops where speed of onset is critical.
+
+        This format solves the traditional challenge of mushroom extracts in beverages: solubility and taste. PULSE acts as a completely clear, neutral-tasting liquid that integrates seamlessly into cold brew coffee, sports drinks, or sublingual tinctures without sediment or earthy aftertaste. For athletes and high-performers, this means immediate access to improved oxygen uptake and mental clarity right when it's needed most.`,
         price: 180,
         image: productPulseHero,
         gallery: [
@@ -88,6 +94,9 @@ export const products: Product[] = [
         title: 'Synervion® ROOT Powders',
         subtitle: 'Whole-Food Nutrition Base',
         description: 'Micronized fruiting body for daily wellness and holistic blends.',
+        longDescription: `Synervion® ROOT Powders honor the whole mushroom. By utilizing the entire fruiting body—micronized to a fine mesh—we preserve the full spectrum of fungal nutrients, including beta-glucans, prebiotic fibers, and trace minerals often lost in isolated extracts. ROOT is the "nutritional base" for holistic wellness products, offering a robust profile that supports gut health and long-term immunity alongside energy production.
+
+        Perfect for food applications, smoothie blends, and superfood mixes, ROOT provides texture and substance. Its broad-spectrum profile triggers a more comprehensive immunomodulatory response, engaging the gut-associated lymphoid tissue (GALT). For formulators, it offers a clean-label, whole-food ingredient that signals authenticity and natural processing to health-conscious consumers.`,
         price: 0,
         image: productRootPowders,
         gallery: [
