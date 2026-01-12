@@ -60,7 +60,7 @@ export function ProductPage() {
                 "applicableCountry": "IN",
                 "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
                 "merchantReturnDays": "30",
-                "returnFees": "https://schema.org/ReturnShippingFees",
+                "returnFees": "https://schema.org/ReturnFeesCustomerResponsibility",
                 "returnMethod": "https://schema.org/ReturnByMail"
             },
             "shippingDetails": {
