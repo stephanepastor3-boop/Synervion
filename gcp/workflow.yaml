@@ -116,7 +116,7 @@ main:
                       report: ${critique_res.body.report}
             - save_scored:
                 assign:
-                  - scored_candidates: ${scored_candidates + [score_item]}
+                  - scored_candidates: ${list.concat(scored_candidates, [score_item])}
 
     # 4. SELECTION PHASE
     - select_winner:
