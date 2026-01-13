@@ -98,8 +98,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                     3. Output ONLY the search query. No quotes.` },
                     { role: "user", content: `Input Topic: ${topic}` }
                 ]);
-                const searchQuery = searchQueryRaw.trim().replace(/^"|"$/g, '');
-                console.log(`[Agent: Research] Pivoted Topic "${topic}" -> Search Query "${searchQuery}"`);
+                let searchQuery = searchQueryRaw?.trim().replace(/^"|"$/g, '') || "";
+
+                // Fallback if LLM fails
+                if (!searchQuery || searchQuery.length < 3) {
+                    console.log(`[Agent: Research] Pivot failed (Empty Result). Fallback to: "Functional Mushrooms Scientific Studies"`);
+                    searchQuery = "Functional Mushrooms Scientific Studies";
+                } else {
+                    console.log(`[Agent: Research] Pivoted Topic "${topic}" -> Search Query "${searchQuery}"`);
+                }
 
                 const context = await braveSearch(searchQuery);
                 return res.status(200).json({ context: `Original Topic: ${topic}\n\nSearch Query Used: ${searchQuery}\n\nResearch Data:\n${context}` });
