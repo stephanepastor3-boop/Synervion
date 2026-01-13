@@ -61,14 +61,16 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         // 2. Research (Brave)
         const researchData = await braveSearch(topic);
 
-        // 3. Strict Workflow Cycle (Recursive Loop)
+        // 3. Smart Recursive Loop (Plan-and-Execute)
+        // Reverted to loop as per user request, but with "Best Draft" safety and "Smart Refiner".
+
         let currentDraft = await generateDraft(topic, researchData, SOP_GUIDELINES);
         let attempts = 0;
         const MAX_ATTEMPTS = 15;
         let isPerfect = false;
         let lastCritique = "";
 
-        // Best Draft Retention
+        // Best Draft Retention (Monotonic Improvement Guard)
         let bestDraft = currentDraft;
         let bestScore = 0;
         let bestCritique = "";
@@ -99,15 +101,21 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                 bestCritique = lastCritique;
                 isPerfect = true;
             } else {
-                // Monotonic Improvement Check
+                // Monotonic Improvement Check to prevent "Ups and Downs"
                 if (score >= bestScore) {
                     bestScore = score;
                     bestDraft = currentDraft;
                     bestCritique = lastCritique;
                 } else {
                     console.warn(`[QA Loop] Score dropped (${bestScore} -> ${score}). Reverting to best draft...`);
-                    // Fallback to best draft, but keep using the NEW iteration count
+                    // IMPORTANT: Revert to the BEST draft, so we try to improve THAT one again, not the failed one.
                     currentDraft = bestDraft;
+                    // We keep the NEW critique for the logs, but for the NEXT refinement, 
+                    // we need to tell the AI what was wrong with the BEST draft, not the failed one.
+                    // Actually, if we revert to bestDraft, we should use bestCritique to refine it again?
+                    // But refining the same thing with the same prompt gives the same result.
+                    // We need to inject "Diversity" or "Try simpler".
+                    // Let's stick to standard revert for now.
                     lastCritique = bestCritique;
                 }
 
@@ -120,14 +128,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         if (!isPerfect) {
             if (bestScore >= 90) {
                 console.log(`[QA Loop] Max attempts reached. Accepting Best Draft (${bestScore}/100).`);
-                currentDraft = bestDraft; // Ensure we use the best one
+                currentDraft = bestDraft;
                 isPerfect = true;
             }
         }
 
         if (!isPerfect) {
             console.error("Failed to reach acceptable Quality Score. Aborting.");
-            throw new Error(`QA Failed. Final Requirements not met. Last Critique: ${lastCritique}`);
+            throw new Error(`QA Failed. Final Requirements not met. Best Score: ${bestScore}. Feedback: ${bestCritique}`);
         }
 
         const finalPost = sanitizePost(currentDraft);
@@ -312,22 +320,25 @@ async function generateRefinedPost(topic: string, draft: string, critique: strin
     const rulesText = guidelines.map(r => `- ${r}`).join('\n');
     return await callPerplexity([
         {
-            role: "system", content: `You are a Surgical Editor. Your job is to FIX the failed draft based on the critique.
+            role: "system", content: `You are a Senior Editor with a "Fix Everything at Once" methodology.
+
+TASK:
+1. ANALYZE the critique. List exactly what is GOOD (to PRESERVE) and what is BAD (to FIX).
+2. PLAN the rewrite. Determine how to fix the bad parts without breaking the good parts.
+3. EXECUTE. Rewrite the post.
 
 CRITICAL INSTRUCTIONS:
-1. Address EVERY failure in the REPORT.
-2. If the critique says "Fake Authenticity" or "In our lab" is fabricated -> REMOVE IT immediately.
-3. If the critique says "Weak Hook" -> WRITE A NEW HOOK.
-4. Do not just "tweak". REWRITE sections that failed.
-5. Verify citations against the CONTEXT provided below. Do not hallucinate studies.
+- If the critique flags "Fake Authenticity", REMOVE IT.
+- If the critique flags "Weak Hook", WRITE A NEW HOOK.
+- Verify citations against the CONTEXT.
 
-CONTEXT (Use this for facts/citations):
+CONTEXT:
 ${researchData}
 
 GUIDELINES:
 ${rulesText}`
         },
-        { role: "user", content: `Draft:\n${draft}\n\nCritique:\n${critique}` }
+        { role: "user", content: `Draft:\n${draft}\n\nCritique:\n${critique}\n\nPlease output ONLY the final rewritten post (skipping the analysis log).` }
     ]);
 }
 
