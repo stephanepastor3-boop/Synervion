@@ -404,31 +404,27 @@ Describe ONE striking visual concept that would stop a LinkedIn scroll. Focus on
 
                 for (const searchQuery of searchQueries) {
                     console.log(`[Agent: Visual] Searching: ${searchQuery}`);
-                    const imageResults = await braveImageSearch(searchQuery);
+                    const imageResult = await braveImageSearch(searchQuery);
 
-                    // Filter out suspicious URLs BEFORE verification
-                    const filteredResults = imageResults.filter((result: any) => {
-                        const url = result.thumbnail?.src || result.url || '';
-                        const isRejected = rejectPatterns.some(pattern =>
-                            url.toLowerCase().includes(pattern)
-                        );
-                        if (isRejected) {
-                            console.log(`[Agent: Visual] Rejected URL (pattern match): ${url}`);
-                        }
-                        return !isRejected;
-                    });
+                    // braveImageSearch returns a single URL string, not an array
+                    if (!imageResult) continue;
 
-                    if (filteredResults && filteredResults.length > 0) {
-                        for (const result of filteredResults) {
-                            const candidateUrl = result.thumbnail?.src || result.url;
-                            if (await verifyImage(candidateUrl)) {
-                                imageUrl = candidateUrl;
-                                console.log(`[Agent: Visual] Selected image: ${imageUrl}`);
-                                break;
-                            }
-                        }
+                    // Check URL for suspicious patterns
+                    const isRejected = rejectPatterns.some(pattern =>
+                        imageResult.toLowerCase().includes(pattern)
+                    );
+
+                    if (isRejected) {
+                        console.log(`[Agent: Visual] Rejected URL (pattern match): ${imageResult}`);
+                        continue; // Try next search query
                     }
-                    if (imageUrl) break; // Found valid image, exit search loop
+
+                    // Verify image accessibility
+                    if (await verifyImage(imageResult)) {
+                        imageUrl = imageResult;
+                        console.log(`[Agent: Visual] Selected image: ${imageUrl}`);
+                        break; // Found valid image, exit search loop
+                    }
                 }
 
                 // 4. Ultimate Fallback (Safe Mode)
