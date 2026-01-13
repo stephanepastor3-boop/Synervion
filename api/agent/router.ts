@@ -225,41 +225,6 @@ Output JUST the query, no quotes.`
 
                 return res.status(200).json({ image_url: imageUrl });
             }
-                const { draft } = req.body;
-                if (!draft) throw new Error("Missing draft");
-
-                // 1. Concept
-                const visualConcept = await callPerplexity([
-                    { role: "system", content: `You are an Art Director. Describe a SINGLE, STRIKING visual concept for this post. Keep it realistic and scientific.` },
-                    { role: "user", content: `Post Content:\n${draft}` }
-                ]);
-
-                // 2. Query
-                const visualQueryRaw = await callPerplexity([
-                    { role: "system", content: `Convert this visual concept into a search query string for high-end stock photos. Output ONLY the query.` },
-                    { role: "user", content: `Visual Concept: ${visualConcept}` }
-                ]);
-                const visualQuery = visualQueryRaw.replace(/^"|"$/g, '');
-
-                // 3. Search Loop
-                const visualQueries = [
-                    visualQuery + " photorealistic 4k",
-                    visualQuery,
-                    "functional mushrooms nature aesthetic 4k"
-                ];
-
-                let imageUrl = "";
-                for (const q of visualQueries) {
-                    try {
-                        console.log(`[Agent: Visual] Searching: "${q}"`);
-                        imageUrl = await braveImageSearch(q);
-                        if (imageUrl) break;
-                    } catch (e) { }
-                }
-
-                if (!imageUrl) throw new Error("CRITICAL: No images found");
-                return res.status(200).json({ image_url: imageUrl });
-        }
 
             case 'delivery': {
             const { topic, final_draft, image_url, qa_report } = req.body;
