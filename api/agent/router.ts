@@ -125,7 +125,12 @@ Output ONLY valid JSON, nothing else.`
                 ]);
 
                 try {
-                    const topic = JSON.parse(topicIdeaRaw);
+                    // Strip markdown code blocks that Gemini sometimes adds
+                    let cleanedResponse = topicIdeaRaw
+                        .replace(/```json\n?/g, '')
+                        .replace(/```\n?/g, '')
+                        .trim();
+                    const topic = JSON.parse(cleanedResponse);
                     return res.status(200).json(topic);
                 } catch (parseError) {
                     console.error('[Agent: discover-topic] JSON parse failed:', topicIdeaRaw);
@@ -281,10 +286,21 @@ CRITICAL FORMATTING RULES (ZERO TOLERANCE):
    - DELETE "Sources" section: No bibliography at end
 2. **HASHTAGS = PLAIN TEXT**: Use "#MyceliumResilience" NOT "# MyceliumResilience" (no space after #).
 3. **NO MARKDOWN HEADERS**: Use **bold** for emphasis ONLY. Never use # ## ### for headers.
-4. **SHORT PARAGRAPHS**: Maximum 3 sentences per paragraph. Split longer ones.
+4. **SHORT PARAGRAPHS (CRITICAL - COUNT THEM)**:
+   - MAXIMUM 3 sentences per paragraph (HARD LIMIT)
+   - Count sentences in EVERY paragraph before finalizing
+   - If any paragraph has 4+ sentences → SPLIT IT immediately
 5. **USE BULLETS FOR DATA**: Flow rates, statistics, or lists MUST use bullet points (- or •).
 6. **GENEROUS WHITESPACE**: Add blank lines between paragraphs and sections.
-7. **CONVERSATIONAL + CREDIBLE**: Write like an expert talking to a peer. Back claims with research when available.
+7. **CONVERSATIONAL LANGUAGE (MANDATORY)**:
+   - Write like explaining to a friend over coffee
+   - BANNED ACADEMIC PHRASES (replace with alternatives):
+     * "bioactive compounds" → "active ingredients" or "natural compounds"
+     * "overall health and well-being" → "your health" or "how you feel"
+     * "promote well-being" → "support wellness" or "boost your health"
+     * "longevity" → "living longer" or "a longer life"
+     * "significant improvements" → "real improvements" or "noticeable changes"
+   - Test: Would you say this out loud to a friend? If no → rewrite
 8. **NO FAKE LAB CLAIMS**: Change "In our lab" to "Industry research shows" or "Studies demonstrate".
 9. **BOLD KEY INSIGHTS**: MANDATORY - Use **bold** for 2-3 critical phrases per paragraph. Example: "Mycelium networks exhibit **remarkable resilience** under stress, adapting **resource flows dynamically**."
 10. **SOFTEN HARD DATA**: 
@@ -342,7 +358,8 @@ Describe ONE striking visual concept that would stop a LinkedIn scroll. Focus on
                     { role: "system", content: `Convert this visual concept into a search query for stock photo sites. Add negative keywords to exclude diagrams/charts. Output ONLY the query.` },
                     { role: "user", content: `Visual Concept: ${visualConcept}` }
                 ]);
-                const visualQuery = visualQueryRaw.replace(/^"|"$/g, '').trim() + " -diagram -chart -graph -infographic";
+                const visualQuery = visualQueryRaw.replace(/^"|"$/g, '').trim() +
+                    " nature photography lifestyle -diagram -chart -graph -infographic -illustration -botanical -vintage -numbered -scientific -labeled -specimen -textbook";
 
                 // 3. Search Loop
                 // Helper to verify image accessibility
