@@ -121,6 +121,9 @@ CRITICAL INSTRUCTIONS:
 3. IF the topic is totally irrelevant, REJECT IT by writing about: "The resilience of mycelial networks".
 4. NEVER invent "lab results". If you lack data, cite external studies or general principles.
 
+5. INCLUDE 3-5 relevant Hashtags at the end.
+6. INCLUDE a "Sources" section at the very bottom with direct URLs to studies cited.
+
 ${anglePrompt}
 
 GUIDELINES:
@@ -187,7 +190,10 @@ ${rulesText}`
 TASK:
 1. Ensure the post is roughly 70% Education / 30% Brand Philosophy.
 2. REMOVE any "fake lab" claims. If the draft says "In our lab" without data, change it to "Industry research suggests...".
-3. POLISH the flow. Short paragraphs. No "AI Fluff" words.
+3. POLISH the flow. Use a CONVERSATIONAL tone (like talking to a peer). No "Essay Structure".
+4. FORMATTING: Use **bold** for key insights. Use bullet points for lists.
+5. CITATIONS: Keep the [1] markers in text, but ENSURE there is a "Sources" list at the bottom with matching URLs.
+6. END with 3-5 Hashtags.
 
 CONTEXT:
 ${context}
