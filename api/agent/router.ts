@@ -306,7 +306,12 @@ REQUIREMENTS (TARGET: 98-100/100):
 
 4. **CONVERSATIONAL LANGUAGE (STRICT)**:
    - BANNED: "promote", "well-being", "bioactive compounds", "longevity", "significant"
-   - USE: "support", "wellness", "compounds", "living longer", "noticeable"
+   - BANNED: "increase your resistance", "physical and mental stressors", "stimulate", "enhance"
+   - BANNED: "juggling tasks", "busy schedules", "hectic days"
+   - USE: "help you", "support", "compounds", "living longer", "noticeable"
+   - USE: "handle stress", "manage", "boost", "sharpen"
+   - Replace: "increase resistance to stressors" → "handle stress better"
+   - Replace: "juggling tasks" → "switching between your standup, emails, and project work"
    - Write like talking to a friend
 
 5. **NO UNSOURCED CLAIMS**:
