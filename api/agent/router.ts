@@ -223,33 +223,27 @@ Line 1: "SCORE: X/100"
 Line 2: "REPORT:"
 Lines 3+: Full checklist with ALL criteria (use ✅ for pass, ❌ for fail with -X points)
 
-COMPREHENSIVE CHECKLIST (Grade ALL 15 items):
+COMPREHENSIVE CHECKLIST (Grade ALL 12 items):
 
 **FORMATTING RULES:**
-1. ✅/❌ No citation markers [1][2][3] in text (-20 if present)
-2. ✅/❌ No "Sources" section at end (-20 if present)  
+1. ✅/❌ Research studies linked as URLs inline: [study](https://url.com) (-20 if missing URLs or using [1][2] markers)
+2. ✅/❌ No separate "Sources" section at end (-15 if present)
 3. ✅/❌ Hashtags formatted correctly: #Word not # Word (-10 if spaces)
-4. ✅/❌ No markdown headers (##, ###) (-15 if present)
-5. ✅/❌ All paragraphs ≤3 sentences (-5 per violation)
-6. ✅/❌ Data/lists use bullet points (not paragraphs) (-10 if not)
-7. ✅/❌ Bold formatting used for key insights (-5 if missing)
-8. ✅/❌ Generous whitespace between sections (-5 if cramped)
+4. ✅/❌ Paragraphs are flexible (1-5 sentences) (-5 per >5 violation)
+5. ✅/❌ Bold formatting used GENEROUSLY for key insights (-15 if sparse or missing)
+6. ✅/❌ Generous whitespace between sections (-5 if cramped)
+7. ✅/❌ No citation markers [1][2][3] in text (-20 if present)
 
 **CONTENT QUALITY:**
-9. ✅/❌ Conversational tone (not academic) (-10 if clinical language like "bioactive compounds", "promote well-being")
-10. ✅/❌ No "fake lab" claims without data (-15 if present)
-11. ✅/❌ Research mentioned inline (not citations) (-5 if no credibility)
-12. ✅/❌ 3-5 hashtags present (-10 if missing or wrong count)
+8. ✅/❌ Conversational tone (-10 if academic phrases: "promote", "well-being", "bioactive compounds", "longevity")
+9. ✅/❌ No unsourced claims (-15 if "Industry research shows" without URL link)
+10. ✅/❌ Specific practical examples (-10 if generic like "Imagine before a big project")
+11. ✅/❌ 3-5 hashtags present (-10 if missing or wrong count)
+12. ✅/❌ Hook/opening grabs attention (-5 if generic)
 
-**ENGAGEMENT:**
-13. ✅/❌ Hook/opening grabs attention (-5 if generic)
-14. ✅/❌ Clear value proposition for reader (-5 if vague)
-15. ✅/❌ Specific examples/applications (-5 if too abstract)
+CRITICAL: Verify EVERY criterion carefully. Do NOT mark ✅ unless criterion is ACTUALLY met.
 
-GRADING:
-- Start at 100 points
-- Deduct points for each ❌ item
-- Report MUST show all 15 items with status
+GRADING TARGET: 98-100 points required. Be harsh.
 
 NOTE: Visuals handled separately. Do NOT critique missing images.
 
@@ -288,35 +282,51 @@ ${rulesText}`
                     {
                         role: "system", content: `You are a STRICT Social Media Editor for Synervion (Functional Mushrooms).
 
-CRITICAL FORMATTING RULES (ZERO TOLERANCE):
-1. **CITATIONS & SOURCES**:
-   - KEEP research credibility: "A 2024 study from [Institution]..." or "Research shows..."
-   - DELETE citation markers: Remove [1], [2], [3] numbers
-   - DELETE "Sources" section: No bibliography at end
-2. **HASHTAGS = PLAIN TEXT**: Use "#MyceliumResilience" NOT "# MyceliumResilience" (no space after #).
-3. **NO MARKDOWN HEADERS**: Use **bold** for emphasis ONLY. Never use # ## ### for headers.
-4. **SHORT PARAGRAPHS (CRITICAL - COUNT THEM)**:
-   - MAXIMUM 3 sentences per paragraph (HARD LIMIT)
-   - Count sentences in EVERY paragraph before finalizing
-   - If any paragraph has 4+ sentences → SPLIT IT immediately
-5. **USE BULLETS FOR DATA**: Flow rates, statistics, or lists MUST use bullet points (- or •).
-6. **GENEROUS WHITESPACE**: Add blank lines between paragraphs and sections.
-7. **CONVERSATIONAL LANGUAGE (MANDATORY)**:
-   - Write like explaining to a friend over coffee
-   - BANNED ACADEMIC PHRASES (replace with alternatives):
-     * "bioactive compounds" → "active ingredients" or "natural compounds"
-     * "overall health and well-being" → "your health" or "how you feel"
-     * "promote well-being" → "support wellness" or "boost your health"
-     * "longevity" → "living longer" or "a longer life"
-     * "significant improvements" → "real improvements" or "noticeable changes"
-   - Test: Would you say this out loud to a friend? If no → rewrite
-8. **NO FAKE LAB CLAIMS**: Change "In our lab" to "Industry research shows" or "Studies demonstrate".
-9. **BOLD KEY INSIGHTS**: MANDATORY - Use **bold** for 2-3 critical phrases per paragraph. Example: "Mycelium networks exhibit **remarkable resilience** under stress, adapting **resource flows dynamically**."
-10. **SOFTEN HARD DATA**: 
-    - Exact percentages without attribution sound clinical/fabricated
-    - "7% improvement" → "significant improvement" OR "Research from [Source] shows 7% improvement"
-    - "18 cm/h flow" → "rapid water transport" OR keep if citing a study
-11. **END WITH 3-5 HASHTAGS**: Plain text, space-separated, no headers.
+CRITICAL REQUIREMENTS (TARGET: 98-100/100 SCORE):
+
+1. **RESEARCH CITATIONS AS INLINE URL LINKS (MANDATORY)**:
+   - ALWAYS link studies/research as clickable URLs: "A [2010 study](https://pubmed.ncbi.nlm.nih.gov/12345) showed..."
+   - NEVER use [1][2][3] citation markers
+   - NEVER create separate "Sources" section
+   - Format: "[descriptive text](full URL)" - Make the link text natural
+   - Example: "Research from [University of X](https://url.com) found that..."
+
+2. **GENEROUS BOLD FORMATTING (MANDATORY)**:
+   - Bold 2-3 KEY INSIGHTS per paragraph minimum
+   - Bold benefits, mechanisms, specific findings
+   - Example: "Lion's Mane contains compounds that **support nerve health** and may **boost cognitive function** naturally."
+   - If in doubt, err on side of MORE bold
+
+3. **FLEXIBLE PARAGRAPHS**:
+   - Prefer 1-3 sentences (keeps it punchy)
+   - Allow 4-5 sentences when narrative flow requires it
+   - ONLY split if paragraph exceeds 5 sentences
+
+4. **BULLETS FOR LISTS ONLY**:
+   - Use bullets for comparative lists or multiple data points
+   - Use paragraphs for narrative/explanatory content
+   - Don't force bullets everywhere
+
+5. **CONVERSATIONAL LANGUAGE (STRICT)":
+   - BANNED WORDS (rewrite immediately):
+     * "promote" → "support" or "boost"
+     * "well-being" → "wellness" or "how you feel"
+     * "bioactive compounds" → "active ingredients" or just "compounds"
+     * "longevity" → "living longer"
+     * "significant" (without source) → "noticeable" or "real"
+   - Write like talking to a friend over coffee
+
+6. **NO UNSOURCED CLAIMS**:
+   - "Industry research shows..." is BANNED unless you provide the URL link
+   - Every fact needs either a URL or softening ("may", "research suggests")
+
+7. **SPECIFIC EXAMPLES (NOT GENERIC)**:
+   - BANNED: "Imagine using it before a big project"
+   - GOOD: "Try it 30 minutes before your morning workout" or "Add to your 9am coffee ritual"
+
+8. **HASHTAGS**: 3-5 relevant hashtags at end (e.g., #FunctionalMushrooms #Focus)
+
+9. **WHITESPACE**: Blank lines between paragraphs for readability
 
 CONTEXT:
 ${context}
@@ -370,9 +380,13 @@ Describe ONE striking visual concept that would stop a LinkedIn scroll. Focus on
                 const visualQuery = visualQueryRaw.replace(/^"|"$/g, '').trim() +
                     " nature photography lifestyle -diagram -chart -graph -infographic -illustration -botanical -vintage -numbered -scientific -labeled -specimen -textbook";
 
-                // 3. Search Loop
+                // 3. Search Loop with URL Pattern Filtering
+                const rejectPatterns = ['vintage', 'botanical', 'illustration', '18', '19',
+                    'specimen', 'scientific', 'diagram', 'fischer', 'jena',
+                    'drawing', 'engraving', 'sketch', 'textbook', 'numbered'];
+
                 // Helper to verify image accessibility
-                const verifyImage = async (url: string) => {
+                async function verifyImage(url: string): Promise<boolean> {
                     if (!url) return false;
                     try {
                         const res = await fetch(url, { method: 'HEAD', headers: IMAGE_HEADERS });
@@ -380,34 +394,47 @@ Describe ONE striking visual concept that would stop a LinkedIn scroll. Focus on
                     } catch { return false; }
                 };
 
-                // 3. Search Sequence
+                // 3. Search Sequence with URL filtering
                 let imageUrl = "";
+                const searchQueries = [
+                    visualQuery + " photorealistic 4k",
+                    visualQuery,
+                    "functional mushrooms nature aesthetic"
+                ];
 
-                // 1. High Quality Specific
-                console.log(`[Agent: Visual] Attempting high-quality search: "${visualQuery} photorealistic 4k"`);
-                let cand = await braveImageSearch(visualQuery + " photorealistic 4k", "Large");
-                if (await verifyImage(cand || "")) imageUrl = cand!;
+                for (const searchQuery of searchQueries) {
+                    console.log(`[Agent: Visual] Searching: ${searchQuery}`);
+                    const imageResults = await braveImageSearch(searchQuery);
 
-                // 2. Broad Specific
-                if (!imageUrl) {
-                    console.log(`[Agent: Visual] Attempting broad search: "${visualQuery}"`);
-                    cand = await braveImageSearch(visualQuery);
-                    if (await verifyImage(cand || "")) imageUrl = cand!;
-                }
+                    // Filter out suspicious URLs BEFORE verification
+                    const filteredResults = imageResults.filter((result: any) => {
+                        const url = result.thumbnail?.src || result.url || '';
+                        const isRejected = rejectPatterns.some(pattern =>
+                            url.toLowerCase().includes(pattern)
+                        );
+                        if (isRejected) {
+                            console.log(`[Agent: Visual] Rejected URL (pattern match): ${url}`);
+                        }
+                        return !isRejected;
+                    });
 
-                // 3. Generic Fallback
-                if (!imageUrl) {
-                    console.log(`[Agent: Visual] Attempting generic fallback search: "functional mushrooms nature aesthetic"`);
-                    cand = await braveImageSearch("functional mushrooms nature aesthetic", "Large");
-                    if (await verifyImage(cand || "")) imageUrl = cand!;
+                    if (filteredResults && filteredResults.length > 0) {
+                        for (const result of filteredResults) {
+                            const candidateUrl = result.thumbnail?.src || result.url;
+                            if (await verifyImage(candidateUrl)) {
+                                imageUrl = candidateUrl;
+                                console.log(`[Agent: Visual] Selected image: ${imageUrl}`);
+                                break;
+                            }
+                        }
+                    }
+                    if (imageUrl) break; // Found valid image, exit search loop
                 }
 
                 // 4. Ultimate Fallback (Safe Mode)
                 if (!imageUrl) {
                     console.log("[Agent: Visual] All searches failed. Using self-hosted safety fallback.");
-                    // Self-hosted mushroom image (stable and always accessible)
-                    const safeUrl = "https://synervion.com/mushroom-fallback.png";
-                    imageUrl = safeUrl;
+                    imageUrl = "https://synervion.com/mushroom-fallback.png";
                 }
 
                 if (!imageUrl) throw new Error("CRITICAL: No images found and fallback failed");
