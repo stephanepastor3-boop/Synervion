@@ -91,16 +91,25 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                 // 1. Sanitize Topic (The "Pivot" Step)
                 const searchQueryRaw = await callPerplexity([
                     {
-                        role: "system", content: `You are the Research Director for Synervion (Functional Mushrooms). 
-                    Your job is to translate ANY input topic into a strict SEARCH QUERY for our field.
+                        role: "system", content: `You are a Search Engine Optimizer.
                     
-                    RULES:
-                    1. If topic is about Tech/AI/Politics -> PIVOT it to "Nature" or "Resilience in Biology".
-                    2. If topic is already relevant -> Keep it but make it specific to "Scientific Studies".
-                    3. Output ONLY the search query. No quotes.` },
-                    { role: "user", content: `Input Topic: ${topic}` }
+TASK: Convert the user's input topic into a simple, effective search query for "Functional Mushrooms" or "Natural Wellness".
+
+RULES:
+1. If input is Tech/AI -> Pivot to biological analogy (e.g. "Mycelium network resilience").
+2. OUTPUT ONLY THE QUERY STRING.
+3. NO Markdown. NO RATIONALE. NO HEADERS. NO QUOTES.
+4. Keep it under 6 words.` },
+                    { role: "user", content: `Input: ${topic}` }
                 ]);
-                let searchQuery = searchQueryRaw?.trim().replace(/^"|"$/g, '') || "";
+
+                // Clean up any potential leakage (Markdown headers, newlines, quotes)
+                let searchQuery = searchQueryRaw
+                    .replace(/#.*$/gm, '') // Remove headers
+                    .replace(/\*\*|__/g, '') // Remove bold
+                    .replace(/^"|"$/g, '')   // Remove quotes
+                    .split('\n')[0]          // Take first line only
+                    .trim();
 
                 // Fallback if LLM fails
                 if (!searchQuery || searchQuery.length < 3) {
