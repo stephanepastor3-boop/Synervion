@@ -1,5 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { checkAuth, braveSearch, callPerplexity, SOP_GUIDELINES, BRAVE_API_KEY, getResend, debugEnvVars, APP_URL, LINKEDIN_ACCESS_TOKEN, ORGANIZATION_ID, CRON_SECRET } from './_utils.js';
+import { checkAuth, braveSearch, SOP_GUIDELINES, BRAVE_API_KEY, getResend, debugEnvVars, APP_URL, LINKEDIN_ACCESS_TOKEN, ORGANIZATION_ID, CRON_SECRET } from './_utils.js';
+import { callGemini } from './_gemini.js';
 import crypto from 'node:crypto';
 import zlib from 'node:zlib';
 import { promisify } from 'node:util';
@@ -95,7 +96,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                 if (!topic) throw new Error("Missing 'topic'");
 
                 // 1. Sanitize Topic (The "Pivot" Step)
-                const searchQueryRaw = await callPerplexity([
+                const searchQueryRaw = await callGemini([
                     {
                         role: "system", content: `You are a Search Engine Optimizer.
                     
@@ -135,7 +136,7 @@ RULES:
                 const anglePrompt = angle ? `APPROACH: ${angle}` : "APPROACH: Standard";
                 const rulesText = SOP_GUIDELINES.map(r => `- ${r}`).join('\n');
 
-                const draft = await callPerplexity([
+                const draft = await callGemini([
                     {
                         role: "system", content: `You are the Strategy Lead for Synervion (a Functional Mushroom & Wellness Brand).
                     
@@ -161,7 +162,7 @@ ${rulesText}`
             case 'critique': {
                 const { draft } = req.body;
                 const rulesText = SOP_GUIDELINES.map(r => `- ${r}`).join('\n');
-                const critique = await callPerplexity([
+                const critique = await callGemini([
                     {
                         role: "system", content: `You are a STRICT Quality Analyst for LinkedIn posts.
 
@@ -222,7 +223,7 @@ ${rulesText}`
             case 'refine': {
                 const { draft, critique, context } = req.body;
                 const rulesText = SOP_GUIDELINES.map(r => `- ${r}`).join('\n');
-                const refinedDraft = await callPerplexity([
+                const refinedDraft = await callGemini([
                     {
                         role: "system", content: `You are a STRICT Social Media Editor for Synervion (Functional Mushrooms).
 
@@ -263,7 +264,7 @@ OUTPUT ONLY THE FINAL POST. No commentary, no analysis.`
                 if (!draft) throw new Error("Missing draft");
 
                 // 1. Concept
-                const visualConcept = await callPerplexity([
+                const visualConcept = await callGemini([
                     {
                         role: "system",
                         content: `You are an Instagram Art Director for a PREMIUM WELLNESS BRAND.
@@ -290,7 +291,7 @@ Describe ONE striking visual concept that would stop a LinkedIn scroll. Focus on
                 ]);
 
                 // 2. Query
-                const visualQueryRaw = await callPerplexity([
+                const visualQueryRaw = await callGemini([
                     { role: "system", content: `Convert this visual concept into a search query for stock photo sites. Add negative keywords to exclude diagrams/charts. Output ONLY the query.` },
                     { role: "user", content: `Visual Concept: ${visualConcept}` }
                 ]);
