@@ -211,7 +211,17 @@ async function callPerplexity(messages: any[]) {
 async function generateDraft(topic: string, context: string, guidelines: string[]) {
     const rulesText = guidelines.map(r => `- ${r}`).join('\n');
     return await callPerplexity([
-        { role: "system", content: `You are the Lead Content Strategist for Synervion. Draft a LinkedIn post.\nGUIDELINES:\n${rulesText}` },
+        {
+            role: "system", content: `You are the Lead Content Strategist for Synervion. Draft a LinkedIn post.
+        
+CRITICAL RULES:
+1. Do NOT invent "lab results" or "in our lab" stories unless explicit data is provided.
+2. If you lack specific data, use general phrases like "Research suggests..." or "Current studies show...".
+3. NO generic CTAs like "What do you think?". Use specific questions like "Have you experimented with extraction temps?".
+
+GUIDELINES:
+${rulesText}`
+        },
         { role: "user", content: `Topic: ${topic}\n\nContext:\n${context}` }
     ]);
 }
@@ -239,9 +249,16 @@ async function generateRefinedPost(topic: string, draft: string, critique: strin
     const rulesText = guidelines.map(r => `- ${r}`).join('\n');
     return await callPerplexity([
         {
-            role: "system", content: `You are an Expert Copywriter. Rewrite this post to fix the issues identified in the critique. Ensure strict adherence to guidelines.
-        
-CONTEXT:
+            role: "system", content: `You are a Surgical Editor. Your job is to FIX the failed draft based on the critique.
+
+CRITICAL INSTRUCTIONS:
+1. Address EVERY failure in the REPORT.
+2. If the critique says "Fake Authenticity" or "In our lab" is fabricated -> REMOVE IT immediately.
+3. If the critique says "Weak Hook" -> WRITE A NEW HOOK.
+4. Do not just "tweak". REWRITE sections that failed.
+5. Verify citations against the CONTEXT provided below. Do not hallucinate studies.
+
+CONTEXT (Use this for facts/citations):
 ${researchData}
 
 GUIDELINES:
