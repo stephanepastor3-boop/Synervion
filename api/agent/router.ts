@@ -30,8 +30,10 @@ async function braveImageSearch(query: string, size?: string) {
 }
 
 async function downloadImageToBuffer(url: string) {
-    const response = await fetch(url);
-    if (!response.ok) throw new Error(`Failed to download image`);
+    const response = await fetch(url, {
+        headers: { 'User-Agent': 'Mozilla/5.0 (compatible; SynervionBot/1.0; +https://synervion.com)' }
+    });
+    if (!response.ok) throw new Error(`Failed to download image: ${response.status} ${response.statusText}`);
     return await response.arrayBuffer();
 }
 
