@@ -7,7 +7,7 @@ export async function callGemini(
     options?: { temperature?: number; maxTokens?: number }
 ): Promise<string> {
     const model = genAI.getGenerativeModel({
-        model: 'gemini-2.0-flash-exp',
+        model: 'gemini-2.0-flash',  // Stable version has higher quota than -exp
         generationConfig: {
             temperature: options?.temperature ?? 0.7,
             maxOutputTokens: options?.maxTokens ?? 2048,
