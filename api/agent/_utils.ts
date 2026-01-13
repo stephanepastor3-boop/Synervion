@@ -70,25 +70,25 @@ export async function callPerplexity(messages: any[]) {
 export async function callGemini(messages: any[], options?: { temperature?: number; maxTokens?: number }) {
     const { GoogleGenerativeAI } = await import('@google/generative-ai');
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
+
+    const systemMessage = messages.find(m => m.role === 'system');
+    const userMessages = messages.filter(m => m.role === 'user');
+
     const model = genAI.getGenerativeModel({
         model: 'gemini-2.0-flash',
         generationConfig: {
             temperature: options?.temperature ?? 0.7,
             maxOutputTokens: options?.maxTokens ?? 2048,
-        }
-    });
-
-    const systemMessage = messages.find(m => m.role === 'system');
-    const userMessages = messages.filter(m => m.role === 'user');
-    const contents = userMessages.map(m => ({ role: 'user', parts: [{ text: m.content }] }));
-
-    const chat = model.startChat({
-        history: [],
-        systemInstruction: systemMessage?.content
+        },
+        systemInstruction: systemMessage ? {
+            role: 'user',
+            parts: [{ text: systemMessage.content }]
+        } : undefined
     });
 
     try {
-        const result = await chat.sendMessage(contents[contents.length - 1].parts[0].text);
+        const contents = userMessages.map(m => m.content).join('\n\n');
+        const result = await model.generateContent(contents);
         return result.response.text();
     } catch (error: any) {
         console.error('[Gemini] Error:', error.message);
