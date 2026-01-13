@@ -91,6 +91,53 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     try {
         switch (action) {
+            case 'discover-topic': {
+                const topicIdeaRaw = await callGemini([
+                    {
+                        role: "system",
+                        content: `You are a Trend Research Analyst for Synervion (Functional Mushrooms & Wellness).
+
+TASK: Generate ONE engaging LinkedIn post topic for TODAY based on:
+1. Current trending wellness/health topics  
+2. Functional mushroom research (Lion's Mane, Reishi, Cordyceps, etc.)
+3. High engagement potential (curiosity, myth-busting, practical value)
+
+RULES:
+- Topic MUST connect to functional mushrooms or natural wellness
+- Should feel timely and relevant (NOT evergreen basics like "Benefits of Mushrooms")
+- Prefer: Analogies to current events/tech, surprising science, practical applications
+- Avoid: Generic topics like "Mushroom Nutrition 101"
+
+GOOD EXAMPLES:
+- "Mycelial Networks vs Neural Networks: Nature's Original AI"
+- "Why Your Morning Routine Needs Fungi, Not More Caffeine"
+- "The Mushroom Mechanism Behind Better Focus (Without Stimulants)"
+
+OUTPUT FORMAT (must be valid JSON):
+{
+  "topic": "The Science Behind Mushroom Adaptogens",
+  "angle": "How fungi help your brain adapt to modern stress",
+  "hook": "What if resilience isn't about working harder, but working smarter?"
+}
+
+Output ONLY valid JSON, nothing else.`
+                    }
+                ]);
+
+                try {
+                    const topic = JSON.parse(topicIdeaRaw);
+                    return res.status(200).json(topic);
+                } catch (parseError) {
+                    console.error('[Agent: discover-topic] JSON parse failed:', topicIdeaRaw);
+                    // Fallback to default topic
+                    return res.status(200).json({
+                        topic: "Functional Mushrooms for Daily Wellness",
+                        angle: "How natural adaptogens support modern life",
+                        hook: "What if the resilience you need comes from nature, not supplements?"
+                    });
+                }
+            }
+
             case 'research': {
                 const { topic } = req.body;
                 if (!topic) throw new Error("Missing 'topic'");

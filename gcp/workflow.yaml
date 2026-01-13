@@ -6,12 +6,33 @@ main:
           - app_url: "https://www.synervion.com"
           - secret_token: "1234567"
           - auth_header: ${"Bearer " + secret_token}
-          - topic: ${input.topic}
+          - topic: ${default(map.get(input, "topic"), "")}  # Optional topic from input
           - draft_a: null
           - draft_b: null
           - draft_c: null
           - candidates: []
           - scored_candidates: []
+
+    # 0. TOPIC DISCOVERY (if topic not provided)
+    - check_topic:
+        switch:
+          - condition: ${topic != ""}
+            next: perform_research  # Topic provided, skip discovery
+        next: discover_topic
+
+    - discover_topic:
+        call: http.post
+        args:
+          url: ${app_url + "/api/agent/router?action=discover-topic"}
+          headers:
+            Authorization: ${auth_header}
+        result: topic_res
+
+    - assign_discovered_topic:
+        assign:
+          - topic: ${topic_res.body.topic}
+          - suggested_angle: ${topic_res.body.angle}
+          - hook: ${topic_res.body.hook}
 
     # 1. RESEARCH PHASE
     - perform_research:
