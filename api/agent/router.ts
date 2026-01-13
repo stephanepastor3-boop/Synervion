@@ -1,6 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { checkAuth, braveSearch, SOP_GUIDELINES, BRAVE_API_KEY, getResend, debugEnvVars, APP_URL, LINKEDIN_ACCESS_TOKEN, ORGANIZATION_ID, CRON_SECRET } from './_utils.js';
-import { callGemini } from './_gemini.js';
+import { checkAuth, braveSearch, callPerplexity, SOP_GUIDELINES, BRAVE_API_KEY, getResend, debugEnvVars, APP_URL, LINKEDIN_ACCESS_TOKEN, ORGANIZATION_ID, CRON_SECRET } from './_utils.js';
 import crypto from 'node:crypto';
 import zlib from 'node:zlib';
 import { promisify } from 'node:util';
@@ -8,39 +7,22 @@ import { promisify } from 'node:util';
 const gzip = promisify(zlib.gzip);
 
 // --- Helper Functions (Visual/Delivery) ---
-async function braveImageSearch(query: string, size?: string) {
+async function braveImageSearch(query: string) {
     const url = new URL('https://api.search.brave.com/res/v1/images/search');
     url.searchParams.append('q', query);
     url.searchParams.append('count', '1');
-    if (size) url.searchParams.append('size', size);
-
-    console.log(`[Brave] Searching: "${query}" (Size: ${size || 'Any'})`);
-
+    url.searchParams.append('size', 'Large');
     const response = await fetch(url.toString(), {
         headers: { 'Accept': 'application/json', 'X-Subscription-Token': BRAVE_API_KEY! }
     });
-
-    if (!response.ok) {
-        console.error(`[Brave] Error ${response.status}:`, await response.text());
-        return null; // Return null instead of throwing
-    }
-
     const json = await response.json();
-    if (!json.results || json.results.length === 0) return null;
+    if (!json.results || json.results.length === 0) throw new Error("No images found.");
     return json.results[0].properties.url;
 }
 
-// Shared headers for image requests (prevents HEAD/GET mismatch)
-const IMAGE_HEADERS = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-    'Accept': 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
-    'Referer': 'https://www.google.com/',
-    'Accept-Language': 'en-US,en;q=0.9'
-};
-
 async function downloadImageToBuffer(url: string) {
-    const response = await fetch(url, { headers: IMAGE_HEADERS });
-    if (!response.ok) throw new Error(`Failed to download image: ${response.status} ${response.statusText}`);
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(`Failed to download image`);
     return await response.arrayBuffer();
 }
 
@@ -91,95 +73,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     try {
         switch (action) {
-            case 'discover-topic': {
-                const topicIdeaRaw = await callGemini([
-                    {
-                        role: "system",
-                        content: `You are a Trend Research Analyst for Synervion (Functional Mushrooms & Wellness).
-
-TASK: Generate ONE engaging LinkedIn post topic for TODAY based on:
-1. Current trending wellness/health topics  
-2. Functional mushroom research (Lion's Mane, Reishi, Cordyceps, etc.)
-3. High engagement potential (curiosity, myth-busting, practical value)
-
-RULES:
-- Topic MUST connect to functional mushrooms or natural wellness
-- Should feel timely and relevant (NOT evergreen basics like "Benefits of Mushrooms")
-- Prefer: Analogies to current events/tech, surprising science, practical applications
-- Avoid: Generic topics like "Mushroom Nutrition 101"
-
-GOOD EXAMPLES:
-- "Mycelial Networks vs Neural Networks: Nature's Original AI"
-- "Why Your Morning Routine Needs Fungi, Not More Caffeine"
-- "The Mushroom Mechanism Behind Better Focus (Without Stimulants)"
-
-OUTPUT FORMAT (must be valid JSON):
-{
-  "topic": "The Science Behind Mushroom Adaptogens",
-  "angle": "How fungi help your brain adapt to modern stress",
-  "hook": "What if resilience isn't about working harder, but working smarter?"
-}
-
-Output ONLY valid JSON, nothing else.`
-                    }
-                ]);
-
-                try {
-                    // Strip markdown code blocks that Gemini sometimes adds
-                    let cleanedResponse = topicIdeaRaw
-                        .replace(/```json\n?/g, '')
-                        .replace(/```\n?/g, '')
-                        .trim();
-                    const topic = JSON.parse(cleanedResponse);
-                    return res.status(200).json(topic);
-                } catch (parseError) {
-                    console.error('[Agent: discover-topic] JSON parse failed:', topicIdeaRaw);
-                    // Fallback to default topic
-                    return res.status(200).json({
-                        topic: "Functional Mushrooms for Daily Wellness",
-                        angle: "How natural adaptogens support modern life",
-                        hook: "What if the resilience you need comes from nature, not supplements?"
-                    });
-                }
-            }
-
             case 'research': {
                 const { topic } = req.body;
                 if (!topic) throw new Error("Missing 'topic'");
-
-                // 1. Sanitize Topic (The "Pivot" Step)
-                const searchQueryRaw = await callGemini([
-                    {
-                        role: "system", content: `You are a Search Engine Optimizer.
-                    
-TASK: Convert the user's input topic into a simple, effective search query for "Functional Mushrooms" or "Natural Wellness".
-
-RULES:
-1. If input is Tech/AI -> Pivot to biological analogy (e.g. "Mycelium network resilience").
-2. OUTPUT ONLY THE QUERY STRING.
-3. NO Markdown. NO RATIONALE. NO HEADERS. NO QUOTES.
-4. Keep it under 6 words.` },
-                    { role: "user", content: `Input: ${topic}` }
-                ]);
-
-                // Clean up any potential leakage (Markdown headers, newlines, quotes)
-                let searchQuery = searchQueryRaw
-                    .replace(/#.*$/gm, '') // Remove headers
-                    .replace(/\*\*|__/g, '') // Remove bold
-                    .replace(/^"|"$/g, '')   // Remove quotes
-                    .split('\n')[0]          // Take first line only
-                    .trim();
-
-                // Fallback if LLM fails
-                if (!searchQuery || searchQuery.length < 3) {
-                    console.log(`[Agent: Research] Pivot failed (Empty Result). Fallback to: "Functional Mushrooms Scientific Studies"`);
-                    searchQuery = "Functional Mushrooms Scientific Studies";
-                } else {
-                    console.log(`[Agent: Research] Pivoted Topic "${topic}" -> Search Query "${searchQuery}"`);
-                }
-
-                const context = await braveSearch(searchQuery);
-                return res.status(200).json({ context: `Original Topic: ${topic}\n\nSearch Query Used: ${searchQuery}\n\nResearch Data:\n${context}` });
+                const context = await braveSearch(topic);
+                return res.status(200).json({ context });
             }
 
             case 'draft': {
@@ -188,18 +86,14 @@ RULES:
                 const anglePrompt = angle ? `APPROACH: ${angle}` : "APPROACH: Standard";
                 const rulesText = SOP_GUIDELINES.map(r => `- ${r}`).join('\n');
 
-                const draft = await callGemini([
+                const draft = await callPerplexity([
                     {
-                        role: "system", content: `You are the Strategy Lead for Synervion (a Functional Mushroom & Wellness Brand).
+                        role: "system", content: `You are the Lead Content Strategist for Synervion. Draft a LinkedIn post.
                     
-CRITICAL INSTRUCTIONS:
-1. YOUR TOPIC IS: "${topic}".
-2. IF the topic is technical (AI, Space, Crypto), YOU MUST PIVOT IT to biology/mycology. Use the tech as a METAPHOR for nature.
-3. IF the topic is totally irrelevant, REJECT IT by writing about: "The resilience of mycelial networks".
-4. NEVER invent "lab results". If you lack data, cite external studies or general principles.
-
-5. INCLUDE 3-5 relevant Hashtags at the end.
-6. INCLUDE a "Sources" section at the very bottom with direct URLs to studies cited.
+CRITICAL RULES:
+1. Do NOT invent "lab results" or "in our lab" stories unless explicit data is provided.
+2. If you lack specific data, use general phrases like "Research suggests..." or "Current studies show...".
+3. NO generic CTAs like "What do you think?". Use specific questions like "Have you experimented with extraction temps?".
 
 ${anglePrompt}
 
@@ -214,37 +108,20 @@ ${rulesText}`
             case 'critique': {
                 const { draft } = req.body;
                 const rulesText = SOP_GUIDELINES.map(r => `- ${r}`).join('\n');
-                const critique = await callGemini([
+                const critique = await callPerplexity([
                     {
-                        role: "system", content: `You are a STRICT Quality Analyst for LinkedIn posts.
+                        role: "system", content: `You are a Harsh Social Media Editor. Critique this draft based on the guidelines.
+                    
+IMPORTANT OUTPUT FORMAT:
+1. First line MUST be "SCORE: X/100".
+2. Followed by a "REPORT:" section.
+3. If Perfect (100/100): List each checklist item with a [x] mark to confirm it passed.
+4. If Failed (<100): List specifically what failed and needs fixing.
 
-OUTPUT FORMAT (MANDATORY - MUST SHOW ALL 12 ITEMS EVERY TIME):
-Line 1: "SCORE: X/100"
-Line 2: "REPORT:"
-Lines 3-14: ALL 12 checklist items (✅ passed, ❌ failed)
-
-COMPREHENSIVE CHECKLIST (Output EVERY item, no exceptions):
-
-1. ✅/❌ Clean URL citations: "according to Source (url.com)" format (-20 if using [brackets] or missing URLs)
-2. ✅/❌ No separate "Sources" section at end (-15 if present)
-3. ✅/❌ Hashtags formatted correctly: #Word not # Word (-10 if spaces)
-4. ✅/❌ Paragraphs flexible (1-5 sentences) (-5 per >5 violation)
-5. ✅/❌ NO bold/italic/link markdown: no **, _, [text](url) etc. (-20 if ** or _ or [link] present)
-   Note: Bullets (*) are OK - LinkedIn supports them
-6. ✅/❌ Generous whitespace between sections (-5 if cramped)
-7. ✅/❌ No citation markers [1][2][3] in text (-20 if present)
-8. ✅/❌ Conversational tone (-10 if academic: "promote", "well-being", "bioactive")
-9. ✅/❌ No unsourced claims (-15 if vague "research shows" without URL)
-10. ✅/❌ Specific examples (-10 if generic "imagine before a project")
-11. ✅/❌ 3-5 hashtags present (-10 if missing)
-12. ✅/❌ Hook grabs attention (-5 if generic)
-
-CRITICAL RULES:
-- Output ALL 12 items EVERY time (not just failures)
-- Verify markdown is GONE (LinkedIn doesn't render it)
-- URLs must be plain text, not [link](url) format
-
-TARGET: 98-100 points. Be harsh.
+NOTE: Visuals are handled separately by a dedicated Art Director agent. 
+- Do NOT critique the draft for missing image descriptions or cues. 
+- Do NOT penalize "Missing visual asset" if the text itself is good.
+- ONLY check that the text DOES NOT contain [placeholders].
 
 GUIDELINES:
 ${rulesText}`
@@ -258,13 +135,10 @@ ${rulesText}`
             }
 
             case 'select-winner': {
-                if (!req.body.candidates || !Array.isArray(req.body.candidates)) {
-                    throw new Error("Missing candidates array");
+                const { candidates } = req.body;
+                if (!candidates || !Array.isArray(candidates) || candidates.length === 0) {
+                    throw new Error("Missing candidates");
                 }
-                const candidates = req.body.candidates.flat();
-                if (candidates.length === 0) throw new Error("Candidates array is empty");
-
-                console.log("[Router] Selecting winner from:", JSON.stringify(candidates));
                 let winner = candidates[0];
                 for (const cand of candidates) {
                     const score = Number(cand.score) || 0;
@@ -277,68 +151,25 @@ ${rulesText}`
             case 'refine': {
                 const { draft, critique, context } = req.body;
                 const rulesText = SOP_GUIDELINES.map(r => `- ${r}`).join('\n');
-                const refinedDraft = await callGemini([
+                const refinedDraft = await callPerplexity([
                     {
-                        role: "system", content: `You are a STRICT Social Media Editor for Synervion (LinkedIn Posts).
+                        role: "system", content: `You are a Senior Editor with a "Fix Everything at Once" methodology.
 
-CRITICAL: LinkedIn does NOT support markdown. Output PLAIN TEXT ONLY.
+TASK:
+1. ANALYZE the critique. List exactly what is GOOD (to PRESERVE) and what is BAD (to FIX).
+2. PLAN the rewrite. Determine how to fix the bad parts without breaking the good parts.
+3. EXECUTE. Rewrite the post.
 
-REQUIREMENTS (TARGET: 98-100/100):
-
-1. **CITATIONS - PLAIN TEXT WITH URLS**:
-   - ✅ CORRECT: "according to Mycoterra Farm (mycoterrafarm.com/study)"
-   - ✅ CORRECT: "Research from Stanford Medicine (med.stanford.edu/news) found that..."
-   - ❌ WRONG: "[Mycoterra Farm](https://url.com)" - LinkedIn doesn't parse markdown links
-   - ❌ WRONG: [1][2][3] citation markers
-   - Format: "Source name (shortened-url.com)" inline in sentence
-   - LinkedIn will auto-link URLs
-
-2. **NO MARKDOWN SYNTAX**:
-   - ❌ BANNED: **bold**, *italic*, # headers, [links](url)
-   - ✅ USE: Plain text with strong verbs for emphasis
-   - ✅ USE: Line breaks for structure
-   - If you want emphasis, USE CAPS SPARINGLY or strong word choice
-
-3. **FLEXIBLE PARAGRAPHS**:
-   - Prefer 1-3 sentences (punchy)
-   - Allow 4-5 when needed
-   - Split if >5 sentences
-
-4. **CONVERSATIONAL LANGUAGE (STRICT)**:
-   - BANNED: "promote", "well-being", "bioactive compounds", "longevity", "significant"
-   - BANNED: "increase your resistance", "physical and mental stressors", "stimulate", "enhance"
-   - BANNED: "juggling tasks", "busy schedules", "hectic days"
-   - USE: "help you", "support", "compounds", "living longer", "noticeable"
-   - USE: "handle stress", "manage", "boost", "sharpen"
-   - Replace: "increase resistance to stressors" → "handle stress better"
-   - Replace: "juggling tasks" → "switching between your standup, emails, and project work"
-   - Write like talking to a friend
-
-5. **NO UNSOURCED CLAIMS**:
-   - Every fact needs a URL or qualifier ("may", "research suggests")
-   - If claiming research, provide the URL inline
-
-6. **ULTRA-SPECIFIC EXAMPLES (CRITICAL)**:
-   - ❌ BANNED: "Try it before your morning workout" (too vague)
-   - ❌ BANNED: "Add to your 9 AM coffee" (still generic)
-   - ✅ REQUIRED: "Mix 500mg Lion's Mane into your 7:15 AM espresso, 30 minutes before your daily standup"
-   - ✅ REQUIRED: Include TIME (exact hour), DOSAGE, and SPECIFIC CONTEXT
-   - Every recommendation needs: When exactly? How much? In what situation?
-
-7. **CLEAN FORMAT**:
-   - Bullets (*) ONLY for lists (LinkedIn supports these)
-   - 3-5 hashtags at end: #FunctionalMushrooms #BrainFog
-   - Blank lines between paragraphs
-
-8. **WHITESPACE**: Generous spacing for readability
+CRITICAL INSTRUCTIONS:
+- If the critique flags "Fake Authenticity", REMOVE IT.
+- If the critique flags "Weak Hook", WRITE A NEW HOOK.
+- Verify citations against the CONTEXT.
 
 CONTEXT:
 ${context}
 
 GUIDELINES:
-${rulesText}
-
-OUTPUT ONLY THE FINAL POST. No commentary, no analysis.`
+${rulesText}`
                     },
                     { role: "user", content: `Draft:\n${draft}\n\nCritique:\n${critique}\n\nPlease output ONLY the final rewritten post (skipping the analysis log).` }
                 ]);
@@ -347,121 +178,109 @@ OUTPUT ONLY THE FINAL POST. No commentary, no analysis.`
 
             case 'visual': {
                 const { draft } = req.body;
+                const { searchUnsplash } = await import('./_unsplash');
+
+                // Generate search query using Gemini
+                const searchQuery = await callGemini([
+                    {
+                        role: "system", content: `Convert a LinkedIn post about mushrooms into an Unsplash search query.
+
+Rules:
+- Keep it 2-4 words max
+- Focus on mushroom type + setting
+- Examples:
+  * "lion's mane mushroom forest"
+  * "reishi mushroom log"
+  * "cordyceps mushroom nature"
+  * "functional mushrooms wellness"
+
+Output JUST the query, no quotes.`
+                    },
+                    { role: "user", content: `Post:\n${draft}` }
+                ]);
+
+                console.log('[Agent: Visual] Unsplash query:', searchQuery);
+
+                // Try progressively broader search terms
+                const searchQueries = [
+                    searchQuery.trim(),
+                    "functional mushrooms forest",
+                    "mushroom nature photography"
+                ];
+
+                let imageUrl = "";
+                for (const query of searchQueries) {
+                    const result = await searchUnsplash(query);
+                    if (result) {
+                        imageUrl = result;
+                        break;
+                    }
+                }
+
+                // Fallback
+                if (!imageUrl) {
+                    console.log('[Agent: Visual] Using fallback image');
+                    imageUrl = "https://synervion.com/mushroom-fallback.png";
+                }
+
+                return res.status(200).json({ image_url: imageUrl });
+            }
+                const { draft } = req.body;
                 if (!draft) throw new Error("Missing draft");
 
                 // 1. Concept
-                const visualConcept = await callGemini([
-                    {
-                        role: "system",
-                        content: `You are an Instagram Art Director for a PREMIUM WELLNESS BRAND.
-
-CRITICAL: We need LIFESTYLE/NATURE photography for LinkedIn, NOT diagrams, charts, or academic illustrations.
-
-GOOD VISUAL CONCEPTS:
-- Close-up of fresh mushrooms in natural forest light
-- Dewy moss and fungi on a mossy log
-- Hands gently holding organic mushrooms
-- Aesthetic nature scene with mushrooms in habitat
-- Wellness lifestyle (person in nature, minimal)
-
-BAD VISUAL CONCEPTS (REJECT):
-- Scientific diagrams with arrows/labels/flowcharts
-- Charts, graphs, data visualizations
-- Microscope imagery or lab equipment
-- Academic textbook-style illustrations
-- Infographics with text overlays
-
-Describe ONE striking visual concept that would stop a LinkedIn scroll. Focus on NATURAL BEAUTY and ORGANIC AESTHETICS.`
-                    },
+                const visualConcept = await callPerplexity([
+                    { role: "system", content: `You are an Art Director. Describe a SINGLE, STRIKING visual concept for this post. Keep it realistic and scientific.` },
                     { role: "user", content: `Post Content:\n${draft}` }
                 ]);
 
                 // 2. Query
-                const visualQueryRaw = await callGemini([
-                    { role: "system", content: `Convert this visual concept into a search query for stock photo sites. Add negative keywords to exclude diagrams/charts. Output ONLY the query.` },
+                const visualQueryRaw = await callPerplexity([
+                    { role: "system", content: `Convert this visual concept into a search query string for high-end stock photos. Output ONLY the query.` },
                     { role: "user", content: `Visual Concept: ${visualConcept}` }
                 ]);
-                const visualQuery = visualQueryRaw.replace(/^"|"$/g, '').trim() +
-                    " nature photography lifestyle -diagram -chart -graph -infographic -illustration -botanical -vintage -numbered -scientific -labeled -specimen -textbook";
+                const visualQuery = visualQueryRaw.replace(/^"|"$/g, '');
 
-                // 3. Search Loop with URL Pattern Filtering
-                const rejectPatterns = ['vintage', 'botanical', 'illustration', '18', '19',
-                    'specimen', 'scientific', 'diagram', 'fischer', 'jena',
-                    'drawing', 'engraving', 'sketch', 'textbook', 'numbered'];
-
-                // Helper to verify image accessibility
-                async function verifyImage(url: string): Promise<boolean> {
-                    if (!url) return false;
-                    try {
-                        const res = await fetch(url, { method: 'HEAD', headers: IMAGE_HEADERS });
-                        return res.ok;
-                    } catch { return false; }
-                };
-
-                // 3. Search Sequence with URL filtering
-                let imageUrl = "";
-                const searchQueries = [
+                // 3. Search Loop
+                const visualQueries = [
                     visualQuery + " photorealistic 4k",
                     visualQuery,
-                    "functional mushrooms nature aesthetic"
+                    "functional mushrooms nature aesthetic 4k"
                 ];
 
-                for (const searchQuery of searchQueries) {
-                    console.log(`[Agent: Visual] Searching: ${searchQuery}`);
-                    const imageResult = await braveImageSearch(searchQuery);
-
-                    // braveImageSearch returns a single URL string, not an array
-                    if (!imageResult) continue;
-
-                    // Check URL for suspicious patterns
-                    const isRejected = rejectPatterns.some(pattern =>
-                        imageResult.toLowerCase().includes(pattern)
-                    );
-
-                    if (isRejected) {
-                        console.log(`[Agent: Visual] Rejected URL (pattern match): ${imageResult}`);
-                        continue; // Try next search query
-                    }
-
-                    // Verify image accessibility
-                    if (await verifyImage(imageResult)) {
-                        imageUrl = imageResult;
-                        console.log(`[Agent: Visual] Selected image: ${imageUrl}`);
-                        break; // Found valid image, exit search loop
-                    }
+                let imageUrl = "";
+                for (const q of visualQueries) {
+                    try {
+                        console.log(`[Agent: Visual] Searching: "${q}"`);
+                        imageUrl = await braveImageSearch(q);
+                        if (imageUrl) break;
+                    } catch (e) { }
                 }
 
-                // 4. Ultimate Fallback (Safe Mode)
-                if (!imageUrl) {
-                    console.log("[Agent: Visual] All searches failed. Using self-hosted safety fallback.");
-                    imageUrl = "https://synervion.com/mushroom-fallback.png";
-                }
-
-                if (!imageUrl) throw new Error("CRITICAL: No images found and fallback failed");
+                if (!imageUrl) throw new Error("CRITICAL: No images found");
                 return res.status(200).json({ image_url: imageUrl });
-            }
+        }
 
             case 'delivery': {
-                const { topic, final_draft, image_url, qa_report } = req.body;
+            const { topic, final_draft, image_url, qa_report } = req.body;
 
-                // 1. Upload
-                console.log(`[Agent: Delivery] Downloading image from: ${image_url}`);
-                const imageBuffer = await downloadImageToBuffer(image_url);
-                const assetUrn = await uploadImageToLinkedIn(imageBuffer);
+            // 1. Upload
+            const imageBuffer = await downloadImageToBuffer(image_url);
+            const assetUrn = await uploadImageToLinkedIn(imageBuffer);
 
-                // 2. Link
-                const payload = JSON.stringify({ topic, text: final_draft, imageUrn: assetUrn });
-                const compressed = await gzip(payload);
-                const dataStr = compressed.toString('base64url');
-                const sig = crypto.createHmac('sha256', CRON_SECRET!).update(dataStr).digest('hex');
-                const approvalUrl = `${APP_URL}/api/approve-post?data=${dataStr}&sig=${sig}`;
+            // 2. Link
+            const payload = JSON.stringify({ topic, text: final_draft, imageUrn: assetUrn });
+            const compressed = await gzip(payload);
+            const dataStr = compressed.toString('base64url');
+            const sig = crypto.createHmac('sha256', CRON_SECRET!).update(dataStr).digest('hex');
+            const approvalUrl = `${APP_URL}/api/approve-post?data=${dataStr}&sig=${sig}`;
 
-                // 3. Email
-                await getResend().emails.send({
-                    from: 'Synervion Bot <bot@synervion.com>',
-                    to: 'stephane@synervion.com',
-                    subject: `⚡️ Review Required: ${topic}`,
-                    html: `
+            // 3. Email
+            await getResend().emails.send({
+                from: 'Synervion Bot <bot@synervion.com>',
+                to: 'stephane@synervion.com',
+                subject: `⚡️ Review Required: ${topic}`,
+                html: `
                         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; color: #333;">
                             <div style="background: #10b981; color: white; padding: 12px; border-radius: 8px 8px 0 0; text-align: center; font-weight: bold;">
                                  Ready for Review (Workflow Engine)
@@ -481,16 +300,16 @@ Describe ONE striking visual concept that would stop a LinkedIn scroll. Focus on
                                 </div>
                             </div>
                         </div>`
-                });
-                return res.status(200).json({ status: "sent", approval_url: approvalUrl });
-            }
-
-            default:
-                return res.status(400).json({ error: "Invalid action" });
+            });
+            return res.status(200).json({ status: "sent", approval_url: approvalUrl });
         }
 
-    } catch (error: any) {
-        console.error(`[Agent Router] Error inside action '${action}':`, error);
-        return res.status(500).json({ error: error.message });
+            default:
+        return res.status(400).json({ error: "Invalid action" });
     }
+
+    } catch (error: any) {
+    console.error(`[Agent Router] Error inside action '${action}':`, error);
+    return res.status(500).json({ error: error.message });
+}
 }

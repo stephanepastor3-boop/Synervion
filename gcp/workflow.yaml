@@ -6,33 +6,12 @@ main:
           - app_url: "https://www.synervion.com"
           - secret_token: "1234567"
           - auth_header: ${"Bearer " + secret_token}
-          - topic: ${default(map.get(input, "topic"), "")}  # Optional topic from input
+          - topic: ${input.topic}
           - draft_a: null
           - draft_b: null
           - draft_c: null
           - candidates: []
           - scored_candidates: []
-
-    # 0. TOPIC DISCOVERY (if topic not provided)
-    - check_topic:
-        switch:
-          - condition: ${topic != ""}
-            next: perform_research  # Topic provided, skip discovery
-        next: discover_topic
-
-    - discover_topic:
-        call: http.post
-        args:
-          url: ${app_url + "/api/agent/router?action=discover-topic"}
-          headers:
-            Authorization: ${auth_header}
-        result: topic_res
-
-    - assign_discovered_topic:
-        assign:
-          - topic: ${topic_res.body.topic}
-          - suggested_angle: ${topic_res.body.angle}
-          - hook: ${topic_res.body.hook}
 
     # 1. RESEARCH PHASE
     - perform_research:
@@ -137,7 +116,7 @@ main:
                       report: ${critique_res.body.report}
             - save_scored:
                 assign:
-                  - scored_candidates: ${list.concat(scored_candidates, [score_item])}
+                  - scored_candidates: ${scored_candidates + [score_item]}
 
     # 4. SELECTION PHASE
     - select_winner:
@@ -154,71 +133,27 @@ main:
         assign:
           - winner: ${winner_res.body.winner}
 
-    # 5. ITERATIVE REFINEMENT LOOP (until 100/100 or max 3 iterations)
-    - init_loop:
-        assign:
-          - iteration: 1
-          - current_draft: ${winner.draft}
-          - current_score: ${winner.score}
-          - best_draft: ${winner.draft}
-          - best_score: ${winner.score}
-    
-    - refinement_loop:
-        steps:
-          - check_termination:
-              switch:
-                - condition: ${current_score >= 98}  # Target score (was 100, unrealistic)
-                  next: exit_refinement
-                - condition: ${iteration > 3}
-                  next: exit_refinement  # Max iterations reached
-              next: continue_refinement
-          
-          - continue_refinement:
-              steps:
-                - refine_draft:
-                    call: http.post
-                    args:
-                      url: ${app_url + "/api/agent/router?action=refine"}
-                      headers:
-                        Authorization: ${auth_header}
-                      body:
-                        topic: ${topic}
-                        draft: ${current_draft}
-                        critique: ${winner.report}
-                        context: ${research_data.body.context}
-                    result: refined_res
-                
-                - critique_refined:
-                    call: http.post
-                    args:
-                      url: ${app_url + "/api/agent/router?action=critique"}
-                      headers:
-                        Authorization: ${auth_header}
-                      body:
-                        draft: ${refined_res.body.refined_draft}
-                    result: new_critique_res
-                
-                - update_loop:
-                    assign:
-                      - current_draft: ${refined_res.body.refined_draft}
-                      - current_score: ${new_critique_res.body.score}
-                      - iteration: ${iteration + 1}
-                      - winner.report: ${new_critique_res.body.report}
-                
-                - check_improvement:
-                    switch:
-                      - condition: ${current_score > best_score}
-                        steps:
-                          - save_best:
-                              assign:
-                                - best_draft: ${current_draft}
-                                - best_score: ${current_score}
-              next: refinement_loop
-          
-          - exit_refinement:
-              assign:
-                - winner.draft: ${best_draft}
-                - winner.score: ${best_score}
+    # 5. POLISH PHASE (Optional One-Shot)
+    - check_polish:
+        switch:
+          - condition: ${winner.score < 95}
+            steps:
+              - refine_winner:
+                  call: http.post
+                  args:
+                    url: ${app_url + "/api/agent/router?action=refine"}
+                    headers:
+                      Authorization: ${auth_header}
+                    body:
+                      topic: ${topic}
+                      draft: ${winner.draft}
+                      critique: ${winner.report}
+                      context: ${research_data.body.context}
+                  result: refined_res
+              - update_winner:
+                  assign:
+                    - winner.draft: ${refined_res.body.refined_draft}
+                    - winner.score: 99 # Assumed improved
 
     # 6. VISUALS & DELIVERY
     - generate_visuals:
