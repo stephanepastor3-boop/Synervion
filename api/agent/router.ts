@@ -73,6 +73,54 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     try {
         switch (action) {
+            case 'discover-topic': {
+                // Auto-discover trending wellness topics using Gemini
+                const topicPrompt = `You are a Wellness Content Strategist for Synervion (functional mushrooms).
+
+Research trending topics in:
+- Brain health & cognitive function
+- Stress management & adaptogens  
+- Natural wellness & immunity
+- Functional mushrooms (Lion's Mane, Reishi, Cordyceps, Chaga)
+
+Generate ONE compelling LinkedIn post idea in JSON format:
+{
+  "topic": "Main topic (5-8 words)",
+  "angle": "Unique perspective or hook (10-15 words)",
+  "hook": "Attention-grabbing opening line"
+}
+
+Make it timely, relevant, and engaging for wellness professionals.`;
+
+                const response = await callGemini([
+                    { role: "system", content: topicPrompt },
+                    { role: "user", content: "Discover today's most engaging functional mushroom topic" }
+                ]);
+
+                // Parse JSON response
+                let topicData;
+                try {
+                    // Strip markdown code blocks if present
+                    let cleanedResponse = response.trim();
+                    if (cleanedResponse.startsWith('```json')) {
+                        cleanedResponse = cleanedResponse.replace(/```json\n?/g, '').replace(/```\n?$/g, '');
+                    } else if (cleanedResponse.startsWith('```')) {
+                        cleanedResponse = cleanedResponse.replace(/```\n?/g, '');
+                    }
+                    topicData = JSON.parse(cleanedResponse);
+                } catch (parseError) {
+                    console.error('[Agent: Discover-Topic] JSON parse failed:', parseError);
+                    // Fallback
+                    topicData = {
+                        topic: "Functional Mushrooms for Mental Clarity",
+                        angle: "Natural cognitive support without caffeine dependency",
+                        hook: "What if sharper focus didn't require another cup of coffee?"
+                    };
+                }
+
+                return res.status(200).json(topicData);
+            }
+
             case 'research': {
                 const { topic } = req.body;
                 if (!topic) throw new Error("Missing 'topic'");
@@ -227,25 +275,25 @@ Output JUST the query, no quotes.`
             }
 
             case 'delivery': {
-            const { topic, final_draft, image_url, qa_report } = req.body;
+                const { topic, final_draft, image_url, qa_report } = req.body;
 
-            // 1. Upload
-            const imageBuffer = await downloadImageToBuffer(image_url);
-            const assetUrn = await uploadImageToLinkedIn(imageBuffer);
+                // 1. Upload
+                const imageBuffer = await downloadImageToBuffer(image_url);
+                const assetUrn = await uploadImageToLinkedIn(imageBuffer);
 
-            // 2. Link
-            const payload = JSON.stringify({ topic, text: final_draft, imageUrn: assetUrn });
-            const compressed = await gzip(payload);
-            const dataStr = compressed.toString('base64url');
-            const sig = crypto.createHmac('sha256', CRON_SECRET!).update(dataStr).digest('hex');
-            const approvalUrl = `${APP_URL}/api/approve-post?data=${dataStr}&sig=${sig}`;
+                // 2. Link
+                const payload = JSON.stringify({ topic, text: final_draft, imageUrn: assetUrn });
+                const compressed = await gzip(payload);
+                const dataStr = compressed.toString('base64url');
+                const sig = crypto.createHmac('sha256', CRON_SECRET!).update(dataStr).digest('hex');
+                const approvalUrl = `${APP_URL}/api/approve-post?data=${dataStr}&sig=${sig}`;
 
-            // 3. Email
-            await getResend().emails.send({
-                from: 'Synervion Bot <bot@synervion.com>',
-                to: 'stephane@synervion.com',
-                subject: `⚡️ Review Required: ${topic}`,
-                html: `
+                // 3. Email
+                await getResend().emails.send({
+                    from: 'Synervion Bot <bot@synervion.com>',
+                    to: 'stephane@synervion.com',
+                    subject: `⚡️ Review Required: ${topic}`,
+                    html: `
                         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; color: #333;">
                             <div style="background: #10b981; color: white; padding: 12px; border-radius: 8px 8px 0 0; text-align: center; font-weight: bold;">
                                  Ready for Review (Workflow Engine)
@@ -265,16 +313,16 @@ Output JUST the query, no quotes.`
                                 </div>
                             </div>
                         </div>`
-            });
-            return res.status(200).json({ status: "sent", approval_url: approvalUrl });
-        }
+                });
+                return res.status(200).json({ status: "sent", approval_url: approvalUrl });
+            }
 
             default:
-        return res.status(400).json({ error: "Invalid action" });
-    }
+                return res.status(400).json({ error: "Invalid action" });
+        }
 
     } catch (error: any) {
-    console.error(`[Agent Router] Error inside action '${action}':`, error);
-    return res.status(500).json({ error: error.message });
-}
+        console.error(`[Agent Router] Error inside action '${action}':`, error);
+        return res.status(500).json({ error: error.message });
+    }
 }
