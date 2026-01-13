@@ -1,0 +1,156 @@
+main:
+  params: [input]
+  steps:
+    - init:
+        assign:
+          - app_url: "https://www.synervion.com"  # Replace with actual prod URL if different
+          - secret_token: "YOUR_CRON_SECRET"      # Will be replaced by Terraform/User
+          - topic: ${input.topic}
+
+    # 1. RESEARCH PHASE
+    - perform_research:
+        call: http.post
+        args:
+          url: ${app_url + "/api/agent/research"}
+          headers:
+            Authorization: ${"Bearer " + secret_token}
+          body:
+            topic: ${topic}
+        result: research_data
+
+    # 2. PARALLEL DRAFTING (The "Best-of-3" Strategy)
+    - generate_candidates:
+        parallel:
+          branches:
+            - analyst:
+                steps:
+                  - draft_analyst:
+                      call: http.post
+                      args:
+                        url: ${app_url + "/api/agent/draft"}
+                        headers: {Authorization: ${"Bearer " + secret_token}}
+                        body:
+                          topic: ${topic}
+                          context: ${research_data.body.context}
+                          angle: "Angle: Data-Driven Analyst (Focus on stats, biochemistry, and papers)"
+                      result: draft_a
+                  - return_a:
+                      return: ${draft_a.body}
+            
+            - storyteller:
+                steps:
+                  - draft_storyteller:
+                      call: http.post
+                      args:
+                        url: ${app_url + "/api/agent/draft"}
+                        headers: {Authorization: ${"Bearer " + secret_token}}
+                        body:
+                          topic: ${topic}
+                          context: ${research_data.body.context}
+                          angle: "Angle: Master Storyteller (Focus on narrative, suspense, and human element)"
+                      result: draft_b
+                  - return_b:
+                      return: ${draft_b.body}
+
+            - skeptic:
+                steps:
+                  - draft_skeptic:
+                      call: http.post
+                      args:
+                        url: ${app_url + "/api/agent/draft"}
+                        headers: {Authorization: ${"Bearer " + secret_token}}
+                        body:
+                          topic: ${topic}
+                          context: ${research_data.body.context}
+                          angle: "Angle: Contrarian/Myth-Buster (Focus on challenging common assumptions)"
+                      result: draft_c
+                  - return_c:
+                      return: ${draft_c.body}
+        result: candidates
+
+    # 3. CRITIQUE PHASE (Also Parallel for speed)
+    - score_candidates:
+        parallel:
+          for:
+            value: candidate
+            in: ${candidates}
+            steps:
+              - critique_call:
+                  call: http.post
+                  args:
+                    url: ${app_url + "/api/agent/critique"}
+                    headers: {Authorization: ${"Bearer " + secret_token}}
+                    body:
+                      topic: ${topic}
+                      draft: ${candidate.draft}
+                  result: critique_res
+              - return_scored:
+                  return:
+                    draft: ${candidate.draft}
+                    angle: ${candidate.angle}
+                    score: ${critique_res.body.score}
+                    report: ${critique_res.body.report}
+        result: scored_candidates
+
+    # 4. SELECTION PHASE
+    - select_winner:
+        call: http.post
+        args:
+          url: ${app_url + "/api/agent/select-winner"}
+          headers: {Authorization: ${"Bearer " + secret_token}}
+          body:
+            candidates: ${scored_candidates}
+        result: winner_res
+    
+    - assign_winner:
+        assign:
+          - winner: ${winner_res.body.winner}
+
+    # 5. POLISH PHASE (Optional One-Shot)
+    - check_polish:
+        switch:
+          - condition: ${winner.score < 95}
+            steps:
+              - refine_winner:
+                  call: http.post
+                  args:
+                    url: ${app_url + "/api/agent/refine"}
+                    headers: {Authorization: ${"Bearer " + secret_token}}
+                    body:
+                      topic: ${topic}
+                      draft: ${winner.draft}
+                      critique: ${winner.report}
+                      context: ${research_data.body.context}
+                  result: refined_res
+              - update_winner:
+                  assign:
+                    - winner.draft: ${refined_res.body.refined_draft}
+                    - winner.score: 99 # Assumed improved
+
+    # 6. VISUALS & DELIVERY
+    - generate_visuals:
+        call: http.post
+        args:
+          url: ${app_url + "/api/agent/visual"}
+          headers: {Authorization: ${"Bearer " + secret_token}}
+          body:
+            draft: ${winner.draft}
+        result: visual_res
+
+    - send_email:
+        call: http.post
+        args:
+          url: ${app_url + "/api/agent/delivery"}
+          headers: {Authorization: ${"Bearer " + secret_token}}
+          body:
+            topic: ${topic}
+            final_draft: ${winner.draft}
+            image_url: ${visual_res.body.image_url}
+            qa_report: ${winner.report}
+        result: delivery_res
+
+    - return_final:
+        return:
+          status: "success"
+          published_topic: ${topic}
+          final_score: ${winner.score}
