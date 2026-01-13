@@ -13,6 +13,9 @@ const RESEND_API_KEY = process.env.RESEND_API_KEY;
 const CRON_SECRET = process.env.CRON_SECRET;
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://synervion.com';
 
+// Vercel Serverless Config
+export const maxDuration = 300; // 5 minutes to allow for 15+ QA iterations
+
 const gzip = promisify(zlib.gzip);
 
 // HARDCODED SOPs (To ensure availability in Edge/Serverless without FS)
@@ -61,7 +64,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         // 3. Strict Workflow Cycle (Recursive Loop)
         let currentDraft = await generateDraft(topic, researchData, SOP_GUIDELINES);
         let attempts = 0;
-        const MAX_ATTEMPTS = 3;
+        const MAX_ATTEMPTS = 15;
         let isPerfect = false;
         let lastCritique = "";
 
@@ -79,7 +82,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                 isPerfect = true;
             } else {
                 console.log("[QA Loop] Draft Failed QA. Refining...");
-                currentDraft = await generateRefinedPost(topic, currentDraft, lastCritique, SOP_GUIDELINES);
+                currentDraft = await generateRefinedPost(topic, currentDraft, lastCritique, SOP_GUIDELINES, researchData);
             }
         }
 
@@ -232,10 +235,18 @@ ${rulesText}`
     ]);
 }
 
-async function generateRefinedPost(topic: string, draft: string, critique: string, guidelines: string[]) {
+async function generateRefinedPost(topic: string, draft: string, critique: string, guidelines: string[], researchData: string) {
     const rulesText = guidelines.map(r => `- ${r}`).join('\n');
     return await callPerplexity([
-        { role: "system", content: `You are an Expert Copywriter. Rewrite this post to fix the issues identified in the critique. Ensure strict adherence to guidelines.\nGUIDELINES:\n${rulesText}` },
+        {
+            role: "system", content: `You are an Expert Copywriter. Rewrite this post to fix the issues identified in the critique. Ensure strict adherence to guidelines.
+        
+CONTEXT:
+${researchData}
+
+GUIDELINES:
+${rulesText}`
+        },
         { role: "user", content: `Draft:\n${draft}\n\nCritique:\n${critique}` }
     ]);
 }
