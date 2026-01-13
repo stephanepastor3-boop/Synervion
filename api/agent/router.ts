@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { checkAuth, braveSearch, callPerplexity, SOP_GUIDELINES, BRAVE_API_KEY, getResend, debugEnvVars, APP_URL, LINKEDIN_ACCESS_TOKEN, ORGANIZATION_ID, CRON_SECRET } from './utils';
+import { checkAuth, braveSearch, callPerplexity, SOP_GUIDELINES, BRAVE_API_KEY, getResend, debugEnvVars, APP_URL, LINKEDIN_ACCESS_TOKEN, ORGANIZATION_ID, CRON_SECRET } from './_utils';
 import crypto from 'node:crypto';
 import zlib from 'node:zlib';
 import { promisify } from 'node:util';
