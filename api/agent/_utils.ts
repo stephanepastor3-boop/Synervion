@@ -67,6 +67,35 @@ export async function callPerplexity(messages: any[]) {
     return json.choices[0].message.content;
 }
 
+export async function callGemini(messages: any[], options?: { temperature?: number; maxTokens?: number }) {
+    const { GoogleGenerativeAI } = await import('@google/generative-ai');
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
+    const model = genAI.getGenerativeModel({
+        model: 'gemini-2.0-flash',
+        generationConfig: {
+            temperature: options?.temperature ?? 0.7,
+            maxOutputTokens: options?.maxTokens ?? 2048,
+        }
+    });
+
+    const systemMessage = messages.find(m => m.role === 'system');
+    const userMessages = messages.filter(m => m.role === 'user');
+    const contents = userMessages.map(m => ({ role: 'user', parts: [{ text: m.content }] }));
+
+    const chat = model.startChat({
+        history: [],
+        systemInstruction: systemMessage?.content
+    });
+
+    try {
+        const result = await chat.sendMessage(contents[contents.length - 1].parts[0].text);
+        return result.response.text();
+    } catch (error: any) {
+        console.error('[Gemini] Error:', error.message);
+        throw new Error(`Gemini API call failed: ${error.message}`);
+    }
+}
+
 export async function braveSearch(query: string) {
     const url = new URL('https://api.search.brave.com/res/v1/web/search');
     url.searchParams.append('q', query);
