@@ -135,10 +135,13 @@ ${rulesText}`
             }
 
             case 'select-winner': {
-                const { candidates } = req.body;
-                if (!candidates || !Array.isArray(candidates) || candidates.length === 0) {
-                    throw new Error("Missing candidates");
+                if (!req.body.candidates || !Array.isArray(req.body.candidates)) {
+                    throw new Error("Missing candidates array");
                 }
+                const candidates = req.body.candidates.flat();
+                if (candidates.length === 0) throw new Error("Candidates array is empty");
+
+                console.log("[Router] Selecting winner from:", JSON.stringify(candidates));
                 let winner = candidates[0];
                 for (const cand of candidates) {
                     const score = Number(cand.score) || 0;
