@@ -167,8 +167,8 @@ main:
         steps:
           - check_termination:
               switch:
-                - condition: ${current_score >= 100}
-                  next: exit_refinement  # Perfect score!
+                - condition: ${current_score >= 98}  # Target score (was 100, unrealistic)
+                  next: exit_refinement
                 - condition: ${iteration > 3}
                   next: exit_refinement  # Max iterations reached
               next: continue_refinement
