@@ -29,10 +29,16 @@ async function braveImageSearch(query: string, size?: string) {
     return json.results[0].properties.url;
 }
 
+// Shared headers for image requests (prevents HEAD/GET mismatch)
+const IMAGE_HEADERS = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+    'Accept': 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
+    'Referer': 'https://www.google.com/',
+    'Accept-Language': 'en-US,en;q=0.9'
+};
+
 async function downloadImageToBuffer(url: string) {
-    const response = await fetch(url, {
-        headers: { 'User-Agent': 'Mozilla/5.0 (compatible; SynervionBot/1.0; +https://synervion.com)' }
-    });
+    const response = await fetch(url, { headers: IMAGE_HEADERS });
     if (!response.ok) throw new Error(`Failed to download image: ${response.status} ${response.statusText}`);
     return await response.arrayBuffer();
 }
@@ -246,7 +252,7 @@ ${rulesText}`
                 const verifyImage = async (url: string) => {
                     if (!url) return false;
                     try {
-                        const res = await fetch(url, { method: 'HEAD', headers: { 'User-Agent': 'Mozilla/5.0' } });
+                        const res = await fetch(url, { method: 'HEAD', headers: IMAGE_HEADERS });
                         return res.ok;
                     } catch { return false; }
                 };
@@ -275,9 +281,9 @@ ${rulesText}`
 
                 // 4. Ultimate Fallback (Safe Mode)
                 if (!imageUrl) {
-                    console.log("[Agent: Visual] All searches failed. Using safety fallback.");
-                    // Stable Wikimedia Commons Image (Reishi Mushroom)
-                    const safeUrl = "https://upload.wikimedia.org/wikipedia/commons/e/e0/2010-08-06_Appenzell_Ganoderma_lucidum.jpg";
+                    console.log("[Agent: Visual] All searches failed. Using self-hosted safety fallback.");
+                    // Self-hosted mushroom image (stable and always accessible)
+                    const safeUrl = "https://synervion.com/mushroom-fallback.png";
                     imageUrl = safeUrl;
                 }
 
