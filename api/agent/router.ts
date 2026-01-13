@@ -242,29 +242,43 @@ ${rulesText}`
                 const visualQuery = visualQueryRaw.replace(/^"|"$/g, '');
 
                 // 3. Search Loop
+                // Helper to verify image accessibility
+                const verifyImage = async (url: string) => {
+                    if (!url) return false;
+                    try {
+                        const res = await fetch(url, { method: 'HEAD', headers: { 'User-Agent': 'Mozilla/5.0' } });
+                        return res.ok;
+                    } catch { return false; }
+                };
+
                 // 3. Search Sequence
                 let imageUrl = "";
 
                 // 1. High Quality Specific
                 console.log(`[Agent: Visual] Attempting high-quality search: "${visualQuery} photorealistic 4k"`);
-                imageUrl = await braveImageSearch(visualQuery + " photorealistic 4k", "Large") || "";
+                let cand = await braveImageSearch(visualQuery + " photorealistic 4k", "Large");
+                if (await verifyImage(cand || "")) imageUrl = cand!;
 
                 // 2. Broad Specific
                 if (!imageUrl) {
                     console.log(`[Agent: Visual] Attempting broad search: "${visualQuery}"`);
-                    imageUrl = await braveImageSearch(visualQuery) || "";
+                    cand = await braveImageSearch(visualQuery);
+                    if (await verifyImage(cand || "")) imageUrl = cand!;
                 }
 
                 // 3. Generic Fallback
                 if (!imageUrl) {
                     console.log(`[Agent: Visual] Attempting generic fallback search: "functional mushrooms nature aesthetic"`);
-                    imageUrl = await braveImageSearch("functional mushrooms nature aesthetic", "Large") || "";
+                    cand = await braveImageSearch("functional mushrooms nature aesthetic", "Large");
+                    if (await verifyImage(cand || "")) imageUrl = cand!;
                 }
 
                 // 4. Ultimate Fallback (Safe Mode)
                 if (!imageUrl) {
                     console.log("[Agent: Visual] All searches failed. Using safety fallback.");
-                    imageUrl = "https://images.unsplash.com/photo-1625828453470-3847e307e5c5?auto=format&fit=crop&w=1600&q=80";
+                    const safeUrl = "https://images.unsplash.com/photo-1625828453470-3847e307e5c5?auto=format&fit=crop&w=1600&q=80";
+                    // Only use if even the safe url is reachable (it should be)
+                    imageUrl = safeUrl;
                 }
 
                 if (!imageUrl) throw new Error("CRITICAL: No images found and fallback failed");
