@@ -71,10 +71,6 @@
         {
             "path": "/api/cron/daily-post",
             "schedule": "0 4 * * *"
-        },
-        {
-            "path": "/api/cron/daily-engagement",
-            "schedule": "30 2 * * *"
         }
     ]
 }

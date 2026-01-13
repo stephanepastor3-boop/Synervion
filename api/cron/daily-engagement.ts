@@ -35,7 +35,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
         // Fallback: If strict site search fails, try a broader keyword search with "linkedin"
         if (!results || results.length === 0) {
-            console.log("Strict search failed (0 results). Trying broader fallback...");
+            console.log("Strict search failed (0 results). Waiting 2s before fallback...");
+            await new Promise(resolve => setTimeout(resolve, 2000));
+
             const fallbackQuery = `linkedin ${query.replace('site:linkedin.com/posts/', '').trim()}`;
             console.log(`Fallback Query: ${fallbackQuery}`);
             results = await braveSearch(fallbackQuery);
