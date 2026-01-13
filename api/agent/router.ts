@@ -229,7 +229,8 @@ COMPREHENSIVE CHECKLIST (Output EVERY item, no exceptions):
 2. ✅/❌ No separate "Sources" section at end (-15 if present)
 3. ✅/❌ Hashtags formatted correctly: #Word not # Word (-10 if spaces)
 4. ✅/❌ Paragraphs flexible (1-5 sentences) (-5 per >5 violation)
-5. ✅/❌ NO markdown syntax visible: no **, *, #, etc. (-20 if ANY markdown present)
+5. ✅/❌ NO bold/italic/link markdown: no **, _, [text](url) etc. (-20 if ** or _ or [link] present)
+   Note: Bullets (*) are OK - LinkedIn supports them
 6. ✅/❌ Generous whitespace between sections (-5 if cramped)
 7. ✅/❌ No citation markers [1][2][3] in text (-20 if present)
 8. ✅/❌ Conversational tone (-10 if academic: "promote", "well-being", "bioactive")
@@ -312,9 +313,12 @@ REQUIREMENTS (TARGET: 98-100/100):
    - Every fact needs a URL or qualifier ("may", "research suggests")
    - If claiming research, provide the URL inline
 
-6. **SPECIFIC EXAMPLES**:
-   - ❌ BANNED: "Imagine using it before a big project"
-   - ✅ GOOD: "Try it 30 minutes before your 9 AM standup" or "Add to your pre-workout coffee"
+6. **ULTRA-SPECIFIC EXAMPLES (CRITICAL)**:
+   - ❌ BANNED: "Try it before your morning workout" (too vague)
+   - ❌ BANNED: "Add to your 9 AM coffee" (still generic)
+   - ✅ REQUIRED: "Mix 500mg Lion's Mane into your 7:15 AM espresso, 30 minutes before your daily standup"
+   - ✅ REQUIRED: Include TIME (exact hour), DOSAGE, and SPECIFIC CONTEXT
+   - Every recommendation needs: When exactly? How much? In what situation?
 
 7. **CLEAN FORMAT**:
    - Bullets (*) ONLY for lists (LinkedIn supports these)
