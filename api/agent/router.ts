@@ -276,8 +276,8 @@ ${rulesText}`
                 // 4. Ultimate Fallback (Safe Mode)
                 if (!imageUrl) {
                     console.log("[Agent: Visual] All searches failed. Using safety fallback.");
-                    const safeUrl = "https://images.unsplash.com/photo-1625828453470-3847e307e5c5?auto=format&fit=crop&w=1600&q=80";
-                    // Only use if even the safe url is reachable (it should be)
+                    // Stable Wikimedia Commons Image (Reishi Mushroom)
+                    const safeUrl = "https://upload.wikimedia.org/wikipedia/commons/e/e0/2010-08-06_Appenzell_Ganoderma_lucidum.jpg";
                     imageUrl = safeUrl;
                 }
 
@@ -289,6 +289,7 @@ ${rulesText}`
                 const { topic, final_draft, image_url, qa_report } = req.body;
 
                 // 1. Upload
+                console.log(`[Agent: Delivery] Downloading image from: ${image_url}`);
                 const imageBuffer = await downloadImageToBuffer(image_url);
                 const assetUrn = await uploadImageToLinkedIn(imageBuffer);
 
