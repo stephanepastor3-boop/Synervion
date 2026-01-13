@@ -133,27 +133,71 @@ main:
         assign:
           - winner: ${winner_res.body.winner}
 
-    # 5. POLISH PHASE (Optional One-Shot)
-    - check_polish:
-        switch:
-          - condition: ${winner.score < 95}
-            steps:
-              - refine_winner:
-                  call: http.post
-                  args:
-                    url: ${app_url + "/api/agent/router?action=refine"}
-                    headers:
-                      Authorization: ${auth_header}
-                    body:
-                      topic: ${topic}
-                      draft: ${winner.draft}
-                      critique: ${winner.report}
-                      context: ${research_data.body.context}
-                  result: refined_res
-              - update_winner:
-                  assign:
-                    - winner.draft: ${refined_res.body.refined_draft}
-                    - winner.score: 99 # Assumed improved
+    # 5. ITERATIVE REFINEMENT LOOP (until 100/100 or max 3 iterations)
+    - init_loop:
+        assign:
+          - iteration: 1
+          - current_draft: ${winner.draft}
+          - current_score: ${winner.score}
+          - best_draft: ${winner.draft}
+          - best_score: ${winner.score}
+    
+    - refinement_loop:
+        steps:
+          - check_termination:
+              switch:
+                - condition: ${current_score >= 100}
+                  next: exit_refinement  # Perfect score!
+                - condition: ${iteration > 3}
+                  next: exit_refinement  # Max iterations reached
+              next: continue_refinement
+          
+          - continue_refinement:
+              steps:
+                - refine_draft:
+                    call: http.post
+                    args:
+                      url: ${app_url + "/api/agent/router?action=refine"}
+                      headers:
+                        Authorization: ${auth_header}
+                      body:
+                        topic: ${topic}
+                        draft: ${current_draft}
+                        critique: ${winner.report}
+                        context: ${research_data.body.context}
+                    result: refined_res
+                
+                - critique_refined:
+                    call: http.post
+                    args:
+                      url: ${app_url + "/api/agent/router?action=critique"}
+                      headers:
+                        Authorization: ${auth_header}
+                      body:
+                        draft: ${refined_res.body.refined_draft}
+                    result: new_critique_res
+                
+                - update_loop:
+                    assign:
+                      - current_draft: ${refined_res.body.refined_draft}
+                      - current_score: ${new_critique_res.body.score}
+                      - iteration: ${iteration + 1}
+                      - winner.report: ${new_critique_res.body.report}
+                
+                - check_improvement:
+                    switch:
+                      - condition: ${current_score > best_score}
+                        steps:
+                          - save_best:
+                              assign:
+                                - best_draft: ${current_draft}
+                                - best_score: ${current_score}
+              next: refinement_loop
+          
+          - exit_refinement:
+              assign:
+                - winner.draft: ${best_draft}
+                - winner.score: ${best_score}
 
     # 6. VISUALS & DELIVERY
     - generate_visuals:

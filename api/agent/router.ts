@@ -163,18 +163,33 @@ ${rulesText}`
                 const rulesText = SOP_GUIDELINES.map(r => `- ${r}`).join('\n');
                 const critique = await callPerplexity([
                     {
-                        role: "system", content: `You are a Harsh Social Media Editor. Critique this draft based on the guidelines.
-                    
-IMPORTANT OUTPUT FORMAT:
-1. First line MUST be "SCORE: X/100".
-2. Followed by a "REPORT:" section.
-3. If Perfect (100/100): List each checklist item with a [x] mark to confirm it passed.
-4. If Failed (<100): List specifically what failed and needs fixing.
+                        role: "system", content: `You are a STRICT Quality Analyst for LinkedIn posts.
 
-NOTE: Visuals are handled separately by a dedicated Art Director agent. 
-- Do NOT critique the draft for missing image descriptions or cues. 
-- Do NOT penalize "Missing visual asset" if the text itself is good.
-- ONLY check that the text DOES NOT contain [placeholders].
+OUTPUT FORMAT:
+1. First line MUST be "SCORE: X/100".
+2. Followed by "REPORT:" section with specific issues.
+
+STRICT GRADING RUBRIC (INSTANT DEDUCTIONS):
+- ANY citation markers [1], [2], etc. in text → -20 points
+- "Sources" section present → -20 points
+- Hashtags with space after # (e.g., "# MyceliumResilience") → -10 points
+- ANY markdown headers (##, ###) → -15 points
+- Paragraphs longer than 4 sentences → -5 points EACH
+- Data/lists NOT in bullet format → -10 points
+- Academic/clinical tone → -10 points
+- "In our lab" without data → -15 points
+- Missing hashtags or fewer than 3 → -10 points
+
+Score 100 ONLY if:
+✓ Zero citations/references
+✓ Zero "Sources" section
+✓ Hashtags formatted correctly (#Word no space)
+✓ Short paragraphs (1-3 sentences)
+✓ Bullets for lists/data
+✓ Conversational tone
+✓ 3-5 hashtags at end
+
+NOTE: Visuals handled separately. Do NOT critique missing images.
 
 GUIDELINES:
 ${rulesText}`
@@ -209,21 +224,27 @@ ${rulesText}`
                 const rulesText = SOP_GUIDELINES.map(r => `- ${r}`).join('\n');
                 const refinedDraft = await callPerplexity([
                     {
-                        role: "system", content: `You are a Senior Editor for Synervion (Functional Mushrooms).
-                        
-TASK:
-1. Ensure the post is roughly 70% Education / 30% Brand Philosophy.
-2. REMOVE any "fake lab" claims. If the draft says "In our lab" without data, change it to "Industry research suggests...".
-3. POLISH the flow. Use a CONVERSATIONAL tone (like talking to a peer). No "Essay Structure".
-4. FORMATTING: Use **bold** for key insights. Use bullet points for lists.
-5. CITATIONS: Keep the [1] markers in text, but ENSURE there is a "Sources" list at the bottom with matching URLs.
-6. END with 3-5 Hashtags.
+                        role: "system", content: `You are a STRICT Social Media Editor for Synervion (Functional Mushrooms).
+
+CRITICAL FORMATTING RULES (ZERO TOLERANCE):
+1. **DELETE ALL CITATIONS**: Remove ALL [1], [2], [3] markers and any reference numbers.
+2. **DELETE "Sources" SECTION**: No bibliography, no URLs, no reference lists at the end.
+3. **HASHTAGS = PLAIN TEXT**: Use "#MyceliumResilience" NOT "# MyceliumResilience" (no space after #).
+4. **NO MARKDOWN HEADERS**: Use **bold** for emphasis ONLY. Never use # ## ### for headers.
+5. **SHORT PARAGRAPHS**: Maximum 3 sentences per paragraph. Split longer ones.
+6. **USE BULLETS FOR DATA**: Flow rates, statistics, or lists MUST use bullet points (- or •).
+7. **GENEROUS WHITESPACE**: Add blank lines between paragraphs and sections.
+8. **CONVERSATIONAL TONE**: Write like talking to a colleague, not a textbook.
+9. **NO FAKE LAB CLAIMS**: Change "In our lab" to "Industry research shows".
+10. **END WITH 3-5 HASHTAGS**: Plain text, space-separated, no headers.
 
 CONTEXT:
 ${context}
 
 GUIDELINES:
-${rulesText}`
+${rulesText}
+
+OUTPUT ONLY THE FINAL POST. No commentary, no analysis.`
                     },
                     { role: "user", content: `Draft:\n${draft}\n\nCritique:\n${critique}\n\nPlease output ONLY the final rewritten post (skipping the analysis log).` }
                 ]);
@@ -236,16 +257,37 @@ ${rulesText}`
 
                 // 1. Concept
                 const visualConcept = await callPerplexity([
-                    { role: "system", content: `You are an Art Director. Describe a SINGLE, STRIKING visual concept for this post. Keep it realistic and scientific.` },
+                    {
+                        role: "system",
+                        content: `You are an Instagram Art Director for a PREMIUM WELLNESS BRAND.
+
+CRITICAL: We need LIFESTYLE/NATURE photography for LinkedIn, NOT diagrams, charts, or academic illustrations.
+
+GOOD VISUAL CONCEPTS:
+- Close-up of fresh mushrooms in natural forest light
+- Dewy moss and fungi on a mossy log
+- Hands gently holding organic mushrooms
+- Aesthetic nature scene with mushrooms in habitat
+- Wellness lifestyle (person in nature, minimal)
+
+BAD VISUAL CONCEPTS (REJECT):
+- Scientific diagrams with arrows/labels/flowcharts
+- Charts, graphs, data visualizations
+- Microscope imagery or lab equipment
+- Academic textbook-style illustrations
+- Infographics with text overlays
+
+Describe ONE striking visual concept that would stop a LinkedIn scroll. Focus on NATURAL BEAUTY and ORGANIC AESTHETICS.`
+                    },
                     { role: "user", content: `Post Content:\n${draft}` }
                 ]);
 
                 // 2. Query
                 const visualQueryRaw = await callPerplexity([
-                    { role: "system", content: `Convert this visual concept into a search query string for high-end stock photos. Output ONLY the query.` },
+                    { role: "system", content: `Convert this visual concept into a search query for stock photo sites. Add negative keywords to exclude diagrams/charts. Output ONLY the query.` },
                     { role: "user", content: `Visual Concept: ${visualConcept}` }
                 ]);
-                const visualQuery = visualQueryRaw.replace(/^"|"$/g, '');
+                const visualQuery = visualQueryRaw.replace(/^"|"$/g, '').trim() + " -diagram -chart -graph -infographic";
 
                 // 3. Search Loop
                 // Helper to verify image accessibility
