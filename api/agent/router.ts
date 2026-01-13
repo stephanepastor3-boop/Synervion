@@ -7,16 +7,25 @@ import { promisify } from 'node:util';
 const gzip = promisify(zlib.gzip);
 
 // --- Helper Functions (Visual/Delivery) ---
-async function braveImageSearch(query: string) {
+async function braveImageSearch(query: string, size?: string) {
     const url = new URL('https://api.search.brave.com/res/v1/images/search');
     url.searchParams.append('q', query);
     url.searchParams.append('count', '1');
-    url.searchParams.append('size', 'Large');
+    if (size) url.searchParams.append('size', size);
+
+    console.log(`[Brave] Searching: "${query}" (Size: ${size || 'Any'})`);
+
     const response = await fetch(url.toString(), {
         headers: { 'Accept': 'application/json', 'X-Subscription-Token': BRAVE_API_KEY! }
     });
+
+    if (!response.ok) {
+        console.error(`[Brave] Error ${response.status}:`, await response.text());
+        return null; // Return null instead of throwing
+    }
+
     const json = await response.json();
-    if (!json.results || json.results.length === 0) throw new Error("No images found.");
+    if (!json.results || json.results.length === 0) return null;
     return json.results[0].properties.url;
 }
 
@@ -197,22 +206,32 @@ ${rulesText}`
                 const visualQuery = visualQueryRaw.replace(/^"|"$/g, '');
 
                 // 3. Search Loop
-                const visualQueries = [
-                    visualQuery + " photorealistic 4k",
-                    visualQuery,
-                    "functional mushrooms nature aesthetic 4k"
-                ];
-
+                // 3. Search Sequence
                 let imageUrl = "";
-                for (const q of visualQueries) {
-                    try {
-                        console.log(`[Agent: Visual] Searching: "${q}"`);
-                        imageUrl = await braveImageSearch(q);
-                        if (imageUrl) break;
-                    } catch (e) { }
+
+                // 1. High Quality Specific
+                console.log(`[Agent: Visual] Attempting high-quality search: "${visualQuery} photorealistic 4k"`);
+                imageUrl = await braveImageSearch(visualQuery + " photorealistic 4k", "Large") || "";
+
+                // 2. Broad Specific
+                if (!imageUrl) {
+                    console.log(`[Agent: Visual] Attempting broad search: "${visualQuery}"`);
+                    imageUrl = await braveImageSearch(visualQuery) || "";
                 }
 
-                if (!imageUrl) throw new Error("CRITICAL: No images found");
+                // 3. Generic Fallback
+                if (!imageUrl) {
+                    console.log(`[Agent: Visual] Attempting generic fallback search: "functional mushrooms nature aesthetic"`);
+                    imageUrl = await braveImageSearch("functional mushrooms nature aesthetic", "Large") || "";
+                }
+
+                // 4. Ultimate Fallback (Safe Mode)
+                if (!imageUrl) {
+                    console.log("[Agent: Visual] All searches failed. Using safety fallback.");
+                    imageUrl = "https://images.unsplash.com/photo-1625828453470-3847e307e5c5?auto=format&fit=crop&w=1600&q=80";
+                }
+
+                if (!imageUrl) throw new Error("CRITICAL: No images found and fallback failed");
                 return res.status(200).json({ image_url: imageUrl });
             }
 
