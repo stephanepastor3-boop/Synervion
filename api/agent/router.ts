@@ -85,8 +85,24 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             case 'research': {
                 const { topic } = req.body;
                 if (!topic) throw new Error("Missing 'topic'");
-                const context = await braveSearch(topic);
-                return res.status(200).json({ context });
+
+                // 1. Sanitize Topic (The "Pivot" Step)
+                const searchQueryRaw = await callPerplexity([
+                    {
+                        role: "system", content: `You are the Research Director for Synervion (Functional Mushrooms). 
+                    Your job is to translate ANY input topic into a strict SEARCH QUERY for our field.
+                    
+                    RULES:
+                    1. If topic is about Tech/AI/Politics -> PIVOT it to "Nature" or "Resilience in Biology".
+                    2. If topic is already relevant -> Keep it but make it specific to "Scientific Studies".
+                    3. Output ONLY the search query. No quotes.` },
+                    { role: "user", content: `Input Topic: ${topic}` }
+                ]);
+                const searchQuery = searchQueryRaw.trim().replace(/^"|"$/g, '');
+                console.log(`[Agent: Research] Pivoted Topic "${topic}" -> Search Query "${searchQuery}"`);
+
+                const context = await braveSearch(searchQuery);
+                return res.status(200).json({ context: `Original Topic: ${topic}\n\nSearch Query Used: ${searchQuery}\n\nResearch Data:\n${context}` });
             }
 
             case 'draft': {
@@ -97,12 +113,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
                 const draft = await callPerplexity([
                     {
-                        role: "system", content: `You are the Lead Content Strategist for Synervion. Draft a LinkedIn post.
+                        role: "system", content: `You are the Strategy Lead for Synervion (a Functional Mushroom & Wellness Brand).
                     
-CRITICAL RULES:
-1. Do NOT invent "lab results" or "in our lab" stories unless explicit data is provided.
-2. If you lack specific data, use general phrases like "Research suggests..." or "Current studies show...".
-3. NO generic CTAs like "What do you think?". Use specific questions like "Have you experimented with extraction temps?".
+CRITICAL INSTRUCTIONS:
+1. YOUR TOPIC IS: "${topic}".
+2. IF the topic is technical (AI, Space, Crypto), YOU MUST PIVOT IT to biology/mycology. Use the tech as a METAPHOR for nature.
+3. IF the topic is totally irrelevant, REJECT IT by writing about: "The resilience of mycelial networks".
+4. NEVER invent "lab results". If you lack data, cite external studies or general principles.
 
 ${anglePrompt}
 
@@ -165,17 +182,12 @@ ${rulesText}`
                 const rulesText = SOP_GUIDELINES.map(r => `- ${r}`).join('\n');
                 const refinedDraft = await callPerplexity([
                     {
-                        role: "system", content: `You are a Senior Editor with a "Fix Everything at Once" methodology.
-
+                        role: "system", content: `You are a Senior Editor for Synervion (Functional Mushrooms).
+                        
 TASK:
-1. ANALYZE the critique. List exactly what is GOOD (to PRESERVE) and what is BAD (to FIX).
-2. PLAN the rewrite. Determine how to fix the bad parts without breaking the good parts.
-3. EXECUTE. Rewrite the post.
-
-CRITICAL INSTRUCTIONS:
-- If the critique flags "Fake Authenticity", REMOVE IT.
-- If the critique flags "Weak Hook", WRITE A NEW HOOK.
-- Verify citations against the CONTEXT.
+1. Ensure the post is roughly 70% Education / 30% Brand Philosophy.
+2. REMOVE any "fake lab" claims. If the draft says "In our lab" without data, change it to "Industry research suggests...".
+3. POLISH the flow. Short paragraphs. No "AI Fluff" words.
 
 CONTEXT:
 ${context}

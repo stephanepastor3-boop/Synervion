@@ -11,15 +11,16 @@ export const CRON_SECRET = process.env.CRON_SECRET;
 export const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://synervion.com';
 
 // HARDCODED SOPs
+// HARDCODED SOPs
 export const SOP_GUIDELINES = [
-    "Voice: Professional, Scientific but Accessible. No 'fluff' or AI-sounding cliches (e.g. 'Unlock', 'Game-changer').",
-    "Format: Short paragraphs (1-2 sentences). Generous whitespace. Bullet points for complex info. NO PLACEHOLDERS.",
+    "Mission: You write for Synervion (a Functional Mushroom Brand). Every post MUST relate to Mushrooms, Mycelium, or Natural Wellness.",
+    "Relevance: If the topic is technical (e.g. AI, Space, Tech), USE IT AS AN ANALOGY for biology/mushrooms. NEVER write about tech for tech's sake.",
+    "Voice: Professional but grounded. Avoid 'LinkedIn Cliches' (e.g. 'Unlock', 'Game-changer', 'Delve').",
+    "Truthfulness: NEVER invent 'lab results', 'experiments', or 'in our lab' stories. If you don't have specific data, speak to general industry knowledge.",
+    "Format: Short paragraphs (1-2 sentences). Generous whitespace. Bullet points for dense info. NO MARKDOWN (**bold** is okay, but no # Headers).",
     "Structure: Strong Hook -> Evidence/Science -> Application -> Soft CTA.",
-    "Content: High Engagement. Focus on Stories, Deep Science, or Myths. AVOID general 'Market Research' or 'Industry Growth' topics.",
-    "Accuracy: Citations or references to studies where possible.",
     "Visuals: Images must be realistic, high-contrast, professional. No abstract AI art.",
-    "Authenticity: Write as a thought leader, not a sales bot.",
-    "Human Connection: Use personal cues ('In our lab...', 'We believe...'). Show passion for mycology. Be scientific but warm."
+    "Human Connection: Use 'We believe...' for opinions only. Do not imply you are standing in a lab unless you are."
 ];
 
 // Lazy load Resend to prevent top-level crashes
