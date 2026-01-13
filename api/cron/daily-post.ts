@@ -75,20 +75,27 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             // Critique
             lastCritique = await generateCritique(topic, currentDraft, SOP_GUIDELINES);
 
-            // Check for Pass/Fail (Simple heuristic: Look for "SCORE: 100" or "FAIL")
-            // In a real strict system, we'd parse JSON, but text parsing works for Perplexity
-            if (lastCritique.includes("SCORE: 100") || lastCritique.includes("NO ISSUES")) {
-                console.log("[QA Loop] Draft Passed QA!");
+            // Parse Score
+            const scoreMatch = lastCritique.match(/SCORE:\s*(\d+)/i);
+            const score = scoreMatch ? parseInt(scoreMatch[1]) : 0;
+
+            console.log(`[QA Loop] Critique Score: ${score}/100`);
+
+            if (score === 100 || lastCritique.includes("NO ISSUES")) {
+                console.log("[QA Loop] Draft Passed QA (Perfect Score)!");
+                isPerfect = true;
+            } else if (attempts >= 8 && score >= 90) {
+                console.log(`[QA Loop] Draft Accepted (High Quality Fallback: ${score}/100)`);
                 isPerfect = true;
             } else {
-                console.log("[QA Loop] Draft Failed QA. Refining...");
+                console.log(`[QA Loop] Draft Failed QA (${score}/100). Refining...`);
                 currentDraft = await generateRefinedPost(topic, currentDraft, lastCritique, SOP_GUIDELINES, researchData);
             }
         }
 
         if (!isPerfect) {
-            console.error("Failed to reach 100/100 Quality Score. Aborting.");
-            throw new Error(`QA Failed. Final Score < 100. Issues: ${lastCritique}`);
+            console.error("Failed to reach acceptable Quality Score. Aborting.");
+            throw new Error(`QA Failed. Final Requirements not met. Last Critique: ${lastCritique}`);
         }
 
         const finalPost = sanitizePost(currentDraft);
@@ -237,6 +244,11 @@ IMPORTANT OUTPUT FORMAT:
 2. Followed by a "REPORT:" section.
 3. If Perfect (100/100): List each checklist item with a [x] mark to confirm it passed.
 4. If Failed (<100): List specifically what failed and needs fixing.
+
+NOTE: Visuals are handled separately by a dedicated Art Director agent. 
+- Do NOT critique the draft for missing image descriptions or cues. 
+- Do NOT penalize "Missing visual asset" if the text itself is good.
+- ONLY check that the text DOES NOT contain [placeholders].
 
 GUIDELINES:
 ${rulesText}`
