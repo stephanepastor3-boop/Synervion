@@ -3,8 +3,8 @@ main:
   steps:
     - init:
         assign:
-          - app_url: "https://www.synervion.com"  # Replace with actual prod URL if different
-          - secret_token: "YOUR_CRON_SECRET"      # Will be replaced by Terraform/User
+          - app_url: "https://www.synervion.com"
+          - secret_token: "1234567"
           - topic: ${input.topic}
 
     # 1. RESEARCH PHASE
