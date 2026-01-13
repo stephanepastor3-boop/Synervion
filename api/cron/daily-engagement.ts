@@ -8,11 +8,13 @@ const RESEND_API_KEY = process.env.RESEND_API_KEY;
 const USER_EMAIL = 'stephane@synervion.com';
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL || process.env.APP_URL || 'https://synervion.com';
 
+// Broader queries to ensure we get results. Filtering for /posts/ happens in code.
 const SEARCH_QUERIES = [
-    'site:linkedin.com/posts/ "functional mushrooms" "trends"',
-    'site:linkedin.com/posts/ "cordyceps" "market"',
-    'site:linkedin.com/posts/ "wellness" "prevention"',
-    'site:linkedin.com/posts/ "nutraceuticals" "innovation"'
+    'site:linkedin.com/posts/ functional mushrooms',
+    'site:linkedin.com/posts/ cordyceps',
+    'site:linkedin.com/posts/ "lion\'s mane"',
+    'site:linkedin.com/posts/ adaptogens wellness',
+    'site:linkedin.com/posts/ nootropics focus'
 ];
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
@@ -25,35 +27,52 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     try {
         // 1. Search (Brave)
+        // Try multiple queries if one fails? For now, pick random but make it robust.
         const query = SEARCH_QUERIES[Math.floor(Math.random() * SEARCH_QUERIES.length)];
         console.log(`Searching for: ${query}`);
-        const results = await braveSearch(query);
+
+        let results = await braveSearch(query);
+
+        // Fallback: If strict site search fails, try a broader keyword search with "linkedin"
+        if (!results || results.length === 0) {
+            console.log("Strict search failed (0 results). Trying broader fallback...");
+            const fallbackQuery = `linkedin ${query.replace('site:linkedin.com/posts/', '').trim()}`;
+            console.log(`Fallback Query: ${fallbackQuery}`);
+            results = await braveSearch(fallbackQuery);
+        }
+
+        console.log(`Brave Search returned ${results?.length || 0} results.`);
 
         if (!results || results.length === 0) {
-            console.log("No results found.");
+            console.log("No results found even after fallback.");
             return res.status(200).json({ message: "No results found." });
         }
 
-        const relevantPost = results.find((r: any) => r.url.includes('/posts/'));
+        // Filter for LinkedIn Post URLs
+        const relevantPost = results.find((r: any) => r.url.includes('linkedin.com/posts/') || r.url.includes('/activity-'));
 
         if (!relevantPost) {
-            console.log("No direct post URLs found.");
-            return res.status(200).json({ message: "No direct post URLs found." });
+            console.log("Found results but no valid LinkedIn Post URLs. Top 3 results were:");
+            results.slice(0, 3).forEach((r: any, i: number) => console.log(`   [${i}] ${r.title} -> ${r.url}`));
+            return res.status(200).json({ message: "No direct post URLs in results." });
         }
 
-        console.log(`Candidate: ${relevantPost.title} (${relevantPost.url})`);
+        console.log(`Candidate selected: ${relevantPost.title} (${relevantPost.url})`);
 
         // 2. Draft Comment (Perplexity)
         const comment = await generateComment(relevantPost.title, relevantPost.description);
         console.log(`Draft: ${comment}`);
 
         // 3. Extract Activity ID
-        const match = relevantPost.url.match(/activity-(\d+)/);
-        if (!match) {
+        // Handles: /posts/[slug]-activity-[ID] AND /feed/update/urn:li:activity:[ID]
+        let activityId = '';
+        const match = relevantPost.url.match(/activity[-:](\d+)/);
+        if (match) {
+            activityId = `urn:li:activity:${match[1]}`;
+        } else {
             console.log("Could not extract Activity ID.");
             return res.status(200).json({ message: "Skipped: Invalid URL format." });
         }
-        const activityId = `urn:li:activity:${match[1]}`;
 
         // 4. Send Email (Resend)
         const resend = new Resend(RESEND_API_KEY);
@@ -104,7 +123,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 async function braveSearch(query: string) {
     const url = new URL('https://api.search.brave.com/res/v1/web/search');
     url.searchParams.append('q', query);
-    url.searchParams.append('count', '5');
+    url.searchParams.append('count', '20'); // Increased context
     url.searchParams.append('freshness', 'pw');
 
     const response = await fetch(url.toString(), {
