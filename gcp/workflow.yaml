@@ -5,7 +5,13 @@ main:
         assign:
           - app_url: "https://www.synervion.com"
           - secret_token: "1234567"
+          - auth_header: ${"Bearer " + secret_token}
           - topic: ${input.topic}
+          - draft_a: null
+          - draft_b: null
+          - draft_c: null
+          - candidates: []
+          - scored_candidates: []
 
     # 1. RESEARCH PHASE
     - perform_research:
@@ -13,7 +19,7 @@ main:
         args:
           url: ${app_url + "/api/agent/router?action=research"}
           headers:
-            Authorization: ${"Bearer " + secret_token}
+            Authorization: ${auth_header}
           body:
             topic: ${topic}
         result: research_data
@@ -21,83 +27,98 @@ main:
     # 2. PARALLEL DRAFTING (The "Best-of-3" Strategy)
     - generate_candidates:
         parallel:
+          shared: [draft_a, draft_b, draft_c]
           branches:
             - analyst:
                 steps:
-                  - draft_analyst:
+                  - run_analyst:
                       call: http.post
                       args:
                         url: ${app_url + "/api/agent/router?action=draft"}
-                        headers: {Authorization: ${"Bearer " + secret_token}}
+                        headers:
+                          Authorization: ${auth_header}
                         body:
                           topic: ${topic}
                           context: ${research_data.body.context}
                           angle: "Angle: Data-Driven Analyst (Focus on stats, biochemistry, and papers)"
-                      result: draft_a
-                  - return_a:
-                      return: ${draft_a.body}
+                      result: res_a
+                  - save_a:
+                      assign:
+                        - draft_a: ${res_a.body}
             
             - storyteller:
                 steps:
-                  - draft_storyteller:
+                  - run_storyteller:
                       call: http.post
                       args:
                         url: ${app_url + "/api/agent/router?action=draft"}
-                        headers: {Authorization: ${"Bearer " + secret_token}}
+                        headers:
+                          Authorization: ${auth_header}
                         body:
                           topic: ${topic}
                           context: ${research_data.body.context}
                           angle: "Angle: Master Storyteller (Focus on narrative, suspense, and human element)"
-                      result: draft_b
-                  - return_b:
-                      return: ${draft_b.body}
+                      result: res_b
+                  - save_b:
+                      assign:
+                        - draft_b: ${res_b.body}
 
             - skeptic:
                 steps:
-                  - draft_skeptic:
+                  - run_skeptic:
                       call: http.post
                       args:
                         url: ${app_url + "/api/agent/router?action=draft"}
-                        headers: {Authorization: ${"Bearer " + secret_token}}
+                        headers:
+                          Authorization: ${auth_header}
                         body:
                           topic: ${topic}
                           context: ${research_data.body.context}
                           angle: "Angle: Contrarian/Myth-Buster (Focus on challenging common assumptions)"
-                      result: draft_c
-                  - return_c:
-                      return: ${draft_c.body}
-        result: candidates
+                      result: res_c
+                  - save_c:
+                      assign:
+                        - draft_c: ${res_c.body}
+
+    - aggregate_candidates:
+        assign:
+          - candidates: [${draft_a}, ${draft_b}, ${draft_c}]
 
     # 3. CRITIQUE PHASE (Also Parallel for speed)
+    # 3. CRITIQUE PHASE (Serial Loop for Safety)
     - score_candidates:
-        parallel:
-          for:
-            value: candidate
-            in: ${candidates}
-            steps:
-              - critique_call:
-                  call: http.post
-                  args:
-                    url: ${app_url + "/api/agent/router?action=critique"}
-                    headers: {Authorization: ${"Bearer " + secret_token}}
-                    body:
-                      topic: ${topic}
-                      draft: ${candidate.draft}
-                  result: critique_res
-              - return_scored:
-                  return:
+        for:
+          value: candidate
+          in: ${candidates}
+          steps:
+            - critique_call:
+                call: http.post
+                args:
+                  url: ${app_url + "/api/agent/router?action=critique"}
+                  headers:
+                    Authorization: ${auth_header}
+                  body:
+                    topic: ${topic}
                     draft: ${candidate.draft}
-                    angle: ${candidate.angle}
-                    score: ${critique_res.body.score}
-                    report: ${critique_res.body.report}
-        result: scored_candidates
+                result: critique_res
+            - create_score_item:
+                assign:
+                  - score_item:
+                      draft: ${candidate.draft}
+                      angle: ${candidate.angle}
+                      score: ${critique_res.body.score}
+                      report: ${critique_res.body.report}
+            - save_scored:
+                assign:
+                  - scored_candidates: ${scored_candidates + [score_item]}
 
     # 4. SELECTION PHASE
     - select_winner:
         call: http.post
         args:
           url: ${app_url + "/api/agent/router?action=select-winner"}
-          headers: {Authorization: ${"Bearer " + secret_token}}
+          headers:
+            Authorization: ${auth_header}
           body:
             candidates: ${scored_candidates}
         result: winner_res
@@ -115,7 +136,8 @@ main:
                   call: http.post
                   args:
                     url: ${app_url + "/api/agent/router?action=refine"}
-                    headers: {Authorization: ${"Bearer " + secret_token}}
+                    headers:
+                      Authorization: ${auth_header}
                     body:
                       topic: ${topic}
                       draft: ${winner.draft}
@@ -132,7 +154,8 @@ main:
         call: http.post
         args:
           url: ${app_url + "/api/agent/router?action=visual"}
-          headers: {Authorization: ${"Bearer " + secret_token}}
+          headers:
+            Authorization: ${auth_header}
           body:
             draft: ${winner.draft}
         result: visual_res
@@ -141,7 +164,8 @@ main:
         call: http.post
         args:
           url: ${app_url + "/api/agent/router?action=delivery"}
-          headers: {Authorization: ${"Bearer " + secret_token}}
+          headers:
+            Authorization: ${auth_header}
           body:
             topic: ${topic}
             final_draft: ${winner.draft}
