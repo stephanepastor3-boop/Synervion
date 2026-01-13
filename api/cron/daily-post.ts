@@ -68,6 +68,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         let isPerfect = false;
         let lastCritique = "";
 
+        // Best Draft Retention
+        let bestDraft = currentDraft;
+        let bestScore = 0;
+        let bestCritique = "";
+
         while (attempts < MAX_ATTEMPTS && !isPerfect) {
             attempts++;
             console.log(`[QA Loop] Iteration ${attempts}/${MAX_ATTEMPTS}...`);
@@ -83,13 +88,40 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
             if (score === 100 || lastCritique.includes("NO ISSUES")) {
                 console.log("[QA Loop] Draft Passed QA (Perfect Score)!");
+                bestDraft = currentDraft;
+                bestScore = 100;
+                bestCritique = lastCritique;
                 isPerfect = true;
             } else if (attempts >= 8 && score >= 90) {
                 console.log(`[QA Loop] Draft Accepted (High Quality Fallback: ${score}/100)`);
+                bestDraft = currentDraft;
+                bestScore = score;
+                bestCritique = lastCritique;
                 isPerfect = true;
             } else {
-                console.log(`[QA Loop] Draft Failed QA (${score}/100). Refining...`);
+                // Monotonic Improvement Check
+                if (score >= bestScore) {
+                    bestScore = score;
+                    bestDraft = currentDraft;
+                    bestCritique = lastCritique;
+                } else {
+                    console.warn(`[QA Loop] Score dropped (${bestScore} -> ${score}). Reverting to best draft...`);
+                    // Fallback to best draft, but keep using the NEW iteration count
+                    currentDraft = bestDraft;
+                    lastCritique = bestCritique;
+                }
+
+                console.log(`[QA Loop] Refining best draft (${bestScore}/100)...`);
                 currentDraft = await generateRefinedPost(topic, currentDraft, lastCritique, SOP_GUIDELINES, researchData);
+            }
+        }
+
+        // If we exit loop due to MAX_ATTEMPTS, check if we have a "Good Enough" draft
+        if (!isPerfect) {
+            if (bestScore >= 90) {
+                console.log(`[QA Loop] Max attempts reached. Accepting Best Draft (${bestScore}/100).`);
+                currentDraft = bestDraft; // Ensure we use the best one
+                isPerfect = true;
             }
         }
 
@@ -105,8 +137,27 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         const visualConcept = await generateVisualConcept(finalPost, SOP_GUIDELINES);
         const visualQuery = await generateOptimizedVisualQuery(visualConcept);
         // Ensure query focuses on Cordyceps/Mushrooms specifically if relevant
-        const safeVisualQuery = visualQuery + " photorealistic 4k";
-        const imageUrl = await braveImageSearchWithRetry(safeVisualQuery);
+        // Strategy: Specific -> Broader -> Topic-based -> Generic Safety Net
+        const visualQueries = [
+            visualQuery + " photorealistic 4k",
+            visualQuery,
+            `${topic} mushroom`,
+            "functional mushrooms nature aesthetic 4k"
+        ];
+
+        let imageUrl = "";
+        for (const q of visualQueries) {
+            try {
+                console.log(`Searching image: "${q}"...`);
+                // braveImageSearchWithRetry has internal retry for network blips
+                imageUrl = await braveImageSearchWithRetry(q);
+                if (imageUrl) break;
+            } catch (e) {
+                console.warn(`Search failed for "${q}". Trying fallback...`);
+            }
+        }
+
+        if (!imageUrl) throw new Error("CRITICAL: No images found after all fallbacks.");
 
         // 4. Prepare Asset (Upload NOW to have a ready URN)
         console.log("Uploading Asset...");
