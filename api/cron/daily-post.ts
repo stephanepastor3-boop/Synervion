@@ -18,9 +18,9 @@ const gzip = promisify(zlib.gzip);
 // HARDCODED SOPs (To ensure availability in Edge/Serverless without FS)
 const SOP_GUIDELINES = [
     "Voice: Professional, Scientific but Accessible. No 'fluff' or AI-sounding cliches (e.g. 'Unlock', 'Game-changer').",
-    "Format: Short paragraphs (1-2 sentences). Generous whitespace. Bullet points for complex info.",
+    "Format: Short paragraphs (1-2 sentences). Generous whitespace. Bullet points for complex info. NO PLACEHOLDERS.",
     "Structure: Strong Hook -> Evidence/Science -> Application -> Soft CTA.",
-    "Content: Focus on Functional Mushrooms, Nutraceuticals, and Preventative Health.",
+    "Content: High Engagement. Focus on Stories, Deep Science, or Myths. AVOID general 'Market Research' or 'Industry Growth' topics.",
     "Accuracy: Citations or references to studies where possible.",
     "Visuals: Images must be realistic, high-contrast, professional. No abstract AI art.",
     "Authenticity: Write as a thought leader, not a sales bot.",
@@ -30,14 +30,13 @@ const SOP_GUIDELINES = [
 const resend = new Resend(RESEND_API_KEY);
 
 const TOPICS = [
-    "The science behind Cordycepin and ATP production",
-    "How Cordyceps Militaris boosts athletic performance naturally",
-    "Sustainable lab-grown mushrooms vs. wild harvesting",
-    "The future of functional foods in India 2026",
-    "Boosting immune health with medicinal mushrooms",
-    "Cordyceps for respiratory health and oxygen uptake",
-    "Vegan nutraceuticals: The rise of plant-based performance",
-    "Understanding the 'Keeda Jadi' legend and its modern evolution"
+    "Case Study: How Cordyceps helped a pro-athlete recover in record time",
+    "Deep Dive: The exact chemical process of ATP synthesis via Cordycepin",
+    "New Research: Cordyceps Militaris vs. Traditional Caffeine",
+    "Mycology Lab Diaries: What a 'perfect' harvest looks like",
+    "Debunking the 'Zombie Fungus' myth with actual science",
+    "Why gut health is the secret to mental clarity (ft. Lion's Mane)",
+    "The 30-Day Cordyceps Challenge: What actually happens to your VO2 Max?"
 ];
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
@@ -84,13 +83,20 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             }
         }
 
+        if (!isPerfect) {
+            console.error("Failed to reach 100/100 Quality Score. Aborting.");
+            throw new Error(`QA Failed. Final Score < 100. Issues: ${lastCritique}`);
+        }
+
         const finalPost = sanitizePost(currentDraft);
 
         // D. Visual Concept
         console.log("Generating Visuals...");
         const visualConcept = await generateVisualConcept(finalPost, SOP_GUIDELINES);
         const visualQuery = await generateOptimizedVisualQuery(visualConcept);
-        const imageUrl = await braveImageSearchWithRetry(visualQuery);
+        // Ensure query focuses on Cordyceps/Mushrooms specifically if relevant
+        const safeVisualQuery = visualQuery + " photorealistic 4k";
+        const imageUrl = await braveImageSearchWithRetry(safeVisualQuery);
 
         // 4. Prepare Asset (Upload NOW to have a ready URN)
         console.log("Uploading Asset...");
@@ -251,10 +257,11 @@ async function generateOptimizedVisualQuery(concept: string) {
 
 function sanitizePost(text: string) {
     return text
+        .replace(/!.*?/g, "") // Remove image placeholders like !(image-placeholder)
+        .replace(/!\[.*?\]\(.*?\)/g, "") // Remove standard markdown images
         .replace(/\[Image suggestion:.*?\]/gi, "")
         .replace(/\[.*?\]/g, "")
-        .replace(/\*\*/g, "") // Remove bold markdown if it looks messy, or keep it if LinkedIn supports (LinkedIn supports native bold with unicode, but standard markdown ** doesn't work well). 
-        // Better: Remove markdown ** but keep structure.
+        .replace(/\*\*/g, "")
         .replace(/__/g, "")
         .trim();
 }
