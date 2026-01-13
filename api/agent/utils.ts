@@ -22,7 +22,23 @@ export const SOP_GUIDELINES = [
     "Human Connection: Use personal cues ('In our lab...', 'We believe...'). Show passion for mycology. Be scientific but warm."
 ];
 
-export const resend = new Resend(RESEND_API_KEY);
+// Lazy load Resend to prevent top-level crashes
+export function getResend() {
+    if (!RESEND_API_KEY) throw new Error("Missing RESEND_API_KEY");
+    return new Resend(RESEND_API_KEY);
+}
+
+export function debugEnvVars() {
+    return {
+        HAS_LINKEDIN: !!LINKEDIN_ACCESS_TOKEN,
+        HAS_ORG: !!ORGANIZATION_ID,
+        HAS_BRAVE: !!BRAVE_API_KEY,
+        HAS_PERPLEXITY: !!PERPLEXITY_API_KEY,
+        HAS_RESEND: !!RESEND_API_KEY,
+        HAS_SECRET: !!CRON_SECRET,
+        APP_URL_VAL: APP_URL
+    };
+}
 
 // Security Middleware
 export function checkAuth(req: VercelRequest, res: VercelResponse) {

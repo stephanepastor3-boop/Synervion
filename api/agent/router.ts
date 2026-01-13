@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { checkAuth, braveSearch, callPerplexity, SOP_GUIDELINES, BRAVE_API_KEY, resend, APP_URL, LINKEDIN_ACCESS_TOKEN, ORGANIZATION_ID, CRON_SECRET } from './utils';
+import { checkAuth, braveSearch, callPerplexity, SOP_GUIDELINES, BRAVE_API_KEY, getResend, debugEnvVars, APP_URL, LINKEDIN_ACCESS_TOKEN, ORGANIZATION_ID, CRON_SECRET } from './utils';
 import crypto from 'node:crypto';
 import zlib from 'node:zlib';
 import { promisify } from 'node:util';
@@ -69,6 +69,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     const { action } = req.query;
     console.log(`[Agent Router] Action: ${action}`);
+    console.log("[Agent Router] Env Check:", JSON.stringify(debugEnvVars()));
 
     try {
         switch (action) {
@@ -227,7 +228,7 @@ ${rulesText}`
                 const approvalUrl = `${APP_URL}/api/approve-post?data=${dataStr}&sig=${sig}`;
 
                 // 3. Email
-                await resend.emails.send({
+                await getResend().emails.send({
                     from: 'Synervion Bot <bot@synervion.com>',
                     to: 'stephane@synervion.com',
                     subject: `⚡️ Review Required: ${topic}`,
