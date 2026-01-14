@@ -40,6 +40,16 @@
             "source": "/terms.php",
             "destination": "https://www.synervion.com/terms",
             "permanent": true
+        },
+        {
+            "source": "/products",
+            "destination": "https://www.synervion.com/#products",
+            "permanent": true
+        },
+        {
+            "source": "/research/:slug",
+            "destination": "https://www.synervion.com/:slug",
+            "permanent": true
         }
     ],
     "headers": [

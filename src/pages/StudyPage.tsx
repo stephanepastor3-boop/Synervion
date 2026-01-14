@@ -25,7 +25,7 @@ export function StudyPage() {
                     <ArrowLeft size={20} />
                     Back to Research
                 </Link>
-            </div>
+            </div >
         );
     }
 
