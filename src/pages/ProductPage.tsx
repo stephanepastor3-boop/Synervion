@@ -61,7 +61,12 @@ export function ProductPage() {
                 "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
                 "merchantReturnDays": "30",
                 "returnFees": "https://schema.org/ReturnFeesCustomerResponsibility",
-                "returnMethod": "https://schema.org/ReturnByMail"
+                "returnMethod": "https://schema.org/ReturnByMail",
+                "returnShippingFeesAmount": {
+                    "@type": "MonetaryAmount",
+                    "value": "0",
+                    "currency": "INR"
+                }
             },
             "shippingDetails": {
                 "@type": "OfferShippingDetails",
