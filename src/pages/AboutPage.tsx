@@ -1,4 +1,5 @@
 import { motion } from 'motion/react';
+import { Helmet } from 'react-helmet-async';
 import { BrandBadge } from '../components/brand/BrandBadge';
 import {
   Database, Layers, Activity, ShieldCheck, Sprout, CheckCircle2,
@@ -9,6 +10,8 @@ import technicianVideo from '../assets/videos/TechnicianLab-video.mp4';
 import cordycepsVideo2 from '../assets/videos/Lab-cordyceps-video2.mp4';
 import revaFloraVideo from '../assets/videos/SynervionXRevaFlora2_1.mp4';
 import foundingTeamImage from '../assets/images/FoundingTeam-image.jpg';
+import technicianThumbnail from '../assets/images/Technician-RevaFlora1.jpg';
+import cordycepsThumbnail from '../assets/images/hero-cordyceps-macro.jpg';
 
 import { SEO } from '../components/SEO';
 import { Navigation } from '../components/Navigation';
@@ -42,6 +45,29 @@ export function AboutPage() {
     { title: 'Formulation Partners', desc: 'Reliable, standardized ingredients.' },
   ];
 
+  const videoSchema = [
+    {
+      "@context": "https://schema.org",
+      "@type": "VideoObject",
+      "name": "Synervion Technician Lab Process",
+      "description": "A technician working in the Synervion lab environment ensuring controlled variables.",
+      "thumbnailUrl": `https://www.synervion.com${technicianThumbnail}`,
+      "uploadDate": "2024-01-01T08:00:00+08:00",
+      "contentUrl": `https://www.synervion.com${technicianVideo}`,
+      "embedUrl": `https://www.synervion.com${technicianVideo}`
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "VideoObject",
+      "name": "Lab-Grown Cordyceps Militaris",
+      "description": "High-quality Cordyceps militaris fruiting bodies grown under controlled conditions.",
+      "thumbnailUrl": `https://www.synervion.com${cordycepsThumbnail}`,
+      "uploadDate": "2024-01-01T08:00:00+08:00",
+      "contentUrl": `https://www.synervion.com${cordycepsVideo2}`,
+      "embedUrl": `https://www.synervion.com${cordycepsVideo2}`
+    }
+  ];
+
   return (
     <div className="min-h-screen bg-white">
       <SEO
@@ -49,6 +75,11 @@ export function AboutPage() {
         description="Synervion is a science-first wellness company dedicated to advancing high-performance functional ingredients through controlled cultivation and transparency."
         canonical="/about"
       />
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify(videoSchema)}
+        </script>
+      </Helmet>
       <Navigation />
 
       {/* Hero Section */}
