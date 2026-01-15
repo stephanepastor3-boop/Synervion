@@ -281,24 +281,25 @@ export function ArticleTemplate({ article }: ArticleTemplateProps) {
                                 </div>
                             )}
 
-                            {/* Table of Contents - Sticky */}
-                            <TableOfContents />
+                            {/* Sidebar - Sticky Container */}
+                            <div className="sticky top-24 space-y-8">
+                                <TableOfContents />
 
-                            {/* Product Card - Sticky (placed after ToC) */}
-                            <div className="sticky top-[400px] rounded-2xl bg-slate-900 text-white p-6 overflow-hidden relative group">
-                                <div className="absolute top-0 right-0 w-32 h-32 bg-orange-500/20 rounded-full blur-2xl -mr-10 -mt-10 pointer-events-none"></div>
-                                <h3 className="text-xl font-bold font-heading mb-2 relative z-10">Power Your Performance</h3>
-                                <p className="text-slate-300 text-sm mb-6 relative z-10">
-                                    Experience the pure, lab-grown Cordyceps Militaris used in this research.
-                                </p>
-                                <Link
-                                    to="/#products"
-                                    className="block w-full text-center bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 rounded-lg transition-all shadow-lg hover:shadow-orange-500/25 relative z-10"
-                                >
-                                    Shop Now
-                                </Link>
+                                {/* Product Card */}
+                                <div className="rounded-2xl bg-slate-900 text-white p-6 overflow-hidden relative group">
+                                    <div className="absolute top-0 right-0 w-32 h-32 bg-orange-500/20 rounded-full blur-2xl -mr-10 -mt-10 pointer-events-none"></div>
+                                    <h3 className="text-xl font-bold font-heading mb-2 relative z-10">Power Your Performance</h3>
+                                    <p className="text-slate-300 text-sm mb-6 relative z-10">
+                                        Experience the pure, lab-grown Cordyceps Militaris used in this research.
+                                    </p>
+                                    <Link
+                                        to="/#products"
+                                        className="block w-full text-center bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 rounded-lg transition-all shadow-lg hover:shadow-orange-500/25 relative z-10"
+                                    >
+                                        Shop Now
+                                    </Link>
+                                </div>
                             </div>
-
                         </aside>
                     </div>
                 </div>

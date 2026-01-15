@@ -11,7 +11,7 @@ export function FeaturedArticles() {
         'cordyceps-manufacturer-india',
         'cordyceps-militaris-benefits',
         'cordyceps-for-high-altitude-training',
-        'cordyceps-for-mental-clarity'
+        'creator-first-product-launch-guide'
     ];
 
     // Fallback to first 6 if specific ones not found
