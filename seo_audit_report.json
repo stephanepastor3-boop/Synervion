@@ -1,0 +1,552 @@
+[
+  {
+    "url": "https://www.synervion.com/",
+    "verdict": "PASS",
+    "coverageState": "Submitted and indexed",
+    "indexingState": "INDEXING_ALLOWED",
+    "lastCrawlTime": "2026-01-17T14:13:15Z",
+    "pageFetchState": "SUCCESSFUL",
+    "robotsTxtState": "ALLOWED",
+    "mobileUsability": "VERDICT_UNSPECIFIED",
+    "richResults": [
+      "Product snippets",
+      "Merchant listings",
+      "Review snippets"
+    ]
+  },
+  {
+    "url": "https://www.synervion.com/about",
+    "verdict": "PASS",
+    "coverageState": "Submitted and indexed",
+    "indexingState": "INDEXING_ALLOWED",
+    "lastCrawlTime": "2026-01-12T08:16:16Z",
+    "pageFetchState": "SUCCESSFUL",
+    "robotsTxtState": "ALLOWED",
+    "mobileUsability": "VERDICT_UNSPECIFIED",
+    "richResults": []
+  },
+  {
+    "url": "https://www.synervion.com/contact",
+    "verdict": "PASS",
+    "coverageState": "Submitted and indexed",
+    "indexingState": "INDEXING_ALLOWED",
+    "lastCrawlTime": "2026-01-09T08:01:46Z",
+    "pageFetchState": "SUCCESSFUL",
+    "robotsTxtState": "ALLOWED",
+    "mobileUsability": "VERDICT_UNSPECIFIED",
+    "richResults": []
+  },
+  {
+    "url": "https://www.synervion.com/partnerships",
+    "verdict": "PASS",
+    "coverageState": "Submitted and indexed",
+    "indexingState": "INDEXING_ALLOWED",
+    "lastCrawlTime": "2025-12-20T23:01:47Z",
+    "pageFetchState": "SUCCESSFUL",
+    "robotsTxtState": "ALLOWED",
+    "mobileUsability": "VERDICT_UNSPECIFIED",
+    "richResults": []
+  },
+  {
+    "url": "https://www.synervion.com/brand-system",
+    "verdict": "PASS",
+    "coverageState": "Submitted and indexed",
+    "indexingState": "INDEXING_ALLOWED",
+    "lastCrawlTime": "2025-12-26T06:01:35Z",
+    "pageFetchState": "SUCCESSFUL",
+    "robotsTxtState": "ALLOWED",
+    "mobileUsability": "VERDICT_UNSPECIFIED",
+    "richResults": []
+  },
+  {
+    "url": "https://www.synervion.com/calculator/cordyceps-goal-planner",
+    "verdict": "PASS",
+    "coverageState": "Submitted and indexed",
+    "indexingState": "INDEXING_ALLOWED",
+    "lastCrawlTime": "2025-12-29T11:30:44Z",
+    "pageFetchState": "SUCCESSFUL",
+    "robotsTxtState": "ALLOWED",
+    "mobileUsability": "VERDICT_UNSPECIFIED",
+    "richResults": [
+      "Review snippets"
+    ]
+  },
+  {
+    "url": "https://www.synervion.com/product/synv-core",
+    "verdict": "PASS",
+    "coverageState": "Submitted and indexed",
+    "indexingState": "INDEXING_ALLOWED",
+    "lastCrawlTime": "2026-01-14T19:40:24Z",
+    "pageFetchState": "SUCCESSFUL",
+    "robotsTxtState": "ALLOWED",
+    "mobileUsability": "VERDICT_UNSPECIFIED",
+    "richResults": [
+      "Product snippets",
+      "Merchant listings",
+      "Review snippets"
+    ]
+  },
+  {
+    "url": "https://www.synervion.com/product/synv-pulse",
+    "verdict": "PASS",
+    "coverageState": "Submitted and indexed",
+    "indexingState": "INDEXING_ALLOWED",
+    "lastCrawlTime": "2026-01-11T22:57:09Z",
+    "pageFetchState": "SUCCESSFUL",
+    "robotsTxtState": "ALLOWED",
+    "mobileUsability": "VERDICT_UNSPECIFIED",
+    "richResults": [
+      "Product snippets",
+      "Merchant listings",
+      "Review snippets"
+    ]
+  },
+  {
+    "url": "https://www.synervion.com/product/synv-root",
+    "verdict": "PASS",
+    "coverageState": "Submitted and indexed",
+    "indexingState": "INDEXING_ALLOWED",
+    "lastCrawlTime": "2026-01-11T23:49:13Z",
+    "pageFetchState": "SUCCESSFUL",
+    "robotsTxtState": "ALLOWED",
+    "mobileUsability": "VERDICT_UNSPECIFIED",
+    "richResults": [
+      "Product snippets",
+      "Merchant listings",
+      "Review snippets"
+    ]
+  },
+  {
+    "url": "https://www.synervion.com/terms",
+    "verdict": "PASS",
+    "coverageState": "Submitted and indexed",
+    "indexingState": "INDEXING_ALLOWED",
+    "lastCrawlTime": "2026-01-15T20:21:38Z",
+    "pageFetchState": "SUCCESSFUL",
+    "robotsTxtState": "ALLOWED",
+    "mobileUsability": "VERDICT_UNSPECIFIED",
+    "richResults": []
+  },
+  {
+    "url": "https://www.synervion.com/privacy-policy",
+    "verdict": "PASS",
+    "coverageState": "Submitted and indexed",
+    "indexingState": "INDEXING_ALLOWED",
+    "lastCrawlTime": "2026-01-14T04:48:46Z",
+    "pageFetchState": "SUCCESSFUL",
+    "robotsTxtState": "ALLOWED",
+    "mobileUsability": "VERDICT_UNSPECIFIED",
+    "richResults": []
+  },
+  {
+    "url": "https://www.synervion.com/study/17",
+    "verdict": "PASS",
+    "coverageState": "Submitted and indexed",
+    "indexingState": "INDEXING_ALLOWED",
+    "lastCrawlTime": "2025-11-27T07:54:55Z",
+    "pageFetchState": "SUCCESSFUL",
+    "robotsTxtState": "ALLOWED",
+    "mobileUsability": "VERDICT_UNSPECIFIED",
+    "richResults": []
+  },
+  {
+    "url": "https://www.synervion.com/study/1",
+    "verdict": "PASS",
+    "coverageState": "Submitted and indexed",
+    "indexingState": "INDEXING_ALLOWED",
+    "lastCrawlTime": "2026-01-08T23:00:40Z",
+    "pageFetchState": "SUCCESSFUL",
+    "robotsTxtState": "ALLOWED",
+    "mobileUsability": "VERDICT_UNSPECIFIED",
+    "richResults": [
+      "Breadcrumbs"
+    ]
+  },
+  {
+    "url": "https://www.synervion.com/study/2",
+    "verdict": "PASS",
+    "coverageState": "Submitted and indexed",
+    "indexingState": "INDEXING_ALLOWED",
+    "lastCrawlTime": "2025-12-29T22:01:03Z",
+    "pageFetchState": "SUCCESSFUL",
+    "robotsTxtState": "ALLOWED",
+    "mobileUsability": "VERDICT_UNSPECIFIED",
+    "richResults": [
+      "Breadcrumbs"
+    ]
+  },
+  {
+    "url": "https://www.synervion.com/study/3",
+    "verdict": "PASS",
+    "coverageState": "Submitted and indexed",
+    "indexingState": "INDEXING_ALLOWED",
+    "lastCrawlTime": "2025-12-29T23:56:30Z",
+    "pageFetchState": "SUCCESSFUL",
+    "robotsTxtState": "ALLOWED",
+    "mobileUsability": "VERDICT_UNSPECIFIED",
+    "richResults": [
+      "Breadcrumbs"
+    ]
+  },
+  {
+    "url": "https://www.synervion.com/study/18",
+    "verdict": "PASS",
+    "coverageState": "Submitted and indexed",
+    "indexingState": "INDEXING_ALLOWED",
+    "lastCrawlTime": "2025-12-29T23:36:08Z",
+    "pageFetchState": "SUCCESSFUL",
+    "robotsTxtState": "ALLOWED",
+    "mobileUsability": "VERDICT_UNSPECIFIED",
+    "richResults": [
+      "Breadcrumbs"
+    ]
+  },
+  {
+    "url": "https://www.synervion.com/study/19",
+    "verdict": "PASS",
+    "coverageState": "Submitted and indexed",
+    "indexingState": "INDEXING_ALLOWED",
+    "lastCrawlTime": "2025-11-27T09:20:48Z",
+    "pageFetchState": "SUCCESSFUL",
+    "robotsTxtState": "ALLOWED",
+    "mobileUsability": "VERDICT_UNSPECIFIED",
+    "richResults": []
+  },
+  {
+    "url": "https://www.synervion.com/study/20",
+    "verdict": "PASS",
+    "coverageState": "Submitted and indexed",
+    "indexingState": "INDEXING_ALLOWED",
+    "lastCrawlTime": "2025-11-27T07:52:48Z",
+    "pageFetchState": "SUCCESSFUL",
+    "robotsTxtState": "ALLOWED",
+    "mobileUsability": "VERDICT_UNSPECIFIED",
+    "richResults": []
+  },
+  {
+    "url": "https://www.synervion.com/study/21",
+    "verdict": "PASS",
+    "coverageState": "Submitted and indexed",
+    "indexingState": "INDEXING_ALLOWED",
+    "lastCrawlTime": "2025-11-27T02:24:39Z",
+    "pageFetchState": "SUCCESSFUL",
+    "robotsTxtState": "ALLOWED",
+    "mobileUsability": "VERDICT_UNSPECIFIED",
+    "richResults": []
+  },
+  {
+    "url": "https://www.synervion.com/study/22",
+    "verdict": "PASS",
+    "coverageState": "Submitted and indexed",
+    "indexingState": "INDEXING_ALLOWED",
+    "lastCrawlTime": "2025-11-27T08:21:06Z",
+    "pageFetchState": "SUCCESSFUL",
+    "robotsTxtState": "ALLOWED",
+    "mobileUsability": "VERDICT_UNSPECIFIED",
+    "richResults": []
+  },
+  {
+    "url": "https://www.synervion.com/study/23",
+    "verdict": "PASS",
+    "coverageState": "Submitted and indexed",
+    "indexingState": "INDEXING_ALLOWED",
+    "lastCrawlTime": "2025-12-29T21:02:05Z",
+    "pageFetchState": "SUCCESSFUL",
+    "robotsTxtState": "ALLOWED",
+    "mobileUsability": "VERDICT_UNSPECIFIED",
+    "richResults": [
+      "Breadcrumbs"
+    ]
+  },
+  {
+    "url": "https://www.synervion.com/cordyceps-manufacturer-india",
+    "verdict": "PASS",
+    "coverageState": "Submitted and indexed",
+    "indexingState": "INDEXING_ALLOWED",
+    "lastCrawlTime": "2026-01-12T02:12:04Z",
+    "pageFetchState": "SUCCESSFUL",
+    "robotsTxtState": "ALLOWED",
+    "mobileUsability": "VERDICT_UNSPECIFIED",
+    "richResults": []
+  },
+  {
+    "url": "https://www.synervion.com/keeda-jadi-price-india",
+    "verdict": "PASS",
+    "coverageState": "Submitted and indexed",
+    "indexingState": "INDEXING_ALLOWED",
+    "lastCrawlTime": "2026-01-12T02:12:02Z",
+    "pageFetchState": "SUCCESSFUL",
+    "robotsTxtState": "ALLOWED",
+    "mobileUsability": "VERDICT_UNSPECIFIED",
+    "richResults": []
+  },
+  {
+    "url": "https://www.synervion.com/cordyceps-militaris-benefits",
+    "verdict": "PASS",
+    "coverageState": "Submitted and indexed",
+    "indexingState": "INDEXING_ALLOWED",
+    "lastCrawlTime": "2026-01-10T10:25:35Z",
+    "pageFetchState": "SUCCESSFUL",
+    "robotsTxtState": "ALLOWED",
+    "mobileUsability": "VERDICT_UNSPECIFIED",
+    "richResults": [
+      "Breadcrumbs",
+      "FAQ"
+    ]
+  },
+  {
+    "url": "https://www.synervion.com/cordyceps-for-high-altitude-training",
+    "verdict": "PASS",
+    "coverageState": "Submitted and indexed",
+    "indexingState": "INDEXING_ALLOWED",
+    "lastCrawlTime": "2026-01-10T10:27:36Z",
+    "pageFetchState": "SUCCESSFUL",
+    "robotsTxtState": "ALLOWED",
+    "mobileUsability": "VERDICT_UNSPECIFIED",
+    "richResults": [
+      "Breadcrumbs",
+      "FAQ"
+    ]
+  },
+  {
+    "url": "https://www.synervion.com/cordyceps-dosage-for-cycling",
+    "verdict": "PASS",
+    "coverageState": "Submitted and indexed",
+    "indexingState": "INDEXING_ALLOWED",
+    "lastCrawlTime": "2026-01-10T10:27:34Z",
+    "pageFetchState": "SUCCESSFUL",
+    "robotsTxtState": "ALLOWED",
+    "mobileUsability": "VERDICT_UNSPECIFIED",
+    "richResults": [
+      "Breadcrumbs",
+      "FAQ"
+    ]
+  },
+  {
+    "url": "https://www.synervion.com/cordyceps-supplement-for-vegan-bodybuilders",
+    "verdict": "PASS",
+    "coverageState": "Submitted and indexed",
+    "indexingState": "INDEXING_ALLOWED",
+    "lastCrawlTime": "2025-12-25T21:42:40Z",
+    "pageFetchState": "SUCCESSFUL",
+    "robotsTxtState": "ALLOWED",
+    "mobileUsability": "VERDICT_UNSPECIFIED",
+    "richResults": [
+      "FAQ"
+    ]
+  },
+  {
+    "url": "https://www.synervion.com/cordyceps-for-crossfit-performance",
+    "verdict": "PASS",
+    "coverageState": "Submitted and indexed",
+    "indexingState": "INDEXING_ALLOWED",
+    "lastCrawlTime": "2025-12-23T19:47:03Z",
+    "pageFetchState": "SUCCESSFUL",
+    "robotsTxtState": "ALLOWED",
+    "mobileUsability": "VERDICT_UNSPECIFIED",
+    "richResults": [
+      "FAQ"
+    ]
+  },
+  {
+    "url": "https://www.synervion.com/cordyceps-for-immune-system-support",
+    "verdict": "PASS",
+    "coverageState": "Submitted and indexed",
+    "indexingState": "INDEXING_ALLOWED",
+    "lastCrawlTime": "2025-12-30T12:36:03Z",
+    "pageFetchState": "SUCCESSFUL",
+    "robotsTxtState": "ALLOWED",
+    "mobileUsability": "VERDICT_UNSPECIFIED",
+    "richResults": [
+      "Breadcrumbs",
+      "FAQ"
+    ]
+  },
+  {
+    "url": "https://www.synervion.com/cordyceps-for-post-viral-recovery",
+    "verdict": "PASS",
+    "coverageState": "Submitted and indexed",
+    "indexingState": "INDEXING_ALLOWED",
+    "lastCrawlTime": "2025-12-21T12:45:23Z",
+    "pageFetchState": "SUCCESSFUL",
+    "robotsTxtState": "ALLOWED",
+    "mobileUsability": "VERDICT_UNSPECIFIED",
+    "richResults": [
+      "FAQ"
+    ]
+  },
+  {
+    "url": "https://www.synervion.com/best-way-to-take-cordyceps-powder-for-energy",
+    "verdict": "PASS",
+    "coverageState": "Submitted and indexed",
+    "indexingState": "INDEXING_ALLOWED",
+    "lastCrawlTime": "2025-12-23T21:14:20Z",
+    "pageFetchState": "SUCCESSFUL",
+    "robotsTxtState": "ALLOWED",
+    "mobileUsability": "VERDICT_UNSPECIFIED",
+    "richResults": [
+      "FAQ"
+    ]
+  },
+  {
+    "url": "https://www.synervion.com/cordyceps-for-mental-clarity",
+    "verdict": "PASS",
+    "coverageState": "Submitted and indexed",
+    "indexingState": "INDEXING_ALLOWED",
+    "lastCrawlTime": "2025-12-27T03:25:58Z",
+    "pageFetchState": "SUCCESSFUL",
+    "robotsTxtState": "ALLOWED",
+    "mobileUsability": "VERDICT_UNSPECIFIED",
+    "richResults": [
+      "FAQ"
+    ]
+  },
+  {
+    "url": "https://www.synervion.com/cordyceps-for-lung-capacity",
+    "verdict": "PASS",
+    "coverageState": "Submitted and indexed",
+    "indexingState": "INDEXING_ALLOWED",
+    "lastCrawlTime": "2025-12-24T06:39:54Z",
+    "pageFetchState": "SUCCESSFUL",
+    "robotsTxtState": "ALLOWED",
+    "mobileUsability": "VERDICT_UNSPECIFIED",
+    "richResults": [
+      "FAQ"
+    ]
+  },
+  {
+    "url": "https://www.synervion.com/cordyceps-militaris-vs-sinensis",
+    "verdict": "PASS",
+    "coverageState": "Submitted and indexed",
+    "indexingState": "INDEXING_ALLOWED",
+    "lastCrawlTime": "2026-01-15T18:49:23Z",
+    "pageFetchState": "SUCCESSFUL",
+    "robotsTxtState": "ALLOWED",
+    "mobileUsability": "VERDICT_UNSPECIFIED",
+    "richResults": [
+      "Breadcrumbs",
+      "FAQ"
+    ]
+  },
+  {
+    "url": "https://www.synervion.com/when-to-take-cordyceps",
+    "verdict": "PASS",
+    "coverageState": "Submitted and indexed",
+    "indexingState": "INDEXING_ALLOWED",
+    "lastCrawlTime": "2025-12-28T07:52:18Z",
+    "pageFetchState": "SUCCESSFUL",
+    "robotsTxtState": "ALLOWED",
+    "mobileUsability": "VERDICT_UNSPECIFIED",
+    "richResults": [
+      "Breadcrumbs",
+      "FAQ"
+    ]
+  },
+  {
+    "url": "https://www.synervion.com/cordyceps-vs-caffeine-daily-energy",
+    "verdict": "PASS",
+    "coverageState": "Submitted and indexed",
+    "indexingState": "INDEXING_ALLOWED",
+    "lastCrawlTime": "2025-12-28T08:16:19Z",
+    "pageFetchState": "SUCCESSFUL",
+    "robotsTxtState": "ALLOWED",
+    "mobileUsability": "VERDICT_UNSPECIFIED",
+    "richResults": [
+      "Breadcrumbs",
+      "FAQ"
+    ]
+  },
+  {
+    "url": "https://www.synervion.com/cordyceps-for-stamina-who-it-helps",
+    "verdict": "PASS",
+    "coverageState": "Submitted and indexed",
+    "indexingState": "INDEXING_ALLOWED",
+    "lastCrawlTime": "2025-12-16T06:48:43Z",
+    "pageFetchState": "SUCCESSFUL",
+    "robotsTxtState": "ALLOWED",
+    "mobileUsability": "VERDICT_UNSPECIFIED",
+    "richResults": [
+      "FAQ"
+    ]
+  },
+  {
+    "url": "https://www.synervion.com/how-to-reduce-caffeine-without-losing-energy",
+    "verdict": "PASS",
+    "coverageState": "Submitted and indexed",
+    "indexingState": "INDEXING_ALLOWED",
+    "lastCrawlTime": "2025-12-15T20:19:02Z",
+    "pageFetchState": "SUCCESSFUL",
+    "robotsTxtState": "ALLOWED",
+    "mobileUsability": "VERDICT_UNSPECIFIED",
+    "richResults": [
+      "FAQ"
+    ]
+  },
+  {
+    "url": "https://www.synervion.com/cordyceps-for-athletes-runners-cyclists",
+    "verdict": "PASS",
+    "coverageState": "Submitted and indexed",
+    "indexingState": "INDEXING_ALLOWED",
+    "lastCrawlTime": "2026-01-07T07:34:07Z",
+    "pageFetchState": "SUCCESSFUL",
+    "robotsTxtState": "ALLOWED",
+    "mobileUsability": "VERDICT_UNSPECIFIED",
+    "richResults": [
+      "Breadcrumbs",
+      "FAQ"
+    ]
+  },
+  {
+    "url": "https://www.synervion.com/cordyceps-clinical-science-research",
+    "verdict": "PASS",
+    "coverageState": "Submitted and indexed",
+    "indexingState": "INDEXING_ALLOWED",
+    "lastCrawlTime": "2026-01-07T07:32:09Z",
+    "pageFetchState": "SUCCESSFUL",
+    "robotsTxtState": "ALLOWED",
+    "mobileUsability": "VERDICT_UNSPECIFIED",
+    "richResults": [
+      "Breadcrumbs",
+      "FAQ"
+    ]
+  },
+  {
+    "url": "https://www.synervion.com/how-to-take-cordyceps-coffee-tea-recipes",
+    "verdict": "PASS",
+    "coverageState": "Submitted and indexed",
+    "indexingState": "INDEXING_ALLOWED",
+    "lastCrawlTime": "2026-01-07T07:32:07Z",
+    "pageFetchState": "SUCCESSFUL",
+    "robotsTxtState": "ALLOWED",
+    "mobileUsability": "VERDICT_UNSPECIFIED",
+    "richResults": [
+      "Breadcrumbs",
+      "FAQ"
+    ]
+  },
+  {
+    "url": "https://www.synervion.com/sustainable-mushroom-cultivation-vs-wild-harvest",
+    "verdict": "PASS",
+    "coverageState": "Submitted and indexed",
+    "indexingState": "INDEXING_ALLOWED",
+    "lastCrawlTime": "2026-01-07T07:34:08Z",
+    "pageFetchState": "SUCCESSFUL",
+    "robotsTxtState": "ALLOWED",
+    "mobileUsability": "VERDICT_UNSPECIFIED",
+    "richResults": [
+      "Breadcrumbs",
+      "FAQ"
+    ]
+  },
+  {
+    "url": "https://www.synervion.com/creator-first-product-launch-guide",
+    "verdict": "NEUTRAL",
+    "coverageState": "URL is unknown to Google",
+    "indexingState": "INDEXING_STATE_UNSPECIFIED",
+    "lastCrawlTime": "NEVER",
+    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+    "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+    "mobileUsability": "VERDICT_UNSPECIFIED",
+    "richResults": []
+  }
+]

@@ -11,3 +11,5 @@ build
 *.tsbuildinfo
 
 mcp_config_read.json
+gsc-service-account.json
+seo_audit_report.json
