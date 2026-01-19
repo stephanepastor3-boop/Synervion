@@ -1,6 +1,6 @@
 import { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { HelmetProvider } from 'react-helmet-async';
+import { HelmetProvider, Helmet } from 'react-helmet-async';
 import { ArticleTemplate } from './components/ArticleTemplate';
 import { articles } from './data/articles';
 import ScrollToHashElement from './components/ScrollToHashElement';
@@ -37,6 +37,30 @@ export default function App() {
         <ScrollToHashElement />
         <AnalyticsTracker />
         <LegacyRedirects />
+        <Helmet>
+          <script type="application/ld+json">
+            {JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "SiteNavigationElement",
+              "name": [
+                "Products",
+                "Synervion® CORE Caps",
+                "Synervion® PULSE Liquids",
+                "Synervion® ROOT Powders",
+                "About Us",
+                "Contact"
+              ],
+              "url": [
+                "https://www.synervion.com",
+                "https://www.synervion.com/product/synv-core",
+                "https://www.synervion.com/product/synv-pulse",
+                "https://www.synervion.com/product/synv-root",
+                "https://www.synervion.com/about",
+                "https://www.synervion.com/contact"
+              ]
+            })}
+          </script>
+        </Helmet>
 
         <Suspense fallback={<PageLoader />}>
           <Routes>

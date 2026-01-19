@@ -27,6 +27,14 @@ export function Navigation() {
   }, []);
 
   const navLinks: NavLink[] = [
+    {
+      label: 'Products',
+      children: [
+        { label: 'Synervion® CORE Caps', href: '/product/synv-core' },
+        { label: 'Synervion® PULSE Liquids', href: '/product/synv-pulse' },
+        { label: 'Synervion® ROOT Powders', href: '/product/synv-root' },
+      ]
+    },
     { label: 'Benefits', href: '#features' },
     { label: 'Why Lab-Grown', href: '#origin' },
     { label: 'Collabs', href: '#partners' },

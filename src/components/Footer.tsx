@@ -17,6 +17,11 @@ export function Footer() {
   };
 
   const links = {
+    Products: [
+      { label: 'Synervion® CORE Caps', href: '/product/synv-core' },
+      { label: 'Synervion® PULSE Liquids', href: '/product/synv-pulse' },
+      { label: 'Synervion® ROOT Powders', href: '/product/synv-root' },
+    ],
     Company: [
       { label: 'About Us', href: '/about' },
       { label: 'Our Science', action: () => smoothScroll('#origin') },
